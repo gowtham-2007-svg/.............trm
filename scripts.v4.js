@@ -482,7 +482,9 @@ const mangaloreCategoryData = {
                 description: 'A challenging trek to a historic hilltop fort with stunning 360-degree views.',
                 rating: '4.7',
                 bestTime: '6:00 AM – 11:00 AM',
-                busRoutes: 'Direct KSRTC/private bus to Belthangady from State Bank → Auto to Jamalabad Fort (5–7 km). Approx Cost: ₹180–₹300',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru (State Bank / Pumpwell)<br><div class="bus-route-flow-container">🟢 Mangaluru (Start Point)<br>│<br>⚪ Bantwal<br>│<br>⚪ Belthangady<br>│<br>🔴 Jamalabad Fort Base<br>│<br>🥾 Trek to Top with Friends (2.5 km)<br>│<br>🏔️ Gadaikallu Summit Peak</div>`,
                 bestChoice: 'Gadaikallu Cliff Climbing Challenge <strong>(~65 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&q=80&w=200'
             },
@@ -492,7 +494,9 @@ const mangaloreCategoryData = {
                 description: 'A scenic trek through lush forests leading to a multi-tiered waterfall.',
                 rating: '4.5',
                 bestTime: '7:30 AM – 12:00 PM',
-                busRoutes: 'Belthangady bus from State Bank → Auto to Ermayi Falls. Approx Cost: ₹220–₹350',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru (State Bank / Pumpwell)<br><div class="bus-route-flow-container">🟢 Mangaluru (Start Point)<br>│<br>⚪ Bantwal<br>│<br>⚪ Belthangady<br>│<br>🔴 Ermayi Falls Parking<br>│<br>🥾 Forest Hike with Squad<br>│<br>🌊 Ermayi Waterfalls</div>`,
                 bestChoice: 'Forest Trail Hike & Waterfall Swim <strong>(~75 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=200'
             },
@@ -502,7 +506,9 @@ const mangaloreCategoryData = {
                 description: 'A steep trek blending nature and spirituality, ending at an ancient cliffside temple.',
                 rating: '4.6',
                 bestTime: '6:00 AM – 9:00 AM',
-                busRoutes: 'Bantwal bus from State Bank or KSRTC → Auto to Karinje Temple. Approx Cost: ₹100–₹180',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru (State Bank / Pumpwell)<br><div class="bus-route-flow-container">🟢 Mangaluru (Start Point)<br>│<br>⚪ BC Road / Bantwal<br>│<br>🔴 Karinje Hill Base<br>│<br>🧗 Climb 555 Steps with Friends<br>│<br>🛕 Karinjeshwara Temple Peak</div>`,
                 bestChoice: 'Cliff Edge Steps Climb & Temple Darshan <strong>(~35 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=200'
             },
@@ -512,7 +518,9 @@ const mangaloreCategoryData = {
                 description: 'A prominent rock formation offering an adventurous climb and beautiful vistas.',
                 rating: '4.7',
                 bestTime: '5:30 AM – 9:30 AM',
-                busRoutes: 'Belthangady bus from State Bank → Auto to Gadaikallu. Approx Cost: ₹180–₹300',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru (State Bank / Pumpwell)<br><div class="bus-route-flow-container">🟢 Mangaluru (Start Point)<br>│<br>⚪ Bantwal<br>│<br>⚪ Belthangady<br>│<br>🔴 Gadaikallu Base<br>│<br>🥾 Sunrise Expedition Hike with Friends<br>│<br>🌄 Gadaikallu Rock Viewpoint</div>`,
                 bestChoice: 'Sunrise Rock Face Expedition Climb <strong>(~65 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=200'
             },
@@ -522,7 +530,9 @@ const mangaloreCategoryData = {
                 description: 'A hidden gem offering mesmerizing panoramic views of the lush green valleys and the winding Netravati river.',
                 rating: '4.4',
                 bestTime: '5:30 PM – 7:00 PM (Sunset)',
-                busRoutes: 'Bus 44A, 46A, 46D, 46M (Board at State Bank or Kankanady. Get down at Saripalla)',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru City Center<br><div class="bus-route-flow-container">🟢 Mangaluru City<br>│<br>⚪ Kankanady / Pumpwell<br>│<br>🔴 Saripalla Sunset Point<br>│<br>🌅 Enjoy Evening Breeze & View with Squad</div>`,
                 bestChoice: 'Golden Hour Photography & Valley Views <strong>(~10 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=200'
             },
@@ -532,7 +542,9 @@ const mangaloreCategoryData = {
                 description: 'One of the most challenging and rewarding treks in the Western Ghats, taking you through dense forests and grasslands.',
                 rating: '4.9',
                 bestTime: '6:00 AM – 5:00 PM',
-                busRoutes: 'KSRTC Bus to Kukke Subrahmanya (Board at Mangaluru KSRTC Bus Stand. Get down at Kukke Subrahmanya)',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Long Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru<br><div class="bus-route-flow-container">🟢 Mangaluru<br>│<br>⚪ Puttur<br>│<br>⚪ Kukke Subrahmanya<br>│<br>🔴 Trek Entrance Point<br>│<br>🥾 2-Day Trekking Expedition with Friends<br>│<br>🏔️ Kumara Parvatha Peak</div>`,
                 bestChoice: 'Pushpagiri Peak Summit Hike <strong>(~110 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1516654766858-f584e2311749?auto=format&fit=crop&q=80&w=200'
             },
@@ -542,7 +554,9 @@ const mangaloreCategoryData = {
                 description: 'A scenic trail winding through the rolling hills of the Western Ghats, offering breathtaking views above the clouds.',
                 rating: '4.8',
                 bestTime: '7:00 AM – 4:00 PM',
-                busRoutes: 'KSRTC/Private Bus to Belthangady or Ujire (Board at State Bank or KSRTC. Get down at Belthangady / Ujire)',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru<br><div class="bus-route-flow-container">🟢 Mangaluru<br>│<br>⚪ Belthangady / Ujire<br>│<br>⚪ Samse / Kalasa Road<br>│<br>🔴 Netravati Trek Base<br>│<br>🥾 Mountain Ridge Hike with Friends<br>│<br>☁️ Netravati Peak above Clouds</div>`,
                 bestChoice: 'Cloud Canopy & Ridgeway Walk <strong>(~85 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&q=80&w=200'
             },
@@ -552,7 +566,9 @@ const mangaloreCategoryData = {
                 description: 'An exciting trek leading to a spectacular waterfall cascading from the top of the Western Ghats.',
                 rating: '4.7',
                 bestTime: '6:30 AM – 2:00 PM',
-                busRoutes: 'KSRTC/Private Bus to Ujire or Belthangady (Board at State Bank or KSRTC. Get down at Ujire / Belthangady)',
+                routeIcon: '🏍️',
+                routeTitle: 'Bike & Friends Travel Route',
+                busRoutes: `<strong>Recommended Trip:</strong> 🏍️ Bike Ride with Friends<br><strong>📍 Starting Point:</strong> Mangaluru<br><div class="bus-route-flow-container">🟢 Mangaluru<br>│<br>⚪ Belthangady<br>│<br>⚪ Ujire / Mundaje<br>│<br>🔴 Bandaje Base Village<br>│<br>🥾 Forest & Grassland Hike with Friends<br>│<br>🌊 Bandaje Arbi Waterfall Edge</div>`,
                 bestChoice: 'Waterfall Edge & Grassland Trek <strong>(~90 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1432405972618-c6c00202124c?auto=format&fit=crop&q=80&w=200'
             }
