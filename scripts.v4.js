@@ -828,7 +828,7 @@ const mangaloreCategoryData = {
                 description: 'Historic watchtower built by Tipu Sultan, serving as a scenic boating/ferry point to cross the river to Tannirbhavi Beach.',
                 openHours: '9:00 AM – 7:00 PM',
                 bestTime: 'Scenic river crossing (~6 km from City Center)',
-                busRoutes: 'Bus 6, 6A, 6B, 6C (Board at State Bank Bus Stand. Get down at Sultan Bathery) | ~8 km from Kankanady | Fare: ₹15–₹20',
+                busRoutes: `<strong>Bus Numbers:</strong> 6, 6A, 6B, 6C<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Bunder<br>│<br>🔴 Sultan Bathery Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>⛴️ Sultan Bathery Ferry Point</div>`,
                 bestChoice: 'Ferry Ride: ₹15 per person',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=200'
             },
@@ -838,7 +838,7 @@ const mangaloreCategoryData = {
                 description: 'Located in the lush Pilikula Nisargadhama, this scenic lake offers peaceful pedal and motor boating options surrounded by gardens.',
                 openHours: '10:00 AM – 5:30 PM (Closed Mondays)',
                 bestTime: 'Quiet lake ride (~12 km from City Center)',
-                busRoutes: 'Bus 8, 8A, 8B, 8C (Board at State Bank Bus Stand. Get down at Pilikula Nisargadhama) | ~12 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 8, 8A, 8B, 8C<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Nanthoor<br>│<br>⚪ Vamanjoor<br>│<br>🔴 Pilikula Bus Stop<br>│<br>🚶 Walk 3 min<br>│<br>🚤 Pilikula Boating Centre</div>`,
                 bestChoice: 'Pedal/Row Boating: ₹50 per person',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=200'
             },
@@ -848,7 +848,7 @@ const mangaloreCategoryData = {
                 description: 'A serene backwater kayaking and boating facility offering beautiful river cruises, single/double kayaking, and sunset experiences.',
                 openHours: '6:00 AM – 6:30 PM',
                 bestTime: 'Sunrise & Sunset Kayaking (~10 km from City Center)',
-                busRoutes: 'Bus 2, 2A, 36, 36M towards Kuloor/Mukka corridor (Board at State Bank. Get down at nearest stop + short walk/auto) | ~10 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 2, 2A, 36, 36M<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Kottara Chowki<br>│<br>⚪ Kuloor<br>│<br>🔴 River Heaven Stop<br>│<br>🚶 Walk 5 min<br>│<br>🛶 River Heaven Boat & Kayaking Services</div>`,
                 bestChoice: 'Kayaking Session: ₹300 per person',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=200'
             },
@@ -858,7 +858,7 @@ const mangaloreCategoryData = {
                 description: 'Enjoy thrilling water sports, including speedboats, banana boats, and jet skiing, right off the beautiful shores of Tannirbhavi Beach.',
                 openHours: '9:00 AM – 7:00 PM',
                 bestTime: 'Sunset Water Sports (~9 km from City Center)',
-                busRoutes: 'Bus 6, 6A (Board at State Bank Bus Stand. Get down at Tannirbhavi Beach) | ~11 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 6, 6A<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Urva Stores<br>│<br>⚪ Kuloor<br>│<br>🔴 Tannirbhavi Bus Stop<br>│<br>🚶 Walk 5 min<br>│<br>🌊 Tannirbhavi Beach Boating</div>`,
                 bestChoice: 'Speedboat & Banana Rides: ₹100 per person',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200'
             }
