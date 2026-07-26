@@ -5144,3 +5144,37 @@ main {
     0% { background: #ECFDF5; border-color: #A7F3D0; }
     100% { background: #D1FAE5; border-color: #34D399; }
 }
+
+/* Scrollable Bus Route Flow Container */
+.bus-route-flow-container {
+    margin: 10px auto 0 auto;
+    text-align: center;
+    line-height: 1.65;
+    font-size: 0.84rem;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #38bdf8;
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    scroll-behavior: smooth;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bus-route-flow-container::-webkit-scrollbar {
+    width: 6px;
+}
+.bus-route-flow-container::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 4px;
+}
+.bus-route-flow-container::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 4px;
+}
+.bus-route-flow-container::-webkit-scrollbar-thumb:hover {
+    background: #0284c7;
+}
