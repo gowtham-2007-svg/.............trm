@@ -567,7 +567,7 @@ const mangaloreCategoryData = {
                 description: 'Famous for its exquisite ceiling paintings that rival the Sistine Chapel.',
                 openHours: '9:00 AM – 1:30 PM, 2:30 PM – 6:00 PM',
                 bestTime: 'Morning visit (10:00 AM)',
-                busRoutes: 'Bus 1, 1A, 1B, 7, 7A (Board at Kankanady or State Bank. Get down at Lighthouse Hill / St. Aloysius College) | ~3 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7, 7A<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Lighthouse Hill<br>│<br>🔴 St. Aloysius College Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>⛪ St. Aloysius Chapel</div>`,
                 bestChoice: 'Sistine Chapel-like Exquisite Ceiling Frescoes',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1548625361-155deee223c2?auto=format&fit=crop&q=80&w=200'
             },
@@ -577,7 +577,7 @@ const mangaloreCategoryData = {
                 description: 'A historic Roman Catholic church in the heart of Mangalore with rich heritage.',
                 openHours: '6:00 AM – 7:30 PM',
                 bestTime: 'Sunday Morning Mass',
-                busRoutes: 'Bus 1, 1A, 1B, 7, 14 (Board at Kankanady or State Bank. Get down at Hampankatta / Milagres) | ~2.5 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7, 14<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>🔴 Milagres Church Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>⛪ Milagres Church</div>`,
                 bestChoice: 'century-old Roman Catholic Architectural Heritage',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1438263308705-f6c8f370ba36?auto=format&fit=crop&q=80&w=200'
             },
@@ -587,7 +587,7 @@ const mangaloreCategoryData = {
                 description: 'The oldest church in Mangalore featuring a stunning dome and beautiful architecture.',
                 openHours: '6:00 AM – 7:00 PM',
                 bestTime: 'Morning Quiet Hours',
-                busRoutes: 'Bus 1, 1A, 7, 14, 21 (Board at Kankanady or State Bank. Get down at Bolar / Rosario Cathedral) | ~3 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 7, 14, 21<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Bolar<br>│<br>🔴 Rosario Cathedral Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>⛪ Rosario Cathedral</div>`,
                 bestChoice: 'Italian-style architecture & spectacular Dome structure',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1548625361-155deee223c2?auto=format&fit=crop&q=80&w=200'
             },
@@ -597,7 +597,7 @@ const mangaloreCategoryData = {
                 description: 'A popular pilgrimage site known for its modern architecture and peaceful ambiance.',
                 openHours: '5:30 AM – 8:30 PM',
                 bestTime: 'Thursdays Novena services',
-                busRoutes: 'Bus 14, 14A, 14B, 21, 21A (Board at Kankanady or State Bank. Get down at Bikarnakatte / Infant Jesus Shrine) | ~4 km from Kankanady | Fare: ₹10–₹20',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 14B, 21, 21A<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Bunts Hostel<br>│<br>⚪ Bikarnakatte<br>│<br>🔴 Infant Jesus Shrine Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>⛪ Infant Jesus Shrine</div>`,
                 bestChoice: 'Prayers in the massive modern amphitheater',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=200'
             }
@@ -611,6 +611,7 @@ const mangaloreCategoryData = {
                 image: 'https://www.crazymasalafood.com/wp-content/images/machali-mangalore-hotel.png',
                 description: 'A legendary home-style seafood restaurant in Mangaluru, celebrated for its fresh fish, traditional local masalas, and quick service.',
                 openHours: '11:30 AM – 3:30 PM, 7:00 PM – 10:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7, 14<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Jyothi Circle<br>│<br>🔴 Machali Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍤 Machali Restaurant</div>`,
                 bestFoods: [
                     { name: 'Anjal Fish Fry', img: 'https://images.indianexpress.com/2016/04/anjal-masala-fry_820_nikhil-pai.jpg', price: '₹290 (Approx)' },
                     { name: 'Fish Thali', img: 'https://static.wixstatic.com/media/798804_28241958932a44f682b26db6b35a8987~mv2.jpg/v1/fill/w_980,h_766,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/798804_28241958932a44f682b26db6b35a8987~mv2.jpg', price: '₹190 (Approx)' },
@@ -623,6 +624,7 @@ const mangaloreCategoryData = {
                 image: 'https://i.ytimg.com/vi/Sg4rB98loRo/maxresdefault.jpg',
                 description: 'An iconic local seafood joint near Car Street, Mangaluru, famous for its rustic coastal flavors, mouthwatering tawa-fried fish, and authentic fish thalis.',
                 openHours: '11:30 AM – 3:30 PM, 7:00 PM – 10:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Car Street<br>│<br>🔴 Car Street Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🐟 GiriManja's</div>`,
                 bestFoods: [
                     { name: 'Anjal (King Fish) Tawa Fry', img: 'assets/places/girimanjas_tawa_fry.jpg', price: '₹300 (Approx)' },
                     { name: 'Special Seafood Thali', img: 'assets/places/girimanjas_fish_thali.jpg', price: '₹220 (Approx)' },
@@ -635,6 +637,7 @@ const mangaloreCategoryData = {
                 image: 'https://aroundmangalore.com/wp-content/uploads/2020/02/Shetty-Lunch-Home-Seafood-and-Mangalore-Cuisine-Restaurant-Adyar-Mangalore-P1.jpg',
                 description: 'The iconic restaurant credited with the invention of the world-famous Chicken Ghee Roast, serving outstanding traditional recipes.',
                 openHours: '11:30 AM – 3:30 PM, 6:30 PM – 10:30 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 Balmatta Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍗 Shetty Lunch Home</div>`,
                 bestFoods: [
                     { name: 'Chicken Ghee Roast', img: 'https://static.wixstatic.com/media/4431d7_10d3db6f602f44cd9c1f0ae354d242e5~mv2.png/v1/fill/w_980,h_1042,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/4431d7_10d3db6f602f44cd9c1f0ae354d242e5~mv2.png', price: '₹340 (Approx)' },
                     { name: 'Kane (Lady Fish) Fry', img: 'https://images.indianexpress.com/2016/04/anjal-masala-fry_820_nikhil-pai.jpg', price: '₹280 (Approx)' },
@@ -647,6 +650,7 @@ const mangaloreCategoryData = {
                 image: 'https://aroundmangalore.com/wp-content/uploads/2016/06/Pallkhi-Restaurant-Balmatta-Road-Mangalore-P1.jpg',
                 description: 'One of Mangaluru\'s premier dining landmarks, renowned for its heritage-style fine dining, authentic local curries, and warm hospitality.',
                 openHours: '11:30 AM – 3:30 PM, 7:00 PM – 11:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 Pallkhi Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍽️ Pallkhi Restaurant</div>`,
                 bestFoods: [
                     { name: 'Chicken Kori Rotti', img: 'https://myfoodstory.com/wp-content/uploads/2015/11/chicken-kori-rotti-mangalorean-chicken-curry-recipe.1024x1024-1024x617.jpg', price: '₹260 (Approx)' },
                     { name: 'Crab Ghee Roast', img: 'https://i.ytimg.com/vi/gxik1GMXxE0/maxresdefault.jpg', price: '₹380 (Approx)' },
@@ -659,6 +663,7 @@ const mangaloreCategoryData = {
                 image: 'https://aroundmangalore.com/wp-content/uploads/2015/08/village5.png',
                 description: 'A charming theme-style garden restaurant offering a rustic coastal village ambiance and a delectable range of Mangalorean delicacies.',
                 openHours: '12:00 PM – 3:30 PM, 7:00 PM – 11:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 8, 8A, 8B, 8C<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Nanthoor<br>│<br>⚪ Vamanjoor<br>│<br>🔴 Village Restaurant Bus Stop<br>│<br>🚶 Walk 3 min<br>│<br>🌿 Village Restaurant</div>`,
                 bestFoods: [
                     { name: 'Fish Curry & Neer Dosa', img: 'https://traveltillyoudrop.com/wp-content/uploads/2024/11/Neer-Dosa-with-Fish-Curry_11zon.webp', price: '₹200 (Approx)' },
                     { name: 'Pomfret Masala Fry', img: 'https://lh3.googleusercontent.com/-4qEWHrdDEf8/YAAmed_qpRI/AAAAAAAAMHs/X28AQROcmQ8Uwt04RJRcryM4dB06-EG_ACLcBGAsYHQ/w1200-h630-p-k-no-nu/1610622580540332-0.png', price: '₹450 (Approx)' },
@@ -671,6 +676,7 @@ const mangaloreCategoryData = {
                 image: 'https://mandistories.com/03_images/logo.png',
                 description: 'A popular Mandi restaurant near Mangalore Central Railway Station in Attavar, renowned for serving delicious Arabian flavors and offering unlimited mandi rice refills with its platters.',
                 openHours: '12:00 PM – 11:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 15, 17, 17A, 19, 33<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Attavar<br>│<br>🔴 Mangalore Central Railway Station<br>│<br>🚶 Walk 2 min<br>│<br>🍖 Mandi Stories</div>`,
                 bestFoods: [
                     { name: 'Half Chicken Al Faham Mandi (For 2)', img: 'https://www.m3mandi.com/wp-content/uploads/2023/08/Chicken_Al_faham_Mandi_.jpeg', price: '₹350–₹450' },
                     { name: 'Full Chicken Al Faham Mandi (For 2)', img: 'https://www.m3mandi.com/wp-content/uploads/2023/08/Chicken_Al_faham_Mandi_.jpeg', price: '₹650–₹850' },
@@ -683,6 +689,7 @@ const mangaloreCategoryData = {
                 image: 'assets/places/charminar_logo.png',
                 description: 'A popular restaurant in Mangaluru famous for its authentic Hyderabadi Dum Biryani, flavorful kebabs, tandoori starters, and rich Mughlai dishes.',
                 openHours: '12:00 PM – 11:00 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 Charminar Restaurant Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍛 Charminar Restaurant</div>`,
                 bestFoods: [
                     { name: 'Hyderabadi Special Chicken Dum Biryani', img: 'assets/places/charminar_main_biryani.jpg', price: '₹220 (Approx)' },
                     { name: 'Chicken 65 Special Dum Biryani', img: 'assets/places/charminar_chicken65_biryani.jpg', price: '₹250 (Approx)' },
@@ -695,6 +702,7 @@ const mangaloreCategoryData = {
                 image: 'https://assets.architecturaldigest.in/photos/696f675217ee5e78ebce1fd0/master/w_1600%2Cc_limit/Noaidwinsttudio-.jpeg',
                 description: 'A renowned iconic hotel famous for its authentic coastal fish thali, mouthwatering tawa fish fry, and rich heritage flavors.',
                 openHours: '11:30 AM – 4:00 PM, 7:00 PM – 10:30 PM',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7, 14<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Car Street<br>│<br>🔴 Hotel Thimmappa Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🐠 Hotel Thimmappa</div>`,
                 bestFoods: [
                     { name: 'Masala Fish Fry', img: 'https://b2958125.smushcdn.com/2958125/wp-content/uploads/masala-fish-fry-recipe-ayala-meen-Mackerel-fry-8.jpg?lossy=1&strip=1&webp=1', price: '₹240 (Approx)' },
                     { name: 'Pomfret Fry', img: 'https://img.frozenfish.direct/wp-content/uploads/2023/04/Pomfret-Fry.jpg.webp', price: '₹340 (Approx)' },
@@ -778,6 +786,7 @@ const mangaloreCategoryData = {
                 description: 'A premium lounge offering great music, vibrant ambiance, and a fantastic selection of beverages.',
                 openHours: '11:00 AM – 11:30 PM',
                 bestTime: 'Weekend Evenings',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 ONYX Lounge Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍸 ONYX Air Lounge & Kitchen</div>`,
                 bestChoice: 'Approx. Spend for 1 Person: ₹500–₹1,200',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=200'
             },
@@ -787,6 +796,7 @@ const mangaloreCategoryData = {
                 description: 'A cozy and lively pub perfect for hanging out with friends over drinks and delicious bar bites.',
                 openHours: '11:00 AM – 11:30 PM',
                 bestTime: 'Evening (7:00 PM)',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 Froth On Top Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍺 Froth On Top</div>`,
                 bestChoice: 'Approx. Spend for 1 Person: ₹400–₹1,000',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&q=80&w=200'
             },
@@ -796,6 +806,7 @@ const mangaloreCategoryData = {
                 description: 'Mangalore\'s first microbrewery offering craft beers, excellent food, and a fantastic vibe.',
                 openHours: '11:00 AM – 11:30 PM',
                 bestTime: 'Friday Nights',
+                busRoutes: `<strong>Bus Numbers:</strong> 9A, 18, 29<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Pandeshwar<br>│<br>🔴 Spindrift Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍻 Spindrift</div>`,
                 bestChoice: 'Approx. Spend for 1 Person: ₹500–₹1,200',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1582222165039-4458b6fa202f?auto=format&fit=crop&q=80&w=200'
             },
@@ -805,6 +816,7 @@ const mangaloreCategoryData = {
                 description: 'A classic favorite in the city with a retro feel, great cocktails, and hearty food.',
                 openHours: '11:00 AM – 11:30 PM',
                 bestTime: 'Evening (8:00 PM)',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 7, 14, 21<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Balmatta<br>│<br>🔴 The Liquid Lounge Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🍹 The Liquid Lounge</div>`,
                 bestChoice: 'Approx. Spend for 1 Person: ₹400–₹1,000',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80&w=200'
             },
@@ -814,6 +826,7 @@ const mangaloreCategoryData = {
                 description: 'A popular pub franchise known for its signature cocktails, upbeat music, and vibrant crowd.',
                 openHours: '11:00 AM – 11:30 PM',
                 bestTime: 'Weekend Nights',
+                busRoutes: `<strong>Bus Numbers:</strong> 9A, 18, 29<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Pandeshwar<br>│<br>🔴 Sherlock's Lounge Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🎵 Sherlock's Lounge & Kitchen</div>`,
                 bestChoice: 'Approx. Spend for 1 Person: ₹500–₹1,200',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1563215037-29bd2f11ed42?auto=format&fit=crop&q=80&w=200'
             }
@@ -878,6 +891,7 @@ const mangaloreCategoryData = {
                 description: 'A popular gaming hub in Empire Mall featuring PS5 console gaming, high-end PC setups, and a lively competitive vibe. Play games like FIFA/FC 25, Valorant, BGMI, and racing games.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Afternoons & Weekends',
+                busRoutes: `<strong>Bus Numbers:</strong> 4, 5, 10A, 11B, 23, 30, 30A, 37, 42, 43, 44A, 44B, 44C, 44D, 51, 51A, 54, 55<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ PVS Circle<br>│<br>🔴 Empire Mall Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>🎮 Esports Arena</div>`,
                 bestChoice: 'Price: ₹100–₹250 per hour <strong>(~1 km from City Center)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&q=80&w=200'
             },
@@ -892,6 +906,7 @@ const mangaloreCategoryData = {
                 description: 'A premium gaming lounge equipped with PS5 consoles and high-performance PC stations. Perfect for competitive multiplayer games like Tekken, Mortal Kombat, Valorant, FIFA, and CS2.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Evening Sessions',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Balmatta<br>│<br>🔴 NTG Esports Stop<br>│<br>🚶 Walk 2 min<br>│<br>🎮 NTG Esports Lounge</div>`,
                 bestChoice: 'Price: ₹100–₹250 per hour <strong>(~2 km from City Center)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200'
             },
@@ -906,6 +921,7 @@ const mangaloreCategoryData = {
                 description: 'Located in Balmatta, this comfortable gaming lounge is perfect for casual and competitive gaming with PS5, FC 25, WWE 2K, GTA V, and various cricket games.',
                 openHours: '10:30 AM – 10:30 PM',
                 bestTime: 'Casual & Group Gaming',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 21, 21A, 30<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>🔴 Balmatta Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🎮 Achilles Gaming Lounge</div>`,
                 bestChoice: 'Price: ₹100–₹300 per hour <strong>(~1 km from City Center)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=200'
             },
@@ -921,6 +937,7 @@ const mangaloreCategoryData = {
                 description: 'The ultimate family entertainment center offering immersive VR games, bowling, arcade machines, cricket simulators, and interactive dance games.',
                 openHours: '11:00 AM – 10:00 PM',
                 bestTime: 'Evening & Weekend Fun',
+                busRoutes: `<strong>Bus Numbers:</strong> 9A, 18, 29<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Pandeshwar<br>│<br>🔴 Forum Fiza Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>🎳 SMAAASH</div>`,
                 bestChoice: 'Bowling: ₹109–₹329 | Packages: ₹1319–₹1759 <strong>(~2 km from City Center)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=200'
             },
@@ -935,6 +952,7 @@ const mangaloreCategoryData = {
                 description: 'A family-friendly arcade zone in Fiza Mall featuring high-tech arcade games, bowling lanes, bumper cars, basketball shootout games, and prize vending machines.',
                 openHours: '11:00 AM – 10:00 PM',
                 bestTime: 'Family Outings',
+                busRoutes: `<strong>Bus Numbers:</strong> 9A, 18, 29<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Pandeshwar<br>│<br>🔴 Forum Fiza Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>🕹️ Timezone</div>`,
                 bestChoice: 'Arcade: ₹40–₹150/game | Bowling: ₹200–₹400 <strong>(~2 km from City Center)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=200'
             }
