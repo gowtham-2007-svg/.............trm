@@ -438,7 +438,7 @@ const mangaloreCategoryData = {
                 description: 'One of the largest malls in Mangalore with great shopping, dining, and multiplex.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends (All day)',
-                busRoutes: '4, 5, 10A, 11B, 23, 30, 30A, 37, 42, 43, 44A, 44B, 44C, 44D, 51, 51A, 54, 55 (all pass through Kankanady → Jyothi → Hampankatta/State Bank)',
+                busRoutes: `<strong>Bus Numbers:</strong> 4, 5, 10A, 11B, 23, 30, 30A, 37, 42, 43, 44A, 44B, 44C, 44D, 51, 51A, 54, 55<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Jyothi Circle<br>│<br>🔴 City Centre Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🛍️ City Centre Mall</div>`,
                 bestChoice: 'Cinepolis Movie Screening & Food Court Dining',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=200'
             },
@@ -448,7 +448,7 @@ const mangaloreCategoryData = {
                 description: 'A premium shopping destination offering global brands and entertainment options.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Evening hours (6:00 PM onwards)',
-                busRoutes: '9A, 18, 29 (go via Pandeshwar)',
+                busRoutes: `<strong>Bus Numbers:</strong> 9A, 18, 29<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Pandeshwar<br>│<br>🔴 Forum Fiza Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>🛍️ Forum Fiza Mall</div>`,
                 bestChoice: 'Global Brands Shopping & Bowling Alley Gaming',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=200'
             },
@@ -456,7 +456,7 @@ const mangaloreCategoryData = {
                 name: 'Lotus Mall (Upcoming)',
                 image: 'https://1.bp.blogspot.com/-ukW_y6j0NO4/UAj7Xco44hI/AAAAAAAALMw/dFO_pcSzgjU/s1600/2s8obah.jpg',
                 description: 'An upcoming mega mall promising a world-class shopping experience.',
-                openHours: 'Under Construction',
+                busRoutes: `<strong>Status:</strong> 🚧 Under Construction<br><div class="bus-route-flow-container">🚧 Opening Soon<br>Bus routes will be updated after the official launch.</div>`,
                 bestTime: 'Post Launch',
                 bestChoice: 'Multiplex & Premium Leisure Zones',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=200'
@@ -467,7 +467,7 @@ const mangaloreCategoryData = {
                 description: 'One of the first modern malls in the city, popular among locals.',
                 openHours: '10:00 AM – 9:30 PM',
                 bestTime: 'Afternoon Shopping hours',
-                busRoutes: '15, 17, 17A, 19, 33, 47B, 48A (stop near Bharath Mall/KSRTC)',
+                busRoutes: `<strong>Bus Numbers:</strong> 15, 17, 17A, 19, 33, 47B, 48A<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Kankanady<br>│<br>🔴 Bharath Mall Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🛍️ Bharath Mall</div>`,
                 bestChoice: 'Supermarket Shopping & Multiplex Theatre',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600'
             }
@@ -713,7 +713,7 @@ const mangaloreCategoryData = {
                 description: 'The largest and most beautiful park in Mangaluru, famous for its musical fountain and lush greenery.',
                 openHours: '6:00 AM – 8:30 PM',
                 bestTime: 'Evening Musical Fountain (7:00 PM)',
-                busRoutes: 'Bus 14, 14A, 14B, 21, 21A (Board at Kankanady or State Bank. Get down at Kadri Park) | ~2 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 14, 14A, 14B, 21, 21A<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Bunts Hostel<br>│<br>🔴 Kadri Park Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🌳 Kadri Park</div>`,
                 bestChoice: 'Musical Fountain Show & Toy Train Ride',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=200'
             },
@@ -723,7 +723,7 @@ const mangaloreCategoryData = {
                 description: 'A historic park offering a spectacular view of the Arabian Sea and the sunset, located near St. Aloysius College.',
                 openHours: '4:00 PM – 8:00 PM',
                 bestTime: 'Sunset (6:00 PM)',
-                busRoutes: 'Bus 1, 1A, 1B, 7, 7A (Board at Kankanady or State Bank. Get down at Lighthouse Hill) | ~3.5 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7, 7A<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Ladyhill<br>│<br>🔴 Lighthouse Hill Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🌳 Tagore Park</div>`,
                 bestChoice: 'Spectacular Arabian Sea Sunset Views',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=200'
             },
@@ -733,7 +733,7 @@ const mangaloreCategoryData = {
                 description: 'A serene tree park near the coast set up by the Forest Department, featuring medicinal plants and wooden sculptures.',
                 openHours: '10:00 AM – 7:00 PM',
                 bestTime: 'Late Afternoon (4:30 PM)',
-                busRoutes: 'Bus 6, 1A (Board at State Bank Bus Stand. Get down at Tannirbhavi) | ~11 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 1A, 6<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Urva Stores<br>│<br>⚪ Kuloor<br>│<br>🔴 Tannirbhavi Bus Stop<br>│<br>🚶 Walk 5 min<br>│<br>🌲 Tannirbhavi Tree Park</div>`,
                 bestChoice: 'Nature Trails & Tree Canopy Walk',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=200'
             },
@@ -743,7 +743,7 @@ const mangaloreCategoryData = {
                 description: 'A prominent urban park offering a peaceful walking environment amidst the bustling city.',
                 openHours: '6:00 AM – 8:00 PM',
                 bestTime: 'Early Morning (6:30 AM)',
-                busRoutes: 'Bus 1, 1A, 1B, 7 (Board at Kankanady or State Bank. Get down at Lalbagh / MG Park) | ~3 km from Kankanady | Fare: ₹10–₹15',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 1A, 1B, 7<br><strong>📍 Board At:</strong> State Bank Bus Stand or Kankanady Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>🔴 Lalbagh Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🌿 Mahatma Gandhi Park</div>`,
                 bestChoice: 'Quiet Morning Walks',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=200'
             },
@@ -753,7 +753,7 @@ const mangaloreCategoryData = {
                 description: 'An eco-education and tourism park featuring a lake, botanical garden, and cultural village.',
                 openHours: '9:30 AM – 5:30 PM',
                 bestTime: 'Morning (10:00 AM)',
-                busRoutes: 'Bus 8, 8A, 8B, 8C (Board at State Bank Bus Stand. Get down at Pilikula) | ~12 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 8, 8A, 8B, 8C<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Nanthoor<br>│<br>⚪ Vamanjoor<br>│<br>🔴 Pilikula Bus Stop<br>│<br>🚶 Walk 3 min<br>│<br>🌿 Pilikula Nisargadhama</div>`,
                 bestChoice: 'Lake Boating & Artisan Village',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=200'
             },
@@ -763,7 +763,7 @@ const mangaloreCategoryData = {
                 description: 'A major zoo and biological park known for its wildlife conservation efforts and tiger breeding program.',
                 openHours: '9:30 AM – 5:30 PM',
                 bestTime: 'Morning (10:00 AM)',
-                busRoutes: 'Bus 8, 8A, 8B, 8C (Board at State Bank Bus Stand. Get down at Pilikula Biological Park) | ~12 km from Kankanady | Fare: ₹20–₹30',
+                busRoutes: `<strong>Bus Numbers:</strong> 8, 8A, 8B, 8C<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Jyothi Circle<br>│<br>⚪ Nanthoor<br>│<br>⚪ Vamanjoor<br>│<br>🔴 Pilikula Biological Park Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🦁 Pilikula Biological Park</div>`,
                 bestChoice: 'Wildlife Safari & Tiger Enclosure',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?auto=format&fit=crop&q=80&w=200'
             }
