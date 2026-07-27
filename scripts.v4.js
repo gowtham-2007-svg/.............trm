@@ -3195,7 +3195,7 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
 
             <div class="places-grid">
                 ${category.places.map(place => `
-                    <div class="place-card">
+                    <div class="place-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${cityId}')">
                         <div class="place-img" style="position: relative; overflow: hidden;">
                             ${place.images && place.images.length > 0 ? `
                                 <div style="width: 100%; height: 100%; overflow: hidden;">
@@ -3443,7 +3443,7 @@ function renderDestination(id) {
             ${!isPremiumCity ? `
             <div class="places-grid">
                 ${dest.famousPlaces.map(place => `
-                    <div class="place-card">
+                    <div class="place-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${id}')">
                         <div class="place-img">
                             <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
                         </div>
@@ -3592,7 +3592,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                     <div class="swiper-wrapper">
                         ${topPlaces.map((place, idx) => `
                             <div class="swiper-slide">
-                                <div class="must-watch-card">
+                                <div class="must-watch-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${cityId}')">
                                     <div class="must-watch-card-img">
                                         <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async" ${['Chamundi Hills', 'Karinjeshwara Hill Temple', 'Karinchieshwara Trek'].includes(place.name) ? 'style="transform: scale(1.35); transform-origin: center; object-fit: cover;"' : ['Mandi Stories', 'Charminar Restaurant'].includes(place.name) ? 'style="object-fit: contain; background-color: #ffffff; padding: 12px;"' : place.name.includes('Upcoming') ? 'style="filter: blur(4px);"' : ''}>
                                         <div class="must-watch-badges">
@@ -4652,6 +4652,15 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
 
 window.handleMangaloreExplore = function(event, placeName) {
     window.handleExplore(event, placeName, currentCityId);
+};
+
+window.handleCardClick = function(event, placeName, cityId = currentCityId) {
+    if (event && event.target) {
+        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon, button, a')) {
+            return;
+        }
+    }
+    window.handleExplore(event, placeName, cityId);
 };
 
 // Helper to show modern non-intrusive Toast notifications
@@ -6215,13 +6224,28 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     else if (cityId === 'chikkamagaluru') cityName = 'Chikkamagaluru';
     else if (cityId === 'manipal') cityName = 'Manipal';
     
-    // Conditional URL generation based on exact coordinates or clean search name.
-    // Using exact latitude & longitude guarantees Google Maps drops a precise pin at the destination location,
-    // bypassing 0-result query mismatches that cause blank map screens.
-    const cleanSearchName = destName.replace(/\([^)]*\)/g, '').split('/')[0].trim();
-    const mapsUrl = (destLat && destLng)
-        ? `https://www.google.com/maps/search/?api=1&query=${destLat},${destLng}`
-        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanSearchName + ', ' + cityName + ', Karnataka')}`;
+    function getCleanMapsQueryName(destName, cityName) {
+        if (!destName) return cityName || 'Karnataka';
+        let clean = destName.replace(/\([^)]*\)/g, '').split('/')[0].trim();
+        const lower = clean.toLowerCase();
+
+        if (lower.includes('end point swarna river viewpoint')) clean = 'End Point Park';
+        else if (lower.includes('delta beach')) clean = 'Delta Beach Bengre';
+        else if (lower.includes('mannapalla lake')) clean = 'Mannapalla Lake';
+        else if (lower.includes('kemmannu hanging bridge')) clean = 'Kemmannu Hanging Bridge';
+        else if (lower.includes('kudremukh peak')) clean = 'Kudremukh Peak';
+        else if (lower.includes('kodachadri')) clean = 'Kodachadri Peak';
+        else if (lower.includes('narasimha parvatha')) clean = 'Narasimha Parvatha Agumbe';
+        else if (lower.includes('kudlu theertha')) clean = 'Kudlu Theertha Falls';
+        else if (lower.includes('koosalli falls')) clean = 'Koosalli Water Falls';
+        else if (lower.includes('garuda mall')) clean = 'Garuda Mall';
+        else if (lower.includes('mysore palace')) clean = 'Mysore Palace';
+
+        return `${clean}, ${cityName}`;
+    }
+
+    const searchQuery = getCleanMapsQueryName(destName, cityName);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
 
     // Generate Drawer skeleton HTML immediately (loading state)
     const drawerHTML = `

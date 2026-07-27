@@ -188,9 +188,9 @@ const mangaloreCategoryData = {
     'beaches': {
         name: 'Mangalore Beaches',
         places: [
-            {
-                name: 'Panambur Beach',
-                image: 'assets/places/panambur_beach.jpg',
+            { 
+                name: 'Panambur Beach', 
+                image: 'assets/places/panambur_beach.jpg', 
                 description: 'A clean and popular beach known for its golden sands and water sports.',
                 rating: '4.5',
                 bestTime: '4:30 PM – 7:00 PM (Sunset)',
@@ -198,9 +198,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Jet Ski & Water Sports Adventures <strong>(~10 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Tannirbhavi Beach',
-                image: 'https://www.hlimg.com/images/things2do/738X538/28mn_mnrmm1_Bea_29_2176132g_1508082724t.jpg',
+            { 
+                name: 'Tannirbhavi Beach', 
+                image: 'https://www.hlimg.com/images/things2do/738X538/28mn_mnrmm1_Bea_29_2176132g_1508082724t.jpg', 
                 description: 'A peaceful beach perfect for relaxation, reachable by a scenic ferry.',
                 rating: '4.7',
                 bestTime: '5:00 PM – 7:15 PM',
@@ -208,9 +208,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Scenic Ferry Ride & Sunset View <strong>(~9 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Someshwara Beach',
-                image: 'https://visitmangalore.in/_next/image?url=https:%2F%2Fapi.visitmangalore.in%2Fuploads%2F5_a_SOMESHWARA_BEACH_9e97b6ef87.jpg&w=1920&q=75',
+            { 
+                name: 'Someshwara Beach', 
+                image: 'https://visitmangalore.in/_next/image?url=https:%2F%2Fapi.visitmangalore.in%2Fuploads%2F5_a_SOMESHWARA_BEACH_9e97b6ef87.jpg&w=1920&q=75', 
                 description: 'Famous for the Rudra Shile (huge rocks) and the ancient Someshwara Temple.',
                 rating: '4.6',
                 bestTime: '4:30 PM – 6:30 PM',
@@ -218,9 +218,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Rudra Shile Rock Formations Exploration <strong>(~17 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Surathkal Beach',
-                image: 'https://www.mustvisitplace.com/wp-content/uploads/2019/03/Surathkal-beach-3-768x648.jpg',
+            { 
+                name: 'Surathkal Beach', 
+                image: 'https://www.mustvisitplace.com/wp-content/uploads/2019/03/Surathkal-beach-3-768x648.jpg', 
                 description: 'A serene beach known for its lighthouse that offers a spectacular view.',
                 rating: '4.8',
                 bestTime: '5:00 PM – 7:00 PM',
@@ -228,9 +228,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Panoramic View from the Lighthouse <strong>(~16 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Sasihithlu Beach',
-                image: 'assets/places/sasihithlu_beach.jpg',
+            { 
+                name: 'Sasihithlu Beach', 
+                image: 'assets/places/sasihithlu_beach.jpg', 
                 description: 'A pristine and scenic beach where the river meets the Arabian Sea, popular for surfing.',
                 rating: '4.9',
                 bestTime: '6:00 AM – 9:00 AM',
@@ -238,9 +238,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Surfing at the River Mouth Confluence <strong>(~24 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Ullal Beach',
-                image: 'assets/places/ullal_beach.jpg',
+            { 
+                name: 'Ullal Beach', 
+                image: 'assets/places/ullal_beach.jpg', 
                 description: 'A tranquil beach offering spectacular sunset views and a peaceful environment.',
                 rating: '4.4',
                 bestTime: '5:00 PM – 7:00 PM',
@@ -248,9 +248,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Tranquil Shoreline Sunset Walks <strong>(~12 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Bengre Beach',
-                image: 'assets/places/bengre_beach.png',
+            { 
+                name: 'Bengre Beach', 
+                image: 'assets/places/bengre_beach.png', 
                 description: 'A picturesque coastal stretch where the river meets the Arabian Sea, offering breathtaking sunsets.',
                 rating: '4.5',
                 bestTime: '4:30 PM – 6:45 PM',
@@ -258,9 +258,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Scenic Estuary Sunset views <strong>(~12 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Talapady Beach',
-                image: 'assets/places/talapady_beach.jpg',
+            { 
+                name: 'Talapady Beach', 
+                image: 'assets/places/talapady_beach.jpg', 
                 description: 'A serene and less crowded beach ideal for relaxing walks along the shoreline.',
                 rating: '4.2',
                 bestTime: '5:00 PM – 7:00 PM',
@@ -268,54 +268,54 @@ const mangaloreCategoryData = {
                 bestChoice: 'Quiet Coastal Beach Walk <strong>(~17 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1434064511983-18c6dae20ed5?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Batapady Beach',
-                image: 'assets/places/batapady_beach.jpg',
+            { 
+                name: 'Batapady Beach', 
+                image: 'assets/places/batapady_beach.jpg', 
                 description: 'A hidden gem offering a calm environment and pristine beauty, perfect for a peaceful getaway.',
                 bestTime: '4:30 PM – 7:00 PM',
                 busRoutes: `<strong>Bus Numbers:</strong> 48, 53E<br><strong>📍 Board At:</strong> State Bank Bus Stand (Get down at Talapady, take auto)<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Kankanady<br>│<br>⚪ Pumpwell<br>│<br>⚪ Ullal<br>│<br>⚪ Talapady<br>│<br>🔴 Talapady Bus Stop<br>│<br>🚖 Auto (2–3 km)<br>│<br>🏖️ Batapady Beach</div>`,
                 bestChoice: 'Hidden Seaside Scenic Gateway <strong>(~19 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Mukka Beach',
-                image: 'assets/places/mukka_beach.jpg',
+            { 
+                name: 'Mukka Beach', 
+                image: 'assets/places/mukka_beach.jpg', 
                 description: 'Known for its golden sands and the nearby NITK lighthouse, offering a panoramic view of the sea.',
                 bestTime: '5:00 PM – 7:15 PM',
                 busRoutes: `<strong>Bus Numbers:</strong> 2, 2A, 36, 36M<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Kottara Chowki<br>│<br>⚪ Surathkal<br>│<br>🔴 Mukka Bus Stop<br>│<br>🚶 Walk 5 min<br>│<br>🏖️ Mukka Beach</div>`,
                 bestChoice: 'Golden Sands & Seagull Watching <strong>(~20 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Kodical Beach',
-                image: 'assets/places/kodical_beach.jpg',
+            { 
+                name: 'Kodical Beach', 
+                image: 'assets/places/kodical_beach.jpg', 
                 description: 'A beautiful coastline with a mix of sandy stretches and rocky shores, perfect for an evening stroll.',
                 bestTime: '4:30 PM – 6:30 PM',
                 busRoutes: `<strong>Bus Numbers:</strong> 1B, 1C, 2, 2A<br><strong>📍 Board At:</strong> State Bank Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Urva Stores<br>│<br>🔴 Kodikal Bus Stop<br>│<br>🚖 Auto (2 km)<br>│<br>🏖️ Kodikal Beach</div>`,
                 bestChoice: 'Rocky Shore Scenic Stroll <strong>(~7 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Chitrapura Beach',
-                image: 'assets/places/chitrapura_beach.jpg',
+            { 
+                name: 'Chitrapura Beach', 
+                image: 'assets/places/chitrapura_beach.jpg', 
                 description: 'A quiet and peaceful beach, perfect for long walks and enjoying the serene coastal breeze.',
                 bestTime: '5:00 PM – 7:00 PM',
                 busRoutes: `<strong>Bus Numbers:</strong> 36, 36M, 45, 45A<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Kottara Chowki<br>│<br>⚪ Surathkal<br>│<br>🔴 Chitrapura Bus Stop<br>│<br>🚶 Walk 5 min<br>│<br>🏖️ Chitrapura Beach</div>`,
                 bestChoice: 'Quiet Coastal Sea Breeze Relaxation <strong>(~12 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1473116763269-255448993767?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Mulki Beach',
-                image: 'assets/places/mulki_beach.jpg',
+            { 
+                name: 'Mulki Beach', 
+                image: 'assets/places/mulki_beach.jpg', 
                 description: 'A popular destination for water sports enthusiasts, especially known for surfing and kayaking.',
                 bestTime: '6:00 AM – 10:00 AM',
                 busRoutes: `<strong>Bus Numbers:</strong> 2A, 36A, 36E<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand (Get down at Mulki, take auto)<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Kottara Chowki<br>│<br>⚪ Surathkal<br>│<br>⚪ Mukka<br>│<br>🔴 Mulki Bus Stand<br>│<br>🚖 Auto (2–3 km)<br>│<br>🏖️ Mulki Beach</div>`,
                 bestChoice: 'Kayaking & Surfing Lessons <strong>(~29 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Hosabettu Beach',
-                image: 'assets/places/hosabettu_beach.gif',
+            { 
+                name: 'Hosabettu Beach', 
+                image: 'assets/places/hosabettu_beach.gif', 
                 description: 'A beautiful hidden coastal gem that offers a pristine environment away from the city crowd.',
                 bestTime: '5:00 PM – 7:00 PM',
                 busRoutes: `<strong>Bus Numbers:</strong> 36, 36M, 45, 45A<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ PVS Circle<br>│<br>⚪ Ballalbagh<br>│<br>⚪ Lalbagh<br>│<br>⚪ Ladyhill<br>│<br>⚪ Kottara Chowki<br>│<br>⚪ Surathkal<br>│<br>⚪ Hosabettu<br>│<br>🔴 Hosabettu Bus Stop<br>│<br>🚶 Walk 5 min<br>│<br>🏖️ Hosabettu Beach</div>`,
@@ -327,9 +327,9 @@ const mangaloreCategoryData = {
     'temples': {
         name: 'Mangalore Temples',
         places: [
-            {
-                name: 'Swami Koragajja Temple',
-                image: 'assets/places/swami_koragajja_temple.jpg',
+            { 
+                name: 'Swami Koragajja Temple', 
+                image: 'assets/places/swami_koragajja_temple.jpg', 
                 description: 'A highly revered sacred shrine dedicated to Swami Koragajja, drawing countless devotees seeking blessings.',
                 openHours: '6:00 AM – 1:00 PM, 4:00 PM – 9:00 PM',
                 bestTime: 'Evening Aarti (6:30 PM)',
@@ -337,9 +337,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Koragajja Darshan & Offering Betel Leaves',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Kadri Manjunath Temple',
-                image: 'assets/places/kadri_temple.jpg',
+            { 
+                name: 'Kadri Manjunath Temple', 
+                image: 'assets/places/kadri_temple.jpg', 
                 description: 'An ancient Hindu temple with unique architecture and historical significance.',
                 openHours: '5:30 AM – 1:00 PM, 4:00 PM – 8:30 PM',
                 bestTime: 'Morning Pooja (7:00 AM)',
@@ -347,9 +347,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Lokeshwara Bronze Statue & Natural Springs',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1609137882611-37f2252a11b9?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Kudroli Gokarnath Temple',
-                image: 'https://imvoyager.com/wp-content/uploads/2021/04/Kudroli-Temple-Mangalore-Kudroli-Gokarnanatha-Temple-Gokarnanatheshwara-Temple--640x437.png',
+            { 
+                name: 'Kudroli Gokarnath Temple', 
+                image: 'https://imvoyager.com/wp-content/uploads/2021/04/Kudroli-Temple-Mangalore-Kudroli-Gokarnanatha-Temple-Gokarnanatheshwara-Temple--640x437.png', 
                 description: 'A beautiful temple known for its magnificent Dasara celebrations.',
                 openHours: '6:00 AM – 2:00 PM, 4:30 PM – 9:00 PM',
                 bestTime: 'Evening lighting (6:30 PM)',
@@ -357,9 +357,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Golden Gopuram View & Dasara Festivities',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Mangaladevi Temple',
-                image: 'https://www.thetravelmagazine.net/wp-content/uploads/Mangaladevi-Temple-Sunset.jpg',
+            { 
+                name: 'Mangaladevi Temple', 
+                image: 'https://www.thetravelmagazine.net/wp-content/uploads/Mangaladevi-Temple-Sunset.jpg', 
                 description: 'The ancient temple after which the city of Mangalore is named.',
                 openHours: '6:00 AM – 1:00 PM, 4:00 PM – 8:30 PM',
                 bestTime: 'Navratri Festival Week (All day)',
@@ -367,9 +367,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Traditional Pooja & Historic Temple Origin Site',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Polali Rajarajeshwari Temple',
-                image: 'https://tempotravellermangalore.in/uploads/image/tour-packages/pilgrimage-places-in-mangalore/polali-rajarajeshwari-temple.jpg',
+            { 
+                name: 'Polali Rajarajeshwari Temple', 
+                image: 'https://tempotravellermangalore.in/uploads/image/tour-packages/pilgrimage-places-in-mangalore/polali-rajarajeshwari-temple.jpg', 
                 description: 'Famous for its wooden idols and the historic Polali Chendu festival.',
                 openHours: '6:00 AM – 12:30 PM, 4:00 PM – 8:00 PM',
                 bestTime: 'Polali Chendu Festival (March/April)',
@@ -377,9 +377,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Sri Rajarajeshwari Clay Idol Darshan',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Kateel Temple',
-                image: 'assets/places/kateel_temple.webp',
+            { 
+                name: 'Kateel Temple', 
+                image: 'assets/places/kateel_temple.webp', 
                 description: 'A prominent Hindu temple dedicated to Goddess Durgaparameshwari, located on an islet in the Nandini River.',
                 openHours: '6:00 AM – 9:30 PM',
                 bestTime: 'Morning Aarti (10:00 AM)',
@@ -387,9 +387,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Island Temple Darshan & River Sunset Views',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Someshwara Temple',
-                image: 'assets/places/someshwara_temple.jpg',
+            { 
+                name: 'Someshwara Temple', 
+                image: 'assets/places/someshwara_temple.jpg', 
                 description: 'An ancient Shiva temple situated by the sea, known for its historic architecture and beautiful surroundings.',
                 openHours: '6:00 AM – 1:00 PM, 4:00 PM – 8:00 PM',
                 bestTime: 'Sunset timings (5:30 PM)',
@@ -397,9 +397,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Sea-Facing Shoreline Shiva Temple Visit',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Urwa Marigudi Temple',
-                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
+            { 
+                name: 'Urwa Marigudi Temple', 
+                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800', 
                 description: 'A highly revered temple dedicated to Goddess Mariamman, famous for its grand Mangaluru Dasara celebrations.',
                 openHours: '6:00 AM – 1:00 PM, 4:00 PM – 9:00 PM',
                 bestTime: 'Tuesdays & Fridays (All day)',
@@ -407,9 +407,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Urwa Mariamman Pooja & Dasara Processions',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🌺 Bappanadu Durgaparameshwari Temple',
-                image: 'https://mangaloreheritage.com/wp-content/uploads/2020/05/bappanadu-1080x675.jpg',
+            { 
+                name: '🌺 Bappanadu Durgaparameshwari Temple', 
+                image: 'https://mangaloreheritage.com/wp-content/uploads/2020/05/bappanadu-1080x675.jpg', 
                 description: 'A historical temple known for its communal harmony and the annual Bappanadu Dolu festival.',
                 openHours: '5:30 AM – 1:30 PM, 4:00 PM – 8:30 PM',
                 bestTime: 'Annual Bappanadu Dolu Festival',
@@ -417,9 +417,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Communal Harmony Shrine & Sacred Bappanadu Drum',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Karinjeshwara Hill Temple',
-                image: 'assets/places/karinjeshwara_temple.jpg',
+            { 
+                name: 'Karinjeshwara Hill Temple', 
+                image: 'assets/places/karinjeshwara_temple.jpg', 
                 description: 'A majestic temple perched on a cliff edge, offering a serene spiritual experience and panoramic views.',
                 openHours: '6:00 AM – 12:00 PM, 4:00 PM – 7:00 PM',
                 bestTime: 'Early Morning (6:30 AM)',
@@ -432,9 +432,9 @@ const mangaloreCategoryData = {
     'malls': {
         name: 'Mangalore Malls',
         places: [
-            {
-                name: 'City Centre Mall',
-                image: 'https://i.ytimg.com/vi/5hSQ865UkQA/maxresdefault.jpg',
+            { 
+                name: 'City Centre Mall', 
+                image: 'https://i.ytimg.com/vi/5hSQ865UkQA/maxresdefault.jpg', 
                 description: 'One of the largest malls in Mangalore with great shopping, dining, and multiplex.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends (All day)',
@@ -442,9 +442,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Cinepolis Movie Screening & Food Court Dining',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Forum Fiza Mall',
-                image: 'https://media-cdn.tripadvisor.com/media/photo-s/0e/0b/50/07/central-atrium-of-the.jpg',
+            { 
+                name: 'Forum Fiza Mall', 
+                image: 'https://media-cdn.tripadvisor.com/media/photo-s/0e/0b/50/07/central-atrium-of-the.jpg', 
                 description: 'A premium shopping destination offering global brands and entertainment options.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Evening hours (6:00 PM onwards)',
@@ -452,33 +452,33 @@ const mangaloreCategoryData = {
                 bestChoice: 'Global Brands Shopping & Bowling Alley Gaming',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Lotus Mall (Upcoming)',
-                image: 'https://1.bp.blogspot.com/-ukW_y6j0NO4/UAj7Xco44hI/AAAAAAAALMw/dFO_pcSzgjU/s1600/2s8obah.jpg',
+            { 
+                name: 'Lotus Mall (Upcoming)', 
+                image: 'https://1.bp.blogspot.com/-ukW_y6j0NO4/UAj7Xco44hI/AAAAAAAALMw/dFO_pcSzgjU/s1600/2s8obah.jpg', 
                 description: 'An upcoming mega mall promising a world-class shopping experience.',
                 busRoutes: `<strong>Status:</strong> 🚧 Under Construction<br><div class="bus-route-flow-container">🚧 Opening Soon<br>Bus routes will be updated after the official launch.</div>`,
                 bestTime: 'Post Launch',
                 bestChoice: 'Multiplex & Premium Leisure Zones',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Bharath Mall',
-                image: 'https://content.jdmagicbox.com/comp/mangalore/54/0824p824std2004954/catalogue/bharath-mall-bejai-mangalore-malls-z1qvkl4h1d.jpg',
+            { 
+                name: 'Bharath Mall', 
+                image: 'https://content.jdmagicbox.com/comp/mangalore/54/0824p824std2004954/catalogue/bharath-mall-bejai-mangalore-malls-z1qvkl4h1d.jpg', 
                 description: 'One of the first modern malls in the city, popular among locals.',
                 openHours: '10:00 AM – 9:30 PM',
                 bestTime: 'Afternoon Shopping hours',
                 busRoutes: `<strong>Bus Numbers:</strong> 15, 17, 17A, 19, 33, 47B, 48A<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Kankanady<br>│<br>🔴 Bharath Mall Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🛍️ Bharath Mall</div>`,
                 bestChoice: 'Supermarket Shopping & Multiplex Theatre',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600'
+                bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200'
             }
         ]
     },
     'trekking': {
         name: 'Mangalore Trekking Places',
         places: [
-            {
-                name: 'Jamalabad Fort',
-                image: 'https://visitmangalore.in/_next/image?url=https:%2F%2Fapi.visitmangalore.in%2Fuploads%2Fgadey_kalu_ed7e47ceb6.jpg&w=1920&q=75',
+            { 
+                name: 'Jamalabad Fort', 
+                image: 'https://visitmangalore.in/_next/image?url=https:%2F%2Fapi.visitmangalore.in%2Fuploads%2Fgadey_kalu_ed7e47ceb6.jpg&w=1920&q=75', 
                 description: 'A challenging trek to a historic hilltop fort with stunning 360-degree views.',
                 rating: '4.7',
                 bestTime: '6:00 AM – 11:00 AM',
@@ -488,9 +488,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Gadaikallu Cliff Climbing Challenge <strong>(~65 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Ermayi Falls Trek',
-                image: 'https://vl-prod-static.b-cdn.net/system/images/000/277/222/8a9f6cab8057c115cd3b9dc620b8a9f7/banner/bmcermayi.jpg?1550889416',
+            { 
+                name: 'Ermayi Falls Trek', 
+                image: 'https://vl-prod-static.b-cdn.net/system/images/000/277/222/8a9f6cab8057c115cd3b9dc620b8a9f7/banner/bmcermayi.jpg?1550889416', 
                 description: 'A scenic trek through lush forests leading to a multi-tiered waterfall.',
                 rating: '4.5',
                 bestTime: '7:30 AM – 12:00 PM',
@@ -500,9 +500,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Forest Trail Hike & Waterfall Swim <strong>(~75 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Karinchieshwara Trek',
-                image: 'https://res.cloudinary.com/dyiffrkzh/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_center,h_518,q_auto,w_660/v1705557186/bbj/m1wifaroojflvk5woe3g.jpg',
+            { 
+                name: 'Karinchieshwara Trek', 
+                image: 'https://res.cloudinary.com/dyiffrkzh/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_center,h_518,q_auto,w_660/v1705557186/bbj/m1wifaroojflvk5woe3g.jpg', 
                 description: 'A steep trek blending nature and spirituality, ending at an ancient cliffside temple.',
                 rating: '4.6',
                 bestTime: '6:00 AM – 9:00 AM',
@@ -512,9 +512,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Cliff Edge Steps Climb & Temple Darshan <strong>(~35 km from Mangaluru)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Gadaikallu',
-                image: 'https://i.pinimg.com/originals/ce/6f/61/ce6f61f2917fb5e4712fc7c7c663311c.jpg',
+            { 
+                name: 'Gadaikallu', 
+                image: 'https://i.pinimg.com/originals/ce/6f/61/ce6f61f2917fb5e4712fc7c7c663311c.jpg', 
                 description: 'A prominent rock formation offering an adventurous climb and beautiful vistas.',
                 rating: '4.7',
                 bestTime: '5:30 AM – 9:30 AM',
@@ -577,9 +577,9 @@ const mangaloreCategoryData = {
     'churches': {
         name: 'Famous Churches',
         places: [
-            {
-                name: 'St. Aloysius Chapel',
-                image: 'https://mangaloretourism.in/images/places-to-visit/header/st-aloysius-chapel-mangalore-tourism-entry-fee-timings-holidays-reviews-header.jpg',
+            { 
+                name: 'St. Aloysius Chapel', 
+                image: 'https://mangaloretourism.in/images/places-to-visit/header/st-aloysius-chapel-mangalore-tourism-entry-fee-timings-holidays-reviews-header.jpg', 
                 description: 'Famous for its exquisite ceiling paintings that rival the Sistine Chapel.',
                 openHours: '9:00 AM – 1:30 PM, 2:30 PM – 6:00 PM',
                 bestTime: 'Morning visit (10:00 AM)',
@@ -587,9 +587,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Sistine Chapel-like Exquisite Ceiling Frescoes',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1548625361-155deee223c2?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Milagres Church',
-                image: 'https://www.shatravelsmts.com/uploads/image/tour-packages/11-best-places-to-visit-in-mangalore/milagres-church.jpg',
+            { 
+                name: 'Milagres Church', 
+                image: 'https://www.shatravelsmts.com/uploads/image/tour-packages/11-best-places-to-visit-in-mangalore/milagres-church.jpg', 
                 description: 'A historic Roman Catholic church in the heart of Mangalore with rich heritage.',
                 openHours: '6:00 AM – 7:30 PM',
                 bestTime: 'Sunday Morning Mass',
@@ -597,9 +597,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'century-old Roman Catholic Architectural Heritage',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1438263308705-f6c8f370ba36?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Rosario Cathedral',
-                image: 'https://th-i.thgim.com/public/news/national/karnataka/p052cm/article25479880.ece/alternates/LANDSCAPE_1200/13BG-CATHEDRAL',
+            { 
+                name: 'Rosario Cathedral', 
+                image: 'https://th-i.thgim.com/public/news/national/karnataka/p052cm/article25479880.ece/alternates/LANDSCAPE_1200/13BG-CATHEDRAL', 
                 description: 'The oldest church in Mangalore featuring a stunning dome and beautiful architecture.',
                 openHours: '6:00 AM – 7:00 PM',
                 bestTime: 'Morning Quiet Hours',
@@ -607,9 +607,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Italian-style architecture & spectacular Dome structure',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1548625361-155deee223c2?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Infant Jesus Shrine',
-                image: 'https://www.infantjesusmangalore.net/images/shrine1.jpg',
+            { 
+                name: 'Infant Jesus Shrine', 
+                image: 'https://www.infantjesusmangalore.net/images/shrine1.jpg', 
                 description: 'A popular pilgrimage site known for its modern architecture and peaceful ambiance.',
                 openHours: '5:30 AM – 8:30 PM',
                 bestTime: 'Thursdays Novena services',
@@ -731,9 +731,9 @@ const mangaloreCategoryData = {
     'parks': {
         name: 'Mangalore Parks',
         places: [
-            {
-                name: 'Kadri Park',
-                image: 'https://i.ytimg.com/vi/afM2SZAJTrQ/hqdefault.jpg',
+            { 
+                name: 'Kadri Park', 
+                image: 'https://i.ytimg.com/vi/afM2SZAJTrQ/hqdefault.jpg', 
                 description: 'The largest and most beautiful park in Mangaluru, famous for its musical fountain and lush greenery.',
                 openHours: '6:00 AM – 8:30 PM',
                 bestTime: 'Evening Musical Fountain (7:00 PM)',
@@ -741,9 +741,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Musical Fountain Show & Toy Train Ride',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Tagore Park (Lighthouse Hill Park)',
-                image: 'https://mangaloretourism.in/images/places-to-visit/header/tagore-park-light-house-hill-garden-mangalore-tourism-entry-fee-timings-holidays-reviews-header.jpg',
+            { 
+                name: 'Tagore Park (Lighthouse Hill Park)', 
+                image: 'https://mangaloretourism.in/images/places-to-visit/header/tagore-park-light-house-hill-garden-mangalore-tourism-entry-fee-timings-holidays-reviews-header.jpg', 
                 description: 'A historic park offering a spectacular view of the Arabian Sea and the sunset, located near St. Aloysius College.',
                 openHours: '4:00 PM – 8:00 PM',
                 bestTime: 'Sunset (6:00 PM)',
@@ -751,9 +751,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Spectacular Arabian Sea Sunset Views',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Tannirbhavi Tree Park',
-                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f9/cc/d5/20191031-110820-largejpg.jpg?w=1200&h=1200&s=1',
+            { 
+                name: 'Tannirbhavi Tree Park', 
+                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f9/cc/d5/20191031-110820-largejpg.jpg?w=1200&h=1200&s=1', 
                 description: 'A serene tree park near the coast set up by the Forest Department, featuring medicinal plants and wooden sculptures.',
                 openHours: '10:00 AM – 7:00 PM',
                 bestTime: 'Late Afternoon (4:30 PM)',
@@ -761,9 +761,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Nature Trails & Tree Canopy Walk',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Mahatma Gandhi Park',
-                image: 'https://threebestrated.in/images/MahatmaGandhiPark-Mangalore-KA-1.jpeg',
+            { 
+                name: 'Mahatma Gandhi Park', 
+                image: 'https://threebestrated.in/images/MahatmaGandhiPark-Mangalore-KA-1.jpeg', 
                 description: 'A prominent urban park offering a peaceful walking environment amidst the bustling city.',
                 openHours: '6:00 AM – 8:00 PM',
                 bestTime: 'Early Morning (6:30 AM)',
@@ -771,9 +771,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Quiet Morning Walks',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Pilikula Nisargadhama',
-                image: 'https://www.trawell.in/admin/images/upload/547012922Pilikula_Main.jpg',
+            { 
+                name: 'Pilikula Nisargadhama', 
+                image: 'https://www.trawell.in/admin/images/upload/547012922Pilikula_Main.jpg', 
                 description: 'An eco-education and tourism park featuring a lake, botanical garden, and cultural village.',
                 openHours: '9:30 AM – 5:30 PM',
                 bestTime: 'Morning (10:00 AM)',
@@ -781,9 +781,9 @@ const mangaloreCategoryData = {
                 bestChoice: 'Lake Boating & Artisan Village',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Pilikula Biological Park',
-                image: 'https://mangaloretourism.in/images/v2/places-to-visit/pilikula-biological-park-mangalore-tourism-header.jpg',
+            { 
+                name: 'Pilikula Biological Park', 
+                image: 'https://mangaloretourism.in/images/v2/places-to-visit/pilikula-biological-park-mangalore-tourism-header.jpg', 
                 description: 'A major zoo and biological park known for its wildlife conservation efforts and tiger breeding program.',
                 openHours: '9:30 AM – 5:30 PM',
                 bestTime: 'Morning (10:00 AM)',
@@ -1024,54 +1024,54 @@ const bangaloreCategoryData = {
     'parks': {
         name: 'Bangalore Parks & Gardens',
         places: [
-            {
-                name: 'Cubbon Park',
-                image: 'https://bangaloretourism.in/images/v2/places-to-visit/cubbon-park-bangalore/cubbon-park-bangalore-bangalore-entry-ticket-price-bangalore-tourism-cr-pmekara.jpg',
+            { 
+                name: 'Cubbon Park', 
+                image: 'https://bangaloretourism.in/images/v2/places-to-visit/cubbon-park-bangalore/cubbon-park-bangalore-bangalore-entry-ticket-price-bangalore-tourism-cr-pmekara.jpg', 
                 description: 'The lungs of the city, a sprawling green space with historic buildings and walking trails.',
                 openHours: '6:00 AM – 8:00 PM',
                 bestTime: 'Morning Walks (6:00 AM – 9:00 AM)',
                 bestChoice: 'Nature Walks & Heritage Building Photography',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Lalbagh Botanical Garden',
-                image: 'https://www.nobroker.in/blog/wp-content/uploads/2024/03/lalbagh-botanical-garden-1.jpg',
+            { 
+                name: 'Lalbagh Botanical Garden', 
+                image: 'https://www.nobroker.in/blog/wp-content/uploads/2024/03/lalbagh-botanical-garden-1.jpg', 
                 description: 'A historic botanical garden featuring a majestic 19th-century glass house inspired by London.',
                 openHours: '6:00 AM – 7:00 PM',
                 bestTime: 'Annual Flower Show (Jan/Aug)',
                 bestChoice: 'Glass House Exploration & Bonsai Garden visit',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Bannerghatta National Park',
-                image: 'https://im.whatshot.in/img/2019/Nov/bp-1-cropped-1-1573218361.jpg',
+            { 
+                name: 'Bannerghatta National Park', 
+                image: 'https://im.whatshot.in/img/2019/Nov/bp-1-cropped-1-1573218361.jpg', 
                 description: 'A bio-reserve featuring an exciting tiger and lion safari, zoo, and butterfly park.',
                 openHours: '9:30 AM – 5:00 PM (Closed Tuesdays)',
                 bestTime: 'Morning Safari (10:00 AM)',
                 bestChoice: 'Grand Jungle Safari & Butterfly Park Walk',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Bugle Rock Park',
-                image: 'https://bangalore247.in/wp-content/uploads/2021/02/Bugle-Rock-Park.jpg',
+            { 
+                name: 'Bugle Rock Park', 
+                image: 'https://bangalore247.in/wp-content/uploads/2021/02/Bugle-Rock-Park.jpg', 
                 description: 'A massive rock formation of geological importance, featuring a beautiful landscaped park and watchtower.',
                 openHours: '5:00 AM – 9:00 PM',
                 bestTime: 'Early Mornings',
                 bestChoice: 'Watchtower Scenic Views & Rock Formations Study',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'JP Park',
-                image: 'https://www.holidify.com/images/cmsuploads/compressed/JPPark_20200602150442_20200602150525.jpg',
+            { 
+                name: 'JP Park', 
+                image: 'https://www.holidify.com/images/cmsuploads/compressed/JPPark_20200602150442_20200602150525.jpg', 
                 description: 'Jayaprakash Narayan Biodiversity Park, featuring lush lawns, visual musical fountains, and a diverse collection of trees.',
                 openHours: '5:00 AM – 9:00 AM, 4:00 PM – 8:30 PM',
                 bestTime: 'Weekend Musical Fountain (7:00 PM)',
                 bestChoice: 'Musical Fountain Show & Biodiversity Trails walk',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Freedom Park',
-                image: 'https://ideadesign.org/wpla/wp-content/uploads/2012/09/FPB_005.jpg',
+            { 
+                name: 'Freedom Park', 
+                image: 'https://ideadesign.org/wpla/wp-content/uploads/2012/09/FPB_005.jpg', 
                 description: 'A unique historical public park built on the grounds of the former Central Jail, showcasing rich heritage and lush green areas.',
                 openHours: '5:00 AM – 8:30 AM, 4:00 PM – 8:00 PM',
                 bestTime: 'Late afternoon visits',
@@ -1083,72 +1083,72 @@ const bangaloreCategoryData = {
     'heritage': {
         name: 'Bangalore Palaces & Heritage',
         places: [
-            {
-                name: 'Bangalore Palace',
-                image: 'https://anvayaplaces.b-cdn.net/places/125_0.webp',
+            { 
+                name: 'Bangalore Palace', 
+                image: 'https://anvayaplaces.b-cdn.net/places/125_0.webp', 
                 description: 'A grand royal residence built in Tudor style, modeled after Windsor Castle.',
                 openHours: '10:00 AM – 5:30 PM',
                 bestTime: 'Morning Visits',
                 bestChoice: 'Royal Durbar Hall & Audio Tour Guide',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1596422846543-75c6fc18a593?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Tipu Sultan Palace',
-                image: 'https://www.revv.co.in/blogs/wp-content/uploads/2020/10/Tipu-Sultan-Palace.jpg',
+            { 
+                name: 'Tipu Sultan Palace', 
+                image: 'https://www.revv.co.in/blogs/wp-content/uploads/2020/10/Tipu-Sultan-Palace.jpg', 
                 description: 'An ornate double-storied wooden palace featuring elegant arches, columns, and history.',
                 openHours: '8:30 AM – 5:30 PM',
                 bestTime: 'Winter Mornings',
                 bestChoice: 'Intricate Teakwood Pillars & Museum Gallery',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Devanahalli Fort',
-                image: 'https://www.oyorooms.com/travel-guide/wp-content/uploads/2020/01/Devanahalli-Fort-1.jpg',
+            { 
+                name: 'Devanahalli Fort', 
+                image: 'https://www.oyorooms.com/travel-guide/wp-content/uploads/2020/01/Devanahalli-Fort-1.jpg', 
                 description: 'A massive historic stone fort originating from 1501, famous as the birthplace of Tipu Sultan.',
                 openHours: '7:00 AM – 8:30 PM',
                 bestTime: 'Late Afternoon (5:00 PM)',
                 bestChoice: 'Fort Bastions walk & Birthplace of Tipu Sultan',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Mayo Hall',
-                image: 'https://bangalore247.in/wp-content/uploads/2021/03/Mayo-Hall-Bangalore.jpg',
+            { 
+                name: 'Mayo Hall', 
+                image: 'https://bangalore247.in/wp-content/uploads/2021/03/Mayo-Hall-Bangalore.jpg', 
                 description: 'An iconic, towering building of architectural prominence featuring beautiful Neo-Classical style elements.',
                 openHours: '9:00 AM – 6:00 PM',
                 bestTime: 'Weekdays',
                 bestChoice: 'Neo-Classical British Stone Architecture',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Kempegowda Museum',
-                image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg',
+            { 
+                name: 'Kempegowda Museum', 
+                image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg', 
                 description: 'A fascinating government museum dedicated to Yelahanka chieftain Kempegowda, located inside Mayo Hall.',
                 openHours: '9:00 AM – 5:00 PM (Closed Sundays)',
                 bestTime: 'Afternoon',
                 bestChoice: 'Founder of Bangalore Historic Memorabilia',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1580537659444-2453e0d86fa6?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Venkatappa Art Gallery',
-                image: 'https://indiator.com/tourist-places/wp-content/uploads/2016/11/Venkatappa-Art-Gallery.jpeg',
+            { 
+                name: 'Venkatappa Art Gallery', 
+                image: 'https://indiator.com/tourist-places/wp-content/uploads/2016/11/Venkatappa-Art-Gallery.jpeg', 
                 description: 'A prestigious government art gallery showcasing the brilliant works of K. Venkatappa and other prominent artists.',
                 openHours: '10:00 AM – 5:00 PM (Closed Mondays)',
                 bestTime: 'Morning Study Hours',
                 bestChoice: 'Venkatappa Paintings & Sculptures collection',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Government Museum',
-                image: 'https://indianexpress.com/wp-content/uploads/2023/02/Museum_bengaluru-1.jpeg',
+            { 
+                name: 'Government Museum', 
+                image: 'https://indianexpress.com/wp-content/uploads/2023/02/Museum_bengaluru-1.jpeg', 
                 description: 'One of the oldest museums in India, featuring an exceptional collection of archaeological and historical artifacts.',
                 openHours: '10:00 AM – 5:00 PM (Closed Mondays)',
                 bestTime: 'Mornings',
                 bestChoice: 'Ancient Stone Inscriptions & Archeological Artifacts',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1582298538104-fe2e74c27f59?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Attara Kacheri',
-                image: 'https://www.molon.de/galleries/India/Karnataka/Bangalore/VidhanaSoudha/images01/15%20Attara%20Kacheri%20Karnataka%20High%20Court.jpg',
+            { 
+                name: 'Attara Kacheri', 
+                image: 'https://www.molon.de/galleries/India/Karnataka/Bangalore/VidhanaSoudha/images01/15%20Attara%20Kacheri%20Karnataka%20High%20Court.jpg', 
                 description: 'The magnificent, red-painted stone building built in neoclassical style, housing the High Court of Karnataka.',
                 openHours: '10:00 AM – 5:00 PM (Court Hours, Exterior viewable anytime)',
                 bestTime: 'Evening lighting',
@@ -1160,63 +1160,63 @@ const bangaloreCategoryData = {
     'temples': {
         name: 'Bangalore Temples',
         places: [
-            {
-                name: 'ISKCON Temple',
-                image: 'https://travellerscribe.com/wp-content/uploads/2024/05/iskcon-temple-bangalore-Aarti-timings.webp',
+            { 
+                name: 'ISKCON Temple', 
+                image: 'https://travellerscribe.com/wp-content/uploads/2024/05/iskcon-temple-bangalore-Aarti-timings.webp', 
                 description: 'A massive neo-classical style cultural complex and temple dedicated to Krishna.',
                 openHours: '4:15 AM – 5:00 AM, 7:15 AM – 1:00 PM, 4:00 PM – 8:30 PM',
                 bestTime: 'Evening Aarti (7:00 PM)',
                 bestChoice: 'Krishna Darshan & Free Prasadam Distribution',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1601202444012-61a5592efb3a?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Bull Temple',
-                image: 'https://wallpapers.com/images/hd/bangalore-bull-temple-edstxqi99f1y2ufd.jpg',
+            { 
+                name: 'Bull Temple', 
+                image: 'https://wallpapers.com/images/hd/bangalore-bull-temple-edstxqi99f1y2ufd.jpg', 
                 description: 'Historic temple in Basavanagudi containing a monolithic statue of Nandi the bull.',
                 openHours: '6:00 AM – 8:00 PM',
                 bestTime: 'Kadalekai Parishe Festival (Nov/Dec)',
                 bestChoice: 'Monolithic Nandi Bull Sculpture & Peanut Festival',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Shivoham Shiva Temple',
-                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/79/28/ac/shiv-mandir-temple.jpg?w=1200&h=1200&s=1',
+            { 
+                name: 'Shivoham Shiva Temple', 
+                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/79/28/ac/shiv-mandir-temple.jpg?w=1200&h=1200&s=1', 
                 description: 'Features a spectacular 65-foot statue of Lord Shiva seated amidst artificial mountains.',
                 openHours: '24 Hours Open',
                 bestTime: 'Maha Shivratri festival night',
                 bestChoice: '65-Foot Shiva Statue & cave walkthrough',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Ragigudda Sri Prasanna Anjaneya Swamy Temple',
-                image: 'https://masalachaimedia.com/wp-content/uploads/2022/12/Ragigudda-Sri-Prasanna-Anjaneyaswamy-Temple-2048x1220.jpeg',
+            { 
+                name: 'Ragigudda Sri Prasanna Anjaneya Swamy Temple', 
+                image: 'https://masalachaimedia.com/wp-content/uploads/2022/12/Ragigudda-Sri-Prasanna-Anjaneyaswamy-Temple-2048x1220.jpeg', 
                 description: 'A beautiful hilltop temple dedicated to Lord Hanuman, offering panoramic views and a serene spiritual atmosphere.',
                 openHours: '8:00 AM – 11:30 AM, 5:00 PM – 8:30 PM',
                 bestTime: 'Hanuman Jayanthi festival',
                 bestChoice: 'Hilltop Hanuman Darshan & Holy Spring Tank',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1609137982420-b1887e9cf2ef?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Shree Banashankari Devi Temple',
-                image: 'https://thetempleguru.com/wp-content/uploads/2024/08/Sri-Banashankari-Temple-Bangalore-3.jpg',
+            { 
+                name: 'Shree Banashankari Devi Temple', 
+                image: 'https://thetempleguru.com/wp-content/uploads/2024/08/Sri-Banashankari-Temple-Bangalore-3.jpg', 
                 description: 'A historic and prominent temple dedicated to Goddess Banashankari, known for its unique worship during Rahukala.',
                 openHours: '6:00 AM – 1:00 PM, 4:30 PM – 8:30 PM',
                 bestTime: 'Tuesdays Rahukala (lemon shell lamps)',
                 bestChoice: 'Lemon shell lamps oil lighting worship',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1532186651327-6ac23687d189?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Sri Shirdi Sai Baba Temple',
-                image: 'https://blessingsonthenet.com/img/slideshow/aim_bn_1388726826.jpg',
+            { 
+                name: 'Sri Shirdi Sai Baba Temple', 
+                image: 'https://blessingsonthenet.com/img/slideshow/aim_bn_1388726826.jpg', 
                 description: 'A serene and sacred spiritual sanctuary dedicated to Sri Shirdi Sai Baba, fostering peace and devotion among visitors.',
                 openHours: '5:00 AM – 9:00 PM',
                 bestTime: 'Thursdays Aarti',
                 bestChoice: 'Sai Baba sanctum chanting & peaceful meditation',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Adiyogi Shiva Statue',
-                image: 'https://www.explorebees.com/uploads/blogs/A-Road-Trip-from-Bangalore-to-Adiyogi-Shiva-Statue-Chikkaballapur.jpg',
+            { 
+                name: 'Adiyogi Shiva Statue', 
+                image: 'https://www.explorebees.com/uploads/blogs/A-Road-Trip-from-Bangalore-to-Adiyogi-Shiva-Statue-Chikkaballapur.jpg', 
                 description: 'A magnificent 112-foot tall statue of Adiyogi Shiva, representing the first yogi, located in Chikkaballapur near Bangalore.',
                 openHours: '6:00 AM – 8:00 PM',
                 bestTime: 'Laser light show (7:00 PM)',
@@ -1228,108 +1228,108 @@ const bangaloreCategoryData = {
     'shopping': {
         name: 'Bangalore Malls & Shopping',
         places: [
-            {
-                name: '🥇 UB City (1st Best)',
-                image: 'https://ubcitybangalore.in/wp-content/uploads/2021/09/Slide378.jpg',
+            { 
+                name: '🥇 UB City (1st Best)', 
+                image: 'https://ubcitybangalore.in/wp-content/uploads/2021/09/Slide378.jpg', 
                 description: 'Ranked 1st Best: India\'s premier ultra-luxury commercial mall offering high-end global fashion houses and fine dining.',
                 openHours: '10:30 AM – 8:30 PM',
                 bestTime: 'Evening Dining',
                 bestChoice: 'Luxury Fashion Boutiques & Rooftop Fine Dining',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🥈 Phoenix Mall of Asia (2nd Best)',
-                image: 'https://im.whatshot.in/img/2020/Apr/phoenix-market-city-mall-whitefield-2-1586505964.jpg',
+            { 
+                name: '🥈 Phoenix Mall of Asia (2nd Best)', 
+                image: 'https://im.whatshot.in/img/2020/Apr/phoenix-market-city-mall-whitefield-2-1586505964.jpg', 
                 description: 'Ranked 2nd Best: One of the largest and most premium shopping hubs in North Bangalore, redefining luxury retail.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends',
                 bestChoice: 'Premium Global Retail Stores & Multiplex Movies',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🥉 Phoenix Marketcity Mall (3rd Best)',
-                image: 'https://www.worthview.com/wp-content/uploads/2018/09/Phoenix-Mall.jpg',
+            { 
+                name: '🥉 Phoenix Marketcity Mall (3rd Best)', 
+                image: 'https://www.worthview.com/wp-content/uploads/2018/09/Phoenix-Mall.jpg', 
                 description: 'Ranked 3rd Best: Sprawling lifestyle mall in East Bangalore featuring international brands, massive dining options, and live events.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Evening Live Concerts',
                 bestChoice: 'Open-air Courtyard Events & Brand Shopping',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🛍️ Lulu Mall (4th Best)',
-                image: 'https://www.bengaluru.lulumall.in/wp-content/uploads/2023/07/image.jpg',
+            { 
+                name: '🛍️ Lulu Mall (4th Best)', 
+                image: 'https://www.bengaluru.lulumall.in/wp-content/uploads/2023/07/image.jpg', 
                 description: 'Ranked 4th Best: Huge shopping destination featuring a colossal Lulu Hypermarket, massive food court, and family entertainment centers.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Morning Hypermarket Shopping',
                 bestChoice: 'Lulu Hypermarket Groceries & Massive Food Court',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🌊 Orion Mall (5th Best)',
-                image: 'https://lh3.googleusercontent.com/i8Vrd_X2CJmyIanO7jBQ48hppHl1BT3LEQJFlZAOhWZ3Ux05oSvq2nAcuHA_-s05AS4OF-yDT6DOlhE0_A5ioAJtCYVbbkc21_8Q5fxW=w1024-rw',
+            { 
+                name: '🌊 Orion Mall (5th Best)', 
+                image: 'https://lh3.googleusercontent.com/i8Vrd_X2CJmyIanO7jBQ48hppHl1BT3LEQJFlZAOhWZ3Ux05oSvq2nAcuHA_-s05AS4OF-yDT6DOlhE0_A5ioAJtCYVbbkc21_8Q5fxW=w1024-rw', 
                 description: 'Ranked 5th Best: Exceptionally designed lakeside shopping mall situated next to World Trade Center in Rajajinagar.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Evening Lakeside walk',
                 bestChoice: 'Lakeside Dining Promenade & Brand retail',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🏬 Nexus Mall Koramangala (6th Best)',
-                image: 'https://www.nexusselecttrust.com/resources/assets/images/nexus-koramangala/banner2.jpg',
+            { 
+                name: '🏬 Nexus Mall Koramangala (6th Best)', 
+                image: 'https://www.nexusselecttrust.com/resources/assets/images/nexus-koramangala/banner2.jpg', 
                 description: 'Ranked 6th Best: Highly popular, iconic shopping destination in Koramangala offering excellent retail, food, and movie experiences.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Afternoons',
                 bestChoice: 'Premium Fashion Brands & PVR Cinema screening',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '✨ VR Bengaluru Mall (7th Best)',
-                image: 'https://bangalore247.in/wp-content/uploads/2021/02/VR-Bengaluru.jpg',
+            { 
+                name: '✨ VR Bengaluru Mall (7th Best)', 
+                image: 'https://bangalore247.in/wp-content/uploads/2021/02/VR-Bengaluru.jpg', 
                 description: 'Ranked 7th Best: Premium boutique style shopping center, beautifully designed next to Phoenix Marketcity in Whitefield.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends',
                 bestChoice: 'Black Box boutique shopping & open-air cinema',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🏢 Garuda Mall (8th Best)',
-                image: 'https://img.staticmb.com/mbcontent/images/crop/uploads/2024/10/garuda-mall-bangalore-magrath-road_0_1200.jpg.webp',
+            { 
+                name: '🏢 Garuda Mall (8th Best)', 
+                image: 'https://img.staticmb.com/mbcontent/images/crop/uploads/2024/10/garuda-mall-bangalore-magrath-road_0_1200.jpg.webp', 
                 description: 'Ranked 8th Best: Iconic multi-level shopping destination situated in the heart of the city near Brigade Road.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekday evenings',
                 bestChoice: 'Central city retail shopping & gaming zones',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1580537659444-2453e0d86fa6?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '⭐ Forum Mall Koramangala (9th Best)',
-                image: 'https://www.urtrips.net/wp-content/uploads/2022/04/Forum-Koramangala-Mall-Bengaluru-1.jpg',
+            { 
+                name: '⭐ Forum Mall Koramangala (9th Best)', 
+                image: 'https://www.urtrips.net/wp-content/uploads/2022/04/Forum-Koramangala-Mall-Bengaluru-1.jpg', 
                 description: 'Ranked 9th Best: One of the oldest modern shopping hubs in South Bangalore, highly popular among students and families.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends',
                 bestChoice: 'Classic retail shopping & student hangout food court',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🏰 Royal Meenakshi Mall (10th Best)',
-                image: 'https://files.lbb.in/media/2020/01/5e131edc4687a955b19f04f7_1578311388524.jpg',
+            { 
+                name: '🏰 Royal Meenakshi Mall (10th Best)', 
+                image: 'https://files.lbb.in/media/2020/01/5e131edc4687a955b19f04f7_1578311388524.jpg', 
                 description: 'Ranked 10th Best: Premier family entertainment mall in South Bangalore on Bannerghatta Road, featuring a massive multiplex.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Sundays',
                 bestChoice: 'Family Shopping, Dining & multiplex',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🌟 Bangalore Central Mall (11th Best)',
-                image: 'https://media-cdn.tripadvisor.com/media/photo-s/1a/00/0c/bc/bangalore-central-mall.jpg',
+            { 
+                name: '🌟 Bangalore Central Mall (11th Best)', 
+                image: 'https://media-cdn.tripadvisor.com/media/photo-s/1a/00/0c/bc/bangalore-central-mall.jpg', 
                 description: 'Ranked 11th Best: Highly popular department store styled fashion mall offering a massive array of clothing and footwear brands.',
                 openHours: '11:00 AM – 9:30 PM',
                 bestTime: 'Festive seasons',
                 bestChoice: 'Departmental store fashion and shoes discounts',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: '🌐 GT World Mall (12th Best)',
-                image: 'https://yometro.com/images/places/gt-world-mall.jpg',
+            { 
+                name: '🌐 GT World Mall (12th Best)', 
+                image: 'https://yometro.com/images/places/gt-world-mall.jpg', 
                 description: 'Ranked 12th Best: Popular family-oriented neighborhood mall offering pocket-friendly shopping, dining, and multiplex cinema.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Weekends',
@@ -1341,27 +1341,27 @@ const bangaloreCategoryData = {
     'breweries': {
         name: 'Bangalore Breweries & Pubs',
         places: [
-            {
-                name: 'Toit',
-                image: 'https://tariqsp.com/wp-content/uploads/2025/08/beer-at-toit-indiranagar-bangalore-696x461.png',
+            { 
+                name: 'Toit', 
+                image: 'https://tariqsp.com/wp-content/uploads/2025/08/beer-at-toit-indiranagar-bangalore-696x461.png', 
                 description: 'A legendary and widely popular English-pub styled microbrewery situated in Indiranagar.',
                 openHours: '12:00 PM – 1:00 AM',
                 bestTime: 'Weekend Evenings (Book in advance)',
                 bestChoice: 'Toit Weiss (Wheat Beer) & Wood-fired Pizzas',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Windmills Craftworks',
-                image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=800',
+            { 
+                name: 'Windmills Craftworks', 
+                image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=800', 
                 description: 'A sophisticated craft brewery offering premier jazz performances and an integrated library.',
                 openHours: '12:00 PM – 1:00 AM',
                 bestTime: 'Jazz Night (Fri/Sat evenings)',
                 bestChoice: 'Craft Stout beer & Live Jazz performances',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Arbor Brewing Company',
-                image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800',
+            { 
+                name: 'Arbor Brewing Company', 
+                image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800', 
                 description: 'A lively and rustic brewery serving excellent craft IPAs, stouts, and global food.',
                 openHours: '12:00 PM – 12:30 AM',
                 bestTime: 'Weekday Happy Hours',
@@ -1373,141 +1373,141 @@ const bangaloreCategoryData = {
     'trekking': {
         name: 'Bangalore Trekking Places',
         places: [
-            {
-                name: 'TK Falls (Thottikallu Falls)',
-                image: 'https://www.thegari.in/blog/wp-content/uploads/2025/08/thottikallu-falls.jpg',
-                description: 'A beautiful waterfall near Bangalore, ideal for trekking, hiking, and enjoying scenic natural views.',
-                bestSeason: 'August to December (Monsoon/Post-monsoon)',
+            { 
+                name: 'TK Falls (Thottikallu Falls)', 
+                image: 'https://www.thegari.in/blog/wp-content/uploads/2025/08/thottikallu-falls.jpg', 
+                description: 'A beautiful waterfall near Bangalore, ideal for trekking, hiking, and enjoying scenic natural views.', 
+                bestSeason: 'August to December (Monsoon/Post-monsoon)', 
                 bestTime: '8:00 AM – 5:00 PM',
                 openHours: '8:00 AM – 5:00 PM',
                 bestChoice: 'Monsoon Waterfall Trail Hike & Photography',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Muthyala Maduvu (Pearl Valley)',
-                image: 'https://im.whatshot.in/img/2022/Apr/5-muthyala-1650360066.jpg',
-                description: 'A peaceful valley featuring a gorgeous waterfall falling like pearls, set amidst deep green hills.',
-                bestSeason: 'August to November (Monsoon/Post-monsoon)',
+            { 
+                name: 'Muthyala Maduvu (Pearl Valley)', 
+                image: 'https://im.whatshot.in/img/2022/Apr/5-muthyala-1650360066.jpg', 
+                description: 'A peaceful valley featuring a gorgeous waterfall falling like pearls, set amidst deep green hills.', 
+                bestSeason: 'August to November (Monsoon/Post-monsoon)', 
                 bestTime: '9:00 AM – 5:00 PM',
                 openHours: '9:00 AM – 5:00 PM',
                 bestChoice: 'Scenic Pearl Waterfall Trail walk & valley exploration',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Guhantara Underground Cave Resort',
-                image: 'https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2017/11/covr-kidn-of.jpg',
-                description: 'An underground cave-themed resort offering unique adventure activities, trekking routes, and relaxation.',
-                bestSeason: 'Year-round',
+            { 
+                name: 'Guhantara Underground Cave Resort', 
+                image: 'https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2017/11/covr-kidn-of.jpg', 
+                description: 'An underground cave-themed resort offering unique adventure activities, trekking routes, and relaxation.', 
+                bestSeason: 'Year-round', 
                 bestTime: '9:00 AM – 5:30 PM (Day outings)',
                 openHours: '9:00 AM – 5:30 PM',
                 bestChoice: 'Underground Cave Dining & adventure games',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Manchinbele Dam',
-                image: 'https://i.ytimg.com/vi/ARII9OPlN1g/maxresdefault.jpg',
-                description: 'A popular reservoir and adventure spot near Bangalore, surrounded by deciduous forests and rocky hills, ideal for trekking and water sports.',
-                bestSeason: 'September to February',
+            { 
+                name: 'Manchinbele Dam', 
+                image: 'https://i.ytimg.com/vi/ARII9OPlN1g/maxresdefault.jpg', 
+                description: 'A popular reservoir and adventure spot near Bangalore, surrounded by deciduous forests and rocky hills, ideal for trekking and water sports.', 
+                bestSeason: 'September to February', 
                 bestTime: '9:00 AM – 6:00 PM',
                 openHours: '9:00 AM – 6:00 PM',
                 bestChoice: 'Lakeside Scenic sunset photography & trekking',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Nandi Hills',
-                image: 'https://i.ytimg.com/vi/K256dg0x0hQ/maxresdefault.jpg',
-                description: 'A famous ancient hill fortress in southern India, renowned for its spectacular sunrise views, misty mornings, and historic temples.',
-                bestSeason: 'September to February',
+            { 
+                name: 'Nandi Hills', 
+                image: 'https://i.ytimg.com/vi/K256dg0x0hQ/maxresdefault.jpg', 
+                description: 'A famous ancient hill fortress in southern India, renowned for its spectacular sunrise views, misty mornings, and historic temples.', 
+                bestSeason: 'September to February', 
                 bestTime: '5:30 AM – 9:00 AM',
                 openHours: '6:00 AM – 10:00 PM',
                 bestChoice: 'Sunrise viewpoint view & Tipu Drop exploration',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Savandurga',
-                image: 'https://www.trawell.in/admin/images/upload/116649355Bangalore_Savandurga_Main.jpg',
-                description: 'One of the largest monolith hills in Asia, offering a challenging yet highly rewarding trekking experience with stunning panoramic views.',
-                bestSeason: 'October to February',
+            { 
+                name: 'Savandurga', 
+                image: 'https://www.trawell.in/admin/images/upload/116649355Bangalore_Savandurga_Main.jpg', 
+                description: 'One of the largest monolith hills in Asia, offering a challenging yet highly rewarding trekking experience with stunning panoramic views.', 
+                bestSeason: 'October to February', 
                 bestTime: '6:00 AM – 10:00 AM',
                 openHours: '6:00 AM – 6:00 PM',
                 bestChoice: 'Challenging Asia Monolith Rock Face steps climbing',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Shivagange Hills',
-                image: 'https://4.bp.blogspot.com/-lYvY_Kw60Lg/VaXxgbzK9vI/AAAAAAAAAS0/yUbWDjZvc5Q/s0/shivagange_cliff.jpg',
-                description: 'A historic peak resembling a Shiva Linga, known for its rocky trekking trails, spring waters, and ancient cave temples.',
-                bestSeason: 'October to March',
+            { 
+                name: 'Shivagange Hills', 
+                image: 'https://4.bp.blogspot.com/-lYvY_Kw60Lg/VaXxgbzK9vI/AAAAAAAAAS0/yUbWDjZvc5Q/s0/shivagange_cliff.jpg', 
+                description: 'A historic peak resembling a Shiva Linga, known for its rocky trekking trails, spring waters, and ancient cave temples.', 
+                bestSeason: 'October to March', 
                 bestTime: '6:00 AM – 12:00 PM',
                 openHours: '6:00 AM – 6:00 PM',
                 bestChoice: 'Rocky hilltop staircase steps climbing & Temple Darshan',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Skandagiri Hills',
-                image: 'https://snaptoro.com/wp-content/uploads/2023/03/Beautiful-Sunrise-View-From-Skandagiri-Hills-1024x618.jpg',
-                description: 'An outstanding night trekking destination, famous for the breathtaking view of a sea of clouds at sunrise from the hilltop ruins.',
-                bestSeason: 'November to February',
+            { 
+                name: 'Skandagiri Hills', 
+                image: 'https://snaptoro.com/wp-content/uploads/2023/03/Beautiful-Sunrise-View-From-Skandagiri-Hills-1024x618.jpg', 
+                description: 'An outstanding night trekking destination, famous for the breathtaking view of a sea of clouds at sunrise from the hilltop ruins.', 
+                bestSeason: 'November to February', 
                 bestTime: '12:00 AM – 7:00 AM (Night trek)',
                 openHours: '12:00 AM – 10:00 AM',
                 bestChoice: 'Midnight trail hiking & Sea of clouds sunrise view',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Devarayanadurga Hills',
-                image: 'https://traveltwosome.com/wp-content/uploads/2015/05/Deva.jpg',
-                description: 'A tranquil hill station surrounded by lush forests, hosting historic temples perched atop the rocky cliffs.',
-                bestSeason: 'September to February',
+            { 
+                name: 'Devarayanadurga Hills', 
+                image: 'https://traveltwosome.com/wp-content/uploads/2015/05/Deva.jpg', 
+                description: 'A tranquil hill station surrounded by lush forests, hosting historic temples perched atop the rocky cliffs.', 
+                bestSeason: 'September to February', 
                 bestTime: '6:00 AM – 10:00 AM or 4:00 PM – 7:00 PM',
                 openHours: '6:00 AM – 7:00 PM',
                 bestChoice: 'Hilltop Yoga Narasimha Swamy temple steps climb',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Anthargange',
-                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/5b/59/0f/thrillophilia-anthargange.jpg?w=700&h=500&s=1',
-                description: 'Famous for its unique volcanic rock formations, natural cave networks, and exciting night navigation treks.',
-                bestSeason: 'October to March',
+            { 
+                name: 'Anthargange', 
+                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/5b/59/0f/thrillophilia-anthargange.jpg?w=700&h=500&s=1', 
+                description: 'Famous for its unique volcanic rock formations, natural cave networks, and exciting night navigation treks.', 
+                bestSeason: 'October to March', 
                 bestTime: '10:00 PM – 6:00 AM (Night cave exploration)',
                 openHours: '24 Hours Open',
                 bestChoice: 'Volcanic Cave exploration & Midnight fire camping',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Thippagondanahalli Reservoir',
-                image: 'https://im.whatshot.in/img/2020/Dec/file6xnkslxn19215clfh3lx-1547474026-cropped-1609227059.jpg',
-                description: 'A scenic reservoir situated at the confluence of the Arkavathy and Kumudavathi rivers, offering tranquil views.',
-                bestSeason: 'September to February (Post-monsoon)',
+            { 
+                name: 'Thippagondanahalli Reservoir', 
+                image: 'https://im.whatshot.in/img/2020/Dec/file6xnkslxn19215clfh3lx-1547474026-cropped-1609227059.jpg', 
+                description: 'A scenic reservoir situated at the confluence of the Arkavathy and Kumudavathi rivers, offering tranquil views.', 
+                bestSeason: 'September to February (Post-monsoon)', 
                 bestTime: '6:00 AM – 10:00 AM or 4:00 PM – 6:00 PM',
                 openHours: '9:00 AM – 5:30 PM',
                 bestChoice: 'Water reservoir views & bird watching',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Chunchi Falls',
-                image: 'https://www.qexperiences.in/blog/wp-content/uploads/2021/06/banner_Chunchi-Falls_989.jpg',
-                description: 'A gorgeous 50-feet high waterfall on the Arkavati River, surrounded by rocky terrain and deciduous forests.',
-                bestSeason: 'August to November (Monsoon/Post-monsoon)',
+            { 
+                name: 'Chunchi Falls', 
+                image: 'https://www.qexperiences.in/blog/wp-content/uploads/2021/06/banner_Chunchi-Falls_989.jpg', 
+                description: 'A gorgeous 50-feet high waterfall on the Arkavati River, surrounded by rocky terrain and deciduous forests.', 
+                bestSeason: 'August to November (Monsoon/Post-monsoon)', 
                 bestTime: '8:00 AM – 4:00 PM',
                 openHours: '8:00 AM – 5:00 PM',
                 bestChoice: 'Rocky Arkavati River waterfall canyon hike',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Hesaraghatta Lake',
-                image: 'https://static.toiimg.com/thumb/msid-95056250,width-1070,height-580,imgsize-1110523,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg',
-                description: 'A fresh water lake and a popular bird-watching spot surrounded by grasslands, perfect for peaceful mornings.',
-                bestSeason: 'October to March (Winter)',
+            { 
+                name: 'Hesaraghatta Lake', 
+                image: 'https://static.toiimg.com/thumb/msid-95056250,width-1070,height-580,imgsize-1110523,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg', 
+                description: 'A fresh water lake and a popular bird-watching spot surrounded by grasslands, perfect for peaceful mornings.', 
+                bestSeason: 'October to March (Winter)', 
                 bestTime: '6:00 AM – 9:00 AM',
                 openHours: '6:00 AM – 6:00 PM',
                 bestChoice: 'Grasslands early morning walking & bird photography',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=200'
             },
-            {
-                name: 'Ramanagara',
-                image: 'https://dmgupcwbwy0wl.cloudfront.net/system/images/000/183/876/be2f7982cdc9b11cc4b12eaac949bd7d/x1000gt/axeadventure_srshills__2_.jpg?1561540288',
-                description: 'Famed as the "Sholay" hills, this rocky landscape offers adventure trekking, rock climbing, and beautiful views of Sri Revanna Siddeshwara Betta.',
-                bestSeason: 'October to March',
+            { 
+                name: 'Ramanagara', 
+                image: 'https://dmgupcwbwy0wl.cloudfront.net/system/images/000/183/876/be2f7982cdc9b11cc4b12eaac949bd7d/x1000gt/axeadventure_srshills__2_.jpg?1561540288', 
+                description: 'Famed as the "Sholay" hills, this rocky landscape offers adventure trekking, rock climbing, and beautiful views of Sri Revanna Siddeshwara Betta.', 
+                bestSeason: 'October to March', 
                 bestTime: '6:00 AM – 11:00 AM',
                 openHours: '6:00 AM – 6:00 PM',
                 bestChoice: 'Sholay Hills rock climbing & vulture sanctuary trek',
@@ -1633,7 +1633,7 @@ const bangaloreCategoryData = {
                 name: 'Filter Coffee',
                 image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800',
                 description: 'Strong, aromatic South Indian style milk coffee brewed in traditional brass filters and served frothy.',
-                bestTime: 'Morning / Evening',
+bestTime: 'Morning / Evening',
                 bestChoice: 'Classic Hot Brass Filter Coffee'
             },
             {
@@ -1642,6 +1642,13 @@ const bangaloreCategoryData = {
                 description: 'Soft, steamed rice cakes served alongside a crispy deep-fried savory lentil doughnut with piping hot sambar.',
                 bestTime: 'Breakfast',
                 bestChoice: 'Soft Steamed Idli & Crispy Uddina Vada'
+            },
+            {
+                name: 'Ragi Mudde',
+                image: 'https://blog.swiggy.com/wp-content/uploads/2024/02/Ragi-Mudde.jpg',
+                description: 'Nutritious and wholesome finger millet balls served with spicy country-style chicken or mixed vegetable curry.',
+                bestTime: 'Lunch / Dinner',
+                bestChoice: 'Nutritious Ragi Mudde with Bassaru'
             }
         ]
     }
@@ -1967,6 +1974,328 @@ const mysuruCategoryData = {
                 description: 'Legendary heritage mutton pulao cooked in short-grain jeera samba rice over a slow wood fire.',
                 bestTime: 'Lunch / Dinner',
                 bestChoice: 'Heritage Mutton Pulao at Hanumanthu Mess'
+            }
+        ]
+    }
+};
+
+const mysuruEastWestCategories = [
+    { id: 'historic', name: 'Historic Places', desc: 'Explore mansions & clock tower →', image: 'https://d2rdhxfof4qmbb.cloudfront.net/wp-content/uploads/2024/03/Palace-Museum-1068x801.jpg' },
+    { id: 'temples', name: 'Temples', desc: 'Explore fort temples & shrines →', image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=600' },
+    { id: 'shopping', name: 'Shopping', desc: 'Explore malls, silk & bazaars →', image: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg' },
+    { id: 'museums_attractions', name: 'Museums & Attractions', desc: 'Explore manuscripts & galleries →', image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=600' },
+    { id: 'parks_nature', name: 'Parks & Nature', desc: 'Explore nature trails & lakes →', image: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg' },
+    { id: 'entertainment', name: 'Entertainment', desc: 'Explore circles & exhibition grounds →', image: 'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?auto=format&fit=crop&q=80&w=600' }
+];
+
+const mysuruEastWestCategoryData = {
+    'historic': {
+        name: 'Historic Places in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Cheluvamba Mansion',
+                image: 'https://www.omastrology.com/indian-monuments/images/cheluvamba-mansion.jpg',
+                description: 'Grand royal mansion built in 1910 for Princess Cheluvajammanni, currently housing CFTRI main campus.',
+                rating: '4.7',
+                bestTime: '9:00 AM – 5:00 PM',
+                busRoutes: 'Located near Mysuru Railway Station / CFTRI Campus.',
+                bestChoice: 'Heritage Architecture & CFTRI Gardens Walk',
+                bestChoiceImg: 'https://www.omastrology.com/indian-monuments/images/cheluvamba-mansion.jpg'
+            },
+            {
+                name: 'Jayalakshmi Vilas Mansion',
+                image: 'https://images.borrbo.com/outings/Jayalakshmi-Vilas-Mansion/mansion-entrance.jpg',
+                description: 'Built in 1905 for Princess Jayalakshammanni, located inside Manasagangotri campus, hosting folklore and archaeology museums.',
+                rating: '4.8',
+                bestTime: '10:00 AM – 5:00 PM',
+                busRoutes: 'Located inside Manasagangotri Campus, Mysore University.',
+                bestChoice: 'Folklore Museum & Royal Wooden Carvings',
+                bestChoiceImg: 'https://images.borrbo.com/outings/Jayalakshmi-Vilas-Mansion/mansion-entrance.jpg'
+            },
+            {
+                name: 'Government House (Raj Bhavan, Mysuru)',
+                image: 'https://static.toiimg.com/photo/51223137/.jpg',
+                description: 'Stunning 1805 neoclassical heritage mansion designed by John Malcolm, set amidst 50 acres of lush gardens.',
+                rating: '4.6',
+                bestTime: '9:30 AM – 5:00 PM',
+                busRoutes: 'Located in Nazarbad, Mysuru.',
+                bestChoice: 'Neoclassical Columns & Heritage Gardens',
+                bestChoiceImg: 'https://static.toiimg.com/photo/51223137/.jpg'
+            },
+            {
+                name: 'Mysore Fort Gateway (Old Fort Area)',
+                image: 'https://thumbs.dreamstime.com/b/mysore-palace-karnataka-india-gateway-huge-grounds-was-built-king-yaduraya-inside-old-fort-th-48184265.jpg',
+                description: 'Ancient fortified gateways surrounding the inner palace complex with historic ramparts and archways.',
+                rating: '4.6',
+                bestTime: '6:00 AM – 8:00 PM',
+                busRoutes: 'Located surrounding Mysore Palace.',
+                bestChoice: 'Historic Fort Gates & Wall Carvings Photography',
+                bestChoiceImg: 'https://thumbs.dreamstime.com/b/mysore-palace-karnataka-india-gateway-huge-grounds-was-built-king-yaduraya-inside-old-fort-th-48184265.jpg'
+            },
+            {
+                name: 'Dodda Gadiyara (Clock Tower)',
+                image: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg',
+                description: 'Iconic 75-foot silver-jubilee clock tower built in 1927 featuring Indo-Saracenic architecture.',
+                rating: '4.5',
+                bestTime: 'Open 24 Hours (Best at Night)',
+                busRoutes: 'Located at Town Hall Circle, Mysuru.',
+                bestChoice: 'Night Illumination & Town Hall Heritage Walk',
+                bestChoiceImg: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg'
+            }
+        ]
+    },
+    'temples': {
+        name: 'Temples in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Lakshmiramana Swamy Temple',
+                image: 'https://img.magnific.com/premium-photo/lakshmiramana-swamy-temple-mysore_78361-13500.jpg',
+                description: 'One of the oldest temples inside Mysore Fort premises, dedicated to Lord Vishnu, dating back to 1499.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
+                busRoutes: 'Located inside Mysore Palace Fort Complex.',
+                bestChoice: 'Ancient Dravidian Sanctum & Vishnu Pooja',
+                bestChoiceImg: 'https://img.magnific.com/premium-photo/lakshmiramana-swamy-temple-mysore_78361-13500.jpg'
+            },
+            {
+                name: 'Bhuvaneshwari Temple',
+                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
+                description: 'Located at the northern gate of Mysore Fort, featuring a silver Surya Mandala gift from the Wodeyar kings.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 1:00 PM, 4:00 PM – 8:30 PM',
+                busRoutes: 'Located at North Gate, Mysore Palace.',
+                bestChoice: 'Silver Mandala & Goddess Bhuvaneshwari Blessings',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Sri Prasanna Anjaneya Swamy Temple',
+                image: 'https://i.ytimg.com/vi/E7fsyPWnQj8/maxresdefault.jpg',
+                description: 'Vibrant temple dedicated to Lord Hanuman, deeply revered by locals for spiritual solace and festivals.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 12:30 PM, 5:00 PM – 8:30 PM',
+                busRoutes: 'Located near Palace Gates / Agrahara.',
+                bestChoice: 'Special Tuesday/Saturday Hanuman Pooja & Chanting',
+                bestChoiceImg: 'https://i.ytimg.com/vi/E7fsyPWnQj8/maxresdefault.jpg'
+            },
+            {
+                name: 'Gayathri Temple',
+                image: 'https://www.iskconmysore.org/wp-content/uploads/2022/11/008.jpg',
+                description: 'Built by Maharaja Jayachamarajendra Wadiyar in 1953 inside the fort complex, dedicated to Goddess Gayathri.',
+                rating: '4.6',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
+                busRoutes: 'Located inside South-East corner of Mysore Palace Fort.',
+                bestChoice: 'Quiet Meditation & Divine Gayatri Mantra Chanting',
+                bestChoiceImg: 'https://www.iskconmysore.org/wp-content/uploads/2022/11/008.jpg'
+            },
+            {
+                name: 'Trinesvaraswamy Temple',
+                image: 'https://jothishi.com/wp-content/uploads/2019/03/Venugopala-Swamy-Temple.jpg',
+                description: 'Ancient Shiva temple pre-dating the Wodeyar dynasty, situated at the north-east corner of Mysore Fort.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
+                busRoutes: 'Located inside North-East Mysore Fort grounds.',
+                bestChoice: 'Maha Shivaratri Special Pooja & Sacred Lingam Darshan',
+                bestChoiceImg: 'https://jothishi.com/wp-content/uploads/2019/03/Venugopala-Swamy-Temple.jpg'
+            }
+        ]
+    },
+    'shopping': {
+        name: 'Shopping in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Garuda Mall Mysuru',
+                image: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg',
+                description: 'Lively shopping mall in central Mysuru featuring fashion brand stores, food court, and gaming zone.',
+                rating: '4.5',
+                bestTime: '10:00 AM – 10:00 PM',
+                busRoutes: 'Located near City Bus Stand, Albert Victor Road.',
+                bestChoice: 'Fashion Apparel Stores & Food Court Snacks',
+                bestChoiceImg: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg'
+            },
+            {
+                name: 'BM Habitat Mall',
+                image: 'https://travelghat.com/wp-content/uploads/2023/08/BM-habitat-mall-mysore-image-edited.jpg',
+                description: 'Modern shopping destination in Jayalakshmipuram housing electronics, clothing, and multiplex.',
+                rating: '4.5',
+                bestTime: '10:00 AM – 9:30 PM',
+                busRoutes: 'Located in Jayalakshmipuram (~3 km from station).',
+                bestChoice: 'Multiplex Cinema & Lifestyle Boutiques',
+                bestChoiceImg: 'https://travelghat.com/wp-content/uploads/2023/08/BM-habitat-mall-mysore-image-edited.jpg'
+            },
+            {
+                name: 'KSIC Silk Factory & Showroom',
+                image: 'https://masthmysore.com/wp-content/uploads/2024/08/Centro-Mall-Mysore-e1723194744647.jpg',
+                description: 'Authentic Mysore Silk saree production factory and showroom featuring pure gold zari sarees.',
+                rating: '4.8',
+                bestTime: '10:00 AM – 7:00 PM',
+                busRoutes: 'Located on Mananthavady Road, Mysuru.',
+                bestChoice: 'Pure Mysore Silk Zari Sarees & Factory Weaving Witness',
+                bestChoiceImg: 'https://masthmysore.com/wp-content/uploads/2024/08/Centro-Mall-Mysore-e1723194744647.jpg'
+            },
+            {
+                name: 'Badsha Bazaar',
+                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
+                description: 'Historic textile center famous for traditional Karnataka silk sarees, dress materials, and ethnic wear.',
+                rating: '4.6',
+                bestTime: '10:30 AM – 9:00 PM',
+                busRoutes: 'Located on Sayyaji Rao Road, Mysuru.',
+                bestChoice: 'Bridal Silk Sarees & Dress Fabrics',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Ashoka Road Shopping Street',
+                image: 'https://s3.india.com/wp-content/uploads/2024/09/ashoka.jpg?impolicy=Medium_Widthonly&w=800&h=541',
+                description: 'Bustling market corridor known for gold and silver jewelry shops, traditional handicrafts, and artifacts.',
+                rating: '4.5',
+                bestTime: '11:00 AM – 9:00 PM',
+                busRoutes: 'Located connecting St Philomena Cathedral to Clock Tower.',
+                bestChoice: 'Gold Jewelry Shopping & Traditional Handicrafts',
+                bestChoiceImg: 'https://s3.india.com/wp-content/uploads/2024/09/ashoka.jpg?impolicy=Medium_Widthonly&w=800&h=541'
+            }
+        ]
+    },
+    'museums_attractions': {
+        name: 'Museums & Attractions in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Mysuru City Corporation Museum',
+                image: 'https://th-i.thgim.com/public/incoming/8ld739/article66946934.ece/alternates/FREE_1200/2303_8_6_2023_19_33_36_2_OLDDCOFFICE.JPG',
+                description: 'Heritage museum displaying civic history, architectural plans, and photographs of Mysuru\'s urban evolution.',
+                rating: '4.4',
+                bestTime: '10:00 AM – 5:30 PM',
+                busRoutes: 'Located inside MCC Heritage Building, Sayyaji Rao Road.',
+                bestChoice: 'Civic History Archives & Architectural Blueprint Models',
+                bestChoiceImg: 'https://th-i.thgim.com/public/incoming/8ld739/article66946934.ece/alternates/FREE_1200/2303_8_6_2023_19_33_36_2_OLDDCOFFICE.JPG'
+            },
+            {
+                name: 'Indira Gandhi Rashtriya Manav Sangrahalaya (Regional Centre)',
+                image: 'https://s7ap1.scene7.com/is/image/incredibleindia/indira-gandhi-rashtriya-manav-sangrahalaya-mysore-1-attr-hero?qlt=82&ts=1751460496517',
+                description: 'National Museum of Mankind regional center showcasing tribal heritage, rock art, and traditional lifestyle exhibits.',
+                rating: '4.6',
+                bestTime: '10:00 AM – 5:30 PM (Closed Mondays)',
+                busRoutes: 'Located in Wellington House, Irwin Road.',
+                bestChoice: 'Tribal Rock Art Models & Traditional Craft Exhibits',
+                bestChoiceImg: 'https://s7ap1.scene7.com/is/image/incredibleindia/indira-gandhi-rashtriya-manav-sangrahalaya-mysore-1-attr-hero?qlt=82&ts=1751460496517'
+            },
+            {
+                name: 'Chamarajendra Academy of Visual Arts (CAVA)',
+                image: 'https://media.gody.vn/images/mysore/hoc-vien-nghe-thuat-thi-giac-chamarajendra-chamarajendra-academy-of-visual-arts/095ccc46b68969525f89f8caf727b9a8ef3b24d0.jpg',
+                description: 'Premier fine arts institute showcasing student art galleries, contemporary paintings, and sculptures.',
+                rating: '4.5',
+                bestTime: '10:00 AM – 5:00 PM',
+                busRoutes: 'Located in Siddartha Layout / Manasagangotri.',
+                bestChoice: 'Student Fine Art Exhibition & Contemporary Sculptures',
+                bestChoiceImg: 'https://media.gody.vn/images/mysore/hoc-vien-nghe-thuat-thi-giac-chamarajendra-chamarajendra-academy-of-visual-arts/095ccc46b68969525f89f8caf727b9a8ef3b24d0.jpg'
+            }
+        ]
+    },
+    'parks_nature': {
+        name: 'Parks & Nature in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Happy Man Park',
+                image: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=800',
+                description: 'Charming landscaped garden in Saraswathipuram featuring a smiling Happy Man statue, fish pond, and kids play zone.',
+                rating: '4.6',
+                bestTime: '4:30 PM – 8:00 PM',
+                busRoutes: 'Located in Saraswathipuram (~2.5 km from station).',
+                bestChoice: 'Lakeside Garden Walk & Happy Man Statue',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Freedom Park Mysuru',
+                image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800',
+                description: 'Sprawling green urban park built on former sub-jail land featuring walking tracks, amphitheater, and freedom memorial.',
+                rating: '4.5',
+                bestTime: '5:30 AM – 9:00 AM, 4:30 PM – 8:00 PM',
+                busRoutes: 'Located near Subbarayanakere / City Bus Stand.',
+                bestChoice: 'Morning Jogging Track & Freedom Fighters Memorial',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Kukkarahalli Nature Trail',
+                image: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg',
+                description: 'Famous 4.5 km boundary trail around Kukkarahalli Lake loved by poets, runners, and nature photography lovers.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 9:00 AM, 4:30 PM – 6:30 PM',
+                busRoutes: 'Located adjacent to Manasagangotri Campus.',
+                bestChoice: '4.5 km Lake Walkway & Spot-billed Pelican Bird Watching',
+                bestChoiceImg: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg'
+            },
+            {
+                name: 'Dalvoy Lake',
+                image: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=800',
+                description: 'Peaceful natural lake on Mysuru-Nanjangud road, popular for quiet sunset views and local wetland birds.',
+                rating: '4.4',
+                bestTime: '5:00 PM – 6:30 PM',
+                busRoutes: 'Located on Mysuru-Nanjangud Highway (~6 km south).',
+                bestChoice: 'Wetland Sunset Photography & Quiet Bird Spotting',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Hebbal Lake (Mysuru)',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800',
+                description: 'Rejuvenated urban lake park in industrial Mysuru with paved walking paths, gazebo, and greenery.',
+                rating: '4.5',
+                bestTime: '6:00 AM – 9:00 AM, 4:30 PM – 7:00 PM',
+                busRoutes: 'Located in Hebbal Industrial Area, Mysuru.',
+                bestChoice: 'Lakeside Gazebo Seating & Evening Breeze Walk',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800'
+            }
+        ]
+    },
+    'entertainment': {
+        name: 'Entertainment in Mysuru (East & West)',
+        places: [
+            {
+                name: 'Chamarajendra Circle',
+                image: 'https://thumbs.dreamstime.com/b/statue-chamarajendra-wadiyar-illuminated-night-time-mysore-city-india-twenty-third-maharaja-263382059.jpg',
+                description: 'Iconic royal circle featuring a marble statue of Maharaja Chamarajendra Wadiyar X under an ornate canopy.',
+                rating: '4.7',
+                bestTime: '7:00 PM – 9:00 PM (Illuminated)',
+                busRoutes: 'Located right outside North Gate of Mysore Palace.',
+                bestChoice: 'Royal Canopy Night Illumination Photography',
+                bestChoiceImg: 'https://thumbs.dreamstime.com/b/statue-chamarajendra-wadiyar-illuminated-night-time-mysore-city-india-twenty-third-maharaja-263382059.jpg'
+            },
+            {
+                name: 'Mysuru Exhibition Grounds',
+                image: 'https://www.re-thinkingthefuture.com/wp-content/uploads/2022/09/A7988-The-Majestic-Mysuru-Dasara-A-tradition-for-centuries-Image-10-1024x675.jpg',
+                description: 'Sprawling fairgrounds host to the world-famous Mysore Dasara Exhibition with amusement rides and food stalls.',
+                rating: '4.7',
+                bestTime: 'October to December (Dasara Season)',
+                busRoutes: 'Located opposite Mysore Palace Fort Gate.',
+                bestChoice: 'Giant Ferris Wheel Ride & Dasara Shopping Stalls',
+                bestChoiceImg: 'https://www.re-thinkingthefuture.com/wp-content/uploads/2022/09/A7988-The-Majestic-Mysuru-Dasara-A-tradition-for-centuries-Image-10-1024x675.jpg'
+            },
+            {
+                name: 'Mysuru Race Course',
+                image: 'https://i.ytimg.com/vi/TL8waC6Yq8Q/maxresdefault.jpg',
+                description: 'Picturesque thoroughbred horse racing track situated against the backdrop of Chamundi Hills.',
+                rating: '4.6',
+                bestTime: 'Race Days / Morning Walk Hours',
+                busRoutes: 'Located on Race Course Road, Mysuru.',
+                bestChoice: 'Thoroughbred Horse Racing & Chamundi Hill Backdrop View',
+                bestChoiceImg: 'https://i.ytimg.com/vi/TL8waC6Yq8Q/maxresdefault.jpg'
+            },
+            {
+                name: 'Nazarbad Heritage Area',
+                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
+                description: 'Historic neighborhood housing heritage bungalows, colonial clubs, and traditional Mysore eateries.',
+                rating: '4.5',
+                bestTime: 'Evening Heritage Walks',
+                busRoutes: 'Located in Nazarbad (~2 km from Palace).',
+                bestChoice: 'Colonial Architecture Tour & Heritage Mess Dining',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                name: 'Open Air Theatre, Manasagangotri',
+                image: 'https://ik.imagekit.io/streamone/ei/open-air-theatre-university-of-mysore.jpg',
+                description: 'Spacious amphitheater inside Mysore University campus host to cultural fests, plays, and musical concerts.',
+                rating: '4.6',
+                bestTime: 'Evening Cultural Events',
+                busRoutes: 'Located inside University of Mysore campus.',
+                bestChoice: 'College Cultural Fest Performance & Live Concerts',
+                bestChoiceImg: 'https://ik.imagekit.io/streamone/ei/open-air-theatre-university-of-mysore.jpg'
             }
         ]
     }
@@ -2409,328 +2738,6 @@ const manipalCategoryData = {
     }
 };
 
-const mysuruEastWestCategories = [
-    { id: 'historic', name: 'Historic Places', desc: 'Explore mansions & clock tower →', image: 'https://d2rdhxfof4qmbb.cloudfront.net/wp-content/uploads/2024/03/Palace-Museum-1068x801.jpg' },
-    { id: 'temples', name: 'Temples', desc: 'Explore fort temples & shrines →', image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=600' },
-    { id: 'shopping', name: 'Shopping', desc: 'Explore malls, silk & bazaars →', image: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg' },
-    { id: 'museums_attractions', name: 'Museums & Attractions', desc: 'Explore manuscripts & galleries →', image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=600' },
-    { id: 'parks_nature', name: 'Parks & Nature', desc: 'Explore nature trails & lakes →', image: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg' },
-    { id: 'entertainment', name: 'Entertainment', desc: 'Explore circles & exhibition grounds →', image: 'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?auto=format&fit=crop&q=80&w=600' }
-];
-
-const mysuruEastWestCategoryData = {
-    'historic': {
-        name: 'Historic Places in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Cheluvamba Mansion',
-                image: 'https://www.omastrology.com/indian-monuments/images/cheluvamba-mansion.jpg',
-                description: 'Grand royal mansion built in 1910 for Princess Cheluvajammanni, currently housing CFTRI main campus.',
-                rating: '4.7',
-                bestTime: '9:00 AM – 5:00 PM',
-                busRoutes: 'Located near Mysuru Railway Station / CFTRI Campus.',
-                bestChoice: 'Heritage Architecture & CFTRI Gardens Walk',
-                bestChoiceImg: 'https://www.omastrology.com/indian-monuments/images/cheluvamba-mansion.jpg'
-            },
-            {
-                name: 'Jayalakshmi Vilas Mansion',
-                image: 'https://images.borrbo.com/outings/Jayalakshmi-Vilas-Mansion/mansion-entrance.jpg',
-                description: 'Built in 1905 for Princess Jayalakshammanni, located inside Manasagangotri campus, hosting folklore and archaeology museums.',
-                rating: '4.8',
-                bestTime: '10:00 AM – 5:00 PM',
-                busRoutes: 'Located inside Manasagangotri Campus, Mysore University.',
-                bestChoice: 'Folklore Museum & Royal Wooden Carvings',
-                bestChoiceImg: 'https://images.borrbo.com/outings/Jayalakshmi-Vilas-Mansion/mansion-entrance.jpg'
-            },
-            {
-                name: 'Government House (Raj Bhavan, Mysuru)',
-                image: 'https://static.toiimg.com/photo/51223137/.jpg',
-                description: 'Stunning 1805 neoclassical heritage mansion designed by John Malcolm, set amidst 50 acres of lush gardens.',
-                rating: '4.6',
-                bestTime: '9:30 AM – 5:00 PM',
-                busRoutes: 'Located in Nazarbad, Mysuru.',
-                bestChoice: 'Neoclassical Columns & Heritage Gardens',
-                bestChoiceImg: 'https://static.toiimg.com/photo/51223137/.jpg'
-            },
-            {
-                name: 'Mysore Fort Gateway (Old Fort Area)',
-                image: 'https://thumbs.dreamstime.com/b/mysore-palace-karnataka-india-gateway-huge-grounds-was-built-king-yaduraya-inside-old-fort-th-48184265.jpg',
-                description: 'Ancient fortified gateways surrounding the inner palace complex with historic ramparts and archways.',
-                rating: '4.6',
-                bestTime: '6:00 AM – 8:00 PM',
-                busRoutes: 'Located surrounding Mysore Palace.',
-                bestChoice: 'Historic Fort Gates & Wall Carvings Photography',
-                bestChoiceImg: 'https://thumbs.dreamstime.com/b/mysore-palace-karnataka-india-gateway-huge-grounds-was-built-king-yaduraya-inside-old-fort-th-48184265.jpg'
-            },
-            {
-                name: 'Dodda Gadiyara (Clock Tower)',
-                image: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg',
-                description: 'Iconic 75-foot silver-jubilee clock tower built in 1927 featuring Indo-Saracenic architecture.',
-                rating: '4.5',
-                bestTime: 'Open 24 Hours (Best at Night)',
-                busRoutes: 'Located at Town Hall Circle, Mysuru.',
-                bestChoice: 'Night Illumination & Town Hall Heritage Walk',
-                bestChoiceImg: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg'
-            }
-        ]
-    },
-    'temples': {
-        name: 'Temples in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Lakshmiramana Swamy Temple',
-                image: 'https://img.magnific.com/premium-photo/lakshmiramana-swamy-temple-mysore_78361-13500.jpg',
-                description: 'One of the oldest temples inside Mysore Fort premises, dedicated to Lord Vishnu, dating back to 1499.',
-                rating: '4.8',
-                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
-                busRoutes: 'Located inside Mysore Palace Fort Complex.',
-                bestChoice: 'Ancient Dravidian Sanctum & Vishnu Pooja',
-                bestChoiceImg: 'https://img.magnific.com/premium-photo/lakshmiramana-swamy-temple-mysore_78361-13500.jpg'
-            },
-            {
-                name: 'Bhuvaneshwari Temple',
-                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
-                description: 'Located at the northern gate of Mysore Fort, featuring a silver Surya Mandala gift from the Wodeyar kings.',
-                rating: '4.7',
-                bestTime: '6:00 AM – 1:00 PM, 4:00 PM – 8:30 PM',
-                busRoutes: 'Located at North Gate, Mysore Palace.',
-                bestChoice: 'Silver Mandala & Goddess Bhuvaneshwari Blessings',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Sri Prasanna Anjaneya Swamy Temple',
-                image: 'https://i.ytimg.com/vi/E7fsyPWnQj8/maxresdefault.jpg',
-                description: 'Vibrant temple dedicated to Lord Hanuman, deeply revered by locals for spiritual solace and festivals.',
-                rating: '4.7',
-                bestTime: '6:00 AM – 12:30 PM, 5:00 PM – 8:30 PM',
-                busRoutes: 'Located near Palace Gates / Agrahara.',
-                bestChoice: 'Special Tuesday/Saturday Hanuman Pooja & Chanting',
-                bestChoiceImg: 'https://i.ytimg.com/vi/E7fsyPWnQj8/maxresdefault.jpg'
-            },
-            {
-                name: 'Gayathri Temple',
-                image: 'https://www.iskconmysore.org/wp-content/uploads/2022/11/008.jpg',
-                description: 'Built by Maharaja Jayachamarajendra Wadiyar in 1953 inside the fort complex, dedicated to Goddess Gayathri.',
-                rating: '4.6',
-                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
-                busRoutes: 'Located inside South-East corner of Mysore Palace Fort.',
-                bestChoice: 'Quiet Meditation & Divine Gayatri Mantra Chanting',
-                bestChoiceImg: 'https://www.iskconmysore.org/wp-content/uploads/2022/11/008.jpg'
-            },
-            {
-                name: 'Trinesvaraswamy Temple',
-                image: 'https://jothishi.com/wp-content/uploads/2019/03/Venugopala-Swamy-Temple.jpg',
-                description: 'Ancient Shiva temple pre-dating the Wodeyar dynasty, situated at the north-east corner of Mysore Fort.',
-                rating: '4.8',
-                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
-                busRoutes: 'Located inside North-East Mysore Fort grounds.',
-                bestChoice: 'Maha Shivaratri Special Pooja & Sacred Lingam Darshan',
-                bestChoiceImg: 'https://jothishi.com/wp-content/uploads/2019/03/Venugopala-Swamy-Temple.jpg'
-            }
-        ]
-    },
-    'shopping': {
-        name: 'Shopping in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Garuda Mall Mysuru',
-                image: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg',
-                description: 'Lively shopping mall in central Mysuru featuring fashion brand stores, food court, and gaming zone.',
-                rating: '4.5',
-                bestTime: '10:00 AM – 10:00 PM',
-                busRoutes: 'Located near City Bus Stand, Albert Victor Road.',
-                bestChoice: 'Fashion Apparel Stores & Food Court Snacks',
-                bestChoiceImg: 'https://static-blog.treebo.com/wp-content/uploads/2018/04/Garuda-Mall-Mysore-1-1.jpg'
-            },
-            {
-                name: 'BM Habitat Mall',
-                image: 'https://travelghat.com/wp-content/uploads/2023/08/BM-habitat-mall-mysore-image-edited.jpg',
-                description: 'Modern shopping destination in Jayalakshmipuram housing electronics, clothing, and multiplex.',
-                rating: '4.5',
-                bestTime: '10:00 AM – 9:30 PM',
-                busRoutes: 'Located in Jayalakshmipuram (~3 km from station).',
-                bestChoice: 'Multiplex Cinema & Lifestyle Boutiques',
-                bestChoiceImg: 'https://travelghat.com/wp-content/uploads/2023/08/BM-habitat-mall-mysore-image-edited.jpg'
-            },
-            {
-                name: 'KSIC Silk Factory & Showroom',
-                image: 'https://masthmysore.com/wp-content/uploads/2024/08/Centro-Mall-Mysore-e1723194744647.jpg',
-                description: 'Authentic Mysore Silk saree production factory and showroom featuring pure gold zari sarees.',
-                rating: '4.8',
-                bestTime: '10:00 AM – 7:00 PM',
-                busRoutes: 'Located on Mananthavady Road, Mysuru.',
-                bestChoice: 'Pure Mysore Silk Zari Sarees & Factory Weaving Witness',
-                bestChoiceImg: 'https://masthmysore.com/wp-content/uploads/2024/08/Centro-Mall-Mysore-e1723194744647.jpg'
-            },
-            {
-                name: 'Badsha Bazaar',
-                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
-                description: 'Historic textile center famous for traditional Karnataka silk sarees, dress materials, and ethnic wear.',
-                rating: '4.6',
-                bestTime: '10:30 AM – 9:00 PM',
-                busRoutes: 'Located on Sayyaji Rao Road, Mysuru.',
-                bestChoice: 'Bridal Silk Sarees & Dress Fabrics',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Ashoka Road Shopping Street',
-                image: 'https://s3.india.com/wp-content/uploads/2024/09/ashoka.jpg?impolicy=Medium_Widthonly&w=800&h=541',
-                description: 'Bustling market corridor known for gold and silver jewelry shops, traditional handicrafts, and artifacts.',
-                rating: '4.5',
-                bestTime: '11:00 AM – 9:00 PM',
-                busRoutes: 'Located connecting St Philomena Cathedral to Clock Tower.',
-                bestChoice: 'Gold Jewelry Shopping & Traditional Handicrafts',
-                bestChoiceImg: 'https://s3.india.com/wp-content/uploads/2024/09/ashoka.jpg?impolicy=Medium_Widthonly&w=800&h=541'
-            }
-        ]
-    },
-    'museums_attractions': {
-        name: 'Museums & Attractions in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Mysuru City Corporation Museum',
-                image: 'https://th-i.thgim.com/public/incoming/8ld739/article66946934.ece/alternates/FREE_1200/2303_8_6_2023_19_33_36_2_OLDDCOFFICE.JPG',
-                description: 'Heritage museum displaying civic history, architectural plans, and photographs of Mysuru\'s urban evolution.',
-                rating: '4.4',
-                bestTime: '10:00 AM – 5:30 PM',
-                busRoutes: 'Located inside MCC Heritage Building, Sayyaji Rao Road.',
-                bestChoice: 'Civic History Archives & Architectural Blueprint Models',
-                bestChoiceImg: 'https://th-i.thgim.com/public/incoming/8ld739/article66946934.ece/alternates/FREE_1200/2303_8_6_2023_19_33_36_2_OLDDCOFFICE.JPG'
-            },
-            {
-                name: 'Indira Gandhi Rashtriya Manav Sangrahalaya (Regional Centre)',
-                image: 'https://s7ap1.scene7.com/is/image/incredibleindia/indira-gandhi-rashtriya-manav-sangrahalaya-mysore-1-attr-hero?qlt=82&ts=1751460496517',
-                description: 'National Museum of Mankind regional center showcasing tribal heritage, rock art, and traditional lifestyle exhibits.',
-                rating: '4.6',
-                bestTime: '10:00 AM – 5:30 PM (Closed Mondays)',
-                busRoutes: 'Located in Wellington House, Irwin Road.',
-                bestChoice: 'Tribal Rock Art Models & Traditional Craft Exhibits',
-                bestChoiceImg: 'https://s7ap1.scene7.com/is/image/incredibleindia/indira-gandhi-rashtriya-manav-sangrahalaya-mysore-1-attr-hero?qlt=82&ts=1751460496517'
-            },
-            {
-                name: 'Chamarajendra Academy of Visual Arts (CAVA)',
-                image: 'https://media.gody.vn/images/mysore/hoc-vien-nghe-thuat-thi-giac-chamarajendra-chamarajendra-academy-of-visual-arts/095ccc46b68969525f89f8caf727b9a8ef3b24d0.jpg',
-                description: 'Premier fine arts institute showcasing student art galleries, contemporary paintings, and sculptures.',
-                rating: '4.5',
-                bestTime: '10:00 AM – 5:00 PM',
-                busRoutes: 'Located in Siddartha Layout / Manasagangotri.',
-                bestChoice: 'Student Fine Art Exhibition & Contemporary Sculptures',
-                bestChoiceImg: 'https://media.gody.vn/images/mysore/hoc-vien-nghe-thuat-thi-giac-chamarajendra-chamarajendra-academy-of-visual-arts/095ccc46b68969525f89f8caf727b9a8ef3b24d0.jpg'
-            }
-        ]
-    },
-    'parks_nature': {
-        name: 'Parks & Nature in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Happy Man Park',
-                image: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=800',
-                description: 'Charming landscaped garden in Saraswathipuram featuring a smiling Happy Man statue, fish pond, and kids play zone.',
-                rating: '4.6',
-                bestTime: '4:30 PM – 8:00 PM',
-                busRoutes: 'Located in Saraswathipuram (~2.5 km from station).',
-                bestChoice: 'Lakeside Garden Walk & Happy Man Statue',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Freedom Park Mysuru',
-                image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800',
-                description: 'Sprawling green urban park built on former sub-jail land featuring walking tracks, amphitheater, and freedom memorial.',
-                rating: '4.5',
-                bestTime: '5:30 AM – 9:00 AM, 4:30 PM – 8:00 PM',
-                busRoutes: 'Located near Subbarayanakere / City Bus Stand.',
-                bestChoice: 'Morning Jogging Track & Freedom Fighters Memorial',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Kukkarahalli Nature Trail',
-                image: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg',
-                description: 'Famous 4.5 km boundary trail around Kukkarahalli Lake loved by poets, runners, and nature photography lovers.',
-                rating: '4.8',
-                bestTime: '6:00 AM – 9:00 AM, 4:30 PM – 6:30 PM',
-                busRoutes: 'Located adjacent to Manasagangotri Campus.',
-                bestChoice: '4.5 km Lake Walkway & Spot-billed Pelican Bird Watching',
-                bestChoiceImg: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg'
-            },
-            {
-                name: 'Dalvoy Lake',
-                image: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=800',
-                description: 'Peaceful natural lake on Mysuru-Nanjangud road, popular for quiet sunset views and local wetland birds.',
-                rating: '4.4',
-                bestTime: '5:00 PM – 6:30 PM',
-                busRoutes: 'Located on Mysuru-Nanjangud Highway (~6 km south).',
-                bestChoice: 'Wetland Sunset Photography & Quiet Bird Spotting',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Hebbal Lake (Mysuru)',
-                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800',
-                description: 'Rejuvenated urban lake park in industrial Mysuru with paved walking paths, gazebo, and greenery.',
-                rating: '4.5',
-                bestTime: '6:00 AM – 9:00 AM, 4:30 PM – 7:00 PM',
-                busRoutes: 'Located in Hebbal Industrial Area, Mysuru.',
-                bestChoice: 'Lakeside Gazebo Seating & Evening Breeze Walk',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800'
-            }
-        ]
-    },
-    'entertainment': {
-        name: 'Entertainment in Mysuru (East & West)',
-        places: [
-            {
-                name: 'Chamarajendra Circle',
-                image: 'https://thumbs.dreamstime.com/b/statue-chamarajendra-wadiyar-illuminated-night-time-mysore-city-india-twenty-third-maharaja-263382059.jpg',
-                description: 'Iconic royal circle featuring a marble statue of Maharaja Chamarajendra Wadiyar X under an ornate canopy.',
-                rating: '4.7',
-                bestTime: '7:00 PM – 9:00 PM (Illuminated)',
-                busRoutes: 'Located right outside North Gate of Mysore Palace.',
-                bestChoice: 'Royal Canopy Night Illumination Photography',
-                bestChoiceImg: 'https://thumbs.dreamstime.com/b/statue-chamarajendra-wadiyar-illuminated-night-time-mysore-city-india-twenty-third-maharaja-263382059.jpg'
-            },
-            {
-                name: 'Mysuru Exhibition Grounds',
-                image: 'https://www.re-thinkingthefuture.com/wp-content/uploads/2022/09/A7988-The-Majestic-Mysuru-Dasara-A-tradition-for-centuries-Image-10-1024x675.jpg',
-                description: 'Sprawling fairgrounds host to the world-famous Mysore Dasara Exhibition with amusement rides and food stalls.',
-                rating: '4.7',
-                bestTime: 'October to December (Dasara Season)',
-                busRoutes: 'Located opposite Mysore Palace Fort Gate.',
-                bestChoice: 'Giant Ferris Wheel Ride & Dasara Shopping Stalls',
-                bestChoiceImg: 'https://www.re-thinkingthefuture.com/wp-content/uploads/2022/09/A7988-The-Majestic-Mysuru-Dasara-A-tradition-for-centuries-Image-10-1024x675.jpg'
-            },
-            {
-                name: 'Mysuru Race Course',
-                image: 'https://i.ytimg.com/vi/TL8waC6Yq8Q/maxresdefault.jpg',
-                description: 'Picturesque thoroughbred horse racing track situated against the backdrop of Chamundi Hills.',
-                rating: '4.6',
-                bestTime: 'Race Days / Morning Walk Hours',
-                busRoutes: 'Located on Race Course Road, Mysuru.',
-                bestChoice: 'Thoroughbred Horse Racing & Chamundi Hill Backdrop View',
-                bestChoiceImg: 'https://i.ytimg.com/vi/TL8waC6Yq8Q/maxresdefault.jpg'
-            },
-            {
-                name: 'Nazarbad Heritage Area',
-                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
-                description: 'Historic neighborhood housing heritage bungalows, colonial clubs, and traditional Mysore eateries.',
-                rating: '4.5',
-                bestTime: 'Evening Heritage Walks',
-                busRoutes: 'Located in Nazarbad (~2 km from Palace).',
-                bestChoice: 'Colonial Architecture Tour & Heritage Mess Dining',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800'
-            },
-            {
-                name: 'Open Air Theatre, Manasagangotri',
-                image: 'https://ik.imagekit.io/streamone/ei/open-air-theatre-university-of-mysore.jpg',
-                description: 'Spacious amphitheater inside Mysore University campus host to cultural fests, plays, and musical concerts.',
-                rating: '4.6',
-                bestTime: 'Evening Cultural Events',
-                busRoutes: 'Located inside University of Mysore campus.',
-                bestChoice: 'College Cultural Fest Performance & Live Concerts',
-                bestChoiceImg: 'https://ik.imagekit.io/streamone/ei/open-air-theatre-university-of-mysore.jpg'
-            }
-        ]
-    }
-};
-
 const cityFoods = {
     'mangaluru': [
         { img: 'https://myfoodstory.com/wp-content/uploads/2015/11/chicken-kori-rotti-mangalorean-chicken-curry-recipe.1024x1024-1024x617.jpg', name: 'Chicken Kori Rotti' },
@@ -2830,12 +2837,12 @@ function bindDoubleTapListeners() {
     cards.forEach(card => {
         let lastTap = 0;
         const foodName = card.getAttribute('data-name');
-
+        
         const handleDoubleTap = (e) => {
             e.preventDefault();
-
+            
             const isFav = toggleFoodFavorite(foodName);
-
+            
             // Update heart icon instantly
             const badgeSvg = card.querySelector('.heart-icon-svg');
             if (badgeSvg) {
@@ -2846,24 +2853,24 @@ function bindDoubleTapListeners() {
                     badgeSvg.setAttribute('fill', 'none');
                     badgeSvg.setAttribute('stroke', '#ffffff');
                 }
-
+                
                 badgeSvg.style.transform = 'scale(1.4)';
                 setTimeout(() => {
                     badgeSvg.style.transform = '';
                 }, 250);
             }
-
+            
             // Show the Instagram-style overlay branding text
             const imgWrapper = card.querySelector('.food-swiper-img-wrapper') || card.querySelector('.place-img') || card;
             if (imgWrapper) {
                 const existing = imgWrapper.querySelector('.double-tap-overlay');
                 if (existing) existing.remove();
-
+                
                 const overlay = document.createElement('div');
                 overlay.className = 'double-tap-overlay';
                 overlay.innerHTML = `<span class="double-tap-text">WeekendExplore.in</span>`;
                 imgWrapper.appendChild(overlay);
-
+                
                 setTimeout(() => {
                     overlay.remove();
                 }, 1000);
@@ -2926,8 +2933,8 @@ function renderFoodCategoryPage(cityId) {
 
             <div class="favorite-foods-container places-grid">
                 ${category.places.map(place => {
-        const isFav = isFoodFavorite(place.name);
-        return `
+                    const isFav = isFoodFavorite(place.name);
+                    return `
                     <div class="place-card favorite-food-card" data-name="${place.name}">
                         <div class="place-img" style="position: relative;">
                             <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
@@ -2955,7 +2962,7 @@ function renderFoodCategoryPage(cityId) {
                         </div>
                     </div>
                     `;
-    }).join('')}
+                }).join('')}
             </div>
         </div>
     `;
@@ -2974,7 +2981,7 @@ function renderGlobalFavoritesPage() {
     clearBackgroundIntervals();
 
     const favFoodNames = getFavoriteFoods();
-
+    
     const allMatchingFoods = [];
     for (const cityId of Object.keys(cityCategoryData)) {
         const foodCategory = cityCategoryData[cityId]?.['food'];
@@ -3061,7 +3068,7 @@ function renderGlobalFavoritesPage() {
 
     if (allMatchingFoods.length > 0) {
         bindDoubleTapListeners();
-
+        
         const cards = document.querySelectorAll('.favorite-food-card');
         cards.forEach(card => {
             const foodName = card.getAttribute('data-name');
@@ -3109,8 +3116,8 @@ function clearBackgroundIntervals() {
 }
 
 function initNavbarFavoriteListener() {
-    const navbarFavBtn = document.querySelector('.nav-actions .nav-icon img[src*="favorite-outline"]')?.closest('.nav-icon') ||
-        document.querySelector('.nav-icon img[alt="Fav"]')?.closest('.nav-icon');
+    const navbarFavBtn = document.querySelector('.nav-actions .nav-icon img[src*="favorite-outline"]')?.closest('.nav-icon') || 
+                          document.querySelector('.nav-icon img[alt="Fav"]')?.closest('.nav-icon');
     if (navbarFavBtn) {
         navbarFavBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -3155,14 +3162,12 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
                     </a>
                     <h1 style="margin: 0 0 0.5rem 0;">${category.name}</h1>
                     <p style="margin: 0 0 1.25rem 0;">Discover the best ${category.name.toLowerCase()} and plan your visit.</p>
-                    ${cityId !== 'mysuru_east_west' ? `
                     <button class="must-watch-btn" id="must-watch-btn" style="margin: 0;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 2px;"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                         <span class="hide-mobile">Must Visit Places</span>
                         <span class="show-mobile-inline" style="display: none;">Must Visit</span>
                         <span class="btn-arrow">→</span>
                     </button>
-                    ` : ''}
                 </div>
 
                 <div class="category-card famous-food-header-card" style="cursor: default;">
@@ -3190,7 +3195,7 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
 
             <div class="places-grid">
                 ${category.places.map(place => `
-                    <div class="place-card">
+                    <div class="place-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${cityId}')">
                         <div class="place-img" style="position: relative; overflow: hidden;">
                             ${place.images && place.images.length > 0 ? `
                                 <div style="width: 100%; height: 100%; overflow: hidden;">
@@ -3319,13 +3324,10 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    const mustWatchCategoryBtn = document.getElementById('must-watch-btn');
-    if (mustWatchCategoryBtn) {
-        mustWatchCategoryBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openMustWatchModal(category, cityId);
-        });
-    }
+    document.getElementById('must-watch-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        openMustWatchModal(category, cityId);
+    });
 }
 
 console.log("Scripts initializing...");
@@ -3381,7 +3383,7 @@ function renderDestination(id) {
 
     currentCityId = id;
 
-    const isPremiumCity = ['mangaluru', 'bangalore', 'mysuru', 'manipal'].includes(dest.id);
+    const isPremiumCity = ['mangaluru', 'bangalore', 'mysuru', 'mysuru_east_west', 'manipal'].includes(dest.id);
 
     const destHTML = `
         <div class="page-content" style="position: relative;">
@@ -3409,8 +3411,8 @@ function renderDestination(id) {
                     <div class="category-img swiper food-swiper" style="will-change: transform; perspective: 1000px; width: 100%; height: 100%;">
                         <div class="swiper-wrapper">
                             ${(cityFoods[dest.id] || []).map(item => {
-        const isFav = isFoodFavorite(item.name);
-        return `
+                                const isFav = isFoodFavorite(item.name);
+                                return `
                                 <div class="swiper-slide favorite-food-card" data-name="${item.name}" style="display: flex; flex-direction: column; overflow: hidden; height: 100%; position: relative; cursor: pointer;">
                                     <div class="food-swiper-img-wrapper" style="position: relative; flex: 1; overflow: hidden; width: 100%;">
                                         <img src="${item.img}" alt="${item.name}" loading="lazy" decoding="async">
@@ -3425,7 +3427,7 @@ function renderDestination(id) {
                                     </div>
                                 </div>
                                 `;
-    }).join('')}
+                            }).join('')}
                         </div>
                     </div>
                 </div>
@@ -3441,7 +3443,7 @@ function renderDestination(id) {
             ${!isPremiumCity ? `
             <div class="places-grid">
                 ${dest.famousPlaces.map(place => `
-                    <div class="place-card">
+                    <div class="place-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${id}')">
                         <div class="place-img">
                             <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
                         </div>
@@ -3558,9 +3560,9 @@ function openMustWatchModal(category, cityId = currentCityId) {
 
     // Select top 3 places as the "Must Watching Places"
     const topPlaces = category.places.slice(0, 3);
-
+    
     const cityName = getCityName(cityId);
-
+    
     // Helper to get static location and rating
     const getLocation = (placeName) => {
         if (category.name.includes("Beaches")) return `Coastal Hwy, ${cityName}`;
@@ -3590,7 +3592,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                     <div class="swiper-wrapper">
                         ${topPlaces.map((place, idx) => `
                             <div class="swiper-slide">
-                                <div class="must-watch-card">
+                                <div class="must-watch-card" style="cursor: pointer;" onclick="handleCardClick(event, '${place.name.replace(/'/g, "\\'")}', '${cityId}')">
                                     <div class="must-watch-card-img">
                                         <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async" ${['Chamundi Hills', 'Karinjeshwara Hill Temple', 'Karinchieshwara Trek'].includes(place.name) ? 'style="transform: scale(1.35); transform-origin: center; object-fit: cover;"' : ['Mandi Stories', 'Charminar Restaurant'].includes(place.name) ? 'style="object-fit: contain; background-color: #ffffff; padding: 12px;"' : place.name.includes('Upcoming') ? 'style="filter: blur(4px);"' : ''}>
                                         <div class="must-watch-badges">
@@ -3604,7 +3606,28 @@ function openMustWatchModal(category, cityId = currentCityId) {
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="12" r="3"/></svg>
                                             <span>${getLocation(place.name)}</span>
                                         </div>
-                                        ${place.busRoutes ? `
+                                        <p>${place.description}</p>
+                                        ${place.bestSeason || place.bestTime || place.openHours || place.busRoutes ? `
+                                        <div class="place-meta">
+                                            ${place.bestSeason ? `
+                                            <div class="meta-item season">
+                                                <span class="meta-icon">🗓️</span>
+                                                <span><strong>Best Season:</strong> ${place.bestSeason}</span>
+                                            </div>
+                                            ` : ''}
+                                            ${place.bestTime ? `
+                                            <div class="meta-item time">
+                                                <span class="meta-icon">⏰</span>
+                                                <span><strong>Best Time:</strong> ${place.bestTime}</span>
+                                            </div>
+                                            ` : ''}
+                                            ${place.openHours ? `
+                                            <div class="meta-item time">
+                                                <span class="meta-icon">⏰</span>
+                                                <span><strong>Timings:</strong> ${place.openHours}</span>
+                                            </div>
+                                            ` : ''}
+                                            ${place.busRoutes ? `
                                              <div class="meta-item bus-route-card dark-bus-card" style="grid-column: 1 / -1; margin-top: 10px; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; color: #f1f5f9;">
                                                  <div class="bus-card-shimmer"></div>
                                                  <div style="z-index: 2; position: relative; width: 100%;">
@@ -3620,35 +3643,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                                                      </div>
                                                  </div>
                                              </div>
-                                             ` : ''}<p>${place.description}</p>
-                                        ${place.bestSeason || place.bestTime || place.openHours ? `
-                                        <div class="place-meta">
-                                            ${place.bestSeason ? `
-                                            <div class="meta-item season">
-                                                <span class="meta-icon">🗓️</span>
-                                                <span><strong>Best Season:</strong> ${place.bestSeason}</span>
-                                            </div>
-                                            ` : ''}
-                                            ${place.busRoutes ? `
-                                                         <span style="color: #e2e8f0; font-weight: 500; line-height: 1.45; display: block;">${place.busRoutes}</span>
-                                                     </div>
-                                                 </div>
-                                             </div>
                                              ` : ''}
-                                            ${place.bestTime ? `
-                                            <div class="meta-item time">
-                                                <span class="meta-icon">⏰</span>
-                                                <span><strong>Best Time:</strong> ${place.bestTime}</span>
-                                            </div>
-                                            ` : ''}
-                                            ${place.openHours ? `
-                                            <div class="meta-item time">
-                                                <span class="meta-icon">⏰</span>
-                                                <span><strong>Timings:</strong> ${place.openHours}</span>
-                                            </div>
-                                            ` : ''}
-                                            ${place.busRoutes ? `
-                                            ` : ''}
                                         </div>
                                         ` : ''}
                                         ${place.bestFoods ? `
@@ -3703,7 +3698,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
     // 2. Simulate dynamique loading before showing modal
     setTimeout(() => {
         loader.classList.remove('active');
-
+        
         document.body.insertAdjacentHTML('beforeend', modalHTML);
 
         const overlay = document.getElementById('must-watch-modal-overlay');
@@ -4214,7 +4209,7 @@ function openCityMustWatchModal(cityId) {
     // 2. Simulate loading animation before displaying
     setTimeout(() => {
         loader.classList.remove('active');
-
+        
         document.body.insertAdjacentHTML('beforeend', modalHTML);
 
         const overlay = document.getElementById('mangaluru-must-watch-modal-overlay');
@@ -4258,7 +4253,7 @@ function openCityMustWatchModal(cityId) {
                     prevEl: '.must-watch-prev',
                 },
             });
-
+            
             // Connect Swiper active slide change with route node highlighting
             swiperInstance.on('slideChange', () => {
                 const activeIdx = swiperInstance.realIndex;
@@ -4301,7 +4296,7 @@ function openCityMustWatchModal(cityId) {
                         e.stopPropagation();
                         const type = detourBtn.getAttribute('data-type');
                         const target = detourBtn.getAttribute('data-target');
-
+                        
                         if (type === 'cat') {
                             closeModal();
                             renderCategoryPage(target, cityId);
@@ -4504,13 +4499,16 @@ const cityCoordinates = {
     'hebbe falls': { lat: 13.5414, lng: 75.7171 },
     'coffee plantations': { lat: 13.3167, lng: 75.7667 },
 
+
     // Zoo fallback for Mysuru
     'zoo': { lat: 12.3022, lng: 76.6639 },
 
     // Manipal
     'end point park': { lat: 13.3592, lng: 74.7936 },
+    'manipal end point park': { lat: 13.3592, lng: 74.7936 },
     'hasta shilpa heritage village': { lat: 13.3512, lng: 74.7865 },
     'anatomy museum (map)': { lat: 13.3533, lng: 74.7850 },
+    'manipal museum of anatomy & pathology (map)': { lat: 13.3533, lng: 74.7850 },
     'venugopal temple': { lat: 13.3550, lng: 74.7900 },
 
     'malpe beach': { lat: 13.3575, lng: 74.7042 },
@@ -4525,25 +4523,67 @@ const cityCoordinates = {
     'shri indrani panchadurga parameshwari temple': { lat: 13.3530, lng: 74.7760 },
     'shivapady sri umamaheshwara temple': { lat: 13.3570, lng: 74.7850 },
 
+    'kudremukh peak trek': { lat: 13.2167, lng: 75.2667 },
     'kudremukh peak': { lat: 13.2167, lng: 75.2667 },
+    'kodachadri peak & sunset trek': { lat: 13.8590, lng: 74.8710 },
+    'kodachadri peak': { lat: 13.8590, lng: 74.8710 },
     'kodachadri trek': { lat: 13.8590, lng: 74.8710 },
     'narasimha parvatha trek (agumbe)': { lat: 13.5042, lng: 75.1225 },
     'kudlu theertha falls trek': { lat: 13.4470, lng: 75.0560 },
-    'koosalli falls trek': { lat: 13.8790, lng: 74.6850 }
+    'koosalli falls trek': { lat: 13.8790, lng: 74.6850 },
+
+    'arbi falls': { lat: 13.3450, lng: 74.7920 },
+    'arbi falls (manipal hidden falls)': { lat: 13.3450, lng: 74.7920 },
+    'kemmannu kayaking & backwater adventure': { lat: 13.4020, lng: 74.7210 },
+    'kemmannu kayaking': { lat: 13.4020, lng: 74.7210 },
+    'jogi gundi falls (agumbe trail)': { lat: 13.5010, lng: 75.0930 },
+    'jogi gundi falls': { lat: 13.5010, lng: 75.0930 },
+
+    'canara mall (manipal)': { lat: 13.3480, lng: 74.7780 },
+    'canara mall': { lat: 13.3480, lng: 74.7780 },
+    'city centre mall (udupi)': { lat: 13.3390, lng: 74.7500 },
+    'time square mall (udupi)': { lat: 13.3450, lng: 74.7650 },
+    'time square mall': { lat: 13.3450, lng: 74.7650 },
+
+    'manipal lake (mannapalla lake)': { lat: 13.3510, lng: 74.7960 },
+    'manipal lake': { lat: 13.3510, lng: 74.7960 },
+    'mannapalla lake': { lat: 13.3510, lng: 74.7960 },
+    'delta beach (pithrody st. mary\'s island backwaters)': { lat: 13.3880, lng: 74.6890 },
+    'delta beach': { lat: 13.3880, lng: 74.6890 },
+    'hangarkatta backwaters & river cruise': { lat: 13.4350, lng: 74.6980 },
+    'hangarkatta': { lat: 13.4350, lng: 74.6980 },
+
+    'egg sunday (end point road)': { lat: 13.3560, lng: 74.7910 },
+    'egg sunday': { lat: 13.3560, lng: 74.7910 },
+    'hakkim mess / hotel hakkim': { lat: 13.3520, lng: 74.7880 },
+    'hakkim mess': { lat: 13.3520, lng: 74.7880 },
+    'dollops restaurant': { lat: 13.3515, lng: 74.7870 },
+    'dollops': { lat: 13.3515, lng: 74.7870 },
+    'scirocco / eye of the needle cafe': { lat: 13.3540, lng: 74.7890 },
+    'scirocco': { lat: 13.3540, lng: 74.7890 },
+
+    'dr. t.m.a. pai museum & planetarium': { lat: 13.3530, lng: 74.7860 },
+    'corporation bank heritage museum (coin museum), udupi': { lat: 13.3400, lng: 74.7510 },
+    'smriti bhavan museum (dr. t.m.a. pai house)': { lat: 13.3570, lng: 74.7920 },
+
+    'gadbad ice cream': { lat: 13.3410, lng: 74.7520 },
+    'ghee roast': { lat: 13.3520, lng: 74.7880 },
+    'neer dosa': { lat: 13.3410, lng: 74.7520 },
+    'mangalore bun': { lat: 13.3410, lng: 74.7520 }
 };
 
 const mangaloreCoordinates = cityCoordinates;
 
 function getCityFallbackCoords(cityId) {
     if (cityId === 'bangalore') return { lat: 12.9716, lng: 77.5946 };
-    if (cityId === 'mysuru') return { lat: 12.3082, lng: 76.6520 };
+    if (cityId === 'mysuru' || cityId === 'mysuru_east_west') return { lat: 12.3082, lng: 76.6520 };
     if (cityId === 'kodagu') return { lat: 12.4244, lng: 75.7382 };
     if (cityId === 'chikkamagaluru') return { lat: 13.3167, lng: 75.7667 };
     if (cityId === 'manipal') return { lat: 13.3525, lng: 74.7876 };
     return { lat: 12.8700, lng: 74.8800 }; // Mangaluru
 }
 
-window.handleExplore = function (event, placeName, cityId = currentCityId) {
+window.handleExplore = function(event, placeName, cityId = currentCityId) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -4571,13 +4611,13 @@ window.handleExplore = function (event, placeName, cityId = currentCityId) {
     }, 2000);
 
     navigator.geolocation.getCurrentPosition(
-        function (position) {
+        function(position) {
             if (resolved) return;
             resolved = true;
             clearTimeout(fallbackTimeout);
             calculateAndOpen(position.coords.latitude, position.coords.longitude);
         },
-        function (error) {
+        function(error) {
             if (resolved) return;
             resolved = true;
             clearTimeout(fallbackTimeout);
@@ -4594,10 +4634,10 @@ window.handleExplore = function (event, placeName, cityId = currentCityId) {
         const R = 6371; // Earth radius in KM
         const dLat = (destCoords.lat - userLat) * Math.PI / 180;
         const dLng = (destCoords.lng - userLng) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(userLat * Math.PI / 180) * Math.cos(destCoords.lat * Math.PI / 180) *
-            Math.sin(dLng / 2) * Math.sin(dLng / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.cos(userLat * Math.PI / 180) * Math.cos(destCoords.lat * Math.PI / 180) *
+                  Math.sin(dLng/2) * Math.sin(dLng/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         const straightDistance = R * c;
 
         // Multiply by 1.25 for typical driving routing factor in India
@@ -4610,8 +4650,17 @@ window.handleExplore = function (event, placeName, cityId = currentCityId) {
     }
 };
 
-window.handleMangaloreExplore = function (event, placeName) {
+window.handleMangaloreExplore = function(event, placeName) {
     window.handleExplore(event, placeName, currentCityId);
+};
+
+window.handleCardClick = function(event, placeName, cityId = currentCityId) {
+    if (event && event.target) {
+        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon, button, a')) {
+            return;
+        }
+    }
+    window.handleExplore(event, placeName, cityId);
 };
 
 // Helper to show modern non-intrusive Toast notifications
@@ -4628,7 +4677,7 @@ function showGeoToast(message) {
     `;
     document.body.insertAdjacentHTML('beforeend', toastHTML);
     const toast = document.getElementById('geo-toast-alert');
-
+    
     // Smooth entrance
     setTimeout(() => {
         toast.classList.add('active');
@@ -4823,12 +4872,75 @@ const cityPlaceIds = {
     'hebbe falls': 'ChIJiV5G22x5rjsR-k49Qv0U5H4',
     'coffee plantations': 'ChIJ4d6W_hQprzsR8P2J2sQ3s2o',
 
-    // Manipal
+    // Manipal Viewpoints & Lakes
+    'end point swarna river viewpoint': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
     'end point park': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
+    'manipal end point park': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
+    'mannapalla lake park': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'mannapalla lake': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'manipal lake': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'kemmannu hanging bridge': 'ChIJO0M_pP--vzsRwW0_H91-lL',
+    'delta beach (bengre confluence)': 'ChIJN0L_oO--vzsRvV0_G92-mM',
+    'delta beach': 'ChIJN0L_oO--vzsRvV0_G92-mM',
+
+    // Manipal Cafes & Hangouts
+    'the egg factory': 'ChIJM0K_nN--vzsRuU0_F93-nN',
+    'egg factory': 'ChIJM0K_nN--vzsRuU0_F93-nN',
+    'eye of the needle cafe': 'ChIJL0J_mM--vzsRtT0_E94-oO',
+    'dollops restaurant': 'ChIJK0I_lL--vzsRsS0_D95-pP',
+    'dollops': 'ChIJK0I_lL--vzsRsS0_D95-pP',
+    'snack shack': 'ChIJJ0H_kK--vzsRrR0_C96-qQ',
+
+    // Manipal Museums
+    'hasta shilpa heritage village museum': 'ChIJK-m4X_2-vzsR-a-p6193s6k',
     'hasta shilpa heritage village': 'ChIJK-m4X_2-vzsR-a-p6193s6k',
     'anatomy museum (map)': 'ChIJJ-m4X_2-vzsR-a-p6193s6k',
-    'venugopal temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'manipal museum of anatomy & pathology (map)': 'ChIJJ-m4X_2-vzsR-a-p6193s6k',
+    'dr. t.m.a. pai museum & planetarium': 'ChIJH0F_iI--vzsRpP0_A98-sS',
+    'corporation bank heritage museum (coin museum), udupi': 'ChIJG0E_hH--vzsRoO0_Z99-tT',
+    'corporation bank heritage museum': 'ChIJG0E_hH--vzsRoO0_Z99-tT',
+    'smriti bhavan museum (dr. t.m.a. pai house)': 'ChIJF0D_gG--vzsRnN0_Y00-uU',
+    'smriti bhavan museum': 'ChIJF0D_gG--vzsRnN0_Y00-uU',
 
+    // Manipal Beaches & Temples
+    'venugopal temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'malpe beach': 'ChIJw0s43Z-_vzsR9c2_M80-aA',
+    'kapu beach': 'ChIJY4S_vV--vzsR8d1_N91-bB',
+    'padukere beach': 'ChIJX3T_uU--vzsR7e0_O82-cC',
+    'hoode beach': 'ChIJW2U_vV--vzsR6e0_P83-dD',
+    'mattu beach': 'ChIJV1T_uU--vzsR5d0_O84-eE',
+    'udupi shri krishna matha': 'ChIJ9T6Y27-_vzsR6f-P-93s6k',
+    'sri venugopala temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'sri venugopala temple (mit campus)': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'kadiyali shri mahishamardini temple': 'ChIJGf1_1vdApzsRkkSw_V8lJWs',
+    'kadiyali temple': 'ChIJGf1_1vdApzsRkkSw_V8lJWs',
+    'shri indrani panchadurga parameshwari temple': 'ChIJHf1_1tdApzsRlkSw_V8lJWs',
+    'indrani temple': 'ChIJHf1_1tdApzsRlkSw_V8lJWs',
+    'shivapady sri umamaheshwara temple': 'ChIJIf1_1rdApzsRmkSw_V8lJWs',
+    // Manipal Trekking Trails
+    'kudremukh peak trek': 'ChIJU0S_vV--vzsR4c0_N85-fF',
+    'kudremukh peak': 'ChIJU0S_vV--vzsR4c0_N85-fF',
+    'kodachadri peak & sunset trek': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'kodachadri peak': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'kodachadri trek': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'narasimha parvatha trek (agumbe)': 'ChIJS0Q_tT--vzsR2a0_L87-hH',
+    'narasimha parvatha': 'ChIJS0Q_tT--vzsR2a0_L87-hH',
+    'kudlu theertha falls trek': 'ChIJR0P_sS--vzsR1Z0_K88-iI',
+    'kudlu theertha': 'ChIJR0P_sS--vzsR1Z0_K88-iI',
+    'koosalli falls trek': 'ChIJQ0O_rR--vzsR0Y0_J89-jJ',
+    'koosalli falls': 'ChIJQ0O_rR--vzsR0Y0_J89-jJ',
+
+    // Manipal Waterfalls & Malls
+    'arbi falls': 'ChIJA1B2C3-_vzsR5e-Q-84t7l',
+    'arbi falls (manipal hidden falls)': 'ChIJA1B2C3-_vzsR5e-Q-84t7l',
+    'kemmannu kayaking & backwater adventure': 'ChIJB2C3D4-_vzsR4d-R-75u8m',
+    'kemmannu kayaking': 'ChIJB2C3D4-_vzsR4d-R-75u8m',
+    'jogi gundi falls (agumbe trail)': 'ChIJE0C_fF--vzsRmM0_X01-vV',
+    'canara mall (manipal)': 'ChIJD4E5F6-_vzsR2b-T-55w0o',
+    'canara mall': 'ChIJD4E5F6-_vzsR2b-T-55w0o',
+    'city centre mall (udupi)': 'ChIJCf1_11dApzsRhkSw_V8lJWs',
+    'time square mall (udupi)': 'ChIJD0B_eE--vzsRlL0_W02-wW',
+    'time square mall': 'ChIJD0B_eE--vzsRlL0_W02-wW',
 
     // Zoo fallback for Mysuru
     'zoo': 'ChIJa-7L3t8XrjsR5fvOQ4z6nI0'
@@ -4839,9 +4951,9 @@ const mangalorePlaceIds = cityPlaceIds;
 // Fuzzy / Robust helper to find coordinate matches
 function getCityCoords(placeName, cityId) {
     if (!placeName) return getCityFallbackCoords(cityId);
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleaned = clean(placeName);
-
+    
     // 1. Exact match
     for (const key of Object.keys(cityCoordinates)) {
         if (clean(key) === cleaned) return cityCoordinates[key];
@@ -4857,9 +4969,9 @@ function getCityCoords(placeName, cityId) {
 // Fuzzy / Robust helper to find Place ID matches
 function getCityPlaceId(placeName, cityId) {
     if (!placeName) return getCityFallbackPlaceId(cityId);
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleaned = clean(placeName);
-
+    
     // 1. Exact match
     for (const key of Object.keys(cityPlaceIds)) {
         if (clean(key) === cleaned) return cityPlaceIds[key];
@@ -4885,16 +4997,19 @@ function getCityName(cityId) {
 
 function generateDynamicMockReviews(placeName, cityId) {
     const cityName = getCityName(cityId);
-
-    // Seeded random-ish rating and count based on name length so it's stable for each place
-    const seed = placeName.length;
+    
+    // Seeded rating and count based on character hash so it is unique and stable for each place
+    let seed = 0;
+    for (let i = 0; i < placeName.length; i++) {
+        seed = (seed * 31 + placeName.charCodeAt(i)) % 1000007;
+    }
     const rating = (4.3 + (seed % 6) * 0.1).toFixed(1);
-    const reviewsCount = 1200 + (seed % 10) * 1350 + (seed % 3) * 312;
-
+    const reviewsCount = 1200 + (seed % 10) * 1350 + (seed % 7) * 312;
+    
     const address = `${placeName}, ${cityName}, Karnataka, India`;
     const cleanName = placeName.toLowerCase().replace(/[^a-z0-9]/g, '');
     const website = `https://www.karnatakatourism.org/tourist-place/${cleanName}`;
-
+    
     const weekdayText = [
         "Monday: 9:00 AM – 6:00 PM",
         "Tuesday: 9:00 AM – 6:00 PM",
@@ -4904,7 +5019,7 @@ function generateDynamicMockReviews(placeName, cityId) {
         "Saturday: 9:00 AM – 6:00 PM",
         "Sunday: 9:00 AM – 6:00 PM"
     ];
-
+    
     const reviews = [
         {
             author_name: "Amit Rao",
@@ -4946,9 +5061,9 @@ function generateDynamicMockReviews(placeName, cityId) {
 // Fuzzy / Robust helper to find mock reviews data matches
 function getMockReviewsData(destName, cityId) {
     if (!destName) return null;
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleanedDest = clean(destName);
-
+    
     // 1. Exact match
     for (const key of Object.keys(mockReviewsData)) {
         if (clean(key) === cleanedDest) return mockReviewsData[key];
@@ -5439,6 +5554,640 @@ const mockReviewsData = {
                 text: 'Stunning temple complex with rich history. The stone carvings are incredibly intricate. Guide services are highly recommended to understand the stories behind the architecture.'
             }
         ]
+    },
+    'hoode beach': {
+        rating: 4.8,
+        user_ratings_total: 4820,
+        formatted_address: 'Hoode Beach Rd, Tonse West, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 0001',
+        website: 'https://www.karnatakatourism.org/tourist-place/hoode-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i.ytimg.com/vi/M0QHbMyTCDo/maxresdefault.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Varun Shetty',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'Serene and scenic beach near Bengre peninsula. Where the river meets the sea! Excellent sunset views and far less crowded than Malpe.'
+            },
+            {
+                author_name: 'Divya Naik',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 weeks ago',
+                text: 'Peaceful coastline perfect for long walks with friends. The sea breeze and golden sunset here are simply magical.'
+            }
+        ]
+    },
+    'mattu beach': {
+        rating: 4.6,
+        user_ratings_total: 3450,
+        formatted_address: 'Mattu Beach Road, Katapadi, Udupi, Manipal, Karnataka 574105',
+        formatted_phone_number: '+91 820 252 0002',
+        website: 'https://www.karnatakatourism.org/tourist-place/mattu-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Prashanth Bhat',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'Famous for bioluminescence sightings during post-monsoon nights and serene coconut palm tree backdrop. Truly an unspoiled gem near Udupi.'
+            },
+            {
+                author_name: 'Kavya Hegde',
+                profile_photo_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100',
+                rating: 4,
+                relative_time_description: '1 month ago',
+                text: 'Quiet, clean, and extremely peaceful shoreline. Great for evening relaxation away from commercial crowds.'
+            }
+        ]
+    },
+    'sri venugopala temple': {
+        rating: 4.8,
+        user_ratings_total: 8900,
+        formatted_address: 'MIT Campus, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2323',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Aditya Shenoy',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'Beautiful serene temple situated right inside the MIT campus green lawns. Very quiet and peaceful in the evenings.'
+            }
+        ]
+    },
+    'kadiyali shri mahishamardini temple': {
+        rating: 4.8,
+        user_ratings_total: 6400,
+        formatted_address: 'Kadiyali, Udupi, Manipal, Karnataka 576102',
+        formatted_phone_number: '+91 820 252 1100',
+        website: 'https://kadiyalitemple.com/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:30 PM',
+                'Tuesday: 6:00 AM – 8:30 PM',
+                'Wednesday: 6:00 AM – 8:30 PM',
+                'Thursday: 6:00 AM – 8:30 PM',
+                'Friday: 6:00 AM – 8:30 PM',
+                'Saturday: 6:00 AM – 8:30 PM',
+                'Sunday: 6:00 AM – 8:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Sharada K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 weeks ago',
+                text: 'Ancient 1200-year-old Goddess shrine. Beautiful stone architecture and divine vibration.'
+            }
+        ]
+    },
+    'shri indrani panchadurga parameshwari temple': {
+        rating: 4.7,
+        user_ratings_total: 5200,
+        formatted_address: 'Indrani, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 0444',
+        website: 'https://indranitemple.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Rajesh Pai',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 month ago',
+                text: 'Peaceful hill shrine surrounded by natural greenery. Highly sacred Durga temple near Manipal.'
+            }
+        ]
+    },
+    'shivapady sri umamaheshwara temple': {
+        rating: 4.7,
+        user_ratings_total: 4150,
+        formatted_address: 'Shivapady, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 1212',
+        website: 'https://shivapady.com/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Suhas Nayak',
+                profile_photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '5 days ago',
+                text: 'Tranquil Shiva temple famous for Atirudra Mahayajna and peaceful temple compound.'
+            }
+        ]
+    },
+    'end point swarna river viewpoint': {
+        rating: 4.9,
+        user_ratings_total: 8400,
+        formatted_address: 'End Point Rd, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2000',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 5:00 AM – 7:30 PM',
+                'Tuesday: 5:00 AM – 7:30 PM',
+                'Wednesday: 5:00 AM – 7:30 PM',
+                'Thursday: 5:00 AM – 7:30 PM',
+                'Friday: 5:00 AM – 7:30 PM',
+                'Saturday: 5:00 AM – 7:30 PM',
+                'Sunday: 5:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/manipal/mmt/activities/m_Manipal%20End%20Point%20Park-3_l_399_532.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Nikhil Kumar',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 days ago',
+                text: 'Breathtaking clifftop views of the Swarna river valley and Western Ghats. Best spot for sunset in Manipal!'
+            }
+        ]
+    },
+    'mannapalla lake park': {
+        rating: 4.6,
+        user_ratings_total: 6200,
+        formatted_address: 'Manipal Lake Rd, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 0000',
+        website: 'https://www.karnatakatourism.org/tourist-place/manipal-lake',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:00 PM',
+                'Tuesday: 6:00 AM – 7:00 PM',
+                'Wednesday: 6:00 AM – 7:00 PM',
+                'Thursday: 6:00 AM – 7:00 PM',
+                'Friday: 6:00 AM – 7:00 PM',
+                'Saturday: 6:00 AM – 7:00 PM',
+                'Sunday: 6:00 AM – 7:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://th-i.thgim.com/public/news/cities/Mangalore/20mb2f/article70274376.ece/alternates/FREE_1200/IMG_3180.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Rohan Deshmukh',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '4 days ago',
+                text: 'Beautiful 3 km paved walking track surrounding a natural lake. Ideal for morning walks and bird watching.'
+            }
+        ]
+    },
+    'kemmannu hanging bridge': {
+        rating: 4.7,
+        user_ratings_total: 7500,
+        formatted_address: 'Kemmannu, Tonse, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 8888',
+        website: 'https://www.karnatakatourism.org/tourist-place/kemmannu-hanging-bridge',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:00 PM',
+                'Tuesday: 6:00 AM – 7:00 PM',
+                'Wednesday: 6:00 AM – 7:00 PM',
+                'Thursday: 6:00 AM – 7:00 PM',
+                'Friday: 6:00 AM – 7:00 PM',
+                'Saturday: 6:00 AM – 7:00 PM',
+                'Sunday: 6:00 AM – 7:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://d3sftlgbtusmnv.cloudfront.net/blog/wp-content/uploads/2024/10/Kemmannu-Hanging-Bridge.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Ananya Rao',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 week ago',
+                text: 'Picturesque wooden suspension bridge over coconut-fringed backwaters. Great spot for photography and kayaking.'
+            }
+        ]
+    },
+    'delta beach (bengre confluence)': {
+        rating: 4.8,
+        user_ratings_total: 5600,
+        formatted_address: 'Bengre Peninsula, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 9999',
+        website: 'https://www.karnatakatourism.org/tourist-place/delta-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/additionalttdimages/mmt/activities/m_Delta_Beach_1_l_360_640.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Vikram Prabhu',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'Spectacular peninsula where Swarna River meets the Arabian Sea. Enjoy fresh sea food and calm water views.'
+            }
+        ]
+    },
+    'hasta shilpa heritage village museum': {
+        rating: 4.9,
+        user_ratings_total: 9150,
+        formatted_address: 'Christ School Road, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 4555',
+        website: 'https://hastashilpatrust.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 10:00 AM – 5:00 PM',
+                'Tuesday: 10:00 AM – 5:00 PM',
+                'Wednesday: 10:00 AM – 5:00 PM',
+                'Thursday: 10:00 AM – 5:00 PM',
+                'Friday: 10:00 AM – 5:00 PM',
+                'Saturday: 10:00 AM – 5:00 PM',
+                'Sunday: 10:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i.ytimg.com/vi/rLaOUhfYWzI/maxresdefault.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Dr. Ramesh Rao',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'A world-class open air heritage museum featuring 26 restored South Indian traditional houses. An absolute masterpiece of heritage preservation.'
+            }
+        ]
+    },
+    'manipal museum of anatomy & pathology (map)': {
+        rating: 4.8,
+        user_ratings_total: 7800,
+        formatted_address: 'KMC Campus, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2200',
+        website: 'https://manipal.edu/kmc-manipal/museum.html',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 8:00 AM – 6:00 PM',
+                'Tuesday: 8:00 AM – 6:00 PM',
+                'Wednesday: 8:00 AM – 6:00 PM',
+                'Thursday: 8:00 AM – 6:00 PM',
+                'Friday: 8:00 AM – 6:00 PM',
+                'Saturday: 8:00 AM – 6:00 PM',
+                'Sunday: 8:00 AM – 6:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://www.manipal.edu/content/dam/manipal/mu/kmc-manipal/images/galleryImage/KMCMpltrial/m9.JPG' }
+        ],
+        reviews: [
+            {
+                author_name: 'Priya Sundaram',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'One of Asia\'s largest medical museums. Over 3000 anatomical specimens displayed meticulously. Mind-blowing for students and visitors!'
+            }
+        ]
+    },
+    'dr. t.m.a. pai museum & planetarium': {
+        rating: 4.5,
+        user_ratings_total: 4200,
+        formatted_address: 'University Admin Block, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2400',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 9:30 AM – 5:30 PM',
+                'Tuesday: 9:30 AM – 5:30 PM',
+                'Wednesday: 9:30 AM – 5:30 PM',
+                'Thursday: 9:30 AM – 5:30 PM',
+                'Friday: 9:30 AM – 5:30 PM',
+                'Saturday: 9:30 AM – 5:30 PM',
+                'Sunday: 9:30 AM – 5:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Arun K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 4,
+                relative_time_description: '2 weeks ago',
+                text: 'Interactive science museum and digital planetarium documenting the founding history of modern Manipal.'
+            }
+        ]
+    },
+    'corporation bank heritage museum (coin museum), udupi': {
+        rating: 4.7,
+        user_ratings_total: 3900,
+        formatted_address: 'Founder Branch, KM Marg, Udupi, Manipal, Karnataka 576101',
+        formatted_phone_number: '+91 820 252 1444',
+        website: 'https://www.karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 10:00 AM – 5:00 PM',
+                'Tuesday: 10:00 AM – 5:00 PM',
+                'Wednesday: 10:00 AM – 5:00 PM',
+                'Thursday: 10:00 AM – 5:00 PM',
+                'Friday: 10:00 AM – 5:00 PM',
+                'Saturday: 10:00 AM – 5:00 PM',
+                'Sunday: Closed'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i0.wp.com/rashminotes.com/wp-content/uploads/2019/03/c1.png?resize=663%2C361' }
+        ],
+        reviews: [
+            {
+                author_name: 'Gaurav Jain',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '5 days ago',
+                text: 'Rare numismatic collection showcasing ancient Indian coins from 400 BC to modern currency. Highly educational!'
+            }
+        ]
+    },
+    'smriti bhavan museum (dr. t.m.a. pai house)': {
+        rating: 4.6,
+        user_ratings_total: 3100,
+        formatted_address: 'End Point Road, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2100',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 9:30 AM – 5:30 PM',
+                'Tuesday: 9:30 AM – 5:30 PM',
+                'Wednesday: 9:30 AM – 5:30 PM',
+                'Thursday: 9:30 AM – 5:30 PM',
+                'Friday: 9:30 AM – 5:30 PM',
+                'Saturday: 9:30 AM – 5:30 PM',
+                'Sunday: 9:30 AM – 5:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Sunita Shenoy',
+                profile_photo_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 month ago',
+                text: 'The preserved residence of visionary Dr. T.M.A. Pai. Inspiring photo archives of Manipal’s early days.'
+            }
+        ]
+    },
+    'kudremukh peak trek': {
+        rating: 4.9,
+        user_ratings_total: 11200,
+        formatted_address: 'Kudremukh National Park, Chikkamagaluru / Udupi Region, Karnataka 577142',
+        formatted_phone_number: '+91 8263 274 221',
+        website: 'https://aranya.gov.in/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 5:00 PM',
+                'Tuesday: 6:00 AM – 5:00 PM',
+                'Wednesday: 6:00 AM – 5:00 PM',
+                'Thursday: 6:00 AM – 5:00 PM',
+                'Friday: 6:00 AM – 5:00 PM',
+                'Saturday: 6:00 AM – 5:00 PM',
+                'Sunday: 6:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/additionalttdimages/mmt/activities/m_Kudremukh_1_l_360_640.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Varun Hegde',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 days ago',
+                text: 'Horse-face shaped peak offering 22 km trail through lush rolling Shola grassland hills. Unmatched trekking experience in Western Ghats!'
+            }
+        ]
+    },
+    'kodachadri peak & sunset trek': {
+        rating: 4.8,
+        user_ratings_total: 9800,
+        formatted_address: 'Mookambika Wildlife Sanctuary, Shimoga / Udupi Border, Karnataka 577452',
+        formatted_phone_number: '+91 8183 226 220',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 6:00 PM',
+                'Tuesday: 6:00 AM – 6:00 PM',
+                'Wednesday: 6:00 AM – 6:00 PM',
+                'Thursday: 6:00 AM – 6:00 PM',
+                'Friday: 6:00 AM – 6:00 PM',
+                'Saturday: 6:00 AM – 6:00 PM',
+                'Sunday: 6:00 AM – 6:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Karthik Bhat',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '4 days ago',
+                text: 'Famous mountain peak trail through dense rainforests and Hidlumane Falls. Majestic sunset view over Arabian Sea coast.'
+            }
+        ]
+    },
+    'narasimha parvatha trek (agumbe)': {
+        rating: 4.7,
+        user_ratings_total: 5400,
+        formatted_address: 'Agumbe Rainforest Reserve, Malandur, Karnataka 577411',
+        formatted_phone_number: '+91 8183 228 111',
+        website: 'https://agumberainforest.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 5:00 PM',
+                'Tuesday: 6:00 AM – 5:00 PM',
+                'Wednesday: 6:00 AM – 5:00 PM',
+                'Thursday: 6:00 AM – 5:00 PM',
+                'Friday: 6:00 AM – 5:00 PM',
+                'Saturday: 6:00 AM – 5:00 PM',
+                'Sunday: 6:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Deepak Naik',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 week ago',
+                text: 'Highest peak in Agumbe rainforest range (826m). Thrilling jungle trek with Barkana falls viewpoint.'
+            }
+        ]
+    },
+    'kudlu theertha falls trek': {
+        rating: 4.7,
+        user_ratings_total: 4600,
+        formatted_address: 'Someshwara Wildlife Sanctuary, Hebri, Karnataka 576112',
+        formatted_phone_number: '+91 820 252 5000',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 8:00 AM – 4:00 PM',
+                'Tuesday: 8:00 AM – 4:00 PM',
+                'Wednesday: 8:00 AM – 4:00 PM',
+                'Thursday: 8:00 AM – 4:00 PM',
+                'Friday: 8:00 AM – 4:00 PM',
+                'Saturday: 8:00 AM – 4:00 PM',
+                'Sunday: 8:00 AM – 4:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Meghna Shetty',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 weeks ago',
+                text: 'Spectacular 300-ft waterfall plunging into a pristine pool inside deep forest. 4 km jungle trek from base camp.'
+            }
+        ]
+    },
+    'koosalli falls trek': {
+        rating: 4.6,
+        user_ratings_total: 3800,
+        formatted_address: 'Koosalli Village, Byndoor, Udupi District, Karnataka 576214',
+        formatted_phone_number: '+91 820 252 6111',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 7:00 AM – 5:00 PM',
+                'Tuesday: 7:00 AM – 5:00 PM',
+                'Wednesday: 7:00 AM – 5:00 PM',
+                'Thursday: 7:00 AM – 5:00 PM',
+                'Friday: 7:00 AM – 5:00 PM',
+                'Saturday: 7:00 AM – 5:00 PM',
+                'Sunday: 7:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Suhas K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: '6-tiered waterfall hidden inside dense forest. Adventurous rocky trail for trek enthusiasts!'
+            }
+        ]
     }
 };
 
@@ -5465,7 +6214,7 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     }
 
     const placeId = getCityPlaceId(destName, cityId);
-
+    
     // Resolve the proper city name for Google Maps search
     let cityName = 'Mysore';
     if (cityId === 'mangaluru') cityName = 'Mangaluru';
@@ -5473,14 +6222,30 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     else if (cityId === 'mysuru') cityName = 'Mysore';
     else if (cityId === 'kodagu') cityName = 'Kodagu';
     else if (cityId === 'chikkamagaluru') cityName = 'Chikkamagaluru';
+    else if (cityId === 'manipal') cityName = 'Manipal';
+    
+    function getCleanMapsQueryName(destName, cityName) {
+        if (!destName) return cityName || 'Karnataka';
+        let clean = destName.replace(/\([^)]*\)/g, '').split('/')[0].trim();
+        const lower = clean.toLowerCase();
 
-    // Conditional URL generation based on whether the Place ID is a placeholder or real.
-    // Real Place IDs (like Mysore Palace, Kadri Temple) resolve via the official Google Maps search query scheme with query_place_id.
-    // Placeholder/simulated Place IDs fallback to a clean name+city search query.
-    const isPlaceholder = !placeId || placeId.includes('kSw_') || placeId.includes('fvO') || placeId.includes('ApzsR');
-    const mapsUrl = isPlaceholder
-        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destName + ', ' + cityName)}`
-        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destName + ', ' + cityName)}&query_place_id=${placeId}`;
+        if (lower.includes('end point swarna river viewpoint')) clean = 'End Point Park';
+        else if (lower.includes('delta beach')) clean = 'Delta Beach Bengre';
+        else if (lower.includes('mannapalla lake')) clean = 'Mannapalla Lake';
+        else if (lower.includes('kemmannu hanging bridge')) clean = 'Kemmannu Hanging Bridge';
+        else if (lower.includes('kudremukh peak')) clean = 'Kudremukh Peak';
+        else if (lower.includes('kodachadri')) clean = 'Kodachadri Peak';
+        else if (lower.includes('narasimha parvatha')) clean = 'Narasimha Parvatha Agumbe';
+        else if (lower.includes('kudlu theertha')) clean = 'Kudlu Theertha Falls';
+        else if (lower.includes('koosalli falls')) clean = 'Koosalli Water Falls';
+        else if (lower.includes('garuda mall')) clean = 'Garuda Mall';
+        else if (lower.includes('mysore palace')) clean = 'Mysore Palace';
+
+        return `${clean}, ${cityName}`;
+    }
+
+    const searchQuery = getCleanMapsQueryName(destName, cityName);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
 
     // Generate Drawer skeleton HTML immediately (loading state)
     const drawerHTML = `
@@ -5589,12 +6354,12 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
                     data.website = mockData.website || data.website;
                     data.opening_hours = mockData.opening_hours || data.opening_hours;
                     data.reviews = mockData.reviews;
-                    data.rating_distribution = {
-                        5: Math.round(mockData.user_ratings_total * 0.7),
-                        4: Math.round(mockData.user_ratings_total * 0.2),
-                        3: Math.round(mockData.user_ratings_total * 0.05),
-                        2: Math.round(mockData.user_ratings_total * 0.03),
-                        1: Math.round(mockData.user_ratings_total * 0.02)
+                    data.rating_distribution = { 
+                        5: Math.round(mockData.user_ratings_total * 0.7), 
+                        4: Math.round(mockData.user_ratings_total * 0.2), 
+                        3: Math.round(mockData.user_ratings_total * 0.05), 
+                        2: Math.round(mockData.user_ratings_total * 0.03), 
+                        1: Math.round(mockData.user_ratings_total * 0.02) 
                     };
                 }
 
@@ -5623,7 +6388,7 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
             const apiContent = document.getElementById('gmaps-api-content');
             if (apiContent) {
                 apiContent.style.display = 'flex';
-
+                
                 // Fallback to mock data if available
                 const mockData = getMockReviewsData(destName, cityId);
                 if (mockData) {
@@ -5639,12 +6404,12 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
                         opening_hours: mockData.opening_hours || null,
                         photos: mockData.photos || [],
                         reviews: mockData.reviews || [],
-                        rating_distribution: {
-                            5: Math.round(mockData.user_ratings_total * 0.7),
-                            4: Math.round(mockData.user_ratings_total * 0.2),
-                            3: Math.round(mockData.user_ratings_total * 0.05),
-                            2: Math.round(mockData.user_ratings_total * 0.03),
-                            1: Math.round(mockData.user_ratings_total * 0.02)
+                        rating_distribution: { 
+                            5: Math.round(mockData.user_ratings_total * 0.7), 
+                            4: Math.round(mockData.user_ratings_total * 0.2), 
+                            3: Math.round(mockData.user_ratings_total * 0.05), 
+                            2: Math.round(mockData.user_ratings_total * 0.03), 
+                            1: Math.round(mockData.user_ratings_total * 0.02) 
                         }
                     };
                     renderRealPlacesDetails(apiContent, data);
@@ -5719,8 +6484,8 @@ function renderRealPlacesDetails(container, data) {
 
 // Helper: Render setup instructions card if Google Places API is not connected
 function renderFallbackSetupCard(container, placeId, customErrorMsg) {
-    const errorSection = customErrorMsg
-        ? `<p style="color: #e74c3c; font-size: 0.85rem; font-weight: 600; margin: 0 0 0.5rem 0;">⚠️ Error Details: ${customErrorMsg}</p>`
+    const errorSection = customErrorMsg 
+        ? `<p style="color: #e74c3c; font-size: 0.85rem; font-weight: 600; margin: 0 0 0.5rem 0;">⚠️ Error Details: ${customErrorMsg}</p>` 
         : '';
 
     container.innerHTML = `
@@ -5769,7 +6534,7 @@ function renderFallbackSetupCard(container, placeId, customErrorMsg) {
     `;
 }
 
-window.showFoodPopup = function (name, img, price) {
+window.showFoodPopup = function(name, img, price) {
     const existing = document.getElementById('food-popup-overlay');
     if (existing) existing.remove();
 
@@ -5798,14 +6563,14 @@ window.showFoodPopup = function (name, img, price) {
                     <div class="popup-scroller" style="overflow: hidden; white-space: nowrap; flex-grow: 1; background: #F0FDF4; border-radius: 8px; padding: 0.25rem 0;">
                         <div class="popup-scroller-inner" style="display: inline-flex; gap: 0.75rem; animation: marquee 12s linear infinite;">
                             ${[...allFoods, ...allFoods].map((food, idx) => {
-            const actualIdx = idx % allFoods.length;
-            return `
+                                const actualIdx = idx % allFoods.length;
+                                return `
                                 <div class="popup-food-card popup-card-${actualIdx}" onclick="selectPopupFood(${actualIdx})" style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(22, 163, 74, 0.15); cursor: pointer; flex-shrink: 0; transition: all 0.2s ease;">
                                     <img src="${food.img}" alt="${food.name}" loading="lazy" decoding="async" style="width: 28px; height: 28px; object-fit: cover; border-radius: 4px;">
                                     <span style="font-size: 0.7rem; font-weight: 600; color: #2D3748;">${food.name}</span>
                                 </div>
                                 `;
-        }).join('')}
+                            }).join('')}
                         </div>
                     </div>
                     ${hasMultipleFoods ? `<button class="scroller-nav-btn next" id="scroller-next-btn" aria-label="Next specialty">&rsaquo;</button>` : ''}
@@ -5834,7 +6599,7 @@ window.showFoodPopup = function (name, img, price) {
     `;
 
     document.body.insertAdjacentHTML('beforeend', popupHTML);
-
+    
     const overlay = document.getElementById('food-popup-overlay');
     const closeBtn = document.getElementById('food-popup-close');
     const prevBtn = document.getElementById('popup-prev-btn');
@@ -5847,7 +6612,7 @@ window.showFoodPopup = function (name, img, price) {
     let popupAutoPlayInterval;
 
     // Helper function to update active popup content
-    window.selectPopupFood = function (index) {
+    window.selectPopupFood = function(index) {
         currentIndex = index;
         const food = allFoods[currentIndex];
         if (!food) return;
@@ -5946,7 +6711,7 @@ function initBestFoodSliders() {
     const sliderCards = document.querySelectorAll('.best-food-slider-card');
     sliderCards.forEach(card => {
         const placeName = card.getAttribute('data-place-name');
-
+        
         // Find place in category data
         let placeData = null;
         for (const cityId of Object.keys(cityCategoryData)) {
@@ -5994,7 +6759,7 @@ function initBestFoodSliders() {
     });
 }
 
-window.handleSliderCardClick = function (event, card) {
+window.handleSliderCardClick = function(event, card) {
     const imgNode = card.querySelector('.food-slider-img');
     const nameNode = card.querySelector('.food-slider-name');
     const priceNode = card.querySelector('.food-slider-price');
@@ -6003,7 +6768,7 @@ window.handleSliderCardClick = function (event, card) {
     }
 };
 
-window.handleSliderNav = function (event, btn, direction) {
+window.handleSliderNav = function(event, btn, direction) {
     event.stopPropagation();
     event.preventDefault();
     const card = btn.closest('.best-food-slider-card');
@@ -6027,9 +6792,9 @@ window.handleSliderNav = function (event, btn, direction) {
     bestFoodSliderIntervals.push(newIntervalId);
 };
 
-window.navigateSliderCard = function (card, direction) {
+window.navigateSliderCard = function(card, direction) {
     const placeName = card.getAttribute('data-place-name');
-
+    
     // Find place data
     let placeData = null;
     for (const cityId of Object.keys(cityCategoryData)) {
@@ -6129,7 +6894,7 @@ function initPlaceImageSliders() {
 }
 
 // Welcome Voice Player Manager
-(function () {
+(function() {
     let welcomeAudio = null;
     let hasPlayed = false;
 
@@ -6263,7 +7028,7 @@ function initPlaceImageSliders() {
     }
 
     // Expose stop welcome audio globally
-    window.stopWelcomeAudio = function () {
+    window.stopWelcomeAudio = function() {
         if (welcomeAudio) {
             welcomeAudio.pause();
             welcomeAudio.currentTime = 0;
@@ -6281,7 +7046,7 @@ function initPlaceImageSliders() {
 // ==========================================
 // Hamburger Menu & Interactive Modals Implementation
 // ==========================================
-(function () {
+(function() {
     const hamburgerBtn = document.getElementById('hamburger-menu-btn');
     const menuDrawer = document.getElementById('menu-drawer');
     const drawerOverlay = document.getElementById('drawer-overlay');
@@ -6295,7 +7060,7 @@ function initPlaceImageSliders() {
     // Toggle Drawer Open/Closed
     function toggleDrawer(open) {
         const shouldOpen = typeof open === 'boolean' ? open : !menuDrawer.classList.contains('active');
-
+        
         if (shouldOpen) {
             hamburgerBtn.classList.add('active');
             menuDrawer.classList.add('active');
@@ -6355,13 +7120,13 @@ function initPlaceImageSliders() {
             `;
             document.body.appendChild(popup);
         }
-
+        
         if (popup.timeoutId) {
             clearTimeout(popup.timeoutId);
         }
-
+        
         popup.classList.add('show');
-
+        
         popup.timeoutId = setTimeout(() => {
             popup.classList.remove('show');
         }, 1800);
@@ -6450,7 +7215,7 @@ function initPlaceImageSliders() {
         }
 
         const utterance = new SpeechSynthesisUtterance(text);
-
+        
         // Find a female voice, prioritizing natural neural voices first
         const voices = window.speechSynthesis.getVoices();
         const femaleVoice = voices.find(voice => {
@@ -6458,22 +7223,22 @@ function initPlaceImageSliders() {
             return name.includes('natural') && (name.includes('aria') || name.includes('samantha') || name.includes('female') || name.includes('en-'));
         }) || voices.find(voice => {
             const name = voice.name.toLowerCase();
-            return name.includes('female') ||
-                name.includes('zira') ||
-                name.includes('samantha') ||
-                name.includes('hazel') ||
-                name.includes('google uk english female') ||
-                name.includes('google us english') ||
-                name.includes('susan') ||
-                name.includes('heera') ||
-                name.includes('haruka') ||
-                (name.includes('microsoft') && (name.includes('zira') || name.includes('en-us')));
+            return name.includes('female') || 
+                   name.includes('zira') || 
+                   name.includes('samantha') || 
+                   name.includes('hazel') ||
+                   name.includes('google uk english female') ||
+                   name.includes('google us english') ||
+                   name.includes('susan') ||
+                   name.includes('heera') ||
+                   name.includes('haruka') ||
+                   (name.includes('microsoft') && (name.includes('zira') || name.includes('en-us')));
         }) || voices.find(voice => voice.lang.startsWith('en'));
 
         if (femaleVoice) {
             utterance.voice = femaleVoice;
         }
-
+        
         utterance.pitch = 1.05; // Slightly higher pitch for a soft, smooth, clear feminine tone
         utterance.rate = 0.88;  // Slightly increased reading speed as requested
         window.speechSynthesis.speak(utterance);
@@ -6795,12 +7560,12 @@ function initPlaceImageSliders() {
                         onSuccess: (data) => {
                             submitBtn.classList.remove('loading');
                             submitBtn.classList.add('success');
-
+                            
                             setTimeout(() => {
                                 // Close the support modal
                                 modal.classList.remove('active');
                                 setTimeout(() => modal.remove(), 400);
-
+                                
                                 // Create and show a standalone "Thank You" popup
                                 const thankYouOverlay = document.createElement('div');
                                 thankYouOverlay.className = 'info-modal-overlay active';
@@ -6808,7 +7573,7 @@ function initPlaceImageSliders() {
                                 thankYouOverlay.style.display = 'flex';
                                 thankYouOverlay.style.opacity = '0';
                                 thankYouOverlay.style.transition = 'opacity 0.4s ease';
-
+                                
                                 // Add keyframes if not exists
                                 if (!document.getElementById('cool-thankyou-anim')) {
                                     const style = document.createElement('style');
@@ -6816,7 +7581,7 @@ function initPlaceImageSliders() {
                                     style.innerHTML = '@keyframes popInText { 0% { transform: scale(0.5) translateY(30px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }';
                                     document.head.appendChild(style);
                                 }
-
+                                
                                 thankYouOverlay.innerHTML = `
                                     <div class="modal-content-container" style="background: rgba(255, 255, 255, 0.95); padding: 3rem 2rem; border-radius: 24px; text-align: center; max-width: 400px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: popInText 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                         <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Thank You!</h2>
@@ -6824,9 +7589,9 @@ function initPlaceImageSliders() {
                                         <button onclick="this.closest('.info-modal-overlay').style.opacity = '0'; setTimeout(() => this.closest('.info-modal-overlay').remove(), 400);" style="background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; box-shadow: 0 8px 20px rgba(131, 56, 236, 0.25); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 25px rgba(131, 56, 236, 0.35)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(131, 56, 236, 0.25)';">Close</button>
                                     </div>
                                 `;
-
+                                
                                 document.body.appendChild(thankYouOverlay);
-
+                                
                                 // Fade in the overlay
                                 requestAnimationFrame(() => {
                                     thankYouOverlay.style.opacity = '1';
@@ -6889,7 +7654,7 @@ function initPlaceImageSliders() {
             init: (modal) => {
                 const body = modal.querySelector('.menu-modal-body');
                 const progress = modal.querySelector('#terms-progress-bar');
-
+                
                 let scrollTicking = false;
                 body.addEventListener('scroll', () => {
                     if (!scrollTicking) {
@@ -7030,13 +7795,13 @@ function initPlaceImageSliders() {
         const clickHandler = (e) => {
             e.preventDefault();
             e.stopPropagation();
-
+            
             // Set active class on header nav link
             document.querySelectorAll('.nav-links .nav-link').forEach(link => link.classList.remove('active'));
             if (navLink) {
                 navLink.classList.add('active');
             }
-
+            
             const config = MENU_ACTIONS[id];
             openInteractiveModal(config.title, config.getHTML(), config.init);
 
@@ -7129,7 +7894,7 @@ function initPlaceImageSliders() {
                         mandatoryOverlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
                         try {
-                            window.Clerk.mountSignIn(signInContainer, {
+                            window.Clerk.mountSignIn(signInContainer, { 
                                 routing: 'hash',
                                 appearance: {
                                     variables: { colorPrimary: 'red' }
@@ -7146,7 +7911,7 @@ function initPlaceImageSliders() {
             window.Clerk.addListener(({ user }) => {
                 updateAuthUI();
             });
-
+            
         } catch (error) {
             console.error('Failed to initialize Clerk:', error);
         }
@@ -7170,9 +7935,9 @@ function initPlaceImageSliders() {
         } else {
             // User is NOT signed in
             if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; 
             if (authNavBtn) {
-                authNavBtn.style.display = 'flex';
+                authNavBtn.style.display = 'flex'; 
                 authNavBtn.classList.remove('logged-in');
                 if (authBtnText) authBtnText.textContent = 'Sign In';
             }
@@ -7192,7 +7957,7 @@ function initPlaceImageSliders() {
                         mandatoryOverlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
                         try {
-                            window.Clerk.mountSignIn(signInContainer, {
+                            window.Clerk.mountSignIn(signInContainer, { 
                                 routing: 'hash',
                                 appearance: {
                                     variables: { colorPrimary: 'red' }
@@ -7222,7 +7987,7 @@ function initPlaceImageSliders() {
                 if (window.Clerk && signInContainer) {
                     try {
                         window.Clerk.unmountSignIn(signInContainer);
-                    } catch (err) { }
+                    } catch (err) {}
                 }
             }
         });
