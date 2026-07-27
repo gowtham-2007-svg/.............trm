@@ -896,7 +896,7 @@ const requestListener = async (req, res) => {
                 const ext = path.extname(targetPath).toLowerCase();
                 const contentType = mimeTypes[ext] || 'application/octet-stream';
                 const headers = { 'Content-Type': contentType };
-                if (ext === '.html') {
+                if (ext === '.html' || ext === '.js' || ext === '.css') {
                     headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate';
                     headers['Pragma'] = 'no-cache';
                     headers['Expires'] = '0';

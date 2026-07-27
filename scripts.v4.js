@@ -4505,8 +4505,10 @@ const cityCoordinates = {
 
     // Manipal
     'end point park': { lat: 13.3592, lng: 74.7936 },
+    'manipal end point park': { lat: 13.3592, lng: 74.7936 },
     'hasta shilpa heritage village': { lat: 13.3512, lng: 74.7865 },
     'anatomy museum (map)': { lat: 13.3533, lng: 74.7850 },
+    'manipal museum of anatomy & pathology (map)': { lat: 13.3533, lng: 74.7850 },
     'venugopal temple': { lat: 13.3550, lng: 74.7900 },
 
     'malpe beach': { lat: 13.3575, lng: 74.7042 },
@@ -4521,11 +4523,53 @@ const cityCoordinates = {
     'shri indrani panchadurga parameshwari temple': { lat: 13.3530, lng: 74.7760 },
     'shivapady sri umamaheshwara temple': { lat: 13.3570, lng: 74.7850 },
 
+    'kudremukh peak trek': { lat: 13.2167, lng: 75.2667 },
     'kudremukh peak': { lat: 13.2167, lng: 75.2667 },
+    'kodachadri peak & sunset trek': { lat: 13.8590, lng: 74.8710 },
+    'kodachadri peak': { lat: 13.8590, lng: 74.8710 },
     'kodachadri trek': { lat: 13.8590, lng: 74.8710 },
     'narasimha parvatha trek (agumbe)': { lat: 13.5042, lng: 75.1225 },
     'kudlu theertha falls trek': { lat: 13.4470, lng: 75.0560 },
-    'koosalli falls trek': { lat: 13.8790, lng: 74.6850 }
+    'koosalli falls trek': { lat: 13.8790, lng: 74.6850 },
+
+    'arbi falls': { lat: 13.3450, lng: 74.7920 },
+    'arbi falls (manipal hidden falls)': { lat: 13.3450, lng: 74.7920 },
+    'kemmannu kayaking & backwater adventure': { lat: 13.4020, lng: 74.7210 },
+    'kemmannu kayaking': { lat: 13.4020, lng: 74.7210 },
+    'jogi gundi falls (agumbe trail)': { lat: 13.5010, lng: 75.0930 },
+    'jogi gundi falls': { lat: 13.5010, lng: 75.0930 },
+
+    'canara mall (manipal)': { lat: 13.3480, lng: 74.7780 },
+    'canara mall': { lat: 13.3480, lng: 74.7780 },
+    'city centre mall (udupi)': { lat: 13.3390, lng: 74.7500 },
+    'time square mall (udupi)': { lat: 13.3450, lng: 74.7650 },
+    'time square mall': { lat: 13.3450, lng: 74.7650 },
+
+    'manipal lake (mannapalla lake)': { lat: 13.3510, lng: 74.7960 },
+    'manipal lake': { lat: 13.3510, lng: 74.7960 },
+    'mannapalla lake': { lat: 13.3510, lng: 74.7960 },
+    'delta beach (pithrody st. mary\'s island backwaters)': { lat: 13.3880, lng: 74.6890 },
+    'delta beach': { lat: 13.3880, lng: 74.6890 },
+    'hangarkatta backwaters & river cruise': { lat: 13.4350, lng: 74.6980 },
+    'hangarkatta': { lat: 13.4350, lng: 74.6980 },
+
+    'egg sunday (end point road)': { lat: 13.3560, lng: 74.7910 },
+    'egg sunday': { lat: 13.3560, lng: 74.7910 },
+    'hakkim mess / hotel hakkim': { lat: 13.3520, lng: 74.7880 },
+    'hakkim mess': { lat: 13.3520, lng: 74.7880 },
+    'dollops restaurant': { lat: 13.3515, lng: 74.7870 },
+    'dollops': { lat: 13.3515, lng: 74.7870 },
+    'scirocco / eye of the needle cafe': { lat: 13.3540, lng: 74.7890 },
+    'scirocco': { lat: 13.3540, lng: 74.7890 },
+
+    'dr. t.m.a. pai museum & planetarium': { lat: 13.3530, lng: 74.7860 },
+    'corporation bank heritage museum (coin museum), udupi': { lat: 13.3400, lng: 74.7510 },
+    'smriti bhavan museum (dr. t.m.a. pai house)': { lat: 13.3570, lng: 74.7920 },
+
+    'gadbad ice cream': { lat: 13.3410, lng: 74.7520 },
+    'ghee roast': { lat: 13.3520, lng: 74.7880 },
+    'neer dosa': { lat: 13.3410, lng: 74.7520 },
+    'mangalore bun': { lat: 13.3410, lng: 74.7520 }
 };
 
 const mangaloreCoordinates = cityCoordinates;
@@ -4819,12 +4863,75 @@ const cityPlaceIds = {
     'hebbe falls': 'ChIJiV5G22x5rjsR-k49Qv0U5H4',
     'coffee plantations': 'ChIJ4d6W_hQprzsR8P2J2sQ3s2o',
 
-    // Manipal
+    // Manipal Viewpoints & Lakes
+    'end point swarna river viewpoint': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
     'end point park': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
+    'manipal end point park': 'ChIJL-m4X_2-vzsR-a-p6193s6k',
+    'mannapalla lake park': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'mannapalla lake': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'manipal lake': 'ChIJP0N_qQ--vzsRxX0_I90-kK',
+    'kemmannu hanging bridge': 'ChIJO0M_pP--vzsRwW0_H91-lL',
+    'delta beach (bengre confluence)': 'ChIJN0L_oO--vzsRvV0_G92-mM',
+    'delta beach': 'ChIJN0L_oO--vzsRvV0_G92-mM',
+
+    // Manipal Cafes & Hangouts
+    'the egg factory': 'ChIJM0K_nN--vzsRuU0_F93-nN',
+    'egg factory': 'ChIJM0K_nN--vzsRuU0_F93-nN',
+    'eye of the needle cafe': 'ChIJL0J_mM--vzsRtT0_E94-oO',
+    'dollops restaurant': 'ChIJK0I_lL--vzsRsS0_D95-pP',
+    'dollops': 'ChIJK0I_lL--vzsRsS0_D95-pP',
+    'snack shack': 'ChIJJ0H_kK--vzsRrR0_C96-qQ',
+
+    // Manipal Museums
+    'hasta shilpa heritage village museum': 'ChIJK-m4X_2-vzsR-a-p6193s6k',
     'hasta shilpa heritage village': 'ChIJK-m4X_2-vzsR-a-p6193s6k',
     'anatomy museum (map)': 'ChIJJ-m4X_2-vzsR-a-p6193s6k',
-    'venugopal temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'manipal museum of anatomy & pathology (map)': 'ChIJJ-m4X_2-vzsR-a-p6193s6k',
+    'dr. t.m.a. pai museum & planetarium': 'ChIJH0F_iI--vzsRpP0_A98-sS',
+    'corporation bank heritage museum (coin museum), udupi': 'ChIJG0E_hH--vzsRoO0_Z99-tT',
+    'corporation bank heritage museum': 'ChIJG0E_hH--vzsRoO0_Z99-tT',
+    'smriti bhavan museum (dr. t.m.a. pai house)': 'ChIJF0D_gG--vzsRnN0_Y00-uU',
+    'smriti bhavan museum': 'ChIJF0D_gG--vzsRnN0_Y00-uU',
 
+    // Manipal Beaches & Temples
+    'venugopal temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'malpe beach': 'ChIJw0s43Z-_vzsR9c2_M80-aA',
+    'kapu beach': 'ChIJY4S_vV--vzsR8d1_N91-bB',
+    'padukere beach': 'ChIJX3T_uU--vzsR7e0_O82-cC',
+    'hoode beach': 'ChIJW2U_vV--vzsR6e0_P83-dD',
+    'mattu beach': 'ChIJV1T_uU--vzsR5d0_O84-eE',
+    'udupi shri krishna matha': 'ChIJ9T6Y27-_vzsR6f-P-93s6k',
+    'sri venugopala temple': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'sri venugopala temple (mit campus)': 'ChIJI-m4X_2-vzsR-a-p6193s6k',
+    'kadiyali shri mahishamardini temple': 'ChIJGf1_1vdApzsRkkSw_V8lJWs',
+    'kadiyali temple': 'ChIJGf1_1vdApzsRkkSw_V8lJWs',
+    'shri indrani panchadurga parameshwari temple': 'ChIJHf1_1tdApzsRlkSw_V8lJWs',
+    'indrani temple': 'ChIJHf1_1tdApzsRlkSw_V8lJWs',
+    'shivapady sri umamaheshwara temple': 'ChIJIf1_1rdApzsRmkSw_V8lJWs',
+    // Manipal Trekking Trails
+    'kudremukh peak trek': 'ChIJU0S_vV--vzsR4c0_N85-fF',
+    'kudremukh peak': 'ChIJU0S_vV--vzsR4c0_N85-fF',
+    'kodachadri peak & sunset trek': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'kodachadri peak': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'kodachadri trek': 'ChIJT0R_uU--vzsR3b0_M86-gG',
+    'narasimha parvatha trek (agumbe)': 'ChIJS0Q_tT--vzsR2a0_L87-hH',
+    'narasimha parvatha': 'ChIJS0Q_tT--vzsR2a0_L87-hH',
+    'kudlu theertha falls trek': 'ChIJR0P_sS--vzsR1Z0_K88-iI',
+    'kudlu theertha': 'ChIJR0P_sS--vzsR1Z0_K88-iI',
+    'koosalli falls trek': 'ChIJQ0O_rR--vzsR0Y0_J89-jJ',
+    'koosalli falls': 'ChIJQ0O_rR--vzsR0Y0_J89-jJ',
+
+    // Manipal Waterfalls & Malls
+    'arbi falls': 'ChIJA1B2C3-_vzsR5e-Q-84t7l',
+    'arbi falls (manipal hidden falls)': 'ChIJA1B2C3-_vzsR5e-Q-84t7l',
+    'kemmannu kayaking & backwater adventure': 'ChIJB2C3D4-_vzsR4d-R-75u8m',
+    'kemmannu kayaking': 'ChIJB2C3D4-_vzsR4d-R-75u8m',
+    'jogi gundi falls (agumbe trail)': 'ChIJE0C_fF--vzsRmM0_X01-vV',
+    'canara mall (manipal)': 'ChIJD4E5F6-_vzsR2b-T-55w0o',
+    'canara mall': 'ChIJD4E5F6-_vzsR2b-T-55w0o',
+    'city centre mall (udupi)': 'ChIJCf1_11dApzsRhkSw_V8lJWs',
+    'time square mall (udupi)': 'ChIJD0B_eE--vzsRlL0_W02-wW',
+    'time square mall': 'ChIJD0B_eE--vzsRlL0_W02-wW',
 
     // Zoo fallback for Mysuru
     'zoo': 'ChIJa-7L3t8XrjsR5fvOQ4z6nI0'
@@ -4835,7 +4942,7 @@ const mangalorePlaceIds = cityPlaceIds;
 // Fuzzy / Robust helper to find coordinate matches
 function getCityCoords(placeName, cityId) {
     if (!placeName) return getCityFallbackCoords(cityId);
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleaned = clean(placeName);
     
     // 1. Exact match
@@ -4853,7 +4960,7 @@ function getCityCoords(placeName, cityId) {
 // Fuzzy / Robust helper to find Place ID matches
 function getCityPlaceId(placeName, cityId) {
     if (!placeName) return getCityFallbackPlaceId(cityId);
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleaned = clean(placeName);
     
     // 1. Exact match
@@ -4882,10 +4989,13 @@ function getCityName(cityId) {
 function generateDynamicMockReviews(placeName, cityId) {
     const cityName = getCityName(cityId);
     
-    // Seeded random-ish rating and count based on name length so it's stable for each place
-    const seed = placeName.length;
+    // Seeded rating and count based on character hash so it is unique and stable for each place
+    let seed = 0;
+    for (let i = 0; i < placeName.length; i++) {
+        seed = (seed * 31 + placeName.charCodeAt(i)) % 1000007;
+    }
     const rating = (4.3 + (seed % 6) * 0.1).toFixed(1);
-    const reviewsCount = 1200 + (seed % 10) * 1350 + (seed % 3) * 312;
+    const reviewsCount = 1200 + (seed % 10) * 1350 + (seed % 7) * 312;
     
     const address = `${placeName}, ${cityName}, Karnataka, India`;
     const cleanName = placeName.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -4942,7 +5052,7 @@ function generateDynamicMockReviews(placeName, cityId) {
 // Fuzzy / Robust helper to find mock reviews data matches
 function getMockReviewsData(destName, cityId) {
     if (!destName) return null;
-    const clean = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
     const cleanedDest = clean(destName);
     
     // 1. Exact match
@@ -5435,6 +5545,640 @@ const mockReviewsData = {
                 text: 'Stunning temple complex with rich history. The stone carvings are incredibly intricate. Guide services are highly recommended to understand the stories behind the architecture.'
             }
         ]
+    },
+    'hoode beach': {
+        rating: 4.8,
+        user_ratings_total: 4820,
+        formatted_address: 'Hoode Beach Rd, Tonse West, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 0001',
+        website: 'https://www.karnatakatourism.org/tourist-place/hoode-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i.ytimg.com/vi/M0QHbMyTCDo/maxresdefault.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Varun Shetty',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'Serene and scenic beach near Bengre peninsula. Where the river meets the sea! Excellent sunset views and far less crowded than Malpe.'
+            },
+            {
+                author_name: 'Divya Naik',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 weeks ago',
+                text: 'Peaceful coastline perfect for long walks with friends. The sea breeze and golden sunset here are simply magical.'
+            }
+        ]
+    },
+    'mattu beach': {
+        rating: 4.6,
+        user_ratings_total: 3450,
+        formatted_address: 'Mattu Beach Road, Katapadi, Udupi, Manipal, Karnataka 574105',
+        formatted_phone_number: '+91 820 252 0002',
+        website: 'https://www.karnatakatourism.org/tourist-place/mattu-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Prashanth Bhat',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'Famous for bioluminescence sightings during post-monsoon nights and serene coconut palm tree backdrop. Truly an unspoiled gem near Udupi.'
+            },
+            {
+                author_name: 'Kavya Hegde',
+                profile_photo_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100',
+                rating: 4,
+                relative_time_description: '1 month ago',
+                text: 'Quiet, clean, and extremely peaceful shoreline. Great for evening relaxation away from commercial crowds.'
+            }
+        ]
+    },
+    'sri venugopala temple': {
+        rating: 4.8,
+        user_ratings_total: 8900,
+        formatted_address: 'MIT Campus, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2323',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Aditya Shenoy',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'Beautiful serene temple situated right inside the MIT campus green lawns. Very quiet and peaceful in the evenings.'
+            }
+        ]
+    },
+    'kadiyali shri mahishamardini temple': {
+        rating: 4.8,
+        user_ratings_total: 6400,
+        formatted_address: 'Kadiyali, Udupi, Manipal, Karnataka 576102',
+        formatted_phone_number: '+91 820 252 1100',
+        website: 'https://kadiyalitemple.com/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:30 PM',
+                'Tuesday: 6:00 AM – 8:30 PM',
+                'Wednesday: 6:00 AM – 8:30 PM',
+                'Thursday: 6:00 AM – 8:30 PM',
+                'Friday: 6:00 AM – 8:30 PM',
+                'Saturday: 6:00 AM – 8:30 PM',
+                'Sunday: 6:00 AM – 8:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Sharada K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 weeks ago',
+                text: 'Ancient 1200-year-old Goddess shrine. Beautiful stone architecture and divine vibration.'
+            }
+        ]
+    },
+    'shri indrani panchadurga parameshwari temple': {
+        rating: 4.7,
+        user_ratings_total: 5200,
+        formatted_address: 'Indrani, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 0444',
+        website: 'https://indranitemple.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Rajesh Pai',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 month ago',
+                text: 'Peaceful hill shrine surrounded by natural greenery. Highly sacred Durga temple near Manipal.'
+            }
+        ]
+    },
+    'shivapady sri umamaheshwara temple': {
+        rating: 4.7,
+        user_ratings_total: 4150,
+        formatted_address: 'Shivapady, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 1212',
+        website: 'https://shivapady.com/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 8:00 PM',
+                'Tuesday: 6:00 AM – 8:00 PM',
+                'Wednesday: 6:00 AM – 8:00 PM',
+                'Thursday: 6:00 AM – 8:00 PM',
+                'Friday: 6:00 AM – 8:00 PM',
+                'Saturday: 6:00 AM – 8:00 PM',
+                'Sunday: 6:00 AM – 8:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Suhas Nayak',
+                profile_photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '5 days ago',
+                text: 'Tranquil Shiva temple famous for Atirudra Mahayajna and peaceful temple compound.'
+            }
+        ]
+    },
+    'end point swarna river viewpoint': {
+        rating: 4.9,
+        user_ratings_total: 8400,
+        formatted_address: 'End Point Rd, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2000',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 5:00 AM – 7:30 PM',
+                'Tuesday: 5:00 AM – 7:30 PM',
+                'Wednesday: 5:00 AM – 7:30 PM',
+                'Thursday: 5:00 AM – 7:30 PM',
+                'Friday: 5:00 AM – 7:30 PM',
+                'Saturday: 5:00 AM – 7:30 PM',
+                'Sunday: 5:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/manipal/mmt/activities/m_Manipal%20End%20Point%20Park-3_l_399_532.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Nikhil Kumar',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 days ago',
+                text: 'Breathtaking clifftop views of the Swarna river valley and Western Ghats. Best spot for sunset in Manipal!'
+            }
+        ]
+    },
+    'mannapalla lake park': {
+        rating: 4.6,
+        user_ratings_total: 6200,
+        formatted_address: 'Manipal Lake Rd, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 0000',
+        website: 'https://www.karnatakatourism.org/tourist-place/manipal-lake',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:00 PM',
+                'Tuesday: 6:00 AM – 7:00 PM',
+                'Wednesday: 6:00 AM – 7:00 PM',
+                'Thursday: 6:00 AM – 7:00 PM',
+                'Friday: 6:00 AM – 7:00 PM',
+                'Saturday: 6:00 AM – 7:00 PM',
+                'Sunday: 6:00 AM – 7:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://th-i.thgim.com/public/news/cities/Mangalore/20mb2f/article70274376.ece/alternates/FREE_1200/IMG_3180.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Rohan Deshmukh',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '4 days ago',
+                text: 'Beautiful 3 km paved walking track surrounding a natural lake. Ideal for morning walks and bird watching.'
+            }
+        ]
+    },
+    'kemmannu hanging bridge': {
+        rating: 4.7,
+        user_ratings_total: 7500,
+        formatted_address: 'Kemmannu, Tonse, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 8888',
+        website: 'https://www.karnatakatourism.org/tourist-place/kemmannu-hanging-bridge',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:00 PM',
+                'Tuesday: 6:00 AM – 7:00 PM',
+                'Wednesday: 6:00 AM – 7:00 PM',
+                'Thursday: 6:00 AM – 7:00 PM',
+                'Friday: 6:00 AM – 7:00 PM',
+                'Saturday: 6:00 AM – 7:00 PM',
+                'Sunday: 6:00 AM – 7:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://d3sftlgbtusmnv.cloudfront.net/blog/wp-content/uploads/2024/10/Kemmannu-Hanging-Bridge.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Ananya Rao',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 week ago',
+                text: 'Picturesque wooden suspension bridge over coconut-fringed backwaters. Great spot for photography and kayaking.'
+            }
+        ]
+    },
+    'delta beach (bengre confluence)': {
+        rating: 4.8,
+        user_ratings_total: 5600,
+        formatted_address: 'Bengre Peninsula, Udupi, Manipal, Karnataka 576115',
+        formatted_phone_number: '+91 820 252 9999',
+        website: 'https://www.karnatakatourism.org/tourist-place/delta-beach',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 7:30 PM',
+                'Tuesday: 6:00 AM – 7:30 PM',
+                'Wednesday: 6:00 AM – 7:30 PM',
+                'Thursday: 6:00 AM – 7:30 PM',
+                'Friday: 6:00 AM – 7:30 PM',
+                'Saturday: 6:00 AM – 7:30 PM',
+                'Sunday: 6:00 AM – 7:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/additionalttdimages/mmt/activities/m_Delta_Beach_1_l_360_640.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Vikram Prabhu',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'Spectacular peninsula where Swarna River meets the Arabian Sea. Enjoy fresh sea food and calm water views.'
+            }
+        ]
+    },
+    'hasta shilpa heritage village museum': {
+        rating: 4.9,
+        user_ratings_total: 9150,
+        formatted_address: 'Christ School Road, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 257 4555',
+        website: 'https://hastashilpatrust.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 10:00 AM – 5:00 PM',
+                'Tuesday: 10:00 AM – 5:00 PM',
+                'Wednesday: 10:00 AM – 5:00 PM',
+                'Thursday: 10:00 AM – 5:00 PM',
+                'Friday: 10:00 AM – 5:00 PM',
+                'Saturday: 10:00 AM – 5:00 PM',
+                'Sunday: 10:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i.ytimg.com/vi/rLaOUhfYWzI/maxresdefault.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Dr. Ramesh Rao',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 days ago',
+                text: 'A world-class open air heritage museum featuring 26 restored South Indian traditional houses. An absolute masterpiece of heritage preservation.'
+            }
+        ]
+    },
+    'manipal museum of anatomy & pathology (map)': {
+        rating: 4.8,
+        user_ratings_total: 7800,
+        formatted_address: 'KMC Campus, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2200',
+        website: 'https://manipal.edu/kmc-manipal/museum.html',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 8:00 AM – 6:00 PM',
+                'Tuesday: 8:00 AM – 6:00 PM',
+                'Wednesday: 8:00 AM – 6:00 PM',
+                'Thursday: 8:00 AM – 6:00 PM',
+                'Friday: 8:00 AM – 6:00 PM',
+                'Saturday: 8:00 AM – 6:00 PM',
+                'Sunday: 8:00 AM – 6:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://www.manipal.edu/content/dam/manipal/mu/kmc-manipal/images/galleryImage/KMCMpltrial/m9.JPG' }
+        ],
+        reviews: [
+            {
+                author_name: 'Priya Sundaram',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: 'One of Asia\'s largest medical museums. Over 3000 anatomical specimens displayed meticulously. Mind-blowing for students and visitors!'
+            }
+        ]
+    },
+    'dr. t.m.a. pai museum & planetarium': {
+        rating: 4.5,
+        user_ratings_total: 4200,
+        formatted_address: 'University Admin Block, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2400',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 9:30 AM – 5:30 PM',
+                'Tuesday: 9:30 AM – 5:30 PM',
+                'Wednesday: 9:30 AM – 5:30 PM',
+                'Thursday: 9:30 AM – 5:30 PM',
+                'Friday: 9:30 AM – 5:30 PM',
+                'Saturday: 9:30 AM – 5:30 PM',
+                'Sunday: 9:30 AM – 5:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Arun K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 4,
+                relative_time_description: '2 weeks ago',
+                text: 'Interactive science museum and digital planetarium documenting the founding history of modern Manipal.'
+            }
+        ]
+    },
+    'corporation bank heritage museum (coin museum), udupi': {
+        rating: 4.7,
+        user_ratings_total: 3900,
+        formatted_address: 'Founder Branch, KM Marg, Udupi, Manipal, Karnataka 576101',
+        formatted_phone_number: '+91 820 252 1444',
+        website: 'https://www.karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 10:00 AM – 5:00 PM',
+                'Tuesday: 10:00 AM – 5:00 PM',
+                'Wednesday: 10:00 AM – 5:00 PM',
+                'Thursday: 10:00 AM – 5:00 PM',
+                'Friday: 10:00 AM – 5:00 PM',
+                'Saturday: 10:00 AM – 5:00 PM',
+                'Sunday: Closed'
+            ]
+        },
+        photos: [
+            { localPath: 'https://i0.wp.com/rashminotes.com/wp-content/uploads/2019/03/c1.png?resize=663%2C361' }
+        ],
+        reviews: [
+            {
+                author_name: 'Gaurav Jain',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '5 days ago',
+                text: 'Rare numismatic collection showcasing ancient Indian coins from 400 BC to modern currency. Highly educational!'
+            }
+        ]
+    },
+    'smriti bhavan museum (dr. t.m.a. pai house)': {
+        rating: 4.6,
+        user_ratings_total: 3100,
+        formatted_address: 'End Point Road, Manipal, Karnataka 576104',
+        formatted_phone_number: '+91 820 292 2100',
+        website: 'https://manipal.edu/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 9:30 AM – 5:30 PM',
+                'Tuesday: 9:30 AM – 5:30 PM',
+                'Wednesday: 9:30 AM – 5:30 PM',
+                'Thursday: 9:30 AM – 5:30 PM',
+                'Friday: 9:30 AM – 5:30 PM',
+                'Saturday: 9:30 AM – 5:30 PM',
+                'Sunday: 9:30 AM – 5:30 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Sunita Shenoy',
+                profile_photo_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 month ago',
+                text: 'The preserved residence of visionary Dr. T.M.A. Pai. Inspiring photo archives of Manipal’s early days.'
+            }
+        ]
+    },
+    'kudremukh peak trek': {
+        rating: 4.9,
+        user_ratings_total: 11200,
+        formatted_address: 'Kudremukh National Park, Chikkamagaluru / Udupi Region, Karnataka 577142',
+        formatted_phone_number: '+91 8263 274 221',
+        website: 'https://aranya.gov.in/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 5:00 PM',
+                'Tuesday: 6:00 AM – 5:00 PM',
+                'Wednesday: 6:00 AM – 5:00 PM',
+                'Thursday: 6:00 AM – 5:00 PM',
+                'Friday: 6:00 AM – 5:00 PM',
+                'Saturday: 6:00 AM – 5:00 PM',
+                'Sunday: 6:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://hblimg.mmtcdn.com/content/hubble/img/additionalttdimages/mmt/activities/m_Kudremukh_1_l_360_640.jpg' }
+        ],
+        reviews: [
+            {
+                author_name: 'Varun Hegde',
+                profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '2 days ago',
+                text: 'Horse-face shaped peak offering 22 km trail through lush rolling Shola grassland hills. Unmatched trekking experience in Western Ghats!'
+            }
+        ]
+    },
+    'kodachadri peak & sunset trek': {
+        rating: 4.8,
+        user_ratings_total: 9800,
+        formatted_address: 'Mookambika Wildlife Sanctuary, Shimoga / Udupi Border, Karnataka 577452',
+        formatted_phone_number: '+91 8183 226 220',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 6:00 PM',
+                'Tuesday: 6:00 AM – 6:00 PM',
+                'Wednesday: 6:00 AM – 6:00 PM',
+                'Thursday: 6:00 AM – 6:00 PM',
+                'Friday: 6:00 AM – 6:00 PM',
+                'Saturday: 6:00 AM – 6:00 PM',
+                'Sunday: 6:00 AM – 6:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Karthik Bhat',
+                profile_photo_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '4 days ago',
+                text: 'Famous mountain peak trail through dense rainforests and Hidlumane Falls. Majestic sunset view over Arabian Sea coast.'
+            }
+        ]
+    },
+    'narasimha parvatha trek (agumbe)': {
+        rating: 4.7,
+        user_ratings_total: 5400,
+        formatted_address: 'Agumbe Rainforest Reserve, Malandur, Karnataka 577411',
+        formatted_phone_number: '+91 8183 228 111',
+        website: 'https://agumberainforest.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 6:00 AM – 5:00 PM',
+                'Tuesday: 6:00 AM – 5:00 PM',
+                'Wednesday: 6:00 AM – 5:00 PM',
+                'Thursday: 6:00 AM – 5:00 PM',
+                'Friday: 6:00 AM – 5:00 PM',
+                'Saturday: 6:00 AM – 5:00 PM',
+                'Sunday: 6:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Deepak Naik',
+                profile_photo_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '1 week ago',
+                text: 'Highest peak in Agumbe rainforest range (826m). Thrilling jungle trek with Barkana falls viewpoint.'
+            }
+        ]
+    },
+    'kudlu theertha falls trek': {
+        rating: 4.7,
+        user_ratings_total: 4600,
+        formatted_address: 'Someshwara Wildlife Sanctuary, Hebri, Karnataka 576112',
+        formatted_phone_number: '+91 820 252 5000',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 8:00 AM – 4:00 PM',
+                'Tuesday: 8:00 AM – 4:00 PM',
+                'Wednesday: 8:00 AM – 4:00 PM',
+                'Thursday: 8:00 AM – 4:00 PM',
+                'Friday: 8:00 AM – 4:00 PM',
+                'Saturday: 8:00 AM – 4:00 PM',
+                'Sunday: 8:00 AM – 4:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Meghna Shetty',
+                profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: '3 weeks ago',
+                text: 'Spectacular 300-ft waterfall plunging into a pristine pool inside deep forest. 4 km jungle trek from base camp.'
+            }
+        ]
+    },
+    'koosalli falls trek': {
+        rating: 4.6,
+        user_ratings_total: 3800,
+        formatted_address: 'Koosalli Village, Byndoor, Udupi District, Karnataka 576214',
+        formatted_phone_number: '+91 820 252 6111',
+        website: 'https://karnatakatourism.org/',
+        opening_hours: {
+            open_now: true,
+            weekday_text: [
+                'Monday: 7:00 AM – 5:00 PM',
+                'Tuesday: 7:00 AM – 5:00 PM',
+                'Wednesday: 7:00 AM – 5:00 PM',
+                'Thursday: 7:00 AM – 5:00 PM',
+                'Friday: 7:00 AM – 5:00 PM',
+                'Saturday: 7:00 AM – 5:00 PM',
+                'Sunday: 7:00 AM – 5:00 PM'
+            ]
+        },
+        photos: [
+            { localPath: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800' }
+        ],
+        reviews: [
+            {
+                author_name: 'Suhas K',
+                profile_photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100',
+                rating: 5,
+                relative_time_description: 'a week ago',
+                text: '6-tiered waterfall hidden inside dense forest. Adventurous rocky trail for trek enthusiasts!'
+            }
+        ]
     }
 };
 
@@ -5469,14 +6213,15 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     else if (cityId === 'mysuru') cityName = 'Mysore';
     else if (cityId === 'kodagu') cityName = 'Kodagu';
     else if (cityId === 'chikkamagaluru') cityName = 'Chikkamagaluru';
+    else if (cityId === 'manipal') cityName = 'Manipal';
     
-    // Conditional URL generation based on whether the Place ID is a placeholder or real.
-    // Real Place IDs (like Mysore Palace, Kadri Temple) resolve via the official Google Maps search query scheme with query_place_id.
-    // Placeholder/simulated Place IDs fallback to a clean name+city search query.
-    const isPlaceholder = !placeId || placeId.includes('kSw_') || placeId.includes('fvO') || placeId.includes('ApzsR');
-    const mapsUrl = isPlaceholder
-        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destName + ', ' + cityName)}`
-        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destName + ', ' + cityName)}&query_place_id=${placeId}`;
+    // Conditional URL generation based on exact coordinates or clean search name.
+    // Using exact latitude & longitude guarantees Google Maps drops a precise pin at the destination location,
+    // bypassing 0-result query mismatches that cause blank map screens.
+    const cleanSearchName = destName.replace(/\([^)]*\)/g, '').split('/')[0].trim();
+    const mapsUrl = (destLat && destLng)
+        ? `https://www.google.com/maps/search/?api=1&query=${destLat},${destLng}`
+        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanSearchName + ', ' + cityName + ', Karnataka')}`;
 
     // Generate Drawer skeleton HTML immediately (loading state)
     const drawerHTML = `
