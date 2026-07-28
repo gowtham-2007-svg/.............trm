@@ -58,7 +58,7 @@ const destinations = [
     {
         id: 'mysuru_east_west',
         name: 'Mysuru – East & West',
-        image: 'https://thumbs.dreamstime.com/b/architecture-dufferin-clock-tower-town-mysore-architecture-dufferin-clock-tower-town-hall-mysore-karnataka-india-239985561.jpg',
+        image: 'assets/destinations/mysuru.png',
         color: '#F59E0B',
         famousPlaces: [
             {
@@ -85,7 +85,7 @@ const destinations = [
     },
     {
         id: 'bangalore',
-        name: 'Bangalore',
+        name: 'Bangalore – North & South',
         image: 'assets/destinations/bangalore.png',
         color: '#8338EC',
         famousPlaces: [
@@ -112,30 +112,30 @@ const destinations = [
         ]
     },
     {
-        id: 'kodagu',
-        name: 'Kodagu',
-        image: 'assets/destinations/kodagu.png',
-        color: '#4C3BCF',
+        id: 'bangalore_east_west',
+        name: 'Bangalore – East & West',
+        image: 'assets/destinations/bangalore.png',
+        color: '#3B82F6',
         famousPlaces: [
             {
-                name: 'Abbey Falls',
-                image: 'assets/places/kodagu_abbey_falls_new.jpg',
-                description: 'A stunning waterfall surrounded by lush greenery and coffee plantations.'
+                name: 'Phoenix Marketcity & VR Mall',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: 'East Bangalore’s premier shopping, dining and entertainment twin-mall hub.'
             },
             {
-                name: 'Raja’s Seat',
-                image: 'assets/places/kodagu_rajas_seat_new.jpg',
-                description: 'A beautiful garden with a panoramic view of the hills and sunset.'
+                name: 'Indiranagar 100ft Road',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+                description: 'Vibrant nightlife, trendy cafes, boutique shopping and artisan breweries.'
             },
             {
-                name: 'Dubare Elephant Camp',
-                image: 'assets/places/kodagu_dubare_new.jpg',
-                description: 'Experience elephants up close in their natural habitat along the Kaveri river.'
+                name: 'HAL Aerospace Museum',
+                image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg',
+                description: 'India’s first aviation museum displaying real fighter jets and helicopters.'
             },
             {
-                name: 'Talakaveri',
-                image: 'assets/places/kodagu_talakaveri_new.jpg',
-                description: 'The origin of the Kaveri river, located on the Brahmagiri hills.'
+                name: 'Commercial Street',
+                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
+                description: 'Bustling shopping street famous for traditional wear, silk, and street food.'
             }
         ]
     },
@@ -2738,6 +2738,199 @@ const manipalCategoryData = {
     }
 };
 
+
+const bangaloreEastWestCategories = [
+    { id: 'shopping', name: 'Malls & Shopping (East & West)', desc: 'Explore malls & markets →', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=600' },
+    { id: 'cafes_food', name: 'Cafes & Food Hubs', desc: 'Explore trendy eateries →', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600' },
+    { id: 'heritage_museums', name: 'Museums & Heritage', desc: 'Explore aviation & art →', image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg' },
+    { id: 'parks_lakes', name: 'Lakes & Scenic Parks', desc: 'Explore lake trails →', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600' },
+    { id: 'breweries', name: 'Pubs & Nightlife', desc: 'Explore craft breweries →', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600' },
+    { id: 'temples', name: 'Historic Temples', desc: 'Explore ancient shrines →', image: 'https://thumbs.dreamstime.com/b/adiyogi-shiva-statue-isha-yoga-center-coimbatore-185442002.jpg' }
+];
+
+const bangaloreEastWestCategoryData = {
+    'shopping': {
+        name: 'Shopping Malls & Markets in Bangalore (East & West)',
+        places: [
+            {
+                name: 'Phoenix Marketcity Whitefield',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: 'Sprawling shopping destination with international luxury fashion brands, PVR P[XL] multiplex, and gourmet dining.',
+                rating: '4.8',
+                bestTime: '10:00 AM – 10:00 PM',
+                busRoutes: 'Located on Whitefield Main Road. Buses: 335E, 500D.',
+                bestChoice: 'PVR P[XL] Screening & Open-Air Courtyard Dining',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'VR Bengaluru (Black Box)',
+                image: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&q=80&w=800',
+                description: 'Lifestyle black box mall adjacent to Phoenix Marketcity, hosting IMAX cinema, rooftop lounges, and artisan markets.',
+                rating: '4.7',
+                bestTime: '11:00 AM – 10:30 PM',
+                busRoutes: 'Whitefield Main Road, Hoodi Halt (~500m from Phoenix).',
+                bestChoice: 'IMAX 3D Experience & Rooftop Skydeck Bar',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Commercial Street',
+                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
+                description: 'Historic shopping district in East Bangalore famous for silk sarees, ethnic wear, jewelry, and street fashion.',
+                rating: '4.7',
+                bestTime: '11:00 AM – 9:00 PM',
+                busRoutes: 'Located in Tasker Town, Near MG Road Metro Station.',
+                bestChoice: 'Silk Sarees Shopping & Street Food Tasting',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Orion Mall (Rajajinagar)',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: 'Lakeside shopping complex in West Bangalore featuring a picturesque artificial lake promenade.',
+                rating: '4.8',
+                bestTime: '10:00 AM – 10:00 PM',
+                busRoutes: 'Located at Brigade Gateway, Rajajinagar (West Bangalore).',
+                bestChoice: 'Lakeside Promenade Stroll & PVR Gold Class Movies',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'cafes_food': {
+        name: 'Popular Cafes & Food Hubs in East & West Bangalore',
+        places: [
+            {
+                name: 'Indiranagar 100ft Road Cafe Corridor',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+                description: 'Bustling avenue lined with specialty coffee houses, artisan bakeries, and global fusion restaurants.',
+                rating: '4.8',
+                bestTime: '11:00 AM – 11:00 PM',
+                busRoutes: 'Indiranagar Metro Station (Purple Line).',
+                bestChoice: 'Specialty Cold Brew Coffee & Artisanal Pizza',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Corner House Ice Cream (Indiranagar / Jayanagar)',
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800',
+                description: 'Legendary Bangalore dessert parlour world-famous for its iconic "Death By Chocolate" (DBC) sundae.',
+                rating: '4.9',
+                bestTime: '1:00 PM – 11:30 PM',
+                busRoutes: 'Located on 100ft Road Indiranagar & 4th Block Jayanagar.',
+                bestChoice: 'Original Death By Chocolate (DBC) Sundae',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'VV Puram Food Street',
+                image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800',
+                description: 'Famous vegetarian street food lane offering hot Dosa varieties, Holige, and Rose Gulkand ice cream.',
+                rating: '4.7',
+                bestTime: '6:00 PM – 11:00 PM',
+                busRoutes: 'Located in Basavanagudi / VV Puram (South-West Bangalore).',
+                bestChoice: 'Hot Floating Butter Dosa & Rose Gulkand Ice Cream',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'heritage_museums': {
+        name: 'Museums & Cultural Heritage in Bangalore (East & West)',
+        places: [
+            {
+                name: 'HAL Aerospace Museum',
+                image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg',
+                description: 'India’s premier aviation museum displaying indigenous aircraft, helicopters, flight simulators, and jet engines.',
+                rating: '4.8',
+                bestTime: '9:00 AM – 5:00 PM (Closed Mondays)',
+                busRoutes: 'Located on Old Airport Road, Marathahalli (~4 km from Indiranagar).',
+                bestChoice: 'Real Fighter Jet Displays & Flight Simulator Motion Ride',
+                bestChoiceImg: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg'
+            },
+            {
+                name: 'National Gallery of Modern Art (NGMA)',
+                image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=800',
+                description: 'Housed in the heritage Manikyavelu Mansion, featuring contemporary Indian art galleries and sculpture garden cafe.',
+                rating: '4.7',
+                bestTime: '10:00 AM – 6:00 PM (Closed Mondays)',
+                busRoutes: 'Located on Palace Road, Vasanth Nagar.',
+                bestChoice: 'Sculpture Garden Stroll & Heritage Mansion Art Walk',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'parks_lakes': {
+        name: 'Lakes & Scenic Parks in Bangalore (East & West)',
+        places: [
+            {
+                name: 'Ulsoor Lake (Halasuru Lake)',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800',
+                description: 'One of Bangalore’s oldest and largest lakes, spread over 120 acres with islands, boating, and paved walking paths.',
+                rating: '4.6',
+                bestTime: '6:00 AM – 9:00 AM / 4:00 PM – 7:00 PM',
+                busRoutes: 'Located near MG Road / Halasuru Metro Station.',
+                bestChoice: 'Lakeside Sunset Walk & Boating through Green Islands',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Sankey Tank',
+                image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=800',
+                description: 'Man-made lake in West Bangalore with a forested perimeter walkway, duck pond, and peaceful benches.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 9:00 AM / 4:30 PM – 7:00 PM',
+                busRoutes: 'Located between Malleshwaram and Sadashivanagar (West Bangalore).',
+                bestChoice: 'Boundary Forest Pathway Walk & Sunset Photography',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'breweries': {
+        name: 'Craft Breweries & Pubs in East & West Bangalore',
+        places: [
+            {
+                name: 'Toit Brewpub (Indiranagar)',
+                image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=800',
+                description: 'Iconic craft microbrewery famous for fresh wheat beers, wood-fired pizzas, and lively open-air seating.',
+                rating: '4.8',
+                bestTime: '12:00 PM – 11:30 PM',
+                busRoutes: 'Located on 100ft Road, Indiranagar.',
+                bestChoice: 'Tintin In Toit Wheat Beer & Wood-Fired Pepperoni Pizza',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Windmills Craftworks (Whitefield)',
+                image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=800',
+                description: 'Ultra-premium jazz theatre and microbrewery serving artisanal craft beer alongside live music.',
+                rating: '4.8',
+                bestTime: '12:00 PM – 11:30 PM',
+                busRoutes: 'Located in EPIP Zone, Whitefield (East Bangalore).',
+                bestChoice: 'Craft IPA Beer & Live Jazz Performance',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'temples': {
+        name: 'Historic Temples in East & West Bangalore',
+        places: [
+            {
+                name: 'Halasuru Someshwara Temple',
+                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800',
+                description: 'Ancient 12th-century Chola dynasty Shiva temple in East Bangalore featuring grand Dravidian stone pillars.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:30 PM',
+                busRoutes: 'Located near Ulsoor Lake / Halasuru Metro Station.',
+                bestChoice: 'Chola Dynasty Stone Carvings & Sacred Lingam Darshan',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Kadu Malleshwara Temple',
+                image: 'https://images.unsplash.com/photo-1609137882611-37f2252a11b9?auto=format&fit=crop&q=80&w=800',
+                description: '17th-century hilltop Shiva temple surrounded by green groves in historic Malleshwaram (West Bangalore).',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:30 PM',
+                busRoutes: 'Located in Malleshwaram (West Bangalore).',
+                bestChoice: 'Nandi Teertha Spring & Sacred Shiva Pooja',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1609137882611-37f2252a11b9?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    }
+};
+
 const cityFoods = {
     'mangaluru': [
         { img: 'https://myfoodstory.com/wp-content/uploads/2015/11/chicken-kori-rotti-mangalorean-chicken-curry-recipe.1024x1024-1024x617.jpg', name: 'Chicken Kori Rotti' },
@@ -2751,6 +2944,12 @@ const cityFoods = {
         { img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800', name: 'Filter Coffee' },
         { img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800', name: 'Idli Vada' },
         { img: 'https://blog.swiggy.com/wp-content/uploads/2024/02/Ragi-Mudde.jpg', name: 'Ragi Mudde' }
+    ],
+    'bangalore_east_west': [
+        { img: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800', name: 'Masala Dosa' },
+        { img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800', name: 'Filter Coffee' },
+        { img: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800', name: 'Corner House DBC' },
+        { img: 'https://madaboutkitchen.in/wp-content/uploads/2016/10/Obattu-3--767x1024.jpg', name: 'Obbattu (Holige)' }
     ],
     'mysuru': [
         { img: 'https://images.slurrp.com/prodarticles/ydoju3f5ofc.webp?impolicy=slurrp-20210601&width=1200&height=900&q=75', name: 'Mysore Pak' },
@@ -2775,6 +2974,7 @@ const cityFoods = {
 const cityCategories = {
     'mangaluru': mangaloreCategories,
     'bangalore': bangaloreCategories,
+    'bangalore_east_west': bangaloreEastWestCategories,
     'mysuru': mysuruCategories,
     'mysuru_east_west': mysuruEastWestCategories,
     'manipal': manipalCategories
@@ -2783,6 +2983,7 @@ const cityCategories = {
 const cityCategoryData = {
     'mangaluru': mangaloreCategoryData,
     'bangalore': bangaloreCategoryData,
+    'bangalore_east_west': bangaloreEastWestCategoryData,
     'mysuru': mysuruCategoryData,
     'mysuru_east_west': mysuruEastWestCategoryData,
     'manipal': manipalCategoryData
@@ -3099,19 +3300,20 @@ function renderGlobalFavoritesPage() {
 }
 
 function clearBackgroundIntervals() {
-    // 1. Clear best food slider intervals
-    if (typeof bestFoodSliderIntervals !== 'undefined' && bestFoodSliderIntervals) {
-        bestFoodSliderIntervals.forEach(clearInterval);
-        bestFoodSliderIntervals = [];
-    }
-    // 2. Clear place image slider intervals
-    if (window.placeImageSliderIntervals) {
-        window.placeImageSliderIntervals.forEach(clearInterval);
-        window.placeImageSliderIntervals = [];
-    }
-    // 3. Clear popup autoplay interval
-    if (typeof popupAutoPlayInterval !== 'undefined' && popupAutoPlayInterval) {
-        clearInterval(popupAutoPlayInterval);
+    try {
+        if (typeof bestFoodSliderIntervals !== 'undefined' && Array.isArray(bestFoodSliderIntervals)) {
+            bestFoodSliderIntervals.forEach(clearInterval);
+            bestFoodSliderIntervals = [];
+        }
+        if (window.placeImageSliderIntervals && Array.isArray(window.placeImageSliderIntervals)) {
+            window.placeImageSliderIntervals.forEach(clearInterval);
+            window.placeImageSliderIntervals = [];
+        }
+        if (typeof popupAutoPlayInterval !== 'undefined' && popupAutoPlayInterval) {
+            clearInterval(popupAutoPlayInterval);
+        }
+    } catch(e) {
+        console.warn(e);
     }
 }
 
@@ -3261,7 +3463,7 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
                             ` : ''}
                             ${place.bestFoods ? `
                             <div class="best-food-slider-wrapper">
-                                <div class="best-food-title">Best Food Choices (Click to view price)</div>
+                                <div class="best-food-title" onclick="handleBestFoodTitleClick(event, this)" style="cursor: pointer;">Best Food Choices (Click to view price)</div>
                                 <div class="best-food-slider-card" data-place-name="${place.name.replace(/'/g, "\\'")}" data-active-index="0" onclick="handleSliderCardClick(event, this)">
                                     <button class="slider-nav-btn prev" onclick="handleSliderNav(event, this, -1)">&lsaquo;</button>
                                     <div class="food-slider-content">
@@ -3532,6 +3734,7 @@ function renderDestination(id) {
 }
 
 // Initial render
+window.renderHome = renderHome;
 renderHome();
 initNavbarFavoriteListener();
 
@@ -4656,7 +4859,7 @@ window.handleMangaloreExplore = function(event, placeName) {
 
 window.handleCardClick = function(event, placeName, cityId = currentCityId) {
     if (event && event.target) {
-        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon, button, a')) {
+        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon, button, a, .best-food-slider-wrapper, .best-food-slider-card, .best-food-title, .best-food-box, .best-food-name')) {
             return;
         }
     }
@@ -4986,10 +5189,11 @@ function getCityPlaceId(placeName, cityId) {
 
 function getCityName(cityId) {
     if (cityId === 'mangaluru') return 'Mangaluru';
-    if (cityId === 'bangalore') return 'Bangalore';
+    if (cityId === 'bangalore') return 'Bangalore – North & South';
+    if (cityId === 'bangalore_east_west') return 'Bangalore – East & West';
     if (cityId === 'mysuru') return 'Mysuru – North & South';
     if (cityId === 'mysuru_east_west') return 'Mysuru – East & West';
-    if (cityId === 'kodagu') return 'Kodagu';
+    if (cityId === 'kodagu') return 'Bangalore – East & West';
     if (cityId === 'chikkamagaluru') return 'Chikkamagaluru';
     if (cityId === 'manipal') return 'Manipal';
     return 'Karnataka';
@@ -5078,9 +5282,8 @@ function getMockReviewsData(destName, cityId) {
 }
 
 function getCityFallbackPlaceId(cityId) {
-    if (cityId === 'bangalore') return 'ChIJ74-L3t8XrjsRtfvOQ4z6nI0'; // Cubbon Park / Bangalore
-    if (cityId === 'mysuru') return 'ChIJ0-7L3t8XrjsR5fvOQ4z6nI0'; // Mysore Palace
-    if (cityId === 'kodagu') return 'ChIJ2e2-9zZTrjsR-78Uq6oH9u4'; // Raja's Seat / Coorg
+    if (cityId === 'bangalore' || cityId === 'bangalore_east_west') return 'ChIJ74-L3t8XrjsRtfvOQ4z6nI0'; // Cubbon Park / Bangalore
+    if (cityId === 'mysuru' || cityId === 'mysuru_east_west') return 'ChIJ0-7L3t8XrjsR5fvOQ4z6nI0'; // Mysore Palace
     if (cityId === 'chikkamagaluru') return 'ChIJ4d6W_hQprzsR8P2J2sQ3s2o'; // Coffee Museum / Chikkamagaluru
     if (cityId === 'manipal') return 'ChIJL-m4X_2-vzsR-a-p6193s6k'; // End Point / Manipal
     return 'ChIJyXGv0N9ApzsRHk9w_P9lJWs'; // Panambur Beach / Mangalore
@@ -6538,14 +6741,21 @@ window.showFoodPopup = function(name, img, price) {
     const existing = document.getElementById('food-popup-overlay');
     if (existing) existing.remove();
 
-    // Look up other food specialties for this restaurant
+    // Look up other food specialties for this restaurant across all categories/cities
     let allFoods = [];
-    const places = cityCategoryData[currentCityId]?.['restaurants']?.places || [];
-    for (const p of places) {
-        if (p.bestFoods && p.bestFoods.some(f => f.name === name)) {
-            allFoods = p.bestFoods;
-            break;
+    for (const cId of Object.keys(cityCategoryData)) {
+        const cityData = cityCategoryData[cId];
+        for (const catId of Object.keys(cityData)) {
+            const category = cityData[catId];
+            if (category && category.places) {
+                const found = category.places.find(p => p.bestFoods && p.bestFoods.some(f => f.name === name));
+                if (found) {
+                    allFoods = found.bestFoods;
+                    break;
+                }
+            }
         }
+        if (allFoods.length > 0) break;
     }
 
     let currentIndex = allFoods.findIndex(f => f.name === name);
@@ -6759,7 +6969,22 @@ function initBestFoodSliders() {
     });
 }
 
+window.handleBestFoodTitleClick = function(event, titleEl) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    const card = titleEl ? titleEl.parentElement.querySelector('.best-food-slider-card') : null;
+    if (card) {
+        window.handleSliderCardClick(event, card);
+    }
+};
+
 window.handleSliderCardClick = function(event, card) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
     const imgNode = card.querySelector('.food-slider-img');
     const nameNode = card.querySelector('.food-slider-name');
     const priceNode = card.querySelector('.food-slider-price');
@@ -7884,28 +8109,6 @@ function initPlaceImageSliders() {
                 }
             });
             updateAuthUI();
-
-            // Auto-pop sign-in modal after 2 seconds if user is not authenticated
-            setTimeout(() => {
-                if (window.Clerk && !window.Clerk.user) {
-                    const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
-                    const signInContainer = document.getElementById('sign-in-container');
-                    if (mandatoryOverlay && signInContainer) {
-                        mandatoryOverlay.style.display = 'flex';
-                        document.body.style.overflow = 'hidden';
-                        try {
-                            window.Clerk.mountSignIn(signInContainer, { 
-                                routing: 'hash',
-                                appearance: {
-                                    variables: { colorPrimary: 'red' }
-                                }
-                            });
-                        } catch (err) {
-                            signInContainer.innerHTML = `<div style="background: white; padding: 2rem; border-radius: 12px; color: #d93025; font-weight: 600;">Error: ${err.message}</div>`;
-                        }
-                    }
-                }
-            }, 2000);
 
             // Listen for auth state changes
             window.Clerk.addListener(({ user }) => {
