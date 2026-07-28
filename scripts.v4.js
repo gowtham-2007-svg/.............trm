@@ -58,9 +58,14 @@ const destinations = [
     {
         id: 'mysuru_east_west',
         name: 'Mysuru – East & West',
-        image: 'assets/destinations/mysuru.png',
+        image: 'https://www.itslife.in/wp-content/gallery/travel/travel-mysore-heritage-blgs-clock-tower-2.jpg',
         color: '#F59E0B',
         famousPlaces: [
+            {
+                name: 'Dodda Gadiyara (Clock Tower)',
+                image: 'https://www.itslife.in/wp-content/gallery/travel/travel-mysore-heritage-blgs-clock-tower-2.jpg',
+                description: 'Iconic 75-foot silver-jubilee clock tower built in 1927 featuring Indo-Saracenic architecture.'
+            },
             {
                 name: 'Jayalakshmi Vilas Mansion',
                 image: 'https://d2rdhxfof4qmbb.cloudfront.net/wp-content/uploads/2024/03/Palace-Museum-1068x801.jpg',
@@ -75,11 +80,6 @@ const destinations = [
                 name: 'Kukkarahalli Nature Trail',
                 image: 'https://live.staticflickr.com/65535/50948988027_64c8bd54e0.jpg',
                 description: 'Scenic nature trail around Kukkarahalli lake popular for morning walks and bird watching.'
-            },
-            {
-                name: 'Gokulam Café Street',
-                image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800',
-                description: 'Trendy yoga and cafe corridor with artisan coffee and international food.'
             }
         ]
     },
@@ -114,9 +114,14 @@ const destinations = [
     {
         id: 'bangalore_east_west',
         name: 'Bangalore – East & West',
-        image: 'assets/destinations/bangalore.png',
+        image: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg',
         color: '#3B82F6',
         famousPlaces: [
+            {
+                name: 'Lalbagh Botanical Garden',
+                image: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg',
+                description: 'Sprawling 240-acre botanical garden featuring the famous glass house and tropical plants.'
+            },
             {
                 name: 'Phoenix Marketcity & VR Mall',
                 image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
@@ -131,11 +136,6 @@ const destinations = [
                 name: 'HAL Aerospace Museum',
                 image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg',
                 description: 'India’s first aviation museum displaying real fighter jets and helicopters.'
-            },
-            {
-                name: 'Commercial Street',
-                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
-                description: 'Bustling shopping street famous for traditional wear, silk, and street food.'
             }
         ]
     },
@@ -2034,13 +2034,13 @@ const mysuruEastWestCategoryData = {
             },
             {
                 name: 'Dodda Gadiyara (Clock Tower)',
-                image: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg',
+                image: 'https://www.itslife.in/wp-content/gallery/travel/travel-mysore-heritage-blgs-clock-tower-2.jpg',
                 description: 'Iconic 75-foot silver-jubilee clock tower built in 1927 featuring Indo-Saracenic architecture.',
                 rating: '4.5',
                 bestTime: 'Open 24 Hours (Best at Night)',
                 busRoutes: 'Located at Town Hall Circle, Mysuru.',
                 bestChoice: 'Night Illumination & Town Hall Heritage Walk',
-                bestChoiceImg: 'https://images.pond5.com/100-year-old-clock-tower-footage-172070642_iconl.jpeg'
+                bestChoiceImg: 'https://www.itslife.in/wp-content/gallery/travel/travel-mysore-heritage-blgs-clock-tower-2.jpg'
             }
         ]
     },
@@ -2743,7 +2743,7 @@ const bangaloreEastWestCategories = [
     { id: 'shopping', name: 'Malls & Shopping (East & West)', desc: 'Explore malls & markets →', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=600' },
     { id: 'cafes_food', name: 'Cafes & Food Hubs', desc: 'Explore trendy eateries →', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600' },
     { id: 'heritage_museums', name: 'Museums & Heritage', desc: 'Explore aviation & art →', image: 'https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg' },
-    { id: 'parks_lakes', name: 'Lakes & Scenic Parks', desc: 'Explore lake trails →', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600' },
+    { id: 'parks_lakes', name: 'Lakes & Scenic Parks', desc: 'Explore botanical gardens & lake trails →', image: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg' },
     { id: 'breweries', name: 'Pubs & Nightlife', desc: 'Explore craft breweries →', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600' },
     { id: 'temples', name: 'Historic Temples', desc: 'Explore ancient shrines →', image: 'https://thumbs.dreamstime.com/b/adiyogi-shiva-statue-isha-yoga-center-coimbatore-185442002.jpg' }
 ];
