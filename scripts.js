@@ -8148,36 +8148,57 @@ function initPlaceImageSliders() {
         }
     }
 
+    function openSignInModal() {
+        if (window.Clerk && window.Clerk.user) return;
+
+        const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
+        const signInContainer = document.getElementById('sign-in-container');
+        if (mandatoryOverlay && signInContainer) {
+            if (mandatoryOverlay.style.display === 'flex') return;
+            mandatoryOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            try {
+                window.Clerk.mountSignIn(signInContainer, { 
+                    routing: 'hash',
+                    appearance: {
+                        variables: { colorPrimary: 'red' }
+                    }
+                });
+            } catch (err) {
+                signInContainer.innerHTML = `<div style="background: white; padding: 2rem; border-radius: 12px; color: #d93025; font-weight: 600;">Error: ${err.message}</div>`;
+            }
+        } else if (window.Clerk) {
+            window.Clerk.openSignIn();
+        }
+    }
+
     if (authNavBtn) {
         authNavBtn.addEventListener('click', async (e) => {
             if (window.Clerk) {
                 if (window.Clerk.user) {
                     await window.Clerk.signOut();
                 } else {
-                    const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
-                    const signInContainer = document.getElementById('sign-in-container');
-                    if (mandatoryOverlay && signInContainer) {
-                        mandatoryOverlay.style.display = 'flex';
-                        document.body.style.overflow = 'hidden';
-                        try {
-                            window.Clerk.mountSignIn(signInContainer, { 
-                                routing: 'hash',
-                                appearance: {
-                                    variables: { colorPrimary: 'red' }
-                                }
-                            });
-                        } catch (err) {
-                            signInContainer.innerHTML = `<div style="background: white; padding: 2rem; border-radius: 12px; color: #d93025; font-weight: 600;">Error: ${err.message}</div>`;
-                        }
-                    } else {
-                        window.Clerk.openSignIn();
-                    }
+                    openSignInModal();
                 }
             } else {
                 alert("Sign-in system is still loading. Please try again in a few seconds.");
             }
         });
     }
+
+    // Auto popup sign-in modal 3 seconds after page load if user is not signed in
+    setTimeout(() => {
+        if (window.Clerk) {
+            openSignInModal();
+        } else {
+            const checkClerkForPopup = setInterval(() => {
+                if (window.Clerk) {
+                    clearInterval(checkClerkForPopup);
+                    openSignInModal();
+                }
+            }, 100);
+        }
+    }, 3000);
 
     // Allow closing the sign in modal if they click on the blurred background
     const mOverlay = document.getElementById('mandatory-auth-overlay');
