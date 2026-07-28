@@ -1884,63 +1884,165 @@ const mysuruCategoryData = {
         places: [
             {
                 name: 'Hotel RRR Mysuru',
-                image: 'https://b.zmtcdn.com/data/pictures/0/3800060/f8caae37b51b759600d83ed93e507c91.jpg',
+                image: 'https://search-ethnic.com/wp-content/uploads/2025/01/th_3-rrr-19-59-42-800x600.jpg',
                 description: 'Legendary non-veg dining establishment near Gandhi Square famous for Andhra-style banana leaf Mutton Biryani and Chilly Chicken.',
                 rating: '4.8',
                 bestTime: '12:00 PM – 4:00 PM, 7:00 PM – 10:30 PM',
                 busRoutes: 'Located at Gandhi Square, Sayyaji Rao Road, Central Mysuru.',
                 bestChoice: 'Mutton Biryani on Banana Leaf & Andhra Chilly Chicken',
-                bestChoiceImg: 'https://b.zmtcdn.com/data/pictures/0/3800060/f8caae37b51b759600d83ed93e507c91.jpg'
+                bestChoiceImg: 'https://search-ethnic.com/wp-content/uploads/2025/01/th_3-rrr-19-59-42-800x600.jpg',
+                bestFoods: [
+                    {
+                        name: 'Banana Leaf Mutton Biryani Meal',
+                        price: '₹320',
+                        img: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/dd/26/6d/photo3jpg.jpg?w=1200&h=-1&s=1'
+                    },
+                    {
+                        name: 'Andhra Chilli Chicken & Biryani Combo',
+                        price: '₹260',
+                        img: 'https://thefoodietravels.com/wp-content/uploads/2021/01/IMG-1198.JPG-1024x768.jpg'
+                    }
+                ]
             },
             {
                 name: 'Original Mylari Hotel',
-                image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800',
+                image: 'https://fastly.4sqi.net/img/general/600x600/11008143_M8OIOUR1e2staJvh_ol5LdvqmNGbZwc6N94ozVQb_-g.jpg',
                 description: 'Historic breakfast joint running since 1938, iconic for soft, pillow-like butter dosa served with saagu and fresh white butter.',
                 rating: '4.9',
                 bestTime: '6:30 AM – 1:30 PM, 3:30 PM – 8:30 PM',
                 busRoutes: 'Located near Agrahara Circle, Mysuru.',
                 bestChoice: 'Original Mylari Butter Dosa with Sagu & Fresh White Butter',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800'
+                bestChoiceImg: 'https://fastly.4sqi.net/img/general/600x600/11008143_M8OIOUR1e2staJvh_ol5LdvqmNGbZwc6N94ozVQb_-g.jpg',
+                bestFoods: [
+                    {
+                        name: 'Original Mylari Butter Dosa & Sagu',
+                        price: '₹60',
+                        img: 'https://thefederal.com/h-upload/2026/01/20/590912-mysoremylarishopinbangalore-1.webp'
+                    },
+                    {
+                        name: 'Special Soft Ghee Dosa with Fresh White Butter',
+                        price: '₹75',
+                        img: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/03/05160656/Original-Vinayaka-Mylari-809x455.jpg'
+                    }
+                ]
             },
             {
                 name: 'Gayathri Tiffin Room (GTR)',
-                image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800',
+                image: 'https://images.slurrp.com/prodrich_article/ar6motue35e.webp?impolicy=slurrp-20210601&width=880&height=500',
                 description: 'Beloved heritage South Indian vegetarian mess famous for crispy ghee masala dosa, crispy uddina vada, and filter coffee.',
                 rating: '4.7',
                 bestTime: '7:00 AM – 11:30 AM, 3:30 PM – 8:00 PM',
                 busRoutes: 'Located in Chamundipuram, Mysuru.',
                 bestChoice: 'GTR Special Masala Dosa, Filter Coffee & Crispy Vada',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800'
+                bestChoiceImg: 'https://images.slurrp.com/prodrich_article/ar6motue35e.webp?impolicy=slurrp-20210601&width=880&height=500',
+                bestFoods: [
+                    {
+                        name: 'GTR Crispy Ghee Masala Dosa',
+                        price: '₹70',
+                        img: 'https://img02.restaurantguru.com/cb68-Gayatri-Tiffin-Room-GTR-Vegetarian-Restaurant-Mysuru-food.jpg'
+                    },
+                    {
+                        name: 'Special Tiffin Meal & Filter Coffee',
+                        price: '₹85',
+                        img: 'https://thetastytales.com/wp-content/uploads/2026/04/Gayatri-Tiffin-Food-1024x771.jpg'
+                    },
+                    {
+                        name: 'GTR Golden Masala Dosa',
+                        price: '₹75',
+                        img: 'https://vacaywork.com/wp-content/uploads/2024/07/GTR-Dosa.jpg'
+                    },
+                    {
+                        name: 'Heritage South Indian Breakfast Spread',
+                        price: '₹95',
+                        img: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/03/05160919/Gayathri-Tiffin-Room-809x455.jpg?tr=w-1920'
+                    }
+                ]
             },
             {
                 name: 'Guru Sweet Mart',
-                image: 'https://images.slurrp.com/prodarticles/ydoju3f5ofc.webp?impolicy=slurrp-20210601&width=1200&height=900&q=75',
+                image: 'https://www.itslife.in/wp-content/gallery/myszoo-eda-balamuri-krs/travel-mysore-guru-sweet-mart-2.jpg',
                 description: 'Original ancestral birthplace of Mysore Pak, crafted by Kakasura Madappa, the royal chef of Maharaja Krishnaraja Wadiyar IV.',
                 rating: '4.9',
                 bestTime: '9:00 AM – 10:00 PM',
                 busRoutes: 'Located on Sayyaji Rao Road, Near Devaraja Market.',
                 bestChoice: 'Authentic Melt-in-Mouth Royal Ghee Mysore Pak',
-                bestChoiceImg: 'https://images.slurrp.com/prodarticles/ydoju3f5ofc.webp?impolicy=slurrp-20210601&width=1200&height=900&q=75'
+                bestChoiceImg: 'https://www.itslife.in/wp-content/gallery/myszoo-eda-balamuri-krs/travel-mysore-guru-sweet-mart-2.jpg',
+                bestFoods: [
+                    {
+                        name: 'Original Royal Ghee Mysore Pak',
+                        price: '₹140 / 250g',
+                        img: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/03/05171556/Guru-Sweet-Mart-809x455.jpg?tr=w-1920'
+                    },
+                    {
+                        name: 'Special Motichoor Laddu',
+                        price: '₹120 / 250g',
+                        img: 'https://www.murarisweets.com/cdn/shop/files/MotichoorLaddu4.png?crop=center&height=2048&v=1709528857&width=2048'
+                    },
+                    {
+                        name: 'Traditional Kova & Kobbari Sweets',
+                        price: '₹130 / 250g',
+                        img: 'https://caleidoscope.in/wp-content/uploads/2022/08/The-Sweet-Delicacies-of-Andhra-Pradesh-Kova-Kobbari-Laddu-1024x674.jpg'
+                    }
+                ]
             },
             {
                 name: 'Hanumanthu Mess',
-                image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=800',
+                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/90/85/1f/sunday.jpg?w=1200&h=1200&s=1',
                 description: 'Historic 90-year-old mess known for its woodfire-cooked mutton pulao served in traditional palm-leaf donnes.',
                 rating: '4.7',
                 bestTime: '6:00 AM – 10:00 PM',
                 busRoutes: 'Located in Mandi Mohalla, Mysuru.',
                 bestChoice: 'Heritage Mutton Pulao & Mutton Chops',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=800'
+                bestChoiceImg: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/90/85/1f/sunday.jpg?w=1200&h=1200&s=1',
+                bestFoods: [
+                    {
+                        name: 'Woodfire Heritage Mutton Donne Pulao',
+                        price: '₹240',
+                        img: 'https://i.ytimg.com/vi/NqDuoIxbXho/maxresdefault.jpg'
+                    },
+                    {
+                        name: 'Authentic Mutton Chops Fry',
+                        price: '₹210',
+                        img: 'https://im.whatshot.in/img/2020/Jun/header-725x420-delhi-13076-b-1592510175.jpg'
+                    },
+                    {
+                        name: 'Chicken Pulao & Spicy Gravy',
+                        price: '₹190',
+                        img: 'https://im.whatshot.in/img/2018/Dec/is-1-1545289353.jpg'
+                    },
+                    {
+                        name: 'Hanumanthu Special Non-Veg Meal',
+                        price: '₹280',
+                        img: 'https://img.restaurantguru.com/r9be-Original-Hanumanthu-Devi-Mess-since-1930-meals-2022-10-2.jpg'
+                    }
+                ]
             },
             {
                 name: 'The Spring (Radisson Blu Mysuru)',
-                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+                image: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/c1/b9/7a/poolside-dining.jpg',
                 description: 'Luxury 24-hour fine dining restaurant offering international buffets, authentic South Indian delicacies, and poolside ambiance.',
                 rating: '4.6',
                 bestTime: '12:30 PM – 3:30 PM, 7:00 PM – 11:00 PM',
                 busRoutes: 'Located on MG Road, Mysuru (Adjacent to Mall of Mysore).',
                 bestChoice: 'Multi-cuisine Luxury Buffet & Poolside Dining',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800'
+                bestChoiceImg: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/c1/b9/7a/poolside-dining.jpg',
+                bestFoods: [
+                    {
+                        name: 'Tandoori Chicken Tikka Platter',
+                        price: '₹550',
+                        img: 'https://myblacktree.com/cdn/shop/files/chicken-tikka-airfryer-feat-2-removebg-preview.png?v=1691146145&width=1080'
+                    },
+                    {
+                        name: 'Luxury Gourmet Buffet Spread',
+                        price: '₹1250',
+                        img: 'https://swatisani.net/kitchen/wp-content/uploads/2015/11/IMG_9546.jpg'
+                    },
+                    {
+                        name: 'Signature Fine Dining Multi-Cuisine Platter',
+                        price: '₹950',
+                        img: 'https://as2.ftcdn.net/jpg/11/62/76/41/1000_F_1162764185_pdOsqoevoDVfjI2I57vwNeeN9qcc5gwu.jpg'
+                    }
+                ]
             }
         ]
     },
