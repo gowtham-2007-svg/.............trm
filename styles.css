@@ -352,19 +352,10 @@ main {
 .destinations-row {
     max-width: 1400px;
     margin: 0 auto 2rem;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.destinations-row::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+    gap: 1rem;
 }
 
 .dest-card-wrapper {
@@ -408,8 +399,8 @@ main {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem 4.5rem 1.5rem 1.5rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding: 1.25rem 3.5rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
     color: white;
     display: flex;
     flex-direction: column;
@@ -418,17 +409,18 @@ main {
 }
 
 .dest-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
 }
 
 .dest-card .arrow-btn {
     position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 40px;
-    height: 40px;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 36px;
+    height: 36px;
     background: white;
     border-radius: 50%;
     display: flex;
@@ -1091,9 +1083,13 @@ main {
     /* Responsive */
     @media (max-width: 1200px) {
         .destinations-row {
-            grid-template-columns: repeat(6, minmax(160px, 1fr));
-            gap: 1rem;
-            overflow-x: auto;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.75rem;
+            padding: 0 1rem;
+        }
+
+        .dest-card h3 {
+            font-size: 1.05rem;
         }
 
         .hero h1 {
@@ -1144,9 +1140,10 @@ main {
         }
 
         .destinations-row {
-            grid-template-columns: repeat(6, minmax(140px, 1fr));
-            overflow-x: auto;
-            gap: 0.85rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1rem;
         }
 
         .hero .badge,
@@ -1162,7 +1159,7 @@ main {
 
         .dest-card {
             height: auto;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 3 / 4;
             opacity: 1;
             animation: none !important;
             transform: translateZ(0);
@@ -1821,10 +1818,13 @@ main {
     /* Responsive Layout Adjustments */
     @media (max-width: 1024px) {
         .destinations-row {
-            grid-template-columns: repeat(6, minmax(150px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
             padding: 0 1.5rem;
-            overflow-x: auto;
+        }
+
+        .dest-card h3 {
+            font-size: 1.2rem;
         }
 
         .places-grid {
@@ -2104,30 +2104,39 @@ main {
     }
 
     .destinations-row {
-        grid-template-columns: repeat(6, minmax(130px, 1fr)) !important;
-        gap: 0.75rem !important;
-        padding: 0 0.75rem 0.5rem !important;
-        overflow-x: auto !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.85rem !important;
+        padding: 0 0.85rem !important;
+        overflow-x: visible !important;
+    }
+
+    .dest-card {
+        height: auto !important;
+        aspect-ratio: 3 / 4 !important;
+        border-radius: 18px !important;
     }
 
     .dest-card h3 {
-        font-size: 0.9rem;
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        line-height: 1.25 !important;
     }
 
     .dest-card-overlay {
-        padding: 0.75rem;
+        padding: 0.85rem 2.4rem 0.85rem 0.85rem !important;
     }
 
     .dest-card .arrow-btn {
-        width: 32px;
-        height: 32px;
-        bottom: 0.75rem;
-        right: 0.75rem;
+        width: 32px !important;
+        height: 32px !important;
+        bottom: 0.85rem !important;
+        right: 0.85rem !important;
     }
 
     .dest-card .arrow-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 15px !important;
+        height: 15px !important;
     }
 
     .dest-header {
