@@ -3,6 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const zlib = require('zlib');
 const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 global.WebSocket = require('ws');
@@ -883,26 +884,53 @@ const requestListener = async (req, res) => {
             targetPath = path.join(safePath, 'index.html');
         }
 
-        fs.readFile(targetPath, (error, content) => {
+        fs.stat(targetPath, (error, fileStats) => {
             if (error) {
                 if (error.code === 'ENOENT') {
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
                     res.end('<h1>404 Not Found</h1>');
                 } else {
-                    res.writeHead(500, { 'Content-Type': 'text/plain' });
+                    res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
                     res.end(`Internal Server Error: ${error.code}`);
                 }
+                return;
+            }
+
+            const ext = path.extname(targetPath).toLowerCase();
+            const contentType = mimeTypes[ext] || 'application/octet-stream';
+            const etag = `W/"${fileStats.size.toString(16)}-${fileStats.mtimeMs.toString(16)}"`;
+            
+            if (req.headers['if-none-match'] === etag) {
+                res.writeHead(304);
+                res.end();
+                return;
+            }
+
+            const headers = {
+                'Content-Type': contentType,
+                'ETag': etag,
+                'Vary': 'Accept-Encoding'
+            };
+
+            if (ext === '.html' || ext === '.js' || ext === '.css') {
+                headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
             } else {
-                const ext = path.extname(targetPath).toLowerCase();
-                const contentType = mimeTypes[ext] || 'application/octet-stream';
-                const headers = { 'Content-Type': contentType };
-                if (ext === '.html' || ext === '.js' || ext === '.css') {
-                    headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate';
-                    headers['Pragma'] = 'no-cache';
-                    headers['Expires'] = '0';
-                }
+                headers['Cache-Control'] = 'public, max-age=86400, immutable';
+            }
+
+            const acceptEncoding = req.headers['accept-encoding'] || '';
+            const isCompressible = /javascript|json|html|css|xml|svg|text/.test(contentType);
+
+            if (isCompressible && acceptEncoding.includes('gzip')) {
+                headers['Content-Encoding'] = 'gzip';
                 res.writeHead(200, headers);
-                res.end(content, 'utf-8');
+                const rawStream = fs.createReadStream(targetPath);
+                const gzipStream = zlib.createGzip({ level: 6 });
+                rawStream.pipe(gzipStream).pipe(res);
+            } else {
+                headers['Content-Length'] = fileStats.size;
+                res.writeHead(200, headers);
+                fs.createReadStream(targetPath).pipe(res);
             }
         });
     });

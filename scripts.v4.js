@@ -3401,6 +3401,8 @@ function renderGlobalFavoritesPage() {
     });
 }
 
+let activeSwiperInstances = [];
+
 function clearBackgroundIntervals() {
     try {
         if (typeof bestFoodSliderIntervals !== 'undefined' && Array.isArray(bestFoodSliderIntervals)) {
@@ -3413,6 +3415,14 @@ function clearBackgroundIntervals() {
         }
         if (typeof popupAutoPlayInterval !== 'undefined' && popupAutoPlayInterval) {
             clearInterval(popupAutoPlayInterval);
+        }
+        if (Array.isArray(activeSwiperInstances) && activeSwiperInstances.length > 0) {
+            activeSwiperInstances.forEach(instance => {
+                if (instance && typeof instance.destroy === 'function') {
+                    try { instance.destroy(true, true); } catch(err) {}
+                }
+            });
+            activeSwiperInstances = [];
         }
     } catch(e) {
         console.warn(e);
@@ -3796,7 +3806,7 @@ function renderDestination(id) {
     if (isPremiumCity && typeof Swiper !== 'undefined') {
         ['.food-swiper', '.beach-swiper', '.temple-swiper', '.mall-swiper'].forEach((selector, idx) => {
             if (document.querySelector(selector)) {
-                new Swiper(selector, {
+                const sInst = new Swiper(selector, {
                     loop: true,
                     speed: 1200,
                     autoplay: {
@@ -3809,6 +3819,9 @@ function renderDestination(id) {
                     touchRatio: 1.2,
                     resistanceRatio: 0.8,
                 });
+                if (typeof activeSwiperInstances !== 'undefined') {
+                    activeSwiperInstances.push(sInst);
+                }
             }
         });
         bindDoubleTapListeners();
