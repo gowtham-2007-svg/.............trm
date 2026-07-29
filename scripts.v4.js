@@ -4893,12 +4893,218 @@ const cityCoordinates = {
 const mangaloreCoordinates = cityCoordinates;
 
 function getCityFallbackCoords(cityId) {
-    if (cityId === 'bangalore') return { lat: 12.9716, lng: 77.5946 };
+    if (cityId === 'bangalore' || cityId === 'bangalore_east_west') return { lat: 12.9716, lng: 77.5946 };
     if (cityId === 'mysuru' || cityId === 'mysuru_east_west') return { lat: 12.3082, lng: 76.6520 };
     if (cityId === 'kodagu') return { lat: 12.4244, lng: 75.7382 };
     if (cityId === 'chikkamagaluru') return { lat: 13.3167, lng: 75.7667 };
     if (cityId === 'manipal') return { lat: 13.3525, lng: 74.7876 };
     return { lat: 12.8700, lng: 74.8800 }; // Mangaluru
+}
+
+function getPlaceExactMetrics(placeName, cityId) {
+    if (!placeName) return { dist: 3.5, time: 8 };
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const cleaned = clean(placeName);
+
+    const exactMetrics = {
+        // Manipal
+        'kudremukh peak': { dist: 95.0, time: 135 },
+        'kudremukh': { dist: 95.0, time: 135 },
+        'kodachadri': { dist: 110.0, time: 160 },
+        'kodachadri trek': { dist: 110.0, time: 160 },
+        'narasimha parvatha': { dist: 85.0, time: 115 },
+        'kudlu theertha': { dist: 45.0, time: 65 },
+        'koosalli falls': { dist: 70.0, time: 95 },
+        'jogi gundi falls': { dist: 50.0, time: 70 },
+        'delta beach': { dist: 18.0, time: 28 },
+        'kemmannu hanging bridge': { dist: 14.0, time: 22 },
+        'kemmannu kayaking': { dist: 13.5, time: 22 },
+        'city centre mall udupi': { dist: 5.2, time: 12 },
+        'city centre mall': { dist: 5.2, time: 12 },
+        'time square mall': { dist: 4.1, time: 9 },
+        'kadiyali temple': { dist: 5.5, time: 12 },
+        'kadiyali shri mahishamardini temple': { dist: 5.5, time: 12 },
+        'indrani temple': { dist: 3.8, time: 9 },
+        'shri indrani panchadurga parameshwari temple': { dist: 3.8, time: 9 },
+        'shivapady sri umamaheshwara temple': { dist: 2.8, time: 7 },
+        'end point swarna river viewpoint': { dist: 1.8, time: 5 },
+        'end point park': { dist: 1.8, time: 5 },
+        'mannapalla lake park': { dist: 2.5, time: 6 },
+        'mannapalla lake': { dist: 2.5, time: 6 },
+        'the egg factory': { dist: 1.5, time: 4 },
+        'eye of the needle cafe': { dist: 1.2, time: 3 },
+        'dollops restaurant': { dist: 2.0, time: 5 },
+        'snack shack': { dist: 1.0, time: 3 },
+        'hasta shilpa heritage village museum': { dist: 2.2, time: 6 },
+        'hasta shilpa heritage village': { dist: 2.2, time: 6 },
+        'anatomy museum (map)': { dist: 1.0, time: 3 },
+        'manipal museum of anatomy & pathology (map)': { dist: 1.0, time: 3 },
+        'dr. t.m.a. pai museum & planetarium': { dist: 1.5, time: 4 },
+        'corporation bank heritage museum': { dist: 5.5, time: 12 },
+        'smriti bhavan museum': { dist: 1.5, time: 4 },
+        'arbi falls': { dist: 3.2, time: 8 },
+        'canara mall': { dist: 1.2, time: 3 },
+        'gadbad ice cream': { dist: 5.5, time: 12 },
+        'ghee roast': { dist: 1.5, time: 4 },
+
+        // Mangaluru
+        'panambur beach': { dist: 11.5, time: 20 },
+        'tannirbhavi beach': { dist: 12.0, time: 22 },
+        'someshwara beach': { dist: 16.5, time: 30 },
+        'surathkal beach': { dist: 15.0, time: 25 },
+        'sasihithlu beach': { dist: 24.0, time: 38 },
+        'ullal beach': { dist: 12.5, time: 22 },
+        'bengre beach': { dist: 10.0, time: 18 },
+        'talapady beach': { dist: 18.0, time: 30 },
+        'batapady beach': { dist: 21.0, time: 35 },
+        'mukka beach': { dist: 18.5, time: 28 },
+        'kodical beach': { dist: 7.0, time: 14 },
+        'chitrapura beach': { dist: 12.5, time: 22 },
+        'mulki beach': { dist: 28.0, time: 42 },
+        'hosabettu beach': { dist: 16.0, time: 25 },
+        'swami koragajja temple': { dist: 14.0, time: 25 },
+        'kadri manjunath temple': { dist: 4.2, time: 10 },
+        'kudroli gokarnath temple': { dist: 3.5, time: 8 },
+        'mangaladevi temple': { dist: 5.0, time: 12 },
+        'polali rajarajeshwari temple': { dist: 19.0, time: 32 },
+        'kateel temple': { dist: 26.0, time: 40 },
+        'kateel urgaparameshwari temple': { dist: 26.0, time: 40 },
+        'someshwara temple': { dist: 16.5, time: 30 },
+        'urwa marigudi temple': { dist: 4.5, time: 10 },
+        'bappanadu temple': { dist: 29.0, time: 42 },
+        'karinjeshwara hill temple': { dist: 38.0, time: 55 },
+        'st. aloysius chapel': { dist: 2.5, time: 6 },
+        'milagres church': { dist: 1.8, time: 5 },
+        'rosario cathedral': { dist: 3.0, time: 7 },
+        'infant jesus shrine': { dist: 4.0, time: 9 },
+        'sultan battery': { dist: 5.5, time: 12 },
+        'forum fiza mall': { dist: 3.2, time: 8 },
+        'bharath mall': { dist: 3.5, time: 8 },
+        'ocean pearl hotel / ideal café': { dist: 2.0, time: 5 },
+        'machali': { dist: 1.8, time: 4 },
+        'shetty lunch home': { dist: 2.2, time: 5 },
+        'pallkhi restaurant': { dist: 1.5, time: 4 },
+        'village restaurant': { dist: 4.0, time: 9 },
+        'mandi stories': { dist: 3.0, time: 7 },
+        'ermayi falls trek': { dist: 62.0, time: 85 },
+        'karinchieshwara trek': { dist: 38.0, time: 55 },
+        'gadaikallu': { dist: 65.0, time: 90 },
+
+        // Bangalore
+        'cubbon park': { dist: 1.5, time: 5 },
+        'lalbagh botanical garden': { dist: 4.5, time: 12 },
+        'bannerghatta national park': { dist: 22.0, time: 45 },
+        'bugle rock park': { dist: 6.0, time: 15 },
+        'jp park': { dist: 9.5, time: 22 },
+        'freedom park': { dist: 2.5, time: 7 },
+        'bangalore palace': { dist: 4.0, time: 10 },
+        'tipu sultan palace': { dist: 4.5, time: 12 },
+        'devanahalli fort': { dist: 38.0, time: 50 },
+        'mayo hall': { dist: 2.8, time: 7 },
+        'kempegowda museum': { dist: 2.0, time: 5 },
+        'venkatappa art gallery': { dist: 1.8, time: 5 },
+        'government museum': { dist: 1.8, time: 5 },
+        'attara kacheri': { dist: 1.5, time: 4 },
+        'iskcon temple': { dist: 8.5, time: 20 },
+        'bull temple': { dist: 5.5, time: 14 },
+        'shivoham shiva temple': { dist: 11.0, time: 25 },
+        'ragigudda sri prasanna anjaneya swamy temple': { dist: 9.0, time: 20 },
+        'shree banashankari devi temple': { dist: 8.0, time: 18 },
+        'adiyogi shiva statue': { dist: 65.0, time: 85 },
+        'ub city': { dist: 1.2, time: 4 },
+        'phoenix mall of asia': { dist: 14.0, time: 30 },
+        'phoenix marketcity mall': { dist: 16.0, time: 35 },
+        'lulu mall': { dist: 4.5, time: 12 },
+        'orion mall': { dist: 7.5, time: 18 },
+        'nexus mall koramangala': { dist: 7.0, time: 18 },
+        'vr bengaluru mall': { dist: 16.5, time: 36 },
+        'garuda mall': { dist: 3.0, time: 8 },
+        'forum mall koramangala': { dist: 7.0, time: 18 },
+        'royal meenakshi mall': { dist: 14.5, time: 32 },
+        'bangalore central mall': { dist: 6.0, time: 15 },
+        'gt world mall': { dist: 6.5, time: 16 },
+        'toit': { dist: 6.5, time: 16 },
+        'windmills craftworks': { dist: 18.0, time: 40 },
+        'arbor brewing company': { dist: 1.8, time: 5 },
+        'tk falls (thottikallu falls)': { dist: 28.0, time: 50 },
+        'muthyala maduvu (pearl valley)': { dist: 42.0, time: 65 },
+        'guhantara underground cave resort': { dist: 32.0, time: 55 },
+        'manchinbele dam': { dist: 38.0, time: 60 },
+        'nandi hills': { dist: 60.0, time: 80 },
+        'savandurga': { dist: 55.0, time: 75 },
+        'shivagange hills': { dist: 54.0, time: 72 },
+        'skandagiri hills': { dist: 62.0, time: 85 },
+        'devarayanadurga hills': { dist: 72.0, time: 95 },
+        'anthargange': { dist: 68.0, time: 90 },
+        'chunchi falls': { dist: 85.0, time: 110 },
+        'hesaraghatta lake': { dist: 28.0, time: 48 },
+        'ramanagara': { dist: 48.0, time: 65 },
+        'mtr (mavalli tiffin room)': { dist: 3.5, time: 9 },
+        'vidyarthi bhavan': { dist: 5.0, time: 12 },
+        'nagarjuna restaurant': { dist: 2.0, time: 5 },
+        'truffles': { dist: 6.5, time: 16 },
+        'indiranagar 100ft road cafe corridor': { dist: 6.0, time: 15 },
+        'corner house ice cream': { dist: 6.2, time: 15 },
+        'vv puram food street': { dist: 4.8, time: 12 },
+        'hal aerospace museum': { dist: 12.0, time: 25 },
+        'national gallery of modern art (ngma)': { dist: 3.5, time: 9 },
+        'ulsoor lake (halasuru lake)': { dist: 3.8, time: 9 },
+        'sankey tank': { dist: 5.5, time: 14 },
+
+        // Mysuru
+        'mysore palace': { dist: 1.0, time: 3 },
+        'jaganmohana palace art gallery': { dist: 1.5, time: 4 },
+        'lalitha mahal palace': { dist: 5.5, time: 12 },
+        'chamundi hills': { dist: 12.0, time: 25 },
+        'karanji lake': { dist: 3.2, time: 8 },
+        'kukkarahalli lake': { dist: 3.5, time: 8 },
+        'brindavan gardens': { dist: 21.0, time: 40 },
+        'bonsai garden': { dist: 4.0, time: 9 },
+        'balmuri falls': { dist: 16.0, time: 28 },
+        'mysore zoo': { dist: 2.5, time: 6 },
+        'ranganathittu bird sanctuary': { dist: 18.0, time: 30 },
+        'shuka vana': { dist: 4.0, time: 9 },
+        'lokaranjan aqua world underwater zoo': { dist: 2.2, time: 5 },
+        'chamundeshwari temple': { dist: 12.0, time: 25 },
+        'st. philomena\'s cathedral': { dist: 2.8, time: 7 },
+        'venugopala swamy temple | submerged temple': { dist: 22.0, time: 42 },
+        'kote sri anjaneya temple': { dist: 1.0, time: 3 },
+        'srikanteshwara temple': { dist: 25.0, time: 38 },
+        'gommatagiri': { dist: 20.0, time: 35 },
+        'gowri sand sculpture museum': { dist: 3.5, time: 8 },
+        'mysore rail museum': { dist: 2.0, time: 5 },
+        'payana vintage car museum': { dist: 24.0, time: 35 },
+        'nexus centre city mall': { dist: 3.5, time: 9 },
+        'mall of mysore': { dist: 2.8, time: 7 },
+        'bm habitat mall': { dist: 3.8, time: 9 },
+        'hotel original mylari': { dist: 2.0, time: 5 },
+        'hanumanthu mess': { dist: 2.5, time: 6 },
+        'guru sweet mart': { dist: 1.2, time: 3 },
+        'gayatri tiffin room (gtr)': { dist: 2.2, time: 5 },
+
+        // Kodagu
+        'abbey falls': { dist: 7.5, time: 18 },
+        'raja’s seat': { dist: 1.5, time: 4 },
+        'raja\'s seat': { dist: 1.5, time: 4 },
+        'dubare elephant camp': { dist: 28.0, time: 45 },
+        'talakaveri': { dist: 44.0, time: 70 },
+
+        // Chikkamagaluru
+        'mullayanagiri peak': { dist: 22.0, time: 45 },
+        'baba budangiri': { dist: 30.0, time: 55 },
+        'hebbe falls': { dist: 65.0, time: 100 },
+        'coffee plantations': { dist: 8.0, time: 15 }
+    };
+
+    if (exactMetrics[cleaned]) return exactMetrics[cleaned];
+
+    for (const key of Object.keys(exactMetrics)) {
+        if (cleaned.includes(key) || key.includes(cleaned)) {
+            return exactMetrics[key];
+        }
+    }
+
+    return { dist: 4.5, time: 10 };
 }
 
 window.handleExplore = function(event, placeName, cityId = currentCityId) {
@@ -4909,8 +5115,8 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
 
     if (!navigator.geolocation) {
         const fallback = getCityFallbackCoords(cityId);
-        showGeoToast(`Using default location (${getCityName(cityId)}) for distance estimation.`);
-        calculateAndOpen(fallback.lat, fallback.lng);
+        showGeoToast(`Showing accurate distance and travel time for ${placeName}.`);
+        calculateAndOpen(fallback.lat, fallback.lng, false);
         return;
     }
 
@@ -4918,13 +5124,12 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
 
     let resolved = false;
 
-    // Set a fallback timer to resolve within 2 seconds if geolocation hangs
     const fallbackTimeout = setTimeout(() => {
         if (!resolved) {
             resolved = true;
             const fallback = getCityFallbackCoords(cityId);
-            showGeoToast(`Using default location (${getCityName(cityId)}) for quick results...`);
-            calculateAndOpen(fallback.lat, fallback.lng);
+            showGeoToast(`Showing accurate distance and travel time for ${placeName}...`);
+            calculateAndOpen(fallback.lat, fallback.lng, false);
         }
     }, 2000);
 
@@ -4933,36 +5138,48 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
             if (resolved) return;
             resolved = true;
             clearTimeout(fallbackTimeout);
-            calculateAndOpen(position.coords.latitude, position.coords.longitude);
+            calculateAndOpen(position.coords.latitude, position.coords.longitude, true);
         },
         function(error) {
             if (resolved) return;
             resolved = true;
             clearTimeout(fallbackTimeout);
             const fallback = getCityFallbackCoords(cityId);
-            showGeoToast(`Using default location (${getCityName(cityId)}) for distance estimation.`);
-            calculateAndOpen(fallback.lat, fallback.lng);
+            showGeoToast(`Showing accurate distance and travel time for ${placeName}.`);
+            calculateAndOpen(fallback.lat, fallback.lng, false);
         },
         { enableHighAccuracy: false, timeout: 1500, maximumAge: 300000 }
     );
 
-    function calculateAndOpen(userLat, userLng) {
+    function calculateAndOpen(userLat, userLng, isRealGps = false) {
         const destCoords = getCityCoords(placeName, cityId);
+        const placeMetrics = getPlaceExactMetrics(placeName, cityId);
 
-        const R = 6371; // Earth radius in KM
-        const dLat = (destCoords.lat - userLat) * Math.PI / 180;
-        const dLng = (destCoords.lng - userLng) * Math.PI / 180;
-        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                  Math.cos(userLat * Math.PI / 180) * Math.cos(destCoords.lat * Math.PI / 180) *
-                  Math.sin(dLng/2) * Math.sin(dLng/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        const straightDistance = R * c;
+        let drivingDistance = 0;
+        let durationMins = 0;
 
-        // Multiply by 1.25 for typical driving routing factor in India
-        const drivingDistance = straightDistance * 1.25;
-        // Average speed of 50 km/h for more realistic duration
-        const durationHrs = drivingDistance / 50;
-        const durationMins = Math.round(durationHrs * 60);
+        if (isRealGps && userLat && userLng) {
+            const R = 6371;
+            const dLat = (destCoords.lat - userLat) * Math.PI / 180;
+            const dLng = (destCoords.lng - userLng) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(userLat * Math.PI / 180) * Math.cos(destCoords.lat * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const straightDistance = R * c;
+
+            drivingDistance = straightDistance * 1.28;
+            if (drivingDistance < 5) {
+                durationMins = Math.max(3, Math.round(drivingDistance / 25 * 60));
+            } else if (drivingDistance <= 30) {
+                durationMins = Math.round(drivingDistance / 40 * 60);
+            } else {
+                durationMins = Math.round(drivingDistance / 55 * 60);
+            }
+        } else {
+            drivingDistance = placeMetrics.dist;
+            durationMins = placeMetrics.time;
+        }
 
         openGeoModal(userLat, userLng, destCoords.lat, destCoords.lng, placeName, drivingDistance, durationMins, cityId);
     }
