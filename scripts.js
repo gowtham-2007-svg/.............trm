@@ -3533,12 +3533,14 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
                     </a>
                     <h1 style="margin: 0 0 0.5rem 0;">${category.name}</h1>
                     <p style="margin: 0 0 1.25rem 0;">Discover the best ${category.name.toLowerCase()} and plan your visit.</p>
+                    ${cityId !== 'mysuru_east_west' ? `
                     <button class="must-watch-btn" id="must-watch-btn" style="margin: 0;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 2px;"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                         <span class="hide-mobile">Must Visit Places</span>
                         <span class="show-mobile-inline" style="display: none;">Must Visit</span>
                         <span class="btn-arrow">→</span>
                     </button>
+                    ` : ''}
                 </div>
 
                 <div class="category-card famous-food-header-card" style="cursor: default;">
@@ -3764,7 +3766,7 @@ function renderDestination(id) {
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                         Back to Home
                     </a>
-                    ${isPremiumCity ? `
+                    ${isPremiumCity && dest.id !== 'mysuru_east_west' ? `
                     <button class="must-watch-btn" id="city-must-watch-btn">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 2px;"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                         <span class="hide-mobile">Must Visit Places</span>
