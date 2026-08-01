@@ -5704,18 +5704,32 @@ function addSwipeListener(element, onSwipeLeft, onSwipeRight) {
     }, { passive: true });
 }
 
-// Helper function to render star SVGs based on numeric rating
+// Helper function to render star SVGs based on numeric rating with staggered spring pop-in animation
 function renderStarRatingHTML(rating) {
     let starsHTML = '';
     const fullStars = Math.floor(rating);
-    const hasHalf = rating % 1 >= 0.5;
+    const remainder = rating % 1;
+
     for (let i = 1; i <= 5; i++) {
+        const delay = (0.3 + i * 0.18).toFixed(2);
+        const animStyle = `animation: starPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s both; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7)); display: inline-block; transform-origin: center;`;
+
         if (i <= fullStars) {
-            starsHTML += '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="margin-right:1px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
-        } else if (i === fullStars + 1 && hasHalf) {
-            starsHTML += '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="margin-right:1px;"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27V2.18L12 2z"/></svg>';
+            starsHTML += `<svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="none" style="margin: 0 3px; ${animStyle}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+        } else if (i === fullStars + 1 && remainder > 0.1) {
+            const pct = Math.round(remainder * 100);
+            const gradId = `goldStarGrad_${Math.floor(rating * 10)}`;
+            starsHTML += `<svg width="20" height="20" viewBox="0 0 24 24" style="margin: 0 3px; ${animStyle}">
+                <defs>
+                    <linearGradient id="${gradId}">
+                        <stop offset="${pct}%" stop-color="#f59e0b" />
+                        <stop offset="${pct}%" stop-color="rgba(255,255,255,0.15)" />
+                    </linearGradient>
+                </defs>
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="url(#${gradId})" />
+            </svg>`;
         } else {
-            starsHTML += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:1px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></polygon></svg>';
+            starsHTML += `<svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,0.15)" stroke="none" style="margin: 0 3px; animation: starPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s both; display: inline-block; transform-origin: center;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
         }
     }
     return starsHTML;
@@ -6920,98 +6934,53 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     };
     document.addEventListener('keydown', escHandler);
 
-    // 5. Fire Async Fetch request to local backend proxy
+    // 5. Instantly render mock place data (0ms delay) so modal pops up with content immediately!
+    const apiContent = document.getElementById('gmaps-api-content');
+    const loader = document.getElementById('gmaps-dynamic-loader');
+    const mockData = getMockReviewsData(destName, cityId);
+
+    if (mockData && apiContent) {
+        if (loader) loader.style.display = 'none';
+        apiContent.style.display = 'flex';
+        const instantData = {
+            connected: true,
+            status: 'OK',
+            name: destName,
+            rating: mockData.rating,
+            user_ratings_total: mockData.user_ratings_total,
+            formatted_address: mockData.formatted_address || '',
+            formatted_phone_number: mockData.formatted_phone_number || '',
+            website: mockData.website || '',
+            opening_hours: mockData.opening_hours || null,
+            photos: mockData.photos || [],
+            reviews: mockData.reviews || [],
+            rating_distribution: { 
+                5: Math.round(mockData.user_ratings_total * 0.7), 
+                4: Math.round(mockData.user_ratings_total * 0.2), 
+                3: Math.round(mockData.user_ratings_total * 0.05), 
+                2: Math.round(mockData.user_ratings_total * 0.03), 
+                1: Math.round(mockData.user_ratings_total * 0.02) 
+            }
+        };
+        renderRealPlacesDetails(apiContent, instantData);
+    }
+
+    // 6. Fire Async Fetch request to local backend proxy in background
     fetch(`${API_BASE}/api/place-details/${placeId}`)
         .then(response => {
             if (!response.ok) throw new Error('Backend server unreachable');
             return response.json();
         })
         .then(data => {
-            const loader = document.getElementById('gmaps-dynamic-loader');
-            if (loader) loader.style.display = 'none';
-            const apiContent = document.getElementById('gmaps-api-content');
-            if (apiContent) {
-                apiContent.style.display = 'flex';
-
-                const mockData = getMockReviewsData(destName, cityId);
-                console.log("GMAPS DRAWER DEBUG:", { destName, mockDataFound: !!mockData, data });
-
-                // If Google Places API returned error/no reviews, or if not connected, and we have mock data
-                if (mockData && (!data.connected || !data.reviews || data.reviews.length === 0 || data.status !== 'OK')) {
-                    // Populate data with mock data so it renders beautifully!
-                    data.connected = true;
-                    data.status = 'OK';
-                    data.name = destName;
-                    data.rating = mockData.rating;
-                    data.user_ratings_total = mockData.user_ratings_total;
-                    data.formatted_address = mockData.formatted_address || data.formatted_address;
-                    data.formatted_phone_number = mockData.formatted_phone_number || data.formatted_phone_number;
-                    data.website = mockData.website || data.website;
-                    data.opening_hours = mockData.opening_hours || data.opening_hours;
-                    data.reviews = mockData.reviews;
-                    data.rating_distribution = { 
-                        5: Math.round(mockData.user_ratings_total * 0.7), 
-                        4: Math.round(mockData.user_ratings_total * 0.2), 
-                        3: Math.round(mockData.user_ratings_total * 0.05), 
-                        2: Math.round(mockData.user_ratings_total * 0.03), 
-                        1: Math.round(mockData.user_ratings_total * 0.02) 
-                    };
-                }
-
-                // ALWAYS override photos with our high-quality local photos for Kodagu and Chikkamagaluru places
-                // to completely bypass the default Google geocode placeholder image
+            if (apiContent && data.connected && data.status === 'OK' && data.reviews && data.reviews.length > 0) {
                 if (mockData && mockData.photos) {
                     data.photos = mockData.photos;
                 }
-
-                if (!data.connected) {
-                    // Scenario: Backend is connected but Google Places API Key is not set
-                    renderFallbackSetupCard(apiContent, placeId);
-                } else if (data.status && data.status !== 'OK') {
-                    // Scenario: Google returned an API key configuration or quota limit error
-                    renderFallbackSetupCard(apiContent, placeId, data.error);
-                } else {
-                    // Scenario: Success, display genuine real Google data
-                    renderRealPlacesDetails(apiContent, data);
-                }
+                renderRealPlacesDetails(apiContent, data);
             }
         })
-        .catch(err => {
-            // Scenario: Backend server is completely down/unreachable
-            const loader = document.getElementById('gmaps-dynamic-loader');
-            if (loader) loader.style.display = 'none';
-            const apiContent = document.getElementById('gmaps-api-content');
-            if (apiContent) {
-                apiContent.style.display = 'flex';
-                
-                // Fallback to mock data if available
-                const mockData = getMockReviewsData(destName, cityId);
-                if (mockData) {
-                    const data = {
-                        connected: true,
-                        status: 'OK',
-                        name: destName,
-                        rating: mockData.rating,
-                        user_ratings_total: mockData.user_ratings_total,
-                        formatted_address: mockData.formatted_address || '',
-                        formatted_phone_number: mockData.formatted_phone_number || '',
-                        website: mockData.website || '',
-                        opening_hours: mockData.opening_hours || null,
-                        photos: mockData.photos || [],
-                        reviews: mockData.reviews || [],
-                        rating_distribution: { 
-                            5: Math.round(mockData.user_ratings_total * 0.7), 
-                            4: Math.round(mockData.user_ratings_total * 0.2), 
-                            3: Math.round(mockData.user_ratings_total * 0.05), 
-                            2: Math.round(mockData.user_ratings_total * 0.03), 
-                            1: Math.round(mockData.user_ratings_total * 0.02) 
-                        }
-                    };
-                    renderRealPlacesDetails(apiContent, data);
-                } else {
-                    renderFallbackSetupCard(apiContent, placeId, 'Google Places Proxy Service is Offline. Start the backend by running "node backend/server.js".');
-                }
-            }
+        .catch(() => {
+            // Silently retain instant rendering
         });
 }
 
@@ -7031,30 +7000,31 @@ function renderRealPlacesDetails(container, data) {
         `;
     }
 
-    // 2. Animated Circular Progress Rating Card (Dark Colored) HTML
+    // 2. Animated Circular Progress Rating Card (Dark Colored) HTML with high-end keyframe animations
     const ratingCardHTML = `
-        <div class="gmaps-rating-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.75rem 1.5rem; background: #111827; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); gap: 1rem; width: 100%; color: white; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); margin-bottom: 1rem;">
-            <div style="position: relative; width: 110px; height: 110px; display: flex; align-items: center; justify-content: center;">
-                <svg width="110" height="110" viewBox="0 0 100 100" style="transform: rotate(-90deg);">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="7" />
-                    <circle class="gmaps-rating-circle-fill" cx="50" cy="50" r="40" fill="none" stroke="url(#ratingGrad)" stroke-width="7" stroke-linecap="round" data-rating="${data.rating}" style="stroke-dasharray: 251.32; stroke-dashoffset: 251.32; transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);" />
+        <div class="gmaps-rating-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.2rem 1.8rem; background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; gap: 1.25rem; width: 100%; color: white; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); margin-bottom: 1rem; position: relative; overflow: hidden; animation: ratingCardPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;">
+            <div style="position: absolute; top: 0; left: 0; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent); transform: skewX(-20deg); animation: ratingShine 2.5s ease-in-out infinite; pointer-events: none;"></div>
+            <div style="position: relative; width: 125px; height: 125px; display: flex; align-items: center; justify-content: center;">
+                <svg width="125" height="125" viewBox="0 0 100 100" style="transform: rotate(-90deg); animation: pulseCircleGlow 3s ease-in-out infinite;">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="6" />
+                    <circle class="gmaps-rating-circle-fill" cx="50" cy="50" r="40" fill="none" stroke="url(#ratingGrad)" stroke-width="6" stroke-linecap="round" data-rating="${data.rating}" style="stroke-dasharray: 251.32; stroke-dashoffset: 251.32; transition: stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.3, 1);" />
                     <defs>
                         <linearGradient id="ratingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#a855f7" />
-                            <stop offset="100%" stop-color="#6366f1" />
+                            <stop offset="0%" stop-color="#f59e0b" />
+                            <stop offset="100%" stop-color="#fbbf24" />
                         </linearGradient>
                     </defs>
                 </svg>
-                <div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1;">
-                    <span style="font-size: 1.85rem; font-weight: 800; color: #a855f7; text-shadow: 0 0 12px rgba(168, 85, 247, 0.4);">${data.rating.toFixed(1)}</span>
-                    <span style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; margin-top: 1px;">/ 5.0</span>
+                <div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; text-align: center;">
+                    <span id="rating-num-counter" data-target-rating="${data.rating}" style="font-size: 2.2rem; font-weight: 800; color: #fde047; text-shadow: 0 0 16px rgba(251, 191, 36, 0.6); font-family: system-ui, -apple-system, sans-serif; letter-spacing: -0.5px;">0.0</span>
+                    <span style="font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-top: 2px; font-style: italic;">/ 5.0</span>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem;">
-                <div class="gmaps-main-rating-stars" style="gap: 3px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                <div class="gmaps-main-rating-stars" style="display: flex; align-items: center; justify-content: center; gap: 2px;">
                     ${renderStarRatingHTML(data.rating)}
                 </div>
-                <span style="font-size: 0.75rem; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">User Rating</span>
+                <span style="font-size: 0.8rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;">USER RATING</span>
             </div>
         </div>
     `;
@@ -7065,16 +7035,58 @@ function renderRealPlacesDetails(container, data) {
         ${ratingCardHTML}
     `;
 
-    // Trigger stroke-dashoffset fill animation after render
-    setTimeout(() => {
-        const fillCircle = container.querySelector('.gmaps-rating-circle-fill');
-        if (fillCircle) {
-            const ratingVal = parseFloat(fillCircle.getAttribute('data-rating'));
-            const circ = 251.32;
-            const offset = circ * (1 - ratingVal / 5.0);
-            fillCircle.style.strokeDashoffset = offset;
-        }
-    }, 100);
+    // Ensure animation styles exist
+    if (!document.getElementById('rating-card-animations')) {
+        const style = document.createElement('style');
+        style.id = 'rating-card-animations';
+        style.innerHTML = `
+            @keyframes ratingCardPop { 0% { opacity: 0; transform: translateY(24px) scale(0.94); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+            @keyframes starPop { 0% { opacity: 0; transform: scale(0.1) rotate(-45deg); } 70% { opacity: 1; transform: scale(1.4) rotate(8deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+            @keyframes pulseCircleGlow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5)); } 50% { filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.85)); } }
+            @keyframes ratingShine { 0% { transform: translateX(-100%) skewX(-20deg); } 100% { transform: translateX(250%) skewX(-20deg); } }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Trigger stroke-dashoffset fill animation & number count-up slowly after render
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            const fillCircle = container.querySelector('.gmaps-rating-circle-fill');
+            if (fillCircle) {
+                fillCircle.style.transition = 'none';
+                fillCircle.style.strokeDashoffset = '251.32';
+                void fillCircle.offsetWidth;
+
+                const ratingVal = parseFloat(fillCircle.getAttribute('data-rating'));
+                const circ = 251.32;
+                const offset = circ * (1 - ratingVal / 5.0);
+                fillCircle.style.transition = 'stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                fillCircle.style.strokeDashoffset = offset;
+            }
+
+            const numSpan = container.querySelector('#rating-num-counter');
+            if (numSpan) {
+                const targetVal = parseFloat(numSpan.getAttribute('data-target-rating'));
+                const duration = 2500; // 2.5s slow count-up
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const currentVal = targetVal * eased;
+                    numSpan.textContent = currentVal.toFixed(1);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        numSpan.textContent = targetVal.toFixed(1);
+                    }
+                }
+                requestAnimationFrame(updateCounter);
+            }
+        }, 150);
+    });
 }
 
 // Helper: Render setup instructions card if Google Places API is not connected
