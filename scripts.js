@@ -8179,40 +8179,30 @@ function initPlaceImageSliders() {
                             submitBtn.classList.add('success');
                             
                             setTimeout(() => {
-                                // Close the support modal
-                                modal.classList.remove('active');
-                                setTimeout(() => modal.remove(), 400);
-                                
-                                // Create and show a standalone "Thank You" popup
-                                const thankYouOverlay = document.createElement('div');
-                                thankYouOverlay.className = 'info-modal-overlay active';
-                                thankYouOverlay.style.zIndex = '999999';
-                                thankYouOverlay.style.display = 'flex';
-                                thankYouOverlay.style.opacity = '0';
-                                thankYouOverlay.style.transition = 'opacity 0.4s ease';
-                                
-                                // Add keyframes if not exists
-                                if (!document.getElementById('cool-thankyou-anim')) {
-                                    const style = document.createElement('style');
-                                    style.id = 'cool-thankyou-anim';
-                                    style.innerHTML = '@keyframes popInText { 0% { transform: scale(0.5) translateY(30px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }';
-                                    document.head.appendChild(style);
+                                const modalBody = modal.querySelector('.menu-modal-body') || modal.querySelector('.support-form-container');
+                                if (modalBody) {
+                                    if (!document.getElementById('cool-thankyou-anim')) {
+                                        const style = document.createElement('style');
+                                        style.id = 'cool-thankyou-anim';
+                                        style.innerHTML = '@keyframes popInText { 0% { transform: scale(0.85); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }';
+                                        document.head.appendChild(style);
+                                    }
+
+                                    modalBody.innerHTML = `
+                                        <div style="padding: 2.5rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: popInText 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                                            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Thank You!</h2>
+                                            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6; max-width: 340px;">Your support ticket has been received. Our team will get back to you shortly.</p>
+                                            <button id="thankyou-modal-close-btn" style="background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; box-shadow: 0 8px 20px rgba(131, 56, 236, 0.25); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">Close</button>
+                                        </div>
+                                    `;
+                                    const closeBtn = modalBody.querySelector('#thankyou-modal-close-btn');
+                                    if (closeBtn) {
+                                        closeBtn.addEventListener('click', () => {
+                                            modal.classList.remove('active');
+                                            setTimeout(() => modal.remove(), 400);
+                                        });
+                                    }
                                 }
-                                
-                                thankYouOverlay.innerHTML = `
-                                    <div class="modal-content-container" style="background: rgba(255, 255, 255, 0.95); padding: 3rem 2rem; border-radius: 24px; text-align: center; max-width: 400px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: popInText 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                                        <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Thank You!</h2>
-                                        <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">Your support ticket has been received. Our team will get back to you shortly.</p>
-                                        <button onclick="this.closest('.info-modal-overlay').style.opacity = '0'; setTimeout(() => this.closest('.info-modal-overlay').remove(), 400);" style="background: linear-gradient(135deg, #8338EC 0%, #FF007F 100%); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; box-shadow: 0 8px 20px rgba(131, 56, 236, 0.25); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 25px rgba(131, 56, 236, 0.35)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(131, 56, 236, 0.25)';">Close</button>
-                                    </div>
-                                `;
-                                
-                                document.body.appendChild(thankYouOverlay);
-                                
-                                // Fade in the overlay
-                                requestAnimationFrame(() => {
-                                    thankYouOverlay.style.opacity = '1';
-                                });
                             }, 600);
                         },
                         onError: (errors) => {
