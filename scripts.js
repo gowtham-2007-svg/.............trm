@@ -8534,6 +8534,30 @@ function initPlaceImageSliders() {
                 userButtonDiv.style.display = 'flex';
                 window.Clerk.mountUserButton(userButtonDiv);
             }
+
+            // Trigger Welcome Toast & Email once per session
+            const userId = window.Clerk.user.id;
+            if (!sessionStorage.getItem('welcome_email_triggered_' + userId)) {
+                sessionStorage.setItem('welcome_email_triggered_' + userId, 'true');
+                const displayName = window.Clerk.user.firstName || window.Clerk.user.fullName || 'Explorer';
+                const userEmail = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress)
+                    ? window.Clerk.user.primaryEmailAddress.emailAddress
+                    : (window.Clerk.user.emailAddresses && window.Clerk.user.emailAddresses[0] ? window.Clerk.user.emailAddresses[0].emailAddress : '');
+
+                // Show on-screen toast notification
+                showWelcomeMessage(displayName);
+
+                // Dispatch automated Welcome Email via backend
+                if (userEmail) {
+                    fetch('/api/auth/send-welcome-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: userEmail, name: displayName })
+                    }).then(res => res.json()).then(data => {
+                        console.log('[WELCOME EMAIL API RESPONSE]', data);
+                    }).catch(err => console.error('Failed to dispatch welcome email:', err));
+                }
+            }
         } else {
             // User is NOT signed in
             if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
@@ -8637,6 +8661,37 @@ function initPlaceImageSliders() {
     }
 
 })();
+
+/* ==========================================================================
+   WELCOME MESSAGE NOTIFICATION TOAST
+   ========================================================================== */
+function showWelcomeMessage(userName) {
+    const existing = document.getElementById('welcome-toast-banner');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'welcome-toast-banner';
+    toast.className = 'welcome-toast-container';
+    toast.innerHTML = `
+        <div class="welcome-toast-icon">👋</div>
+        <div class="welcome-toast-content">
+            <div class="welcome-toast-title">Welcome back, ${userName || 'Explorer'}!</div>
+            <div class="welcome-toast-sub">Great to see you again. Enjoy exploring!</div>
+        </div>
+        <button class="welcome-toast-close" onclick="this.parentElement.classList.add('hiding'); setTimeout(() => this.parentElement.remove(), 300);">&times;</button>
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        if (toast && toast.parentElement) {
+            toast.classList.add('hiding');
+            setTimeout(() => toast.remove(), 350);
+        }
+    }, 5000);
+}
+
+
 
 
 
