@@ -4080,7 +4080,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                 loop: true,
                 speed: 800,
                 autoplay: {
-                    delay: 3000,
+                    delay: 2000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
@@ -4600,7 +4600,7 @@ function openCityMustWatchModal(cityId) {
                 loop: true,
                 speed: 800,
                 autoplay: {
-                    delay: 4000,
+                    delay: 2000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
@@ -5163,14 +5163,19 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
         event.stopPropagation();
     }
 
+    if (!placeName) return;
+
+    // Close any open Must-Watch / Must-Visit modals so Place Details drawer pops up on top cleanly!
+    document.querySelectorAll('.must-watch-modal-overlay, #must-watch-modal-overlay, #mangaluru-must-watch-modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 250);
+    });
+
     if (!navigator.geolocation) {
         const fallback = getCityFallbackCoords(cityId);
-        showGeoToast(`Showing accurate distance and travel time for ${placeName}.`);
         calculateAndOpen(fallback.lat, fallback.lng, false);
         return;
     }
-
-    showGeoToast("📡 Requesting location permission...");
 
     let resolved = false;
 
@@ -5178,10 +5183,9 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
         if (!resolved) {
             resolved = true;
             const fallback = getCityFallbackCoords(cityId);
-            showGeoToast(`Showing accurate distance and travel time for ${placeName}...`);
             calculateAndOpen(fallback.lat, fallback.lng, false);
         }
-    }, 2000);
+    }, 1000);
 
     navigator.geolocation.getCurrentPosition(
         function(position) {
@@ -5195,10 +5199,9 @@ window.handleExplore = function(event, placeName, cityId = currentCityId) {
             resolved = true;
             clearTimeout(fallbackTimeout);
             const fallback = getCityFallbackCoords(cityId);
-            showGeoToast(`Showing accurate distance and travel time for ${placeName}.`);
             calculateAndOpen(fallback.lat, fallback.lng, false);
         },
-        { enableHighAccuracy: false, timeout: 1500, maximumAge: 300000 }
+        { enableHighAccuracy: false, timeout: 800, maximumAge: 300000 }
     );
 
     function calculateAndOpen(userLat, userLng, isRealGps = false) {
@@ -5241,7 +5244,7 @@ window.handleMangaloreExplore = function(event, placeName) {
 
 window.handleCardClick = function(event, placeName, cityId = currentCityId) {
     if (event && event.target) {
-        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon, button, a, .best-food-slider-wrapper, .best-food-slider-card, .best-food-title, .best-food-box, .best-food-name')) {
+        if (event.target.closest('.slider-nav-btn, .slider-dot, .heart-icon-svg, .food-favorite-icon-badge')) {
             return;
         }
     }
