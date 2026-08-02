@@ -7024,17 +7024,17 @@ function renderRealPlacesDetails(container, data) {
     const busRoutesContent = data.busRoutes || (data.name ? (findPlaceData(data.name, data.cityId)?.busRoutes) : '');
     if (busRoutesContent) {
         busCardHTML = `
-            <div class="meta-item bus-route-card dark-bus-card" style="grid-column: 1 / -1; margin-top: 10px; margin-bottom: 1rem; padding: 14px 16px; border-radius: 14px; font-size: 0.88rem; color: #f1f5f9; width: 100%; box-sizing: border-box;">
+            <div class="meta-item bus-route-card dark-bus-card" style="grid-column: 1 / -1; margin-top: 10px; margin-bottom: 1rem; padding: 18px 20px; border-radius: 20px; font-size: 0.88rem; color: #64748B; width: 100%; box-sizing: border-box;">
                 <div class="bus-card-shimmer"></div>
                 <div style="z-index: 2; position: relative; width: 100%;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="meta-icon bus-icon-anim" style="font-size: 1.3rem; line-height: 1;">${data.routeIcon || '🚌'}</span>
-                            <strong style="color: #38bdf8; text-transform: uppercase; font-size: 0.76rem; letter-spacing: 0.8px; font-weight: 700;">${data.routeTitle || 'Bus Routes & Stop Details'}</strong>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="meta-icon bus-icon-anim" style="font-size: 1.4rem; line-height: 1; filter: drop-shadow(0 2px 6px rgba(43, 190, 255, 0.4));">${data.routeIcon || '🚌'}</span>
+                            <strong style="color: #0F172A; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 1px; font-weight: 800;">${data.routeTitle || 'Bus Routes & Stop Details'}</strong>
                         </div>
                         <span class="bus-live-badge"><span class="live-dot"></span> ${data.routeIcon ? 'Rider Route' : 'Live Route'}</span>
                     </div>
-                    <div style="color: #e2e8f0; font-weight: 500; line-height: 1.45; width: 100%; text-align: center;">
+                    <div style="color: #64748B; font-weight: 500; line-height: 1.5; width: 100%; text-align: center;">
                         ${busRoutesContent}
                     </div>
                 </div>

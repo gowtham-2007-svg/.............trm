@@ -5122,36 +5122,27 @@ main {
     text-decoration: underline !important;
 }
 
-/* Enhanced Dark Cyberpunk Animations for Bus Route Card */
+/* Minimal Bright Travel-App Glassmorphism Theme for Bus Route Card */
 @keyframes busDriveEnhanced {
     0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
-        filter: drop-shadow(0 0 4px #60a5fa);
+        transform: translateX(-2px) translateY(0) rotate(0deg);
+        filter: drop-shadow(0 2px 6px rgba(43, 190, 255, 0.4));
     }
-
-    20% {
-        transform: translateX(5px) translateY(-2px) rotate(3deg);
-        filter: drop-shadow(0 0 10px #38bdf8);
+    25% {
+        transform: translateX(4px) translateY(-2px) rotate(3deg);
+        filter: drop-shadow(0 4px 10px rgba(34, 197, 94, 0.4));
     }
-
-    40% {
-        transform: translateX(2px) translateY(1px) rotate(-1deg);
-        filter: drop-shadow(0 0 6px #60a5fa);
+    50% {
+        transform: translateX(1px) translateY(1px) rotate(-1deg);
+        filter: drop-shadow(0 2px 6px rgba(43, 190, 255, 0.4));
     }
-
-    60% {
-        transform: translateX(-4px) translateY(-1px) rotate(-3deg);
-        filter: drop-shadow(0 0 8px #818cf8);
+    75% {
+        transform: translateX(-3px) translateY(-1px) rotate(2deg);
+        filter: drop-shadow(0 4px 10px rgba(43, 190, 255, 0.5));
     }
-
-    80% {
-        transform: translateX(3px) translateY(-2px) rotate(2deg);
-        filter: drop-shadow(0 0 12px #38bdf8);
-    }
-
     100% {
-        transform: translateX(0) translateY(0) rotate(0deg);
-        filter: drop-shadow(0 0 4px #60a5fa);
+        transform: translateX(-2px) translateY(0) rotate(0deg);
+        filter: drop-shadow(0 2px 6px rgba(43, 190, 255, 0.4));
     }
 }
 
@@ -5159,49 +5150,56 @@ main {
     0% {
         transform: translateX(-150%) rotate(25deg);
     }
-
     100% {
         transform: translateX(250%) rotate(25deg);
     }
 }
 
+@keyframes busGradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 @keyframes liveDotPulse {
     0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.8);
     }
-
     70% {
-        transform: scale(1.15);
+        transform: scale(1.25);
         box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
     }
-
     100% {
-        transform: scale(0.95);
+        transform: scale(0.9);
         box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
     }
 }
 
-@keyframes darkGlowBorder {
+@keyframes brightGlowBorder {
     0% {
-        border-color: rgba(99, 102, 241, 0.45);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(99, 102, 241, 0.2);
+        border-color: rgba(43, 190, 255, 0.35);
+        box-shadow: 0 10px 30px rgba(43, 190, 255, 0.12), 0 4px 15px rgba(0, 0, 0, 0.03);
     }
-
     50% {
-        border-color: rgba(56, 189, 248, 0.65);
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 22px rgba(56, 189, 248, 0.35);
+        border-color: rgba(34, 197, 94, 0.45);
+        box-shadow: 0 14px 35px rgba(34, 197, 94, 0.16), 0 6px 20px rgba(43, 190, 255, 0.08);
     }
-
     100% {
-        border-color: rgba(99, 102, 241, 0.45);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(99, 102, 241, 0.2);
+        border-color: rgba(43, 190, 255, 0.35);
+        box-shadow: 0 10px 30px rgba(43, 190, 255, 0.12), 0 4px 15px rgba(0, 0, 0, 0.03);
     }
 }
 
 .bus-icon-anim {
     display: inline-block !important;
-    animation: busDriveEnhanced 3s ease-in-out infinite !important;
+    animation: busDriveEnhanced 2.5s ease-in-out infinite !important;
     transform-origin: center !important;
 }
 
@@ -5213,18 +5211,21 @@ main {
 }
 
 .dark-bus-card {
-    background: linear-gradient(135deg, #090d16 0%, #0f172a 40%, #171c38 100%) !important;
-    border: 1px solid rgba(99, 102, 241, 0.45) !important;
-    border-radius: 12px !important;
-    animation: darkGlowBorder 4s infinite alternate !important;
+    background: linear-gradient(135deg, #F8FBFF 0%, #EAF6FF 50%, #D9FFF4 100%) !important;
+    background-size: 200% 200% !important;
+    animation: busGradientShift 8s ease infinite, brightGlowBorder 4s infinite alternate !important;
+    border: 1px solid rgba(43, 190, 255, 0.35) !important;
+    border-radius: 20px !important;
     position: relative !important;
     overflow: hidden !important;
+    color: #0F172A !important;
+    backdrop-filter: blur(12px) !important;
 }
 
 .dark-bus-card:hover {
     transform: translateY(-3px) scale(1.01) !important;
-    border-color: rgba(56, 189, 248, 0.8) !important;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8), 0 0 25px rgba(56, 189, 248, 0.45) !important;
+    border-color: rgba(43, 190, 255, 0.7) !important;
+    box-shadow: 0 16px 40px rgba(43, 190, 255, 0.22), 0 6px 20px rgba(0, 0, 0, 0.06) !important;
 }
 
 .bus-card-shimmer {
@@ -5233,33 +5234,34 @@ main {
     left: -50%;
     width: 60%;
     height: 200%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
     pointer-events: none;
-    animation: busCardShimmer 4s infinite ease-in-out;
+    animation: busCardShimmer 3.5s infinite ease-in-out;
 }
 
 .bus-live-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.35);
-    padding: 2px 8px;
+    background: rgba(34, 197, 94, 0.14);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    padding: 3px 10px;
     border-radius: 20px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: #4ade80;
-    letter-spacing: 0.5px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #15803D;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
 }
 
 .live-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #22c55e;
+    width: 7px;
+    height: 7px;
+    background-color: #22C55E;
     border-radius: 50%;
     display: inline-block;
-    animation: liveDotPulse 1.8s infinite;
+    animation: liveDotPulse 1.6s infinite;
 }
 
 .student-discount-badge {
@@ -5282,18 +5284,20 @@ main {
 
 /* Scrollable Bus Route Flow Container */
 .bus-route-flow-container {
-    margin: 10px auto 0 auto;
+    margin: 12px auto 0 auto;
     text-align: center;
-    line-height: 1.65;
-    font-size: 0.84rem;
-    font-weight: 500;
-    background: rgba(0, 0, 0, 0.35);
-    padding: 12px 14px;
-    border-radius: 10px;
-    color: #38bdf8;
-    max-height: 160px;
+    line-height: 1.7;
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 14px 16px;
+    border-radius: 14px;
+    color: #0F172A;
+    max-height: 180px;
     overflow-y: auto;
-    border: 1px solid rgba(56, 189, 248, 0.25);
+    border: 1px solid rgba(43, 190, 255, 0.35);
+    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.9), 0 4px 15px rgba(43, 190, 255, 0.1);
     scroll-behavior: smooth;
     width: 100%;
     box-sizing: border-box;
@@ -5304,17 +5308,17 @@ main {
 }
 
 .bus-route-flow-container::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(234, 246, 255, 0.8);
     border-radius: 4px;
 }
 
 .bus-route-flow-container::-webkit-scrollbar-thumb {
-    background: #38bdf8;
+    background: linear-gradient(180deg, #2BBEFF, #0284C7);
     border-radius: 4px;
 }
 
 .bus-route-flow-container::-webkit-scrollbar-thumb:hover {
-    background: #0284c7;
+    background: #0284C7;
 }
 
 /* ==========================================================================
