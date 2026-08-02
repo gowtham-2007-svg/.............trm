@@ -937,6 +937,9 @@ const requestListener = async (req, res) => {
             res.end(JSON.stringify(users));
         } catch (err) {
             console.error('[Admin Users Endpoint Error]', err.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to fetch users' }));
+        }
         return;
     }
 

@@ -3593,7 +3593,7 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
                                 ${place.rating ? `<span class="place-rating"><span class="star-icon">⭐</span> ${place.rating}</span>` : ''}
                             </div>
                             <p>${place.description}</p>
-                            ${place.bestSeason || place.bestTime || place.openHours || place.busRoutes ? `
+                            ${place.bestSeason || place.bestTime || place.openHours ? `
                             <div class="place-meta">
                                 ${place.bestSeason ? `
                                 <div class="meta-item season">
@@ -3611,23 +3611,6 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
                                 <div class="meta-item time">
                                     <span class="meta-icon">⏰</span>
                                     <span><strong>Timings:</strong> ${place.openHours}</span>
-                                </div>
-                                ` : ''}
-                                ${place.busRoutes ? `
-                                <div class="meta-item bus-route-card dark-bus-card" style="grid-column: 1 / -1; margin-top: 10px; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; color: #f1f5f9;">
-                                    <div class="bus-card-shimmer"></div>
-                                    <div style="z-index: 2; position: relative; width: 100%;">
-                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-                                            <div style="display: flex; align-items: center; gap: 8px;">
-                                                <span class="meta-icon bus-icon-anim" style="font-size: 1.3rem; line-height: 1;">${place.routeIcon || '🚌'}</span>
-                                                <strong style="color: #38bdf8; text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.8px; font-weight: 700;">${place.routeTitle || 'Bus Routes & Stop Details'}</strong>
-                                            </div>
-                                            <span class="bus-live-badge"><span class="live-dot"></span> ${place.routeIcon ? 'Rider Route' : 'Live Route'}</span>
-                                        </div>
-                                        <div style="color: #e2e8f0; font-weight: 500; line-height: 1.45; width: 100%; text-align: center;">
-                                            ${place.busRoutes}
-                                        </div>
-                                    </div>
                                 </div>
                                 ` : ''}
                             </div>
@@ -3984,7 +3967,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                                             <span>${getLocation(place.name)}</span>
                                         </div>
                                         <p>${place.description}</p>
-                                        ${place.bestSeason || place.bestTime || place.openHours || place.busRoutes ? `
+                                        ${place.bestSeason || place.bestTime || place.openHours ? `
                                         <div class="place-meta">
                                             ${place.bestSeason ? `
                                             <div class="meta-item season">
@@ -6943,6 +6926,7 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
     const apiContent = document.getElementById('gmaps-api-content');
     const loader = document.getElementById('gmaps-dynamic-loader');
     const mockData = getMockReviewsData(destName, cityId);
+    const matchedPlace = findPlaceData(destName, cityId);
 
     if (mockData && apiContent) {
         if (loader) loader.style.display = 'none';
@@ -6951,6 +6935,7 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
             connected: true,
             status: 'OK',
             name: destName,
+            cityId: cityId,
             rating: mockData.rating,
             user_ratings_total: mockData.user_ratings_total,
             formatted_address: mockData.formatted_address || '',
@@ -6959,6 +6944,9 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
             opening_hours: mockData.opening_hours || null,
             photos: mockData.photos || [],
             reviews: mockData.reviews || [],
+            busRoutes: (matchedPlace && matchedPlace.busRoutes) || '',
+            routeIcon: (matchedPlace && matchedPlace.routeIcon) || '',
+            routeTitle: (matchedPlace && matchedPlace.routeTitle) || '',
             rating_distribution: { 
                 5: Math.round(mockData.user_ratings_total * 0.7), 
                 4: Math.round(mockData.user_ratings_total * 0.2), 
@@ -6981,12 +6969,48 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
                 if (mockData && mockData.photos) {
                     data.photos = mockData.photos;
                 }
+                data.name = destName;
+                data.cityId = cityId;
+                if (matchedPlace && matchedPlace.busRoutes) {
+                    data.busRoutes = matchedPlace.busRoutes;
+                    data.routeIcon = matchedPlace.routeIcon;
+                    data.routeTitle = matchedPlace.routeTitle;
+                }
                 renderRealPlacesDetails(apiContent, data);
             }
         })
         .catch(() => {
             // Silently retain instant rendering
         });
+}
+
+// Helper to look up a place item across cityCategoryData by place name
+function findPlaceData(destName, cityId) {
+    if (!destName) return null;
+    const clean = (str) => str.toLowerCase().replace(/\([^)]*\)/g, '').replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+    const targetClean = clean(destName);
+
+    if (typeof cityCategoryData === 'undefined') return null;
+
+    const citiesToCheck = cityId && cityCategoryData[cityId] 
+        ? [cityId, ...Object.keys(cityCategoryData).filter(c => c !== cityId)] 
+        : Object.keys(cityCategoryData);
+
+    for (const cId of citiesToCheck) {
+        const cityData = cityCategoryData[cId];
+        if (!cityData) continue;
+        for (const catId of Object.keys(cityData)) {
+            const category = cityData[catId];
+            if (category && category.places) {
+                const found = category.places.find(p => {
+                    const pClean = clean(p.name);
+                    return pClean === targetClean || pClean.includes(targetClean) || targetClean.includes(pClean);
+                });
+                if (found) return found;
+            }
+        }
+    }
+    return null;
 }
 
 // Helper: Render genuine active Google Places Details UI
@@ -7005,93 +7029,34 @@ function renderRealPlacesDetails(container, data) {
         `;
     }
 
-    // 2. Animated Circular Progress Rating Card (Dark Colored) HTML with high-end keyframe animations
-    const ratingCardHTML = `
-        <div class="gmaps-rating-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.2rem 1.8rem; background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; gap: 1.25rem; width: 100%; color: white; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); margin-bottom: 1rem; position: relative; overflow: hidden; animation: ratingCardPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;">
-            <div style="position: absolute; top: 0; left: 0; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent); transform: skewX(-20deg); animation: ratingShine 2.5s ease-in-out infinite; pointer-events: none;"></div>
-            <div style="position: relative; width: 125px; height: 125px; display: flex; align-items: center; justify-content: center;">
-                <svg width="125" height="125" viewBox="0 0 100 100" style="transform: rotate(-90deg); animation: pulseCircleGlow 3s ease-in-out infinite;">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="6" />
-                    <circle class="gmaps-rating-circle-fill" cx="50" cy="50" r="40" fill="none" stroke="url(#ratingGrad)" stroke-width="6" stroke-linecap="round" data-rating="${data.rating}" style="stroke-dasharray: 251.32; stroke-dashoffset: 251.32; transition: stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.3, 1);" />
-                    <defs>
-                        <linearGradient id="ratingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#f59e0b" />
-                            <stop offset="100%" stop-color="#fbbf24" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; text-align: center;">
-                    <span id="rating-num-counter" data-target-rating="${data.rating}" style="font-size: 2.2rem; font-weight: 800; color: #fde047; text-shadow: 0 0 16px rgba(251, 191, 36, 0.6); font-family: system-ui, -apple-system, sans-serif; letter-spacing: -0.5px;">0.0</span>
-                    <span style="font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-top: 2px; font-style: italic;">/ 5.0</span>
+    // 2. Bus Routes & Stop Details Card HTML
+    let busCardHTML = '';
+    const busRoutesContent = data.busRoutes || (data.name ? (findPlaceData(data.name, data.cityId)?.busRoutes) : '');
+    if (busRoutesContent) {
+        busCardHTML = `
+            <div class="meta-item bus-route-card dark-bus-card" style="grid-column: 1 / -1; margin-top: 10px; margin-bottom: 1rem; padding: 14px 16px; border-radius: 14px; font-size: 0.88rem; color: #f1f5f9; width: 100%; box-sizing: border-box;">
+                <div class="bus-card-shimmer"></div>
+                <div style="z-index: 2; position: relative; width: 100%;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="meta-icon bus-icon-anim" style="font-size: 1.3rem; line-height: 1;">${data.routeIcon || '🚌'}</span>
+                            <strong style="color: #38bdf8; text-transform: uppercase; font-size: 0.76rem; letter-spacing: 0.8px; font-weight: 700;">${data.routeTitle || 'Bus Routes & Stop Details'}</strong>
+                        </div>
+                        <span class="bus-live-badge"><span class="live-dot"></span> ${data.routeIcon ? 'Rider Route' : 'Live Route'}</span>
+                    </div>
+                    <div style="color: #e2e8f0; font-weight: 500; line-height: 1.45; width: 100%; text-align: center;">
+                        ${busRoutesContent}
+                    </div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
-                <div class="gmaps-main-rating-stars" style="display: flex; align-items: center; justify-content: center; gap: 2px;">
-                    ${renderStarRatingHTML(data.rating)}
-                </div>
-                <span style="font-size: 0.8rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;">USER RATING</span>
-            </div>
-        </div>
-    `;
-
-    // Assemble unified layout (Only photo and rating)
-    container.innerHTML = `
-        ${photosHTML}
-        ${ratingCardHTML}
-    `;
-
-    // Ensure animation styles exist
-    if (!document.getElementById('rating-card-animations')) {
-        const style = document.createElement('style');
-        style.id = 'rating-card-animations';
-        style.innerHTML = `
-            @keyframes ratingCardPop { 0% { opacity: 0; transform: translateY(24px) scale(0.94); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-            @keyframes starPop { 0% { opacity: 0; transform: scale(0.1) rotate(-45deg); } 70% { opacity: 1; transform: scale(1.4) rotate(8deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-            @keyframes pulseCircleGlow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5)); } 50% { filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.85)); } }
-            @keyframes ratingShine { 0% { transform: translateX(-100%) skewX(-20deg); } 100% { transform: translateX(250%) skewX(-20deg); } }
         `;
-        document.head.appendChild(style);
     }
 
-    // Trigger stroke-dashoffset fill animation & number count-up slowly after render
-    requestAnimationFrame(() => {
-        setTimeout(() => {
-            const fillCircle = container.querySelector('.gmaps-rating-circle-fill');
-            if (fillCircle) {
-                fillCircle.style.transition = 'none';
-                fillCircle.style.strokeDashoffset = '251.32';
-                void fillCircle.offsetWidth;
-
-                const ratingVal = parseFloat(fillCircle.getAttribute('data-rating'));
-                const circ = 251.32;
-                const offset = circ * (1 - ratingVal / 5.0);
-                fillCircle.style.transition = 'stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
-                fillCircle.style.strokeDashoffset = offset;
-            }
-
-            const numSpan = container.querySelector('#rating-num-counter');
-            if (numSpan) {
-                const targetVal = parseFloat(numSpan.getAttribute('data-target-rating'));
-                const duration = 2500; // 2.5s slow count-up
-                const startTime = performance.now();
-
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    const currentVal = targetVal * eased;
-                    numSpan.textContent = currentVal.toFixed(1);
-
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        numSpan.textContent = targetVal.toFixed(1);
-                    }
-                }
-                requestAnimationFrame(updateCounter);
-            }
-        }, 150);
-    });
+    // Assemble layout
+    container.innerHTML = `
+        ${photosHTML}
+        ${busCardHTML}
+    `;
 }
 
 // Helper: Render setup instructions card if Google Places API is not connected
