@@ -18,34 +18,93 @@ try {
 
 async function sendWelcomeEmail(recipientEmail, userName) {
     const name = userName || 'Explorer';
-    const mailSubject = `Welcome to Weekend Explorer, ${name}! 🌟`;
+    const mailSubject = `Welcome to Weekend Explore! 🌟`;
+    const mailText = `Welcome to Weekend Explore!\n\nDiscover amazing destinations, hidden gems, delicious food, and unforgettable experiences—all tailored to your budget, location, travel style, and preferences.\n\n🤖 Powered by an AI Travel Agent that helps you find the perfect place in seconds.\n\n✨ Proudly created by GenZS.`;
+
     const mailHtml = `
-        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; background-color: #0f172a; border-radius: 20px; padding: 40px; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1);">
-            <div style="text-align: center; margin-bottom: 28px;">
-                <h1 style="color: #38bdf8; font-size: 28px; font-weight: 800; margin: 0 0 8px 0;">Weekend Explorer</h1>
-                <p style="color: #94a3b8; font-size: 15px; margin: 0;">Your ultimate destination guide</p>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Welcome to Weekend Explore!</title>
+        </head>
+        <body style="margin: 0; padding: 24px 12px; background-color: #0b0f19; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;">
+            <div style="max-width: 580px; margin: 0 auto; background: #131b2e; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                <!-- Header Banner -->
+                <div style="background: linear-gradient(135deg, #8338EC 0%, #3A86EF 100%); padding: 36px 28px; text-align: center;">
+                    <h1 style="color: #ffffff; font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.5px; text-transform: uppercase;">Weekend Explore</h1>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 15px; margin: 6px 0 0 0; font-weight: 500;">Welcome, ${name}! 👋</p>
+                </div>
+
+                <!-- Main Body -->
+                <div style="padding: 32px 28px; color: #e2e8f0;">
+                    <h2 style="color: #ffffff; font-size: 22px; font-weight: 700; margin-top: 0; margin-bottom: 16px;">Welcome to Weekend Explore!</h2>
+
+                    <p style="font-size: 16px; line-height: 1.7; color: #cbd5e1; margin-bottom: 24px;">
+                        Discover amazing destinations, hidden gems, delicious food, and unforgettable experiences—all tailored to your budget, location, travel style, and preferences.
+                    </p>
+
+                    <div style="background: rgba(131, 56, 236, 0.15); border: 1px solid rgba(131, 56, 236, 0.35); border-radius: 14px; padding: 20px; margin-bottom: 24px;">
+                        <p style="font-size: 15px; line-height: 1.6; color: #f8fafc; margin: 0; font-weight: 500;">
+                            🤖 <strong>Powered by an AI Travel Agent</strong> that helps you find the perfect place in seconds.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px; text-align: center; border: 1px dashed rgba(255, 255, 255, 0.15);">
+                        <p style="font-size: 15px; font-weight: 600; color: #c084fc; margin: 0;">
+                            ✨ Proudly created by GenZS.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="background-color: #0b0f19; padding: 20px 28px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 13px; color: #64748b;">
+                    <p style="margin: 0;">&copy; ${new Date().getFullYear()} Weekend Explore by GenZS. All rights reserved.</p>
+                </div>
             </div>
-            <div style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 14px; padding: 24px; margin: 24px 0;">
-                <h2 style="color: #f8fafc; font-size: 20px; margin-top: 0;">Welcome, ${name}! 👋</h2>
-                <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
-                    Thank you for signing up for <strong>Weekend Explorer</strong>. We are thrilled to have you join our community!
-                </p>
-                <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
-                    Discover curated travel spots, hidden beaches, cultural landmarks, and local dining highlights all in one place.
-                </p>
-            </div>
-            <div style="text-align: center; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #64748b; font-size: 12px;">
-                &copy; ${new Date().getFullYear()} Weekend Explorer. All rights reserved.
-            </div>
-        </div>
+        </body>
+        </html>
     `;
+
+    // 1. Send via Resend API Priority
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const resendFrom = process.env.RESEND_FROM || 'onboarding@resend.dev';
+    let resendErrorDetails = null;
+
+    if (resendApiKey) {
+        try {
+            console.log(`[WELCOME EMAIL - RESEND] Dispatching welcome email to ${recipientEmail} via Resend...`);
+            const resendRes = await axios.post(
+                'https://api.resend.com/emails',
+                {
+                    from: resendFrom,
+                    to: [recipientEmail],
+                    subject: mailSubject,
+                    html: mailHtml,
+                    text: mailText
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${resendApiKey}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+            console.log(`[WELCOME EMAIL - RESEND SUCCESS] Email delivered successfully to ${recipientEmail}. Resend ID: ${resendRes.data.id}`);
+            return { success: true, mode: 'resend', resendId: resendRes.data.id };
+        } catch (resendErr) {
+            resendErrorDetails = resendErr.response ? resendErr.response.data : resendErr.message;
+            console.error(`[WELCOME EMAIL - RESEND ERROR]`, resendErrorDetails);
+        }
+    }
 
     const host = process.env.SMTP_HOST || process.env.GMAIL_HOST || 'smtp.gmail.com';
     const port = process.env.SMTP_PORT || 587;
     const user = process.env.SMTP_USER || process.env.GMAIL_USER;
     const pass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASS;
 
-    // 1. Send via real SMTP / Gmail credentials if configured
+    // 2. Send via real SMTP / Gmail credentials if configured
     if (nodemailer && user && pass) {
         try {
             const transporter = nodemailer.createTransport({
@@ -55,19 +114,20 @@ async function sendWelcomeEmail(recipientEmail, userName) {
                 auth: { user, pass }
             });
             await transporter.sendMail({
-                from: process.env.SMTP_FROM || `"Weekend Explorer" <${user}>`,
+                from: process.env.SMTP_FROM || `"Weekend Explore" <${user}>`,
                 to: recipientEmail,
                 subject: mailSubject,
-                html: mailHtml
+                html: mailHtml,
+                text: mailText
             });
             console.log(`[WELCOME EMAIL] Sent real Gmail/SMTP email successfully to ${recipientEmail}`);
-            return { success: true, mode: 'smtp' };
+            return { success: true, mode: 'smtp', resendError: resendErrorDetails };
         } catch (err) {
             console.error('[WELCOME EMAIL] Real SMTP error:', err.message);
         }
     }
 
-    // 2. Ethereal Test Account fallback
+    // 3. Ethereal Test Account fallback
     if (nodemailer) {
         try {
             const testAccount = await nodemailer.createTestAccount();
@@ -78,26 +138,26 @@ async function sendWelcomeEmail(recipientEmail, userName) {
                 auth: { user: testAccount.user, pass: testAccount.pass }
             });
             const info = await transporter.sendMail({
-                from: '"Weekend Explorer" <no-reply@weekendexplorer.com>',
+                from: '"Weekend Explore" <no-reply@weekendexplorer.com>',
                 to: recipientEmail,
                 subject: mailSubject,
-                html: mailHtml
+                html: mailHtml,
+                text: mailText
             });
             const previewUrl = nodemailer.getTestMessageUrl(info);
             console.log(`\n==================================================`);
             console.log(`[AUTOMATED WELCOME EMAIL SENT (TEST MODE)]`);
             console.log(`Recipient: ${recipientEmail}`);
             console.log(`View Sent Email Live at: ${previewUrl}`);
-            console.log(`Note: To deliver directly to Gmail inboxes, set GMAIL_USER & GMAIL_APP_PASS in backend/.env`);
             console.log(`==================================================\n`);
-            return { success: true, mode: 'ethereal', previewUrl };
+            return { success: true, mode: 'ethereal', previewUrl, resendError: resendErrorDetails };
         } catch (e) {
             console.error('[WELCOME EMAIL] Ethereal fallback error:', e.message);
         }
     }
 
     console.log(`[WELCOME EMAIL] Generated welcome email for ${recipientEmail}.`);
-    return { success: true, mode: 'console' };
+    return { success: true, mode: 'console', resendError: resendErrorDetails };
 }
 
 // Manual parser for .env configuration
@@ -962,9 +1022,11 @@ const requestListener = async (req, res) => {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
                 success: true,
-                message: result.mode === 'smtp'
-                    ? `Welcome email delivered directly to ${email}!`
-                    : (result.previewUrl ? `Welcome email generated in test mode.` : `Welcome email logged.`),
+                message: result.mode === 'resend'
+                    ? `Welcome email sent successfully via Resend to ${email}!`
+                    : (result.mode === 'smtp' ? `Welcome email delivered directly to ${email}!` : `Welcome email logged.`),
+                resendId: result.resendId,
+                resendError: result.resendError,
                 previewUrl: result.previewUrl,
                 mode: result.mode
             }));
