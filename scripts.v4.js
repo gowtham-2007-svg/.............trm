@@ -1017,7 +1017,8 @@ const bangaloreCategories = [
     { id: 'breweries', name: 'Pubs & Breweries', desc: 'Explore breweries →', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600' },
     { id: 'trekking', name: 'Trekking Places', desc: 'Explore trekking spots →', image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&q=80&w=600' },
     { id: 'restaurants', name: 'Best Restaurants', desc: 'Explore best restaurants →', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600' },
-    { id: 'gaming', name: 'Gaming & Esports Zone', desc: 'Explore top game houses →', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600' }
+    { id: 'gaming', name: 'Gaming & Esports Zone', desc: 'Explore top game houses →', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600' },
+    { id: 'entertainment', name: 'Trampoline & Entertainment Parks', desc: 'Explore trampoline parks & play arenas →', image: 'https://d2ki7eiqd260sq.cloudfront.net/trampoline-park-in-Garuda-Mall-Bengalurue0630361-34bf-437e-8f5c-1c019b816a95.jpeg' }
 ];
 
 const bangaloreCategoryData = {
@@ -1257,7 +1258,7 @@ const bangaloreCategoryData = {
             },
             { 
                 name: '🛍️ Lulu Mall (4th Best)', 
-                image: 'https://www.bengaluru.lulumall.in/wp-content/uploads/2023/07/image.jpg', 
+                image: 'https://referce.com/wp-content/uploads/2023/07/Lulu-Mall-Bangalore-2-768x512.png', 
                 description: 'Ranked 4th Best: Huge shopping destination featuring a colossal Lulu Hypermarket, massive food court, and family entertainment centers.',
                 openHours: '10:00 AM – 10:00 PM',
                 bestTime: 'Morning Hypermarket Shopping',
@@ -1609,6 +1610,214 @@ const bangaloreCategoryData = {
                 bestTime: 'Evening & Holidays',
                 bestChoice: 'Bowling/Go-Karting: ₹250–₹500 <strong>(Marathahalli)</strong>',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Blitz Esports Arena',
+                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
+                images: [
+                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&q=80&w=200'
+                ],
+                description: 'Top-rated esports arena in Rajajinagar featuring high-performance RTX Gaming PCs, high-refresh displays, and popular titles like Valorant, CS2, and FIFA. Entry Fee: ₹100–₹180/hour.',
+                rating: '4.8',
+                openHours: '10:00 AM – 11:00 PM',
+                bestTime: 'Afternoon & Evening Gaming Sessions',
+                entryFee: '₹100–₹180/hour',
+                recommendedTime: '1–3 Hours',
+                bestFor: 'RTX Gaming PCs, Valorant, CS2 & FIFA',
+                busRoutes: 'Located in Rajajinagar (North Bangalore). Nearest metro station: Rajajinagar / Mahalakshmi Metro.',
+                bestChoice: 'RTX Gaming PCs, Valorant, CS2 & FIFA <strong>(Rajajinagar - North)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'La E-Gamers Lounge',
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800',
+                images: [
+                    'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=200'
+                ],
+                description: 'Premium gaming lounge in Yelahanka offering PS5 consoles, immersive VR gaming setups, and pro racing simulators for an ultimate gaming experience. Entry Fee: ₹100–₹200/hour.',
+                rating: '4.9',
+                openHours: '10:00 AM – 11:00 PM',
+                bestTime: '10:00 AM – 11:00 PM',
+                entryFee: '₹100–₹200/hour',
+                recommendedTime: '1–3 Hours',
+                bestFor: 'PS5, VR Gaming & Racing Simulators',
+                busRoutes: 'Located in Yelahanka (North Bangalore). Direct bus access via Yelahanka NES / Police Station Stop.',
+                bestChoice: 'PS5, VR Gaming & Racing Simulators <strong>(Yelahanka - North)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Pavilion Esports Arena',
+                image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800',
+                description: 'High-tech gaming and esports hub in Jalahalli dedicated to competitive esports tournaments, team bootcamps, and high-end gaming PCs. Entry Fee: ₹100–₹200/hour.',
+                rating: '4.8',
+                openHours: '9:00 AM – 10:00 PM',
+                bestTime: 'Esports Tournament Days & Evenings',
+                entryFee: '₹100–₹200/hour',
+                recommendedTime: '2–4 Hours',
+                bestFor: 'Esports Tournaments & High-End Gaming PCs',
+                busRoutes: 'Located in Jalahalli (North Bangalore). Nearest metro station: Jalahalli Metro Station.',
+                bestChoice: 'Esports Tournaments & High-End Gaming PCs <strong>(Jalahalli - North)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'LXG Bengaluru Gaming Lounge',
+                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
+                description: 'Popular gaming café chain in Hebbal featuring console gaming, FIFA 25 multiplayer zones, esports PC rigs, and budget-friendly hourly rates. Entry Fee: ₹80–₹150/hour.',
+                rating: '4.7',
+                openHours: '11:00 AM – 10:00 PM',
+                bestTime: 'Afternoon & Night Gaming Sessions',
+                entryFee: '₹80–₹150/hour',
+                recommendedTime: '1–3 Hours',
+                bestFor: 'Console Gaming, FIFA & Multiplayer Games',
+                busRoutes: 'Located in Hebbal (North Bangalore). Easily accessible via Hebbal Flyover bus stop.',
+                bestChoice: 'Console Gaming, FIFA & Multiplayer Games <strong>(Hebbal - North)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Playaura Gaming Centre',
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800',
+                description: 'Elite gaming sanctuary in Koramangala boasting cutting-edge RTX 40-Series gaming PCs, PS5 stations, and weekly community tournaments. Entry Fee: ₹100–₹250/hour.',
+                rating: '4.9',
+                openHours: '10:00 AM – 11:00 PM',
+                bestTime: 'Evening & Weekend Tournaments',
+                entryFee: '₹100–₹250/hour',
+                recommendedTime: '2–4 Hours',
+                bestFor: 'RTX 40-Series PCs, PS5 & Weekly Tournaments',
+                busRoutes: 'Located in Koramangala (South Bangalore). Accessible via Sony World Signal bus stop.',
+                bestChoice: 'RTX 40-Series PCs, PS5 & Weekly Tournaments <strong>(Koramangala - South)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Nex Esports',
+                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
+                description: 'Vibrant esports lounge in JP Nagar tailored for FPS competitive gamers featuring high FPS setups for Valorant, CS2, and PUBG PC. Entry Fee: ₹70–₹150/hour.',
+                rating: '4.6',
+                openHours: '10:00 AM – 10:00 PM',
+                bestTime: '10:00 AM – 10:00 PM',
+                entryFee: '₹70–₹150/hour',
+                recommendedTime: '1–3 Hours',
+                bestFor: 'Valorant, CS2 & PUBG PC',
+                busRoutes: 'Located in JP Nagar (South Bangalore). Accessible via JP Nagar 6th Phase Metro / Bus Stop.',
+                bestChoice: 'Valorant, CS2 & PUBG PC <strong>(JP Nagar - South)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'Gamers Den Arena',
+                image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800',
+                description: 'Cozy and well-equipped gaming hub in BTM Layout offering high-end custom PC rigs, PS5 lounge area, and arcade racing setups. Entry Fee: ₹80–₹150/hour.',
+                rating: '4.7',
+                openHours: '10:00 AM – 10:00 PM',
+                bestTime: 'Afternoon & Evening Hangouts',
+                entryFee: '₹80–₹150/hour',
+                recommendedTime: '1–3 Hours',
+                bestFor: 'High-End PCs, PS5 & Racing Games',
+                busRoutes: 'Located in BTM Layout (South Bangalore). Accessible via BTM Udupi Garden bus stop.',
+                bestChoice: 'High-End PCs, PS5 & Racing Games <strong>(BTM Layout - South)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=200'
+            },
+            {
+                name: 'League of Gamers (LOG Arena)',
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800',
+                description: 'Sprawling esports facility in Electronic City equipped with dedicated team practice booths, live streaming suites, and top-tier multiplayer rigs. Entry Fee: ₹100–₹180/hour.',
+                rating: '4.8',
+                openHours: '10:00 AM – 11:00 PM',
+                bestTime: '10:00 AM – 11:00 PM',
+                entryFee: '₹100–₹180/hour',
+                recommendedTime: '2–4 Hours',
+                bestFor: 'Esports Practice, Streaming Booth & Multiplayer Gaming',
+                busRoutes: 'Located in Electronic City Phase 1 (South Bangalore). Direct bus access via Wipro Gate / Electronic City Bus Stand.',
+                bestChoice: 'Esports Practice, Streaming Booth & Multiplayer Gaming <strong>(Electronic City - South)</strong>',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=200'
+            }
+        ]
+    },
+    'entertainment': {
+        name: 'Trampoline & Entertainment Parks in Bangalore',
+        places: [
+            {
+                name: 'BOUNCE Inc Bengaluru',
+                image: 'https://www.bounceinc.in/wp-content/uploads/sites/34/2023/07/website-15-scaled.jpg',
+                images: [
+                    'https://www.bounceinc.in/wp-content/uploads/sites/34/2023/07/website-15-scaled.jpg',
+                    'https://d2ki7eiqd260sq.cloudfront.net/trampoline-park-in-Garuda-Mall-Bengalurue0630361-34bf-437e-8f5c-1c019b816a95.jpeg'
+                ],
+                description: 'World-class indoor freestyle playground and trampoline park featuring slam dunk arenas, cliff jumps, high performance trampolines, dodgeball, and wall climbing in Rajajinagar. Entry Fee: ₹399 – ₹999.',
+                rating: '4.8',
+                openHours: '10:00 AM – 10:00 PM',
+                bestTime: '10:00 AM – 10:00 PM (Rec. Time: 1–2 Hours | Entry: ₹399 – ₹999)',
+                entryFee: '₹399 – ₹999 (1–2 hour sessions)',
+                recommendedTime: '1–2 Hours',
+                bestFor: 'Freestyle Trampoline & Wall Climbing',
+                busRoutes: 'Located in Rajajinagar (North Bangalore). Direct metro access via Rajajinagar / Mahalakshmi Metro Station.',
+                bookingUrl: 'https://www.bounceinc.in/bengaluru-pricing/?utm_source=chatgpt.com',
+                bestChoice: 'Freestyle Trampoline & Slam Dunk Arena <strong>(Rajajinagar - North)</strong>',
+                bestChoiceImg: 'https://www.bounceinc.in/wp-content/uploads/sites/34/2023/07/website-15-scaled.jpg'
+            },
+            {
+                name: 'SkyJumper Trampoline Park',
+                image: 'https://media1.thrillophilia.com/filestore/j5rxfn0iw2un45qpuaw4sd5ud68d_trampoline-arena.webp',
+                images: [
+                    'https://media1.thrillophilia.com/filestore/j5rxfn0iw2un45qpuaw4sd5ud68d_trampoline-arena.webp',
+                    'https://d2ki7eiqd260sq.cloudfront.net/trampoline-park-in-Garuda-Mall-Bengalurue0630361-34bf-437e-8f5c-1c019b816a95.jpeg'
+                ],
+                description: 'High-energy indoor trampoline park featuring wall-to-wall trampolines, foam pits, ninja warrior course, dodgeball, and basketball dunk zone in Garuda Mall. Entry Fee: ₹500 onwards.',
+                rating: '4.7',
+                openHours: '11:00 AM – 9:00 PM',
+                bestTime: '11:00 AM – 9:00 PM (Rec. Time: 1–2 Hours | Entry: ₹500 onwards)',
+                entryFee: '₹500 onwards',
+                recommendedTime: '1–2 Hours',
+                bestFor: 'Wall-to-wall Trampolines & Ninja Course',
+                busRoutes: 'Located at Garuda Mall, Magrath Road, Central Bangalore (Near MG Road Metro Station).',
+                bookingUrl: 'https://in.bookmyshow.com/activities/sky-jumper-trampoline-park-bengaluru/ET00365263/?utm_source=chatgpt.com',
+                bestChoice: 'Wall-to-wall Trampolines & Foam Pit <strong>(Garuda Mall - Central)</strong>',
+                bestChoiceImg: 'https://media1.thrillophilia.com/filestore/j5rxfn0iw2un45qpuaw4sd5ud68d_trampoline-arena.webp'
+            },
+            {
+                name: 'Awesome Place',
+                image: 'https://www.revv.co.in/blogs/wp-content/uploads/2020/05/Bangalore-Attractions.jpg',
+                description: 'Fun play zone & trampoline park designed for kids and young families, featuring soft play equipment, slides, creative play, and birthday party rooms in Mantri Square Mall. Entry Fee: ₹499 onwards.',
+                rating: '4.6',
+                openHours: '11:00 AM – 9:30 PM',
+                bestTime: '11:00 AM – 9:30 PM (Rec. Time: 1–2 Hours | Entry: ₹499 onwards)',
+                entryFee: '₹499 onwards',
+                recommendedTime: '1–2 Hours',
+                bestFor: 'Kids Soft Play & Family Fun',
+                busRoutes: 'Located inside Mantri Square Mall, Sampige Road, Malleshwaram (North Bangalore). Direct Metro access via Mantri Square Sampige Road Station.',
+                bookingUrl: 'https://www.district.in/activities/kids-play-in-bengaluru/?utm_source=chatgpt.com',
+                bestChoice: 'Kids Soft Play & Trampoline <strong>(Mantri Square - North)</strong>',
+                bestChoiceImg: 'https://www.revv.co.in/blogs/wp-content/uploads/2020/05/Bangalore-Attractions.jpg'
+            },
+            {
+                name: 'Play Arena',
+                image: 'https://www.qexperiences.in/blog/wp-content/uploads/2021/06/Play1.jpg',
+                description: 'Massive outdoor and indoor sports & adventure complex offering trampoline park, go-karting, bowling, paintball, climbing wall, and laser tag on Sarjapur Road. Entry Fee: ₹500 – ₹900.',
+                rating: '4.6',
+                openHours: '6:00 AM – 11:00 PM',
+                bestTime: 'Full Day / Evening (Rec. Time: 2–4 Hours | Entry: ₹500 – ₹900)',
+                entryFee: '₹500 – ₹900 (varies by activity package)',
+                recommendedTime: '2–4 Hours',
+                bestFor: 'Multi-sport & Trampoline Adventure',
+                busRoutes: 'Located on Sarjapur Road, Kasavanahalli (South-East Bangalore). Buses: 342F, 342D.',
+                bookingUrl: 'https://www.district.in/activities/kids-play-in-bengaluru/?utm_source=chatgpt.com',
+                bestChoice: 'Trampoline, Go-Karting & Bowling <strong>(Sarjapur Road - South-East)</strong>',
+                bestChoiceImg: 'https://www.qexperiences.in/blog/wp-content/uploads/2021/06/Play1.jpg'
+            },
+            {
+                name: 'Fun City',
+                image: 'https://i.ytimg.com/vi/UbNfTp1ZWsU/maxresdefault.jpg',
+                description: 'Popular family entertainment center located in Vega City Mall featuring arcade gaming, bumper cars, soft play area, and interactive play rides for kids and teens. Entry Fee: ₹300 – ₹700.',
+                rating: '4.5',
+                openHours: '11:00 AM – 9:30 PM',
+                bestTime: '11:00 AM – 9:30 PM (Rec. Time: 1–2 Hours | Entry: ₹300 – ₹700)',
+                entryFee: '₹300 – ₹700 (depending on games/card package)',
+                recommendedTime: '1–2 Hours',
+                bestFor: 'Arcade Gaming & Kids Play Card Package',
+                busRoutes: 'Located in Vega City Mall, Bannerghatta Road (South Bangalore). Buses: 365, 365J.',
+                bookingUrl: 'https://www.district.in/activities/kids-play-in-bengaluru/?utm_source=chatgpt.com',
+                bestChoice: 'Arcade Gaming & Kids Play Zone <strong>(Vega City Mall - South)</strong>',
+                bestChoiceImg: 'https://i.ytimg.com/vi/UbNfTp1ZWsU/maxresdefault.jpg'
             }
         ]
     },
