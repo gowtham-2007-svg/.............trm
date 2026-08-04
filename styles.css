@@ -289,8 +289,16 @@ main {
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 4rem 2rem 2rem;
+    padding: 3rem 1.5rem 1.5rem;
     position: relative;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.55) 0%, rgba(15, 23, 42, 0) 75%);
+    border-radius: 40px;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 @keyframes badgeReveal {
@@ -354,32 +362,58 @@ main {
 .hero .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: #F0E6FF;
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
+    gap: 0.65rem;
+    background: rgba(131, 56, 236, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #FFFFFF;
+    padding: 0.55rem 1.35rem;
     border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.01em;
+}
+
+.hero .badge img {
+    filter: brightness(0) invert(1);
+    width: 18px;
+    height: 18px;
 }
 
 .hero h1 {
-    font-size: 4.5rem;
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #1A1A1A 0%, #4C3BCF 100%);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    color: #FFFFFF;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    letter-spacing: -0.025em;
+    text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.hero h1 span.hero-accent {
+    background: linear-gradient(135deg, #38BDF8 0%, #F472B6 45%, #FACC15 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(0, 0, 0, 0.9));
 }
 
 .hero p {
-    color: var(--text-light);
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 3rem;
+    color: #F8FAFC;
+    font-size: 1.3rem;
+    font-weight: 600;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.55;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 2px 6px rgba(0, 0, 0, 0.8);
 }
+
+
+
 
 /* Destination Cards Row */
 .destinations-row {
@@ -5373,27 +5407,34 @@ main {
 /* ==========================================================================
    WELCOME TOAST NOTIFICATION STYLES
    ========================================================================== */
+/* ==========================================================================
+   WELCOME TOAST NOTIFICATION STYLES (Compact Light SaaS with Black Border)
+   ========================================================================== */
 .welcome-toast-container {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    top: 20px;
+    right: 20px;
     z-index: 999999;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
-    border-radius: 16px;
-    padding: 14px 20px;
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
-    gap: 14px;
-    color: #f8fafc;
-    max-width: 380px;
-    width: calc(100vw - 48px);
+    gap: 10px;
+    color: #0F172A;
+    max-width: 320px;
+    width: calc(100vw - 40px);
     box-sizing: border-box;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    animation: welcomeToastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: welcomeToastSlideUp 0.3s ease forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.welcome-toast-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 }
 
 .welcome-toast-container.hiding {
@@ -5401,53 +5442,95 @@ main {
     transform: translateY(-12px) scale(0.95);
 }
 
-@keyframes welcomeToastSlideIn {
+@keyframes welcomeToastSlideUp {
     from {
         opacity: 0;
-        transform: translateY(-20px) scale(0.92);
+        transform: translateY(12px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
 .welcome-toast-icon {
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     line-height: 1;
     flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #F8FAFC;
+    border: 1.5px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: welcomeToastWave 2s ease-in-out infinite;
+}
+
+@keyframes welcomeToastWave {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(14deg); }
+    40% { transform: rotate(-8deg); }
+    60% { transform: rotate(14deg); }
+    80% { transform: rotate(-4deg); }
 }
 
 .welcome-toast-content {
     flex: 1;
+    min-width: 0;
 }
 
 .welcome-toast-title {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #38bdf8;
-    margin: 0 0 2px 0;
+    color: #000000;
+    margin: 0 0 1px 0;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .welcome-toast-sub {
-    font-size: 0.84rem;
-    color: #94a3b8;
+    font-size: 0.75rem;
+    color: #475569;
     margin: 0;
+    line-height: 1.35;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .welcome-toast-close {
-    background: none;
-    border: none;
-    color: #94a3b8;
-    font-size: 1.25rem;
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    color: #000000;
+    font-size: 0.9rem;
     cursor: pointer;
     padding: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .welcome-toast-close:hover {
-    color: #f8fafc;
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
 }
+
+
+
+
+
+
 
 

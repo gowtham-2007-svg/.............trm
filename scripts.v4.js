@@ -3897,7 +3897,7 @@ function renderHome() {
                     <img src="https://api.iconify.design/material-symbols:location-on.svg?color=%238338EC" alt="Loc">
                     Explore with Weekend Explore
                 </div>
-                <h1>Where do<br>you want to go?</h1>
+                <h1>Where do<br><span class="hero-accent">you want to go?</span></h1>
                 <p>Choose your perfect destination and create beautiful memories.</p>
             </section>
 
