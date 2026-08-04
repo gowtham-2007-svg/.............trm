@@ -396,9 +396,10 @@ main {
 }
 
 .hero h1 span.hero-accent {
-    background: linear-gradient(135deg, #38BDF8 0%, #F472B6 45%, #FACC15 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
     filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(0, 0, 0, 0.9));
 }
 

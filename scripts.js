@@ -118,19 +118,59 @@ const destinations = [
         color: '#3B82F6',
         famousPlaces: [
             {
+                name: 'Phoenix Marketcity (Whitefield - East)',
+                image: 'https://www.worthview.com/wp-content/uploads/2018/09/Phoenix-Mall.jpg',
+                description: '⭐ 4.5 | East Bangalore’s premier shopping, dining, and entertainment twin-mall hub with PVR P[XL].'
+            },
+            {
+                name: 'VR Bengaluru (Whitefield - East)',
+                image: 'https://bangalore247.in/wp-content/uploads/2021/02/VR-Bengaluru.jpg',
+                description: '⭐ 4.4 | Premium boutique Black Box lifestyle mall hosting IMAX 3D, rooftop lounges, and artisan markets.'
+            },
+            {
+                name: 'Orion East Mall (Banaswadi - East)',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: '⭐ 4.0 | Modern shopping center in Banaswadi featuring Cinepolis multiplex and family retail.'
+            },
+            {
+                name: 'Park Square Mall (ITPL - East)',
+                image: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&q=80&w=800',
+                description: '⭐ 4.1 | Tech-park shopping mall in ITPL Whitefield with bowling alley, gaming, and dining.'
+            },
+            {
+                name: 'Gopalan Signature Mall (Old Madras Rd - East)',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: '⭐ 4.2 | Family shopping mall on Old Madras Road with Gopalan Cinemas and bowling alley.'
+            },
+            {
+                name: 'Orion Mall (Rajajinagar - West)',
+                image: 'https://lh3.googleusercontent.com/i8Vrd_X2CJmyIanO7jBQ48hppHl1BT3LEQJFlZAOhWZ3Ux05oSvq2nAcuHA_-s05AS4OF-yDT6DOlhE0_A5ioAJtCYVbbkc21_8Q5fxW=w1024-rw',
+                description: '⭐ 4.5 | Exceptionally designed lakeside shopping mall in West Bangalore next to World Trade Center.'
+            },
+            {
+                name: 'Lulu Mall Bengaluru (Binnypet - West)',
+                image: 'https://referce.com/wp-content/uploads/2023/07/Lulu-Mall-Bangalore-2-768x512.png',
+                description: '⭐ 4.4 | Colossal shopping hub in West Bangalore featuring India\'s largest Lulu Hypermarket and Funtura.'
+            },
+            {
+                name: 'Mantri Square Mall (Malleshwaram - West)',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
+                description: '⭐ 4.4 | Massive shopping mall in Malleshwaram with direct Sampige Road Metro station access.'
+            },
+            {
+                name: 'GT World Mall (Magadi Road - West)',
+                image: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&q=80&w=800',
+                description: '⭐ 4.0 | Popular entertainment and value fashion destination on Magadi Road with GT Cinemas.'
+            },
+            {
                 name: 'Lalbagh Botanical Garden',
                 image: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg',
                 description: 'Sprawling 240-acre botanical garden featuring the famous glass house and tropical plants.'
             },
             {
-                name: 'Phoenix Marketcity & VR Mall',
-                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=800',
-                description: 'East Bangalore’s premier shopping, dining and entertainment twin-mall hub.'
-            },
-            {
                 name: 'Indiranagar 100ft Road',
                 image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
-                description: 'Vibrant nightlife, trendy cafes, boutique shopping and artisan breweries.'
+                description: 'Vibrant nightlife, trendy cafes, boutique shopping, and artisan breweries.'
             },
             {
                 name: 'HAL Aerospace Museum',
@@ -1950,6 +1990,66 @@ const mysuruCategoryData = {
                 busRoutes: 'Located near KRS Reservoir backwaters, Hosa Kannambadi (~25 km from Mysuru).',
                 bestChoice: 'Hoysala Carvings & Backwater Sunset Temple View',
                 bestChoiceImg: 'https://jothishi.com/wp-content/uploads/2019/03/Venugopala-Swamy-Temple.jpg'
+            },
+            {
+                name: 'Sri Srikanteshwara Temple (Nanjangud)',
+                image: 'https://www.omastrology.com/indian-temples/images/srikanteshwara-temple-nanjanguda.jpg',
+                description: 'One of Karnataka\'s most famous Shiva temples, known as the "Dakshina Kashi" and located about 25 km from Mysuru.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 1:00 PM, 4:00 PM – 8:30 PM',
+                busRoutes: 'Located in Nanjangud (~25 km from Mysuru city centre). KSRTC buses & trains available.',
+                bestChoice: 'Lord Srikanteshwara Darshan & Sacred Temple Architecture',
+                bestChoiceImg: 'https://www.omastrology.com/indian-temples/images/srikanteshwara-temple-nanjanguda.jpg'
+            },
+            {
+                name: 'Sri Ganapathy Sachchidananda Ashrama Temple',
+                image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLwdtRj21DIoF1hhNcLp_BbVfK5yYcp0at9rgQ22qBUFy9CxbCFO6n-NGJP7pOZ5VS1Sk0vbdM7UQ7ttZMatWhTiomy5mgGDipbDxmh1w0w0iGRJxwbmhcKVvEQ3Eg5XgmXwUZisDxfXaBPZ0tAOEd04SgOglxE1_fyTLWJX_npp2QCVc2RKVa_FxDfRSo/s800/IMG_20240115_091705%20-%20Copy.jpg',
+                description: 'A renowned spiritual temple complex featuring multiple shrines in a peaceful ashram environment.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:00 PM, 4:00 PM – 8:00 PM',
+                busRoutes: 'Located on Ooty Road, Avadhoota Datta Peetham, Mysuru.',
+                bestChoice: 'Peaceful Meditation & Multi-Deity Darshan',
+                bestChoiceImg: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLwdtRj21DIoF1hhNcLp_BbVfK5yYcp0at9rgQ22qBUFy9CxbCFO6n-NGJP7pOZ5VS1Sk0vbdM7UQ7ttZMatWhTiomy5mgGDipbDxmh1w0w0iGRJxwbmhcKVvEQ3Eg5XgmXwUZisDxfXaBPZ0tAOEd04SgOglxE1_fyTLWJX_npp2QCVc2RKVa_FxDfRSo/s800/IMG_20240115_091705%20-%20Copy.jpg'
+            },
+            {
+                name: 'Sri Datta Venkateshwara Temple (Avadhoota Datta Peetham)',
+                image: 'https://dattapeetham.s3.amazonaws.com/content/page_images/527/527_e54f0e9f5481af23.jpeg',
+                description: 'Popular temple dedicated to Lord Venkateshwara and Lord Dattatreya, attracting devotees from across India.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 12:30 PM, 4:00 PM – 8:00 PM',
+                busRoutes: 'Located inside Avadhoota Datta Peetham campus, Ooty Road, Mysuru.',
+                bestChoice: 'Lord Venkateshwara Darshan & Spiritual Experience',
+                bestChoiceImg: 'https://dattapeetham.s3.amazonaws.com/content/page_images/527/527_e54f0e9f5481af23.jpeg'
+            },
+            {
+                name: 'Sri Mahabaleshwara Temple (Chamundi Hills)',
+                image: 'https://live.staticflickr.com/2909/33312039731_115bdc09f9_b.jpg',
+                description: 'Ancient Shiva temple located near Chamundeshwari Temple, known for its peaceful atmosphere and historical significance.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:00 PM',
+                busRoutes: 'Located near Chamundeshwari Temple top, Chamundi Hills, Mysuru.',
+                bestChoice: 'Shiva Darshan & Chamundi Hills Visit',
+                bestChoiceImg: 'https://live.staticflickr.com/2909/33312039731_115bdc09f9_b.jpg'
+            },
+            {
+                name: 'Shri Kote Anjaneya Swamy Temple',
+                image: 'https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format=webp,w=720/QwRY54Li1HMwD7oNfpE6u9nLAWEvPDvmWLf6X4Y9as',
+                description: 'Historic Hanuman temple situated near Mysore Palace and visited by thousands of devotees.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 12:00 PM, 5:00 PM – 8:30 PM',
+                busRoutes: 'Located right outside the North Gate of Mysore Palace, Mysuru.',
+                bestChoice: 'Hanuman Blessings & Palace Area Visit',
+                bestChoiceImg: 'https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format=webp,w=720/QwRY54Li1HMwD7oNfpE6u9nLAWEvPDvmWLf6X4Y9as'
+            },
+            {
+                name: 'Sri Shirdi Sai Baba Temple (Mysuru)',
+                image: 'https://srishirdisaibabatemple.com/wp-content/uploads/elementor/thumbs/Samadhi-Mandir-Sai-Baba-Photo-45-scaled-pnz9ibado3y8rhmjdkay30qiatk05edvbs9i7dmn28.jpg',
+                description: 'A popular Sai Baba temple known for its peaceful ambiance and daily aarti ceremonies.',
+                rating: '4.7',
+                bestTime: '6:00 AM – 12:00 PM, 4:30 PM – 8:30 PM',
+                busRoutes: 'Located in Mysuru city area, easily accessible via local city transit.',
+                bestChoice: 'Sai Baba Darshan & Evening Aarti',
+                bestChoiceImg: 'https://srishirdisaibabatemple.com/wp-content/uploads/elementor/thumbs/Samadhi-Mandir-Sai-Baba-Photo-45-scaled-pnz9ibado3y8rhmjdkay30qiatk05edvbs9i7dmn28.jpg'
             }
         ]
     },
@@ -3907,8 +4007,8 @@ function renderHome() {
                     <img src="https://api.iconify.design/material-symbols:location-on.svg?color=%238338EC" alt="Loc">
                     Explore with Weekend Explore
                 </div>
-                <h1>Where do<br><span class="hero-accent">you want to go?</span></h1>
-                <p>Choose your perfect destination and create beautiful memories.</p>
+                <h1 style="color: #ffffff;">Where do<br><span class="hero-accent" style="color: #ffffff; -webkit-text-fill-color: #ffffff; background: none;">you want to go?</span></h1>
+                <p style="color: #ffffff; opacity: 0.95;">Choose your perfect destination and create beautiful memories.</p>
             </section>
 
             <div class="destinations-row">
@@ -3918,6 +4018,7 @@ function renderHome() {
                             <img src="${dest.image}" alt="${dest.name}" loading="lazy" decoding="async">
                             <div class="dest-card-overlay">
                                 <h3>${dest.name}</h3>
+                                ${dest.id === 'bangalore_east_west' ? '<span style="background: rgba(234, 179, 8, 0.95); color: #000; font-size: 11px; padding: 2px 8px; border-radius: 12px; margin-top: 4px; font-weight: 700; display: inline-block;">Under Development 🚧</span>' : ''}
                             </div>
                             <div class="arrow-btn">
                                 <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
@@ -3935,13 +4036,70 @@ function renderHome() {
     document.querySelectorAll('.dest-card').forEach(card => {
         card.addEventListener('click', () => {
             const destId = card.getAttribute('data-id');
+            if (destId === 'bangalore_east_west') {
+                showUnderDevelopmentModal('Bangalore – East & West');
+                return;
+            }
             renderDestination(destId);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 }
 
+function showUnderDevelopmentModal(cityName = 'Bangalore – East & West') {
+    const existing = document.getElementById('under-dev-modal');
+    if (existing) existing.remove();
+
+    const imageUrl = 'https://static.vecteezy.com/system/resources/previews/013/710/622/original/under-construction-sign-tools-design-vector.jpg';
+
+    const modalHTML = `
+        <div id="under-dev-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeInModal 0.3s ease;">
+            <div style="background: #ffffff; border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 28px; max-width: 440px; width: 100%; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25); text-align: center; position: relative;">
+                
+                <button id="under-dev-close-btn" aria-label="Close" style="position: absolute; top: 16px; right: 16px; background: rgba(15, 23, 42, 0.06); border: none; color: #475569; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; z-index: 10; transition: all 0.2s ease;">✕</button>
+                
+                <!-- Smooth Light Header with seamless illustration -->
+                <div style="background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%); padding: 32px 24px 12px 24px; display: flex; justify-content: center; align-items: center;">
+                    <img src="${imageUrl}" alt="Under Construction" style="max-height: 170px; width: auto; object-fit: contain;">
+                </div>
+
+                <!-- Light Content Area -->
+                <div style="padding: 16px 28px 28px 28px;">
+                    <span style="background: #fef3c7; color: #d97706; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; display: inline-block; margin-bottom: 12px; border: 1px solid #fde68a;">Under Development 🚧</span>
+                    <h2 style="color: #0f172a; font-size: 22px; font-weight: 700; margin: 0 0 10px 0; font-family: 'Outfit', sans-serif; letter-spacing: -0.3px;">${cityName}</h2>
+                    <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin: 0 0 24px 0;">This region is currently under active development. We are bringing exciting new places, itineraries, and experiences soon!</p>
+                    <button id="under-dev-gotit-btn" style="width: 100%; background: linear-gradient(135deg, #8338ec 0%, #3a86ef 100%); color: #ffffff; border: none; padding: 14px 20px; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px rgba(131, 56, 236, 0.3); transition: all 0.2s ease;">Got it!</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    const modal = document.getElementById('under-dev-modal');
+    const closeBtn = document.getElementById('under-dev-close-btn');
+    const gotItBtn = document.getElementById('under-dev-gotit-btn');
+
+    const closeModal = () => {
+        if (modal) {
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.25s ease';
+            setTimeout(() => modal.remove(), 250);
+        }
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    gotItBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+}
+
 function renderDestination(id) {
+    if (id === 'bangalore_east_west') {
+        showUnderDevelopmentModal('Bangalore – East & West');
+        return;
+    }
     clearBackgroundIntervals();
     const dest = destinations.find(d => d.id === id);
     if (!dest) return;
@@ -4992,6 +5150,19 @@ const cityCoordinates = {
     'bangalore central mall': { lat: 12.9600, lng: 77.6000 },
     '🌐 gt world mall (12th best)': { lat: 12.9733, lng: 77.5450 },
     'gt world mall': { lat: 12.9733, lng: 77.5450 },
+    'phoenix marketcity (whitefield)': { lat: 12.9972, lng: 77.6966 },
+    'vr bengaluru (whitefield)': { lat: 12.9960, lng: 77.6960 },
+    'orion east mall (banaswadi)': { lat: 13.0033, lng: 77.6250 },
+    'park square mall (itpl)': { lat: 12.9875, lng: 77.7375 },
+    'gopalan signature mall (old madras road)': { lat: 12.9922, lng: 77.6622 },
+    'soul space arena mall (mahadevapura)': { lat: 12.9900, lng: 77.6850 },
+    'market square mall (sarjapur road)': { lat: 12.9150, lng: 77.6680 },
+    'orion mall (rajajinagar)': { lat: 13.0112, lng: 77.5550 },
+    'lulu mall bengaluru (rajajinagar / binnypet)': { lat: 12.9708, lng: 77.5562 },
+    'mantri square mall (malleshwaram)': { lat: 12.9912, lng: 77.5710 },
+    'gt world mall (magadi road)': { lat: 12.9733, lng: 77.5450 },
+    'eta namma mall (binnypet)': { lat: 12.9640, lng: 77.5540 },
+    'gopalan arcade mall (mysore road)': { lat: 12.9260, lng: 77.5180 },
     'toit': { lat: 12.9791, lng: 77.6408 },
     'windmills craftworks': { lat: 12.9823, lng: 77.7219 },
     'arbor brewing company': { lat: 12.9703, lng: 77.6068 },
@@ -5041,6 +5212,12 @@ const cityCoordinates = {
     'iskcon temple': { lat: 12.3480, lng: 76.6130 },
     'kote sri anjaneya temple': { lat: 12.3080, lng: 76.6560 },
     'srikanteshwara temple': { lat: 12.1220, lng: 76.6810 },
+    'sri srikanteshwara temple (nanjangud)': { lat: 12.1220, lng: 76.6810 },
+    'sri ganapathy sachchidananda ashrama temple': { lat: 12.2818, lng: 76.6570 },
+    'sri datta venkateshwara temple (avadhoota datta peetham)': { lat: 12.2818, lng: 76.6570 },
+    'sri mahabaleshwara temple (chamundi hills)': { lat: 12.2740, lng: 76.6710 },
+    'shri kote anjaneya swamy temple': { lat: 12.3080, lng: 76.6560 },
+    'sri shirdi sai baba temple (mysuru)': { lat: 12.3120, lng: 76.6500 },
     'gommatagiri': { lat: 12.3700, lng: 76.4900 },
     'gowri sand sculpture museum': { lat: 12.2882, lng: 76.6775 },
     'mysore rail museum': { lat: 12.3168, lng: 76.6433 },
