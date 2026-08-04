@@ -1095,13 +1095,17 @@ const requestListener = async (req, res) => {
             const headers = {
                 'Content-Type': contentType,
                 'ETag': etag,
-                'Vary': 'Accept-Encoding'
+                'Vary': 'Accept-Encoding',
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'SAMEORIGIN'
             };
 
-            if (ext === '.html' || ext === '.js' || ext === '.css') {
+            if (ext === '.html') {
                 headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+            } else if (ext === '.js' || ext === '.css') {
+                headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=86400';
             } else {
-                headers['Cache-Control'] = 'public, max-age=86400, immutable';
+                headers['Cache-Control'] = 'public, max-age=31536000, immutable';
             }
 
             const acceptEncoding = req.headers['accept-encoding'] || '';

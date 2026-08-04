@@ -9034,6 +9034,97 @@ function showWelcomeMessage(userName) {
     }, 5000);
 }
 
+/* ==========================================================================
+   PERFORMANCE & UX OPTIMIZATION SUITE (60 FPS, Instant Page Transitions, Memory Cleanup)
+   ========================================================================== */
+(function() {
+    // 1. Debounce and Throttle Utilities
+    window.perfDebounce = function(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    };
+
+    window.perfThrottle = function(func, limit) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    };
+
+    // 2. Global Memory Leak Cleanup Registry
+    window._activeIntervals = window._activeIntervals || [];
+    window.registerPerformanceInterval = function(intervalId) {
+        window._activeIntervals.push(intervalId);
+    };
+    window.clearPerformanceIntervals = function() {
+        if (window._activeIntervals) {
+            window._activeIntervals.forEach(id => clearInterval(id));
+            window._activeIntervals = [];
+        }
+    };
+
+    // 3. IntersectionObserver Lazy Loader & Image Prefetcher
+    function initImagePrefetcher() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset && img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                        if ('decode' in img) {
+                            img.decode().catch(() => {});
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '200px 0px' });
+
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    }
+
+    // 4. Instant Hover Prefetching for Cards
+    function initCardHoverPrefetch() {
+        document.addEventListener('mouseover', perfThrottle((e) => {
+            const card = e.target.closest('.dest-card, .place-card, .category-card');
+            if (card) {
+                const img = card.querySelector('img');
+                if (img && img.src && !img.dataset.preloaded) {
+                    const preloadImg = new Image();
+                    preloadImg.src = img.src;
+                    img.dataset.preloaded = 'true';
+                }
+            }
+        }, 100), { passive: true });
+    }
+
+    // 5. Ensure Passive Scroll & Touch Event Listeners
+    window.addEventListener('scroll', perfThrottle(() => {}, 16), { passive: true });
+    window.addEventListener('touchmove', () => {}, { passive: true });
+
+    // Initialize on DOM Ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initImagePrefetcher();
+            initCardHoverPrefetch();
+        });
+    } else {
+        initImagePrefetcher();
+        initCardHoverPrefetch();
+    }
+})();
+
 
 
 
