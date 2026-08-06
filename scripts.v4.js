@@ -1866,7 +1866,7 @@ const bangaloreCategoryData = {
         places: [
             {
                 name: 'Obbattu (Holige)',
-                image: 'https://madaboutkitchen.in/wp-content/uploads/2016/10/Obattu-3--767x1024.jpg',
+                image: 'https://static.vecteezy.com/system/resources/previews/015/933/204/non_2x/puran-poli-puran-roti-holige-obbattu-or-bobbattlu-is-indian-sweet-flatbread-from-maharashtra-free-photo.jpg',
                 description: 'A traditional sweet flatbread stuffed with a sweet mixture of lentils and jaggery, served hot with melted ghee.',
                 bestTime: 'Anytime Sweet Treat',
                 bestChoice: 'Hot Ghee Obbattu (Holige)'
@@ -3397,7 +3397,7 @@ const cityFoods = {
         { img: 'https://static.wixstatic.com/media/4431d7_10d3db6f602f44cd9c1f0ae354d242e5~mv2.png/v1/fill/w_980,h_1042,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/4431d7_10d3db6f602f44cd9c1f0ae354d242e5~mv2.png', name: 'Ghee Roast' }
     ],
     'bangalore': [
-        { img: 'https://madaboutkitchen.in/wp-content/uploads/2016/10/Obattu-3--767x1024.jpg', name: 'Obbattu (Holige)' },
+        { img: 'https://static.vecteezy.com/system/resources/previews/015/933/204/non_2x/puran-poli-puran-roti-holige-obbattu-or-bobbattlu-is-indian-sweet-flatbread-from-maharashtra-free-photo.jpg', name: 'Obbattu (Holige)' },
         { img: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800', name: 'Masala Dosa' },
         { img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800', name: 'Filter Coffee' },
         { img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800', name: 'Idli Vada' },
@@ -3407,7 +3407,7 @@ const cityFoods = {
         { img: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&q=80&w=800', name: 'Masala Dosa' },
         { img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800', name: 'Filter Coffee' },
         { img: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800', name: 'Corner House DBC' },
-        { img: 'https://madaboutkitchen.in/wp-content/uploads/2016/10/Obattu-3--767x1024.jpg', name: 'Obbattu (Holige)' }
+        { img: 'https://static.vecteezy.com/system/resources/previews/015/933/204/non_2x/puran-poli-puran-roti-holige-obbattu-or-bobbattlu-is-indian-sweet-flatbread-from-maharashtra-free-photo.jpg', name: 'Obbattu (Holige)' }
     ],
     'mysuru': [
         { img: 'https://images.slurrp.com/prodarticles/ydoju3f5ofc.webp?impolicy=slurrp-20210601&width=1200&height=900&q=75', name: 'Mysore Pak' },
