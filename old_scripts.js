@@ -486,7 +486,7 @@ const mangaloreCategoryData = {
             },
             {
                 name: 'Saripalla View',
-                image: 'https://www.nativeplanet.com/img/2023/06/saripalla-1687945738.jpg',
+                image: 'https://i.ytimg.com/vi/PTp05s2x0kU/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFIgZShHMA8=&rs=AOn4CLBinhcnrIVtH7w_3h8enLOKpTHTpQ',
                 description: 'A hidden gem offering mesmerizing panoramic views of the lush green valleys and the winding Netravati river.',
                 rating: '4.4',
                 bestTime: '5:30 PM â€“ 7:00 PM (Sunset)',
@@ -504,7 +504,7 @@ const mangaloreCategoryData = {
             },
             {
                 name: 'Netravati Peak Trek',
-                image: 'https://trekentrip.com/wp-content/uploads/2024/10/netravati-peak-1024x576.jpeg',
+                image: 'https://www.siasat.com/wp-content/uploads/2025/10/Netravati-Trek.jpg',
                 description: 'A scenic trail winding through the rolling hills of the Western Ghats, offering breathtaking views above the clouds.',
                 rating: '4.8',
                 bestTime: '7:00 AM â€“ 4:00 PM',
@@ -719,7 +719,7 @@ const mangaloreCategoryData = {
             },
             {
                 name: 'The Liquid Lounge',
-                image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/ba/81/14/the-liquid-lounge.jpg?w=1200&h=-1&s=1',
+                image: 'https://headlinekarnataka.com/img/news/ck_editor_upload_1721993780.jpeg',
                 description: 'A classic favorite in the city with a retro feel, great cocktails, and hearty food.',
                 openHours: '11:00 AM â€“ 11:30 PM',
                 bestTime: 'Evening (8:00 PM)',
