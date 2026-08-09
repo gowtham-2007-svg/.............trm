@@ -5371,31 +5371,45 @@ main {
     }
 }
 
-/* Scrollable Bus Route Flow Container */
+/* Scrollable Bus Route Flow Container & Auto-Scroll Styling */
 .bus-route-flow-container {
     margin: 12px auto 0 auto;
     text-align: center;
-    line-height: 1.7;
+    line-height: 1.75;
     font-size: 0.86rem;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
     padding: 14px 16px;
     border-radius: 14px;
     color: #0F172A;
-    max-height: 180px;
+    max-height: 175px;
     overflow-y: auto;
     border: 1px solid rgba(43, 190, 255, 0.35);
     animation: routeContainerGlow 4s infinite alternate;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(234, 246, 255, 0.8);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
     width: 100%;
     box-sizing: border-box;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .bus-route-flow-container:hover {
-    background: rgba(255, 255, 255, 0.95);
-    transform: scale(1.005);
+    background: #FFFFFF;
+    border-color: rgba(43, 190, 255, 0.8);
+    box-shadow: 0 4px 16px rgba(43, 190, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.bus-route-flow-container:focus,
+.bus-route-flow-container:active {
+    outline: none;
+    border-color: #0284C7;
 }
 
 .bus-route-flow-container::-webkit-scrollbar {
@@ -5404,16 +5418,59 @@ main {
 
 .bus-route-flow-container::-webkit-scrollbar-track {
     background: rgba(234, 246, 255, 0.8);
-    border-radius: 4px;
+    border-radius: 6px;
+    margin: 4px 0;
 }
 
 .bus-route-flow-container::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #2BBEFF, #0284C7);
-    border-radius: 4px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .bus-route-flow-container::-webkit-scrollbar-thumb:hover {
-    background: #0284C7;
+    background: linear-gradient(180deg, #0284C7, #0369A1);
+}
+
+/* Bus Route Scroll Hint Badge */
+.bus-route-scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: #64748B;
+    margin-top: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    user-select: none;
+    opacity: 0.92;
+    transition: all 0.2s ease;
+}
+
+.bus-route-scroll-hint .scroll-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    display: inline-block;
+    animation: liveDotPulse 1.4s infinite;
+    transition: background-color 0.3s ease;
+}
+
+.bus-route-scroll-hint .scroll-status-dot.paused {
+    background-color: #F59E0B;
+    animation: none;
+}
+
+.bus-route-scroll-hint .scroll-status-text {
+    font-weight: 700;
+    color: #0F172A;
+}
+
+.bus-route-scroll-hint .scroll-status-sub {
+    color: #94A3B8;
+    font-size: 0.68rem;
 }
 
 /* ==========================================================================

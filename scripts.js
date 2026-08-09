@@ -4442,7 +4442,7 @@ function openMustWatchModal(category, cityId = currentCityId) {
                 loop: true,
                 speed: 800,
                 autoplay: {
-                    delay: 2000,
+                    delay: 3500,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
@@ -4459,8 +4459,22 @@ function openMustWatchModal(category, cityId = currentCityId) {
                     nextEl: '.must-watch-next',
                     prevEl: '.must-watch-prev',
                 },
+                on: {
+                    slideChange: function() {
+                        setTimeout(() => {
+                            if (typeof window.initBusRouteAutoScroll === 'function') {
+                                window.initBusRouteAutoScroll();
+                            }
+                        }, 60);
+                    }
+                }
             });
         }
+        setTimeout(() => {
+            if (typeof window.initBusRouteAutoScroll === 'function') {
+                window.initBusRouteAutoScroll();
+            }
+        }, 100);
 
         const closeModal = () => {
             overlay.classList.remove('active');
@@ -7443,6 +7457,11 @@ function renderRealPlacesDetails(container, data) {
         ${photosHTML}
         ${busCardHTML}
     `;
+    setTimeout(() => {
+        if (typeof window.initBusRouteAutoScroll === 'function') {
+            window.initBusRouteAutoScroll();
+        }
+    }, 60);
 }
 
 // Helper: Render setup instructions card if Google Places API is not connected
@@ -9134,6 +9153,235 @@ function showWelcomeMessage(userName) {
         initCardHoverPrefetch();
     }
 })();
+
+// ==========================================================================
+// BUS ROUTE AUTO-SCROLL ENGINE
+// ==========================================================================
+function initBusRouteAutoScroll() {
+    const containers = document.querySelectorAll('.bus-route-flow-container');
+    if (!containers || containers.length === 0) return;
+
+    containers.forEach((container) => {
+        if (container.dataset.autoscrollInit === 'true') return;
+        container.dataset.autoscrollInit = 'true';
+
+        // Add sleek status hint badge under bus-route-card if not already present
+        const parentCard = container.closest('.bus-route-card');
+        if (parentCard && !parentCard.querySelector('.bus-route-scroll-hint')) {
+            const hint = document.createElement('div');
+            hint.className = 'bus-route-scroll-hint';
+            hint.innerHTML = '<span class="scroll-status-dot"></span> <span class="scroll-status-text">Auto-Scrolling</span> <span class="scroll-status-sub">(Hover/touch to pause)</span>';
+            container.parentNode.insertBefore(hint, container.nextSibling);
+        }
+
+        let isPaused = false;
+        let isUserInteracting = false;
+        let isReturning = false;
+        let isVisible = true;
+        let currentScroll = container.scrollTop;
+        let lastTime = performance.now();
+        let userScrollTimeout = null;
+        const scrollSpeed = 24; // Smooth, legible pixels per second
+
+        const updateStatus = (isPausedState) => {
+            if (parentCard) {
+                const textEl = parentCard.querySelector('.scroll-status-text');
+                const dotEl = parentCard.querySelector('.scroll-status-dot');
+                if (textEl && dotEl) {
+                    if (isPausedState) {
+                        textEl.textContent = 'Paused';
+                        dotEl.classList.add('paused');
+                    } else {
+                        textEl.textContent = 'Auto-Scrolling';
+                        dotEl.classList.remove('paused');
+                    }
+                }
+            }
+        };
+
+        // Pause on mouse hover
+        container.addEventListener('mouseenter', () => {
+            isPaused = true;
+            updateStatus(true);
+        }, { passive: true });
+
+        container.addEventListener('mouseleave', () => {
+            isPaused = false;
+            lastTime = performance.now();
+            updateStatus(false);
+        }, { passive: true });
+
+        // Pause on touch interaction
+        container.addEventListener('touchstart', () => {
+            isUserInteracting = true;
+            isPaused = true;
+            updateStatus(true);
+            if (userScrollTimeout) clearTimeout(userScrollTimeout);
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+            if (userScrollTimeout) clearTimeout(userScrollTimeout);
+            userScrollTimeout = setTimeout(() => {
+                isUserInteracting = false;
+                isPaused = false;
+                currentScroll = container.scrollTop;
+                lastTime = performance.now();
+                updateStatus(false);
+            }, 2000);
+        }, { passive: true });
+
+        // Pause on user wheel or manual drag
+        container.addEventListener('wheel', () => {
+            if (!isReturning) {
+                isUserInteracting = true;
+                updateStatus(true);
+                if (userScrollTimeout) clearTimeout(userScrollTimeout);
+                userScrollTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                    currentScroll = container.scrollTop;
+                    lastTime = performance.now();
+                    updateStatus(false);
+                }, 2200);
+            }
+        }, { passive: true });
+
+        container.addEventListener('scroll', () => {
+            if (isUserInteracting || isPaused) {
+                currentScroll = container.scrollTop;
+            }
+        }, { passive: true });
+
+        // Smooth return animation to top
+        const smoothReturnToTop = () => {
+            isReturning = true;
+            const startScroll = container.scrollTop;
+            const duration = 650;
+            const startTime = performance.now();
+
+            const returnStep = (now) => {
+                if (isPaused || isUserInteracting) {
+                    isReturning = false;
+                    return;
+                }
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // EaseInOutQuad
+                const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+                container.scrollTop = startScroll * (1 - ease);
+
+                if (progress < 1) {
+                    requestAnimationFrame(returnStep);
+                } else {
+                    container.scrollTop = 0;
+                    currentScroll = 0;
+                    isReturning = false;
+                    // Pause for 1.6s at top before restarting
+                    isPaused = true;
+                    setTimeout(() => {
+                        if (!container.matches(':hover') && !isUserInteracting) {
+                            isPaused = false;
+                            lastTime = performance.now();
+                        }
+                    }, 1600);
+                }
+            };
+            requestAnimationFrame(returnStep);
+        };
+
+        // Main animation loop
+        const animate = (currentTime) => {
+            const maxScroll = container.scrollHeight - container.clientHeight;
+
+            if (maxScroll > 6 && isVisible && !isPaused && !isUserInteracting && !isReturning) {
+                const deltaTime = (currentTime - lastTime) / 1000;
+                lastTime = currentTime;
+
+                if (deltaTime > 0 && deltaTime < 0.5) {
+                    currentScroll += scrollSpeed * deltaTime;
+                    if (currentScroll >= maxScroll - 1) {
+                        currentScroll = maxScroll;
+                        container.scrollTop = maxScroll;
+                        // Pause at destination for 2.2 seconds
+                        isPaused = true;
+                        setTimeout(() => {
+                            if (!container.matches(':hover') && !isUserInteracting) {
+                                isPaused = false;
+                                smoothReturnToTop();
+                            }
+                        }, 2200);
+                    } else {
+                        container.scrollTop = currentScroll;
+                    }
+                }
+            } else {
+                lastTime = currentTime;
+            }
+
+            requestAnimationFrame(animate);
+        };
+
+        // IntersectionObserver to save resources when container is offscreen
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible && !isPaused && !isUserInteracting) {
+                        lastTime = performance.now();
+                    }
+                });
+            }, { threshold: 0.05 });
+            observer.observe(container);
+        }
+
+        // Start animation after a brief delay
+        setTimeout(() => {
+            currentScroll = container.scrollTop;
+            lastTime = performance.now();
+            requestAnimationFrame(animate);
+        }, 800);
+    });
+}
+
+window.initBusRouteAutoScroll = initBusRouteAutoScroll;
+
+// DOM MutationObserver to auto-initialize on any newly injected route containers
+if (typeof MutationObserver !== 'undefined') {
+    const busRouteObserver = new MutationObserver((mutations) => {
+        let hasNewContainer = false;
+        for (const m of mutations) {
+            if (m.addedNodes.length > 0) {
+                for (const node of m.addedNodes) {
+                    if (node.nodeType === 1) {
+                        if (node.classList?.contains('bus-route-flow-container') || node.querySelector?.('.bus-route-flow-container')) {
+                            hasNewContainer = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (hasNewContainer) break;
+        }
+        if (hasNewContainer) {
+            setTimeout(initBusRouteAutoScroll, 80);
+        }
+    });
+    if (document.body) {
+        busRouteObserver.observe(document.body, { childList: true, subtree: true });
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            busRouteObserver.observe(document.body, { childList: true, subtree: true });
+        });
+    }
+}
+
+// Auto-run on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initBusRouteAutoScroll, 300);
+    });
+} else {
+    setTimeout(initBusRouteAutoScroll, 300);
+}
 
 
 
