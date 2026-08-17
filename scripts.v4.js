@@ -3626,19 +3626,20 @@ function renderFoodCategoryPage(cityId) {
         </div>
     `;
 
-    app.innerHTML = destHTML;
-    bindDoubleTapListeners();
+    setAppContent(destHTML, () => {
+        bindDoubleTapListeners();
 
-    document.getElementById('back-to-city').addEventListener('click', (e) => {
-        e.preventDefault();
-        renderDestination(cityId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const backToCityBtn = document.getElementById('back-to-city');
+        if (backToCityBtn) {
+            backToCityBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderDestination(cityId);
+            });
+        }
     });
 }
 
 function renderGlobalFavoritesPage() {
-    clearBackgroundIntervals();
-
     const favFoodNames = getFavoriteFoods();
     
     const allMatchingFoods = [];
@@ -3720,40 +3721,42 @@ function renderGlobalFavoritesPage() {
         </div>
     `;
 
-    app.innerHTML = pageHTML;
+    setAppContent(pageHTML, () => {
+        // Remove active class from navigation links
+        document.querySelectorAll('.nav-links .nav-link').forEach(link => link.classList.remove('active'));
 
-    // Remove active class from navigation links
-    document.querySelectorAll('.nav-links .nav-link').forEach(link => link.classList.remove('active'));
-
-    if (allMatchingFoods.length > 0) {
-        bindDoubleTapListeners();
-        
-        const cards = document.querySelectorAll('.favorite-food-card');
-        cards.forEach(card => {
-            const foodName = card.getAttribute('data-name');
-            card.addEventListener('click', (e) => {
-                const badge = e.target.closest('.food-favorite-icon-badge');
-                setTimeout(() => {
-                    if (!isFoodFavorite(foodName)) {
-                        card.style.transition = 'all 0.5s ease';
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.8)';
-                        setTimeout(() => {
-                            card.remove();
-                            if (document.querySelectorAll('.favorite-food-card').length === 0) {
-                                renderGlobalFavoritesPage();
-                            }
-                        }, 500);
-                    }
-                }, 310);
+        if (allMatchingFoods.length > 0) {
+            bindDoubleTapListeners();
+            
+            const cards = document.querySelectorAll('.favorite-food-card');
+            cards.forEach(card => {
+                const foodName = card.getAttribute('data-name');
+                card.addEventListener('click', (e) => {
+                    const badge = e.target.closest('.food-favorite-icon-badge');
+                    setTimeout(() => {
+                        if (!isFoodFavorite(foodName)) {
+                            card.style.transition = 'all 0.5s ease';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.remove();
+                                if (document.querySelectorAll('.favorite-food-card').length === 0) {
+                                    renderGlobalFavoritesPage();
+                                }
+                            }, 500);
+                        }
+                    }, 310);
+                });
             });
-        });
-    }
+        }
 
-    document.getElementById('back-to-home-from-favs').addEventListener('click', (e) => {
-        e.preventDefault();
-        renderHome();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const backBtn = document.getElementById('back-to-home-from-favs');
+        if (backBtn) {
+            backBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHome();
+            });
+        }
     });
 }
 
@@ -3953,43 +3956,67 @@ function renderCategoryPage(categoryId, cityId = currentCityId) {
         </div>
     `;
 
-    app.innerHTML = destHTML;
-    initBestFoodSliders();
-    initPlaceImageSliders();
+    setAppContent(destHTML, () => {
+        initBestFoodSliders();
+        initPlaceImageSliders();
 
-    if (typeof Swiper !== 'undefined' && document.querySelector('.category-header-swiper')) {
-        new Swiper('.category-header-swiper', {
-            loop: true,
-            speed: 1200,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-            },
-            effect: 'slide',
-            grabCursor: true,
-            touchRatio: 1.2,
-            resistanceRatio: 0.8,
-        });
-    }
+        if (typeof Swiper !== 'undefined' && document.querySelector('.category-header-swiper')) {
+            const sInst = new Swiper('.category-header-swiper', {
+                loop: true,
+                speed: 1200,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
+                effect: 'slide',
+                grabCursor: true,
+                touchRatio: 1.2,
+                resistanceRatio: 0.8,
+            });
+            if (typeof activeSwiperInstances !== 'undefined') {
+                activeSwiperInstances.push(sInst);
+            }
+        }
 
-    document.getElementById('back-to-city').addEventListener('click', (e) => {
-        e.preventDefault();
-        renderDestination(cityId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        const backToCityBtn = document.getElementById('back-to-city');
+        if (backToCityBtn) {
+            backToCityBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderDestination(cityId);
+            });
+        }
 
-    document.getElementById('must-watch-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        openMustWatchModal(category, cityId);
+        const mustWatchBtn = document.getElementById('must-watch-btn');
+        if (mustWatchBtn) {
+            mustWatchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openMustWatchModal(category, cityId);
+            });
+        }
     });
 }
 
 console.log("Scripts initializing...");
 const app = document.getElementById('app');
 
-function renderHome() {
+// High-Performance GPU-Accelerated View Transition Runner
+function setAppContent(html, onMounted) {
+    if (!app) return;
     clearBackgroundIntervals();
+    app.classList.remove('page-transition-enter');
+    // Scroll instantly to top before paint to prevent layout jumping
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    app.innerHTML = html;
+    requestAnimationFrame(() => {
+        app.classList.add('page-transition-enter');
+    });
+    if (typeof onMounted === 'function') {
+        onMounted();
+    }
+}
+
+function renderHome() {
     const homeHTML = `
         <div class="page-content">
             <section class="hero">
@@ -4020,18 +4047,17 @@ function renderHome() {
         </div>
     `;
 
-    app.innerHTML = homeHTML;
-
-    // Add click listeners to cards
-    document.querySelectorAll('.dest-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const destId = card.getAttribute('data-id');
-            if (destId === 'bangalore_east_west') {
-                showUnderDevelopmentModal('Bangalore – East & West');
-                return;
-            }
-            renderDestination(destId);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    setAppContent(homeHTML, () => {
+        // Add click listeners to cards
+        document.querySelectorAll('.dest-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const destId = card.getAttribute('data-id');
+                if (destId === 'bangalore_east_west') {
+                    showUnderDevelopmentModal('Bangalore – East & West');
+                    return;
+                }
+                renderDestination(destId);
+            });
         });
     });
 }
@@ -4191,58 +4217,60 @@ function renderDestination(id) {
         </div>
     `;
 
-    app.innerHTML = destHTML;
-    initBestFoodSliders();
+    setAppContent(destHTML, () => {
+        initBestFoodSliders();
 
-    // Add back button listener
-    document.getElementById('back-home').addEventListener('click', (e) => {
-        e.preventDefault();
-        renderHome();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        // Add back button listener
+        const backHomeBtn = document.getElementById('back-home');
+        if (backHomeBtn) {
+            backHomeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHome();
+            });
+        }
 
-    // Initialize Swiper for Header Category Cards
-    if (isPremiumCity && typeof Swiper !== 'undefined') {
-        ['.food-swiper', '.beach-swiper', '.temple-swiper', '.mall-swiper'].forEach((selector, idx) => {
-            if (document.querySelector(selector)) {
-                const sInst = new Swiper(selector, {
-                    loop: true,
-                    speed: 1200,
-                    autoplay: {
-                        delay: 2000 + (idx * 500),
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true,
-                    },
-                    effect: 'slide',
-                    grabCursor: true,
-                    touchRatio: 1.2,
-                    resistanceRatio: 0.8,
-                });
-                if (typeof activeSwiperInstances !== 'undefined') {
-                    activeSwiperInstances.push(sInst);
+        // Initialize Swiper for Header Category Cards
+        if (isPremiumCity && typeof Swiper !== 'undefined') {
+            ['.food-swiper', '.beach-swiper', '.temple-swiper', '.mall-swiper'].forEach((selector, idx) => {
+                if (document.querySelector(selector)) {
+                    const sInst = new Swiper(selector, {
+                        loop: true,
+                        speed: 1200,
+                        autoplay: {
+                            delay: 2000 + (idx * 500),
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        },
+                        effect: 'slide',
+                        grabCursor: true,
+                        touchRatio: 1.2,
+                        resistanceRatio: 0.8,
+                    });
+                    if (typeof activeSwiperInstances !== 'undefined') {
+                        activeSwiperInstances.push(sInst);
+                    }
                 }
-            }
-        });
-        bindDoubleTapListeners();
-    }
+            });
+            bindDoubleTapListeners();
+        }
 
-    // Add Must Watch button listener if present
-    const mustWatchBtn = document.getElementById('city-must-watch-btn');
-    if (mustWatchBtn) {
-        mustWatchBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openCityMustWatchModal(dest.id);
-        });
-    }
+        // Add Must Watch button listener if present
+        const mustWatchBtn = document.getElementById('city-must-watch-btn');
+        if (mustWatchBtn) {
+            mustWatchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openCityMustWatchModal(dest.id);
+            });
+        }
 
-    // Add category click listeners if any
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const catId = card.getAttribute('data-cat-id');
-            if (catId && !catId.startsWith('coming_soon') && catId !== 'food') {
-                renderCategoryPage(catId, dest.id);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+        // Add category click listeners if any
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const catId = card.getAttribute('data-cat-id');
+                if (catId && !catId.startsWith('coming_soon') && catId !== 'food') {
+                    renderCategoryPage(catId, dest.id);
+                }
+            });
         });
     });
 }
@@ -7185,6 +7213,38 @@ const API_BASE = window.location.port === '3000'
         ? 'http://localhost:3000'
         : `${window.location.protocol}//${window.location.hostname}:3000`);
 
+// Ultra-fast Client-side in-memory & sessionStorage Place Cache (0ms response)
+const clientPlacesCache = new Map();
+
+function fetchCachedPlaceDetails(placeId) {
+    if (clientPlacesCache.has(placeId)) {
+        return Promise.resolve(clientPlacesCache.get(placeId));
+    }
+    try {
+        const stored = sessionStorage.getItem('gplaces_cache_' + placeId);
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            clientPlacesCache.set(placeId, parsed);
+            return Promise.resolve(parsed);
+        }
+    } catch(e) {}
+
+    return fetch(`${API_BASE}/api/place-details/${placeId}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Backend server unreachable');
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.connected) {
+                clientPlacesCache.set(placeId, data);
+                try {
+                    sessionStorage.setItem('gplaces_cache_' + placeId, JSON.stringify(data));
+                } catch(e) {}
+            }
+            return data;
+        });
+}
+
 // Unified Google Maps-style Details Drawer Loader
 function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, durationMins, cityId = currentCityId) {
     const existing = document.getElementById('gmaps-drawer-overlay-bg');
@@ -7348,12 +7408,8 @@ function openGeoModal(userLat, userLng, destLat, destLng, destName, distance, du
         renderRealPlacesDetails(apiContent, instantData);
     }
 
-    // 6. Fire Async Fetch request to local backend proxy in background
-    fetch(`${API_BASE}/api/place-details/${placeId}`)
-        .then(response => {
-            if (!response.ok) throw new Error('Backend server unreachable');
-            return response.json();
-        })
+    // 6. Fire Cached / Background Async Fetch request
+    fetchCachedPlaceDetails(placeId)
         .then(data => {
             if (apiContent && data.connected && data.status === 'OK' && data.reviews && data.reviews.length > 0) {
                 if (mockData && mockData.photos) {
@@ -9278,11 +9334,18 @@ function initBusRouteAutoScroll() {
             requestAnimationFrame(returnStep);
         };
 
-        // Main animation loop
+        let animationFrameId = null;
+
+        // Main 60 FPS animation loop
         const animate = (currentTime) => {
+            if (!isVisible) {
+                animationFrameId = null;
+                return;
+            }
+
             const maxScroll = container.scrollHeight - container.clientHeight;
 
-            if (maxScroll > 6 && isVisible && !isPaused && !isUserInteracting && !isReturning) {
+            if (maxScroll > 6 && !isPaused && !isUserInteracting && !isReturning) {
                 const deltaTime = (currentTime - lastTime) / 1000;
                 lastTime = currentTime;
 
@@ -9307,7 +9370,14 @@ function initBusRouteAutoScroll() {
                 lastTime = currentTime;
             }
 
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        const startAnimationLoop = () => {
+            if (!animationFrameId && isVisible) {
+                lastTime = performance.now();
+                animationFrameId = requestAnimationFrame(animate);
+            }
         };
 
         // IntersectionObserver to save resources when container is offscreen
@@ -9315,8 +9385,9 @@ function initBusRouteAutoScroll() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     isVisible = entry.isIntersecting;
-                    if (isVisible && !isPaused && !isUserInteracting) {
+                    if (isVisible) {
                         lastTime = performance.now();
+                        startAnimationLoop();
                     }
                 });
             }, { threshold: 0.05 });
@@ -9326,8 +9397,7 @@ function initBusRouteAutoScroll() {
         // Start animation after a brief delay
         setTimeout(() => {
             currentScroll = container.scrollTop;
-            lastTime = performance.now();
-            requestAnimationFrame(animate);
+            startAnimationLoop();
         }, 800);
     });
 }

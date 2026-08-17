@@ -22,20 +22,35 @@
 /* GPU Hardware Acceleration & Performance Optimization */
 .page-content,
 .hero,
-.dest-card,
-.place-card,
-.category-card,
-.swiper-slide,
-.menu-drawer,
 .main-header,
-.auth-nav-btn,
-.signin-btn,
-.must-watch-btn,
-.navbar-brand {
-    transform: translateZ(0);
-    will-change: transform, opacity;
+.menu-drawer {
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+}
+
+.dest-card:hover,
+.place-card:hover,
+.category-card:hover {
+    will-change: transform;
+}
+
+/* Instant GPU-Accelerated Page Transitions */
+.page-transition-enter {
+    animation: pageSlideFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+@keyframes pageSlideFade {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 button, a {
@@ -90,6 +105,9 @@ body::before {
     background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1920') no-repeat center top / cover;
     z-index: -1;
     pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Header & Nav */
