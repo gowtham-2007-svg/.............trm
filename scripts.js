@@ -9010,16 +9010,18 @@ function initPlaceImageSliders() {
             document.body.style.overflow = 'hidden';
             try {
                 window.Clerk.mountSignIn(signInContainer, { 
-                    routing: 'hash',
-                    appearance: {
-                        variables: { colorPrimary: 'red' }
-                    }
+                    routing: 'virtual',
+                    afterSignInUrl: window.location.href,
+                    afterSignUpUrl: window.location.href
                 });
             } catch (err) {
                 signInContainer.innerHTML = `<div style="background: white; padding: 2rem; border-radius: 12px; color: #d93025; font-weight: 600;">Error: ${err.message}</div>`;
             }
         } else if (window.Clerk) {
-            window.Clerk.openSignIn();
+            window.Clerk.openSignIn({
+                afterSignInUrl: window.location.href,
+                afterSignUpUrl: window.location.href
+            });
         }
     }
 
