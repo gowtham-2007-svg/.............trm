@@ -149,10 +149,13 @@
 }
 
 .wai-message {
-  max-width: 85%;
-  padding: 12px 16px;
+  max-width: 95%;
+  box-sizing: border-box;
+  padding: 12px 14px;
   font-size: 0.95rem;
   line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   animation: weekendAiFadeIn 0.3s ease forwards;
 }
 
@@ -161,6 +164,7 @@
   background-color: var(--wai-primary-light);
   color: var(--wai-text-dark);
   border-radius: 16px 16px 16px 4px;
+  width: 100%;
 }
 
 .wai-message-user {
@@ -168,6 +172,7 @@
   background-color: var(--wai-primary);
   color: var(--wai-bg-white);
   border-radius: 16px 16px 4px 16px;
+  max-width: 85%;
 }
 
 /* 5. Option Chips/Buttons */
@@ -341,13 +346,40 @@
 }
 
 .wai-budget-card {
-  margin-top: 16px;
-  background-color: var(--wai-primary-light);
+  margin-top: 14px;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wai-budget-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.82rem;
+  color: var(--wai-text-muted);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wai-budget-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: var(--wai-text-dark);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--wai-border);
+  padding-top: 8px;
+  margin-top: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .wai-budget-label {
@@ -359,7 +391,7 @@
 .wai-budget-amount {
   font-weight: 700;
   color: var(--wai-primary);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .wai-btn-outline {

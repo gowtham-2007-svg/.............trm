@@ -695,19 +695,23 @@
     html += `
         </div>
 
-        <div class="wai-budget-card" style="margin-top: 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 10px 12px; font-size: 0.82rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px; color: #64748b;">
-            <span>Activities & Entry:</span><span>₹${actCost}</span>
+        <div class="wai-budget-card">
+          <div class="wai-budget-row">
+            <span>Activities & Entry:</span>
+            <span style="font-weight: 600; color: #1e293b;">₹${actCost}</span>
           </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px; color: #64748b;">
-            <span>Transport (${transDesc.split('(')[0]}):</span><span>₹${transportCost}</span>
+          <div class="wai-budget-row">
+            <span>Transport (${transDesc.split('(')[0].trim()}):</span>
+            <span style="font-weight: 600; color: #1e293b;">₹${transportCost}</span>
           </div>
           ${foodCost > 0 ? `
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px; color: #64748b;">
-            <span>Food & Snacks:</span><span>₹${foodCost}</span>
+          <div class="wai-budget-row">
+            <span>Food & Snacks:</span>
+            <span style="font-weight: 600; color: #1e293b;">₹${foodCost}</span>
           </div>` : ''}
-          <div style="display: flex; justify-content: space-between; font-weight: 700; color: #1e293b; border-top: 1px solid #e2e8f0; padding-top: 6px; margin-top: 6px;">
-            <span>Total Estimated Cost:</span><span>₹${totalCalculated} / ₹${s.budget}</span>
+          <div class="wai-budget-total-row">
+            <span>Total Estimated:</span>
+            <span style="color: #8338EC; font-size: 0.95rem;">₹${totalCalculated} / ₹${s.budget}</span>
           </div>
         </div>
     `;
