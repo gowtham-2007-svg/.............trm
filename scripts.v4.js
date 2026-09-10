@@ -4122,6 +4122,10 @@ function renderDestination(id) {
 
     currentCityId = id;
 
+    if (window.WeekendAI && typeof window.WeekendAI.openForCity === 'function') {
+        window.WeekendAI.openForCity(dest.name);
+    }
+
     const isPremiumCity = ['mangaluru', 'bangalore', 'mysuru', 'mysuru_east_west', 'manipal'].includes(dest.id);
 
     const destHTML = `
