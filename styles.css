@@ -542,17 +542,42 @@ main {
 .back-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 600;
+    color: var(--primary-color, #8338EC);
+    background: rgba(131, 56, 236, 0.08);
+    border: 1.5px solid rgba(131, 56, 236, 0.28);
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    font-weight: 700;
     margin-bottom: 2rem;
-    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(131, 56, 236, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.back-btn svg {
+    stroke: currentColor;
+    transition: transform 0.3s ease;
 }
 
 .back-btn:hover {
-    color: var(--primary-color);
-    transform: translateX(-5px);
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-color, #8338EC) 0%, #6d28d9 100%);
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(131, 56, 236, 0.38);
+    transform: translateX(-4px);
+}
+
+.back-btn:hover svg {
+    transform: translateX(-3px);
+}
+
+.back-btn:active {
+    transform: translateX(-2px) scale(0.97);
 }
 
 .dest-header h1 {
