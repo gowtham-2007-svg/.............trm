@@ -4,7 +4,7 @@
   // --- Multi-Language Translations ---
   const TRANSLATIONS = {
     en: {
-      welcome: "Hey! 👋 Welcome to Weekend AI! Choose your language to start planning:",
+      welcome: "Hi {name}! 👋 Welcome to Weekend AI! Choose your language to start planning:",
       loc_q: "Where are you starting your trip from? 📍",
       loc_detect: "📍 Use My Current Location",
       loc_detected: "Detected your location: {city}! ✅",
@@ -28,7 +28,7 @@
       large_group: "Large Group (7+)"
     },
     kn: {
-      welcome: "ಹೇ! 👋 ವೀಕೆಂಡ್ AI ಗೆ ಸುಸ್ವಾಗತ! ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+      welcome: "ನಮಸ್ಕಾರ {name}! 👋 ವೀಕೆಂಡ್ AI ಗೆ ಸುಸ್ವಾಗತ! ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
       loc_q: "ನಿಮ್ಮ ಪ್ರವಾಸವನ್ನು ಎಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸುತ್ತೀರಿ? 📍",
       loc_detect: "📍 ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳ ಬಳಸಿ",
       loc_detected: "ನಿಮ್ಮ ಸ್ಥಳ: {city}! ✅",
@@ -52,7 +52,7 @@
       large_group: "ಗುಂಪು (7+)"
     },
     hi: {
-      welcome: "नमस्ते! 👋 वीकेंड AI में आपका स्वागत है! अपनी भाषा चुनें:",
+      welcome: "नमस्ते {name}! 👋 वीकेंड AI में आपका स्वागत है! अपनी भाषा चुनें:",
       loc_q: "आप अपनी यात्रा कहाँ से शुरू कर रहे हैं? 📍",
       loc_detect: "📍 मेरे वर्तमान स्थान का उपयोग करें",
       loc_detected: "आपका स्थान: {city}! ✅",
@@ -75,22 +75,64 @@
       big_group: "बड़ा समूह (5-6)",
       large_group: "बड़ा समूह (7+)"
     },
-    ta: { welcome: "வணக்கம்! 👋 Weekend AI க்கு வரவேற்கிறோம்! மொழியைத் தேர்ந்தெடுக்கவும்:" },
-    te: { welcome: "నమస్కారం! 👋 Weekend AI కి స్వాగతం! మీ భాషను ఎంచుకోండి:" },
-    ml: { welcome: "നമസ്കാരം! 👋 Weekend AI ലേക്ക് സ്വാഗതം! ഭാഷ തിരഞ്ഞെടുക്കുക:" },
-    mr: { welcome: "नमस्कार! 👋 Weekend AI मध्ये आपले स्वागत आहे! भाषा निवडा:" },
-    bn: { welcome: "হ্যালো! 👋 Weekend AI তে স্বাগতম! আপনার ভাষা নির্বাচন করুন:" },
-    gu: { welcome: "નમસ્તે! 👋 Weekend AI માં તમારું સ્વાગત છે! ભાષા પસંદ કરો:" }
+    ta: { welcome: "வணக்கம் {name}! 👋 Weekend AI க்கு வரவேற்கிறோம்! மொழியைத் தேர்ந்தெடுக்கவும்:" },
+    te: { welcome: "నమస్కారం {name}! 👋 Weekend AI కి స్వాగతం! మీ భాషను ఎంచుకోండి:" },
+    ml: { welcome: "നമസ്കാരം {name}! 👋 Weekend AI ലേക്ക് സ്വാഗതം! ഭാഷ തിരഞ്ഞെടുക്കുക:" },
+    mr: { welcome: "नमस्कार {name}! 👋 Weekend AI मध्ये आपले स्वागत आहे! भाषा निवडा:" },
+    bn: { welcome: "হ্যালো {name}! 👋 Weekend AI তে স্বাগতম! আপনার भाषा নির্বাচন করুন:" },
+    gu: { welcome: "નમસ્તે {name}! 👋 Weekend AI માં તમારું સ્વાગત છે! ભાષા પસંદ કરો:" }
   };
+
+  // Helper to get logged-in user name from Clerk / Google authentication
+  function getUserDisplayName() {
+    try {
+      if (window.Clerk && window.Clerk.user) {
+        const u = window.Clerk.user;
+        if (u.firstName && u.firstName.trim()) {
+          return u.firstName.trim();
+        }
+        if (u.fullName && u.fullName.trim()) {
+          return u.fullName.trim().split(' ')[0];
+        }
+        // Extract name from primary email (e.g. gowtham@gmail.com -> Gowtham)
+        const email = (u.primaryEmailAddress && u.primaryEmailAddress.emailAddress)
+          || (u.emailAddresses && u.emailAddresses[0] ? u.emailAddresses[0].emailAddress : '');
+        if (email) {
+          const raw = email.split('@')[0].replace(/[._0-9]/g, ' ').trim();
+          const part = raw.split(' ')[0];
+          if (part) {
+            return part.charAt(0).toUpperCase() + part.slice(1);
+          }
+        }
+      }
+
+      // Check session or local storage
+      const saved = sessionStorage.getItem('weekend_user_name') || localStorage.getItem('weekend_user_name');
+      if (saved && saved.trim()) {
+        return saved.trim().split(' ')[0];
+      }
+    } catch (e) {
+      console.warn('[WeekendAI] Could not retrieve user name:', e);
+    }
+    return '';
+  }
 
   function t(key, lang) {
     lang = lang || STATE.language || 'en';
+    let text = '';
     if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
-      return TRANSLATIONS[lang][key];
+      text = TRANSLATIONS[lang][key];
+    } else {
+      text = (TRANSLATIONS.en && TRANSLATIONS.en[key]) || key;
     }
-    return (TRANSLATIONS.en && TRANSLATIONS.en[key]) || key;
-  }
 
+    if (typeof text === 'string' && text.includes('{name}')) {
+      const name = getUserDisplayName();
+      text = text.replace('{name}', name || 'there');
+    }
+
+    return text;
+  }
   // --- Initial State ---
   const INITIAL_STATE = {
     language: 'en',
@@ -738,7 +780,15 @@
   let DOM = {};
 
   function initUI() {
-    if (document.getElementById('wai-trigger')) return;
+    if (document.getElementById('wai-trigger')) {
+      DOM.trigger = document.getElementById('wai-trigger');
+      DOM.window = document.getElementById('wai-chat-window');
+      DOM.backdrop = document.getElementById('wai-backdrop');
+      DOM.closeBtn = document.getElementById('wai-close');
+      DOM.dotsContainer = document.getElementById('wai-dots');
+      DOM.chatBody = document.getElementById('wai-chat-body');
+      return;
+    }
 
     let container = document.getElementById('weekend-ai-container');
     if (!container) {
@@ -950,11 +1000,43 @@
     }
   };
 
-  // Auto-init on load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initUI);
-  } else {
+  // --- Show / Hide the entire widget (trigger badge) ---
+  function showWidget() {
     initUI();
+    const trigger = document.getElementById('wai-trigger') || DOM.trigger;
+    if (trigger) {
+      trigger.style.display = 'flex';
+      trigger.style.visibility = 'visible';
+      trigger.style.opacity = '1';
+    }
+  }
+
+  function hideWidget() {
+    closeChat();
+    const trigger = document.getElementById('wai-trigger') || DOM.trigger;
+    if (trigger) {
+      trigger.style.display = 'none';
+    }
+  }
+
+  // Expose show/hide on global API
+  window.WeekendAI.show = showWidget;
+  window.WeekendAI.hide = hideWidget;
+
+  // Auto-init on load — keep widget hidden on home page, show on destination page
+  function checkInitialVisibility() {
+    initUI();
+    if (window.currentCityId) {
+      showWidget();
+    } else {
+      hideWidget();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkInitialVisibility);
+  } else {
+    checkInitialVisibility();
   }
 
 })();

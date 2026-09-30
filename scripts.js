@@ -4027,6 +4027,10 @@ function setAppContent(html, onMounted) {
 }
 
 function renderHome() {
+    window.currentCityId = null;
+    if (window.WeekendAI && typeof window.WeekendAI.hide === 'function') {
+        window.WeekendAI.hide();
+    }
     const homeHTML = `
         <div class="page-content">
             <section class="hero">
@@ -4058,6 +4062,10 @@ function renderHome() {
     `;
 
     setAppContent(homeHTML, () => {
+        // Keep AI widget hidden on the home page
+        if (window.WeekendAI && typeof window.WeekendAI.hide === 'function') {
+            window.WeekendAI.hide();
+        }
         // Add click listeners to cards
         document.querySelectorAll('.dest-card').forEach(card => {
             card.addEventListener('click', () => {
@@ -4131,8 +4139,12 @@ function renderDestination(id) {
     if (!dest) return;
 
     currentCityId = id;
+    window.currentCityId = id;
 
-    const isPremiumCity = ['mangaluru', 'bangalore', 'mysuru', 'mysuru_east_west', 'manipal'].includes(dest.id);
+    // Show the AI widget button on the destination page
+    if (window.WeekendAI && typeof window.WeekendAI.show === 'function') {
+        window.WeekendAI.show();
+    }
 
     const destHTML = `
         <div class="page-content" style="position: relative;">
