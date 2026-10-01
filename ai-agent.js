@@ -4,8 +4,8 @@
   // --- Multi-Language Translations ---
   const TRANSLATIONS = {
     en: {
-      welcome: "Hi {name}! 👋 Welcome to Weekend AI! Choose your language to start planning:",
-      loc_q: "Where are you starting your trip from? 📍",
+      welcome: "Hi {name}! 👋 Welcome to Weekend AI! Where are you starting your trip from? 📍",
+      loc_q: "Hi {name}! 👋 Welcome to Weekend AI! Where are you starting your trip from? 📍",
       loc_detect: "📍 Use My Current Location",
       loc_detected: "Detected your location: {city}! ✅",
       loc_choose: "🏙️ Choose a Starting City",
@@ -340,28 +340,8 @@
     return DEFAULT_CITY_DATA;
   }
 
-  // --- 10 Conversation Steps ---
+  // --- 9 Conversation Steps ---
   const STEPS = [
-    {
-      id: 'language',
-      getQuestion: () => t('welcome', STATE.language),
-      getChips: () => [
-        { label: "English", value: "en" },
-        { label: "ಕನ್ನಡ (Kannada)", value: "kn" },
-        { label: "हिंदी (Hindi)", value: "hi" },
-        { label: "தமிழ் (Tamil)", value: "ta" },
-        { label: "తెలుగు (Telugu)", value: "te" },
-        { label: "മലയാളം (Malayalam)", value: "ml" },
-        { label: "मराठी (Marathi)", value: "mr" },
-        { label: "বাংলা (Bengali)", value: "bn" },
-        { label: "ગુજરાતી (Gujarati)", value: "gu" }
-      ],
-      onSelect: (val) => {
-        STATE.language = val;
-        addUserMessage(val === 'en' ? 'English' : val === 'kn' ? 'ಕನ್ನಡ' : val === 'hi' ? 'हिंदी' : val);
-        advanceStep();
-      }
-    },
     {
       id: 'location',
       getQuestion: () => t('loc_q', STATE.language),
@@ -584,7 +564,7 @@
           showTypingIndicator(() => {
             const itinHtml = generateMasterItinerary(STATE);
             addAIMessage(itinHtml);
-            updateDots(10);
+            updateDots(9);
           }, 800);
         }
       }
@@ -820,7 +800,7 @@
 
           <div class="wai-progress-container">
             <div class="wai-progress-dots" id="wai-dots">
-              ${Array(10).fill('<div class="wai-dot"></div>').join('')}
+              ${Array(9).fill('<div class="wai-dot"></div>').join('')}
             </div>
           </div>
 
@@ -973,7 +953,7 @@
       STATE = JSON.parse(JSON.stringify(INITIAL_STATE));
       STATE.destination = cityName;
       STATE.startLocation = cityName;
-      STATE.currentStepIndex = 2;
+      STATE.currentStepIndex = 1;
 
       if (DOM.chatBody) DOM.chatBody.innerHTML = '';
       openChat();
