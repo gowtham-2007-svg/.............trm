@@ -26,29 +26,73 @@
   bottom: 24px;
   right: 24px;
   z-index: 99998;
-  background: linear-gradient(135deg, var(--wai-primary), var(--wai-primary-dark));
-  color: var(--wai-bg-white);
-  padding: 12px 24px;
-  border-radius: 999px; /* Pill shape */
+  background: linear-gradient(90deg, #5850ec 0%, #6839e6 50%, #7622dc 100%);
+  color: #ffffff;
+  padding: 8px 12px 8px 10px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 4px 14px rgba(131, 56, 236, 0.4);
-  animation: weekendAiPulse 2s infinite;
-  transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(104, 57, 230, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  user-select: none;
 }
 
 .wai-trigger-badge:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(104, 57, 230, 0.55), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.wai-trigger-icon {
-  width: 24px;
+.wai-trigger-sparkle-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.wai-trigger-badge:hover .wai-trigger-sparkle-circle {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.wai-trigger-divider {
+  width: 1.5px;
   height: 24px;
-  fill: currentColor;
+  background: rgba(255, 255, 255, 0.35);
+  margin: 0 12px 0 10px;
+  border-radius: 2px;
+}
+
+.wai-trigger-text {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.wai-trigger-arrow-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 14px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.wai-trigger-badge:hover .wai-trigger-arrow-circle {
+  transform: translateX(3px);
+  background: rgba(0, 0, 0, 0.28);
 }
 
 /* 2. Chat Window (Desktop) */
@@ -486,13 +530,22 @@
   .wai-trigger-badge {
     bottom: 16px;
     right: 16px;
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    padding: 6px 10px 6px 8px;
   }
   
-  .wai-trigger-icon {
-    width: 20px;
-    height: 20px;
+  .wai-trigger-sparkle-circle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .wai-trigger-text {
+    font-size: 0.95rem;
+  }
+  
+  .wai-trigger-arrow-circle {
+    width: 28px;
+    height: 28px;
+    margin-left: 8px;
   }
   
   .wai-chat-window {
@@ -514,3 +567,195 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* --- 10. Sliding Graph & Interactive Sliders --- */
+.wai-slider-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(131, 56, 236, 0.18);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 10px;
+  box-shadow: 0 4px 20px rgba(131, 56, 236, 0.08);
+  animation: weekendAiChipIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  max-width: 100%;
+}
+
+.wai-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.wai-slider-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wai-slider-value-badge {
+  background: rgba(131, 56, 236, 0.1);
+  color: #8338EC;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(131, 56, 236, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.wai-slider-subtext {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-bottom: 12px;
+  min-height: 18px;
+}
+
+/* Histogram Graph */
+.wai-graph-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 48px;
+  padding: 0 2px 4px 2px;
+  margin-bottom: 6px;
+}
+
+.wai-graph-bar {
+  flex: 1;
+  background: #e2e8f0;
+  border-radius: 4px 4px 1px 1px;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease, opacity 0.15s ease;
+  min-width: 4px;
+}
+
+.wai-graph-bar:hover {
+  transform: scaleY(1.1);
+  opacity: 0.85;
+}
+
+.wai-graph-bar.wai-bar-active {
+  background: linear-gradient(180deg, #8338EC 0%, #3a86ff 100%);
+  box-shadow: 0 2px 6px rgba(131, 56, 236, 0.25);
+}
+
+/* Range input */
+.wai-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+  margin: 6px 0 10px 0;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.wai-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #8338EC;
+  cursor: grab;
+  box-shadow: 0 2px 8px rgba(131, 56, 236, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wai-range-slider::-webkit-slider-thumb:hover,
+.wai-range-slider::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+  cursor: grabbing;
+  box-shadow: 0 4px 14px rgba(131, 56, 236, 0.5);
+}
+
+.wai-range-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #8338EC;
+  cursor: grab;
+  box-shadow: 0 2px 8px rgba(131, 56, 236, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wai-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.wai-slider-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.wai-slider-preset-chip {
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wai-slider-preset-chip:hover {
+  border-color: #8338EC;
+  color: #8338EC;
+  background: rgba(131, 56, 236, 0.05);
+}
+
+.wai-slider-preset-chip.active {
+  background: #8338EC;
+  color: #ffffff;
+  border-color: #8338EC;
+}
+
+.wai-slider-confirm-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #8338EC 0%, #3a86ff 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(131, 56, 236, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wai-slider-confirm-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(131, 56, 236, 0.35);
+}
+
+.wai-slider-card.wai-card-disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+

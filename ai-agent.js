@@ -4,22 +4,22 @@
   // --- Multi-Language Translations ---
   const TRANSLATIONS = {
     en: {
-      welcome: "Hi {name}! 👋 Welcome to Weekend AI! Where are you starting your trip from? 📍",
-      loc_q: "Hi {name}! 👋 Welcome to Weekend AI! Where are you starting your trip from? 📍",
-      loc_detect: "📍 Use My Current Location",
-      loc_detected: "Detected your location: {city}! ✅",
-      loc_choose: "🏙️ Choose a Starting City",
-      group_q: "How many people in your group? 👥",
-      budget_q: "What is your TOTAL group budget? 💰 (Not per person)",
-      trans_q: "How do you plan to travel? 🚌",
-      time_q: "Which time slot works best for you? ⏰",
-      food_q: "What is your food preference? 🍽️",
-      mood_q: "What kind of vibe are you looking for? 🎭",
-      weather_q: "What's the weather like right now? 🌤️",
+      welcome: "Hi {name}! Welcome to Weekend AI! Where are you starting your trip from?",
+      loc_q: "Hi {name}! Welcome to Weekend AI! Where are you starting your trip from?",
+      loc_detect: "Use My Current Location",
+      loc_detected: "Detected your location: {city}!",
+      loc_choose: "Choose a Starting City",
+      group_q: "How many people in your group?",
+      budget_q: "What is your TOTAL group budget? (Not per person)",
+      trans_q: "How do you plan to travel?",
+      time_q: "Which time slot works best for you?",
+      food_q: "What is your food preference?",
+      mood_q: "What kind of vibe are you looking for?",
+      weather_q: "What's the weather like right now?",
       confirm_title: "Here is your trip summary:",
-      generating: "✨ Generating your custom weekend itinerary...",
-      start_over: "🔄 Start Over",
-      change_something: "✏️ Change Something / Recalculate",
+      generating: "Generating your custom weekend itinerary...",
+      start_over: "Start Over",
+      change_something: "Change Something / Recalculate",
       itinerary_for: "Weekend Itinerary for {city}",
       solo: "Solo (1)",
       couple: "Couple (2)",
@@ -28,22 +28,22 @@
       large_group: "Large Group (7+)"
     },
     kn: {
-      welcome: "ನಮಸ್ಕಾರ {name}! 👋 ವೀಕೆಂಡ್ AI ಗೆ ಸುಸ್ವಾಗತ! ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
-      loc_q: "ನಿಮ್ಮ ಪ್ರವಾಸವನ್ನು ಎಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸುತ್ತೀರಿ? 📍",
-      loc_detect: "📍 ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳ ಬಳಸಿ",
-      loc_detected: "ನಿಮ್ಮ ಸ್ಥಳ: {city}! ✅",
-      loc_choose: "🏙️ ನಗರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-      group_q: "ನಿಮ್ಮ ಗುಂಪಿನಲ್ಲಿ ಎಷ್ಟು ಜನರಿದ್ದಾರೆ? 👥",
-      budget_q: "ನಿಮ್ಮ ಒಟ್ಟು ಬಜೆಟ್ ಎಷ್ಟು? 💰",
-      trans_q: "ನೀವು ಹೇಗೆ ಪ್ರಯಾಣಿಸಲು ಬಯಸುತ್ತೀರಿ? 🚌",
-      time_q: "ಯಾವ ಸಮಯ ಸೂಕ್ತ? ⏰",
-      food_q: "ಆಹಾರದ ಆಯ್ಕೆ ಏನು? 🍽️",
-      mood_q: "ನಿಮಗೆ ಯಾವ ರೀತಿಯ ಅನುಭವ ಬೇಕು? 🎭",
-      weather_q: "ಹವಾಮಾನ ಹೇಗಿದೆ? 🌤️",
+      welcome: "ನಮಸ್ಕಾರ {name}! ವೀಕೆಂಡ್ AI ಗೆ ಸುಸ್ವಾಗತ! ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+      loc_q: "ನಿಮ್ಮ ಪ್ರವಾಸವನ್ನು ಎಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸುತ್ತೀರಿ?",
+      loc_detect: "ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳ ಬಳಸಿ",
+      loc_detected: "ನಿಮ್ಮ ಸ್ಥಳ: {city}!",
+      loc_choose: "ನಗರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      group_q: "ನಿಮ್ಮ ಗುಂಪಿನಲ್ಲಿ ಎಷ್ಟು ಜನರಿದ್ದಾರೆ?",
+      budget_q: "ನಿಮ್ಮ ಒಟ್ಟು ಬಜೆಟ್ ಎಷ್ಟು?",
+      trans_q: "ನೀವು ಹೇಗೆ ಪ್ರಯಾಣಿಸಲು ಬಯಸುತ್ತೀರಿ?",
+      time_q: "ಯಾವ ಸಮಯ ಸೂಕ್ತ?",
+      food_q: "ಆಹಾರದ ಆಯ್ಕೆ ಏನು?",
+      mood_q: "ನಿಮಗೆ ಯಾವ ರೀತಿಯ ಅನುಭವ ಬೇಕು?",
+      weather_q: "ಹವಾಮಾನ ಹೇಗಿದೆ?",
       confirm_title: "ಪ್ರವಾಸದ ಸಾರಾಂಶ:",
-      generating: "✨ ಪ್ರವಾಸ ಯೋಜನೆಯನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ...",
-      start_over: "🔄 ಮರುಪ್ರಾರಂಭಿಸಿ",
-      change_something: "✏️ ಬದಲಾವಣೆ ಮಾಡಿ",
+      generating: "ಪ್ರವಾಸ ಯೋಜನೆಯನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ...",
+      start_over: "ಮರುಪ್ರಾರಂಭಿಸಿ",
+      change_something: "ಬದಲಾವಣೆ ಮಾಡಿ",
       itinerary_for: "{city} ವಾರಾಂತ್ಯದ ಯೋಜನೆ",
       solo: "ಏಕಾಂಗಿ (1)",
       couple: "ಜೋಡಿ (2)",
@@ -52,22 +52,22 @@
       large_group: "ಗುಂಪು (7+)"
     },
     hi: {
-      welcome: "नमस्ते {name}! 👋 वीकेंड AI में आपका स्वागत है! अपनी भाषा चुनें:",
-      loc_q: "आप अपनी यात्रा कहाँ से शुरू कर रहे हैं? 📍",
-      loc_detect: "📍 मेरे वर्तमान स्थान का उपयोग करें",
-      loc_detected: "आपका स्थान: {city}! ✅",
-      loc_choose: "🏙️ शहर चुनें",
-      group_q: "समूह में कितने लोग हैं? 👥",
-      budget_q: "आपका कुल ग्रुप बजट क्या है? 💰",
-      trans_q: "आप कैसे यात्रा करना चाहते हैं? 🚌",
-      time_q: "कौन सा समय सबसे अच्छा रहेगा? ⏰",
-      food_q: "भोजन की प्राथमिकता क्या है? 🍽️",
-      mood_q: "आप किस तरह का अनुभव चाहते हैं? 🎭",
-      weather_q: "अभी मौसम कैसा है? 🌤️",
+      welcome: "नमस्ते {name}! वीकेंड AI में आपका स्वागत है! अपनी भाषा चुनें:",
+      loc_q: "आप अपनी यात्रा कहाँ से शुरू कर रहे हैं?",
+      loc_detect: "मेरे वर्तमान स्थान का उपयोग करें",
+      loc_detected: "आपका स्थान: {city}!",
+      loc_choose: "शहर चुनें",
+      group_q: "समूह में कितने लोग हैं?",
+      budget_q: "आपका कुल ग्रुप बजट क्या है?",
+      trans_q: "आप कैसे यात्रा करना चाहते हैं?",
+      time_q: "कौन सा समय सबसे अच्छा रहेगा?",
+      food_q: "भोजन की प्राथमिकता क्या है?",
+      mood_q: "आप किस तरह का अनुभव चाहते हैं?",
+      weather_q: "अभी मौसम कैसा है?",
       confirm_title: "आपकी यात्रा का सारांश:",
-      generating: "✨ यात्रा योजना बनाई जा रही है...",
-      start_over: "🔄 फिर से शुरू करें",
-      change_something: "✏️ कुछ बदलें",
+      generating: "यात्रा योजना बनाई जा रही है...",
+      start_over: "फिर से शुरू करें",
+      change_something: "कुछ बदलें",
       itinerary_for: "{city} वीकेंड यात्रा कार्यक्रम",
       solo: "अकेले (1)",
       couple: "जोड़ी (2)",
@@ -75,12 +75,12 @@
       big_group: "बड़ा समूह (5-6)",
       large_group: "बड़ा समूह (7+)"
     },
-    ta: { welcome: "வணக்கம் {name}! 👋 Weekend AI க்கு வரவேற்கிறோம்! மொழியைத் தேர்ந்தெடுக்கவும்:" },
-    te: { welcome: "నమస్కారం {name}! 👋 Weekend AI కి స్వాగతం! మీ భాషను ఎంచుకోండి:" },
-    ml: { welcome: "നമസ്കാരം {name}! 👋 Weekend AI ലേക്ക് സ്വാഗതം! ഭാഷ തിരഞ്ഞെടുക്കുക:" },
-    mr: { welcome: "नमस्कार {name}! 👋 Weekend AI मध्ये आपले स्वागत आहे! भाषा निवडा:" },
-    bn: { welcome: "হ্যালো {name}! 👋 Weekend AI তে স্বাগতম! আপনার भाषा নির্বাচন করুন:" },
-    gu: { welcome: "નમસ્તે {name}! 👋 Weekend AI માં તમારું સ્વાગત છે! ભાષા પસંદ કરો:" }
+    ta: { welcome: "வணக்கம் {name}! Weekend AI க்கு வரவேற்கிறோம்! மொழியைத் தேர்ந்தெடுக்கவும்:" },
+    te: { welcome: "నమస్కారం {name}! Weekend AI కి స్వాగతం! మీ భాషను ఎంచుకోండి:" },
+    ml: { welcome: "നമസ്കാരം {name}! Weekend AI ലേക്ക് സ്വാഗതം! ഭാഷ തിരഞ്ഞെടുക്കുക:" },
+    mr: { welcome: "नमस्कार {name}! Weekend AI मध्ये आपले स्वागत आहे! भाषा निवडा:" },
+    bn: { welcome: "হ্যালো {name}! Weekend AI তে স্বাগতম! আপনার भाषा নির্বাচন করুন:" },
+    gu: { welcome: "નમસ્તે {name}! Weekend AI માં તમારું સ્વાગત છે! ભાષા પસંદ કરો:" }
   };
 
   // Helper to get logged-in user name from Clerk / Google authentication
@@ -340,6 +340,263 @@
     return DEFAULT_CITY_DATA;
   }
 
+  // --- Sliding Graph Slider Generators ---
+  function createPeopleSlider(onConfirm) {
+    const card = document.createElement('div');
+    card.className = 'wai-slider-card';
+
+    let currentVal = Number(STATE.people) || 2;
+    const popularityHeights = [40, 95, 75, 100, 60, 80, 50, 45, 35, 30]; // 1 to 10
+    
+    function getLabel(count) {
+      if (count === 1) return t('solo', STATE.language);
+      if (count === 2) return t('couple', STATE.language);
+      if (count >= 3 && count <= 4) return `${t('small_group', STATE.language)} (${count})`;
+      if (count >= 5 && count <= 6) return `${t('big_group', STATE.language)} (${count})`;
+      return `${t('large_group', STATE.language)} (${count}+)`;
+    }
+
+    function getSubtext(count) {
+      if (count === 1) return 'Personal solo getaway with complete freedom';
+      if (count === 2) return 'Pair traveling together — shared transport & meals';
+      if (count <= 4) return 'Friends or family squad of ' + count;
+      if (count <= 6) return 'Larger group — great for sharing autos & group meals';
+      return 'Big celebration group of ' + count + '+ people';
+    }
+
+    card.innerHTML = `
+      <div class="wai-slider-header">
+        <span class="wai-slider-title">Group Size</span>
+        <span class="wai-slider-value-badge" id="wai-people-badge">${getLabel(currentVal)}</span>
+      </div>
+      <div class="wai-slider-subtext" id="wai-people-subtext">${getSubtext(currentVal)}</div>
+      
+      <div class="wai-graph-container" id="wai-people-graph">
+        ${popularityHeights.map((h, i) => `
+          <div class="wai-graph-bar ${i + 1 <= currentVal ? 'wai-bar-active' : ''}" 
+               style="height: ${h}%;" 
+               data-idx="${i + 1}" 
+               title="${i + 1} People"></div>
+        `).join('')}
+      </div>
+
+      <input type="range" class="wai-range-slider" id="wai-people-range" min="1" max="10" step="1" value="${currentVal}">
+      
+      <div class="wai-slider-labels">
+        <span>1 (Solo)</span>
+        <span>4 (Small)</span>
+        <span>6 (Big)</span>
+        <span>10+ (Large)</span>
+      </div>
+
+      <div class="wai-slider-presets">
+        <button type="button" class="wai-slider-preset-chip ${currentVal === 1 ? 'active' : ''}" data-val="1">Solo (1)</button>
+        <button type="button" class="wai-slider-preset-chip ${currentVal === 2 ? 'active' : ''}" data-val="2">Couple (2)</button>
+        <button type="button" class="wai-slider-preset-chip ${currentVal === 4 ? 'active' : ''}" data-val="4">Small Group (4)</button>
+        <button type="button" class="wai-slider-preset-chip ${currentVal === 6 ? 'active' : ''}" data-val="6">Big Group (6)</button>
+        <button type="button" class="wai-slider-preset-chip ${currentVal >= 8 ? 'active' : ''}" data-val="8">Large Group (8+)</button>
+      </div>
+
+      <button type="button" class="wai-slider-confirm-btn" id="wai-people-confirm">
+        Continue with ${getLabel(currentVal)}
+      </button>
+    `;
+
+    const badge = card.querySelector('#wai-people-badge');
+    const subtext = card.querySelector('#wai-people-subtext');
+    const range = card.querySelector('#wai-people-range');
+    const confirmBtn = card.querySelector('#wai-people-confirm');
+    const graphBars = card.querySelectorAll('#wai-people-graph .wai-graph-bar');
+    const presetChips = card.querySelectorAll('.wai-slider-preset-chip');
+
+    function updateTrack(val) {
+      const pct = ((val - 1) / (10 - 1)) * 100;
+      range.style.background = `linear-gradient(to right, #8338EC ${pct}%, #e2e8f0 ${pct}%)`;
+    }
+
+    function applyVal(val) {
+      currentVal = Math.max(1, Math.min(10, Number(val)));
+      range.value = currentVal;
+      const lbl = getLabel(currentVal);
+      badge.textContent = lbl;
+      subtext.textContent = getSubtext(currentVal);
+      confirmBtn.textContent = `Continue with ${lbl}`;
+      
+      updateTrack(currentVal);
+
+      graphBars.forEach((bar, i) => {
+        if (i + 1 <= currentVal) {
+          bar.classList.add('wai-bar-active');
+        } else {
+          bar.classList.remove('wai-bar-active');
+        }
+      });
+
+      presetChips.forEach(chip => {
+        const cVal = Number(chip.dataset.val);
+        if (cVal === currentVal || (cVal === 8 && currentVal >= 7)) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+    }
+
+    range.addEventListener('input', (e) => applyVal(e.target.value));
+
+    graphBars.forEach(bar => {
+      bar.addEventListener('click', () => applyVal(bar.dataset.idx));
+    });
+
+    presetChips.forEach(chip => {
+      chip.addEventListener('click', () => applyVal(chip.dataset.val));
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      card.classList.add('wai-card-disabled');
+      const finalLabel = getLabel(currentVal);
+      onConfirm(currentVal, finalLabel);
+    });
+
+    updateTrack(currentVal);
+    return card;
+  }
+
+  function createBudgetSlider(onConfirm) {
+    const card = document.createElement('div');
+    card.className = 'wai-slider-card';
+
+    const BUDGET_STEPS = [0, 100, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1800, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7500, 10000];
+    const BUDGET_BAR_HEIGHTS = [35, 50, 60, 70, 80, 100, 92, 98, 85, 80, 72, 68, 58, 50, 45, 40, 32, 28, 24, 20]; // 20 bars
+
+    let currentStepIdx = 7; // ₹1,000 default
+    if (typeof STATE.budget === 'number') {
+      const foundIdx = BUDGET_STEPS.findIndex(b => b >= STATE.budget);
+      if (foundIdx !== -1) currentStepIdx = foundIdx;
+    }
+
+    function getSubtext(amount) {
+      let desc = '';
+      if (amount === 0) desc = 'Completely Free Sightseeing & Sea Walks';
+      else if (amount <= 100) desc = 'Ultra Budget Plan (Verified public buses & free spots)';
+      else if (amount <= 500) desc = 'Pocket Friendly (Local bus, street snacks & parks)';
+      else if (amount <= 1500) desc = 'Balanced Weekend (Entry tickets, cafe/meals & transport)';
+      else if (amount <= 3000) desc = 'Comfort Trip (Auto/cabs, heritage monuments & dining)';
+      else desc = 'Premium Weekend (Cabs, full meals & all top attractions)';
+
+      if (STATE.people && STATE.people > 1 && amount > 0) {
+        const perPerson = Math.round(amount / STATE.people);
+        return `${desc} • ~₹${perPerson}/person`;
+      }
+      return desc;
+    }
+
+    card.innerHTML = `
+      <div class="wai-slider-header">
+        <span class="wai-slider-title">Total Group Budget</span>
+        <span class="wai-slider-value-badge" id="wai-budget-badge">₹${BUDGET_STEPS[currentStepIdx].toLocaleString('en-IN')}</span>
+      </div>
+      <div class="wai-slider-subtext" id="wai-budget-subtext">${getSubtext(BUDGET_STEPS[currentStepIdx])}</div>
+      
+      <div class="wai-graph-container" id="wai-budget-graph">
+        ${BUDGET_BAR_HEIGHTS.map((h, i) => `
+          <div class="wai-graph-bar ${i <= currentStepIdx ? 'wai-bar-active' : ''}" 
+               style="height: ${h}%;" 
+               data-idx="${i}" 
+               title="₹${BUDGET_STEPS[i]}"></div>
+        `).join('')}
+      </div>
+
+      <input type="range" class="wai-range-slider" id="wai-budget-range" min="0" max="${BUDGET_STEPS.length - 1}" step="1" value="${currentStepIdx}">
+      
+      <div class="wai-slider-labels">
+        <span>₹0 (Free)</span>
+        <span>₹500</span>
+        <span>₹1,500</span>
+        <span>₹5,000</span>
+        <span>₹10,000+</span>
+      </div>
+
+      <div class="wai-slider-presets">
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 0 ? 'active' : ''}" data-val="0">₹0 (Free)</button>
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 100 ? 'active' : ''}" data-val="100">₹100 (Ultra)</button>
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 500 ? 'active' : ''}" data-val="500">₹500</button>
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 1000 ? 'active' : ''}" data-val="1000">₹1,000</button>
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 2500 ? 'active' : ''}" data-val="2500">₹2,500</button>
+        <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 5000 ? 'active' : ''}" data-val="5000">₹5,000+</button>
+      </div>
+
+      <button type="button" class="wai-slider-confirm-btn" id="wai-budget-confirm">
+        Set Budget: ₹${BUDGET_STEPS[currentStepIdx].toLocaleString('en-IN')}
+      </button>
+    `;
+
+    const badge = card.querySelector('#wai-budget-badge');
+    const subtext = card.querySelector('#wai-budget-subtext');
+    const range = card.querySelector('#wai-budget-range');
+    const confirmBtn = card.querySelector('#wai-budget-confirm');
+    const graphBars = card.querySelectorAll('#wai-budget-graph .wai-graph-bar');
+    const presetChips = card.querySelectorAll('.wai-slider-preset-chip');
+
+    function updateTrack(idx) {
+      const pct = (idx / (BUDGET_STEPS.length - 1)) * 100;
+      range.style.background = `linear-gradient(to right, #8338EC ${pct}%, #e2e8f0 ${pct}%)`;
+    }
+
+    function applyIdx(idx) {
+      currentStepIdx = Math.max(0, Math.min(BUDGET_STEPS.length - 1, Number(idx)));
+      range.value = currentStepIdx;
+      const amount = BUDGET_STEPS[currentStepIdx];
+      const formatted = `₹${amount.toLocaleString('en-IN')}`;
+      
+      badge.textContent = formatted;
+      subtext.textContent = getSubtext(amount);
+      confirmBtn.textContent = `Set Budget: ${formatted}`;
+      
+      updateTrack(currentStepIdx);
+
+      graphBars.forEach((bar, i) => {
+        if (i <= currentStepIdx) {
+          bar.classList.add('wai-bar-active');
+        } else {
+          bar.classList.remove('wai-bar-active');
+        }
+      });
+
+      presetChips.forEach(chip => {
+        const cVal = Number(chip.dataset.val);
+        if (cVal === amount) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+    }
+
+    range.addEventListener('input', (e) => applyIdx(e.target.value));
+
+    graphBars.forEach(bar => {
+      bar.addEventListener('click', () => applyIdx(bar.dataset.idx));
+    });
+
+    presetChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const targetVal = Number(chip.dataset.val);
+        const idx = BUDGET_STEPS.indexOf(targetVal);
+        if (idx !== -1) applyIdx(idx);
+      });
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      card.classList.add('wai-card-disabled');
+      const finalAmount = BUDGET_STEPS[currentStepIdx];
+      onConfirm(finalAmount);
+    });
+
+    updateTrack(currentStepIdx);
+    return card;
+  }
+
   // --- 9 Conversation Steps ---
   const STEPS = [
     {
@@ -358,7 +615,7 @@
       ],
       onSelect: (val) => {
         if (val === "__GEOLOCATE__") {
-          addUserMessage("📍 Detecting location...");
+          addUserMessage("Detecting location...");
           showTypingIndicator(() => {
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(
@@ -376,20 +633,20 @@
                     })
                     .catch(() => {
                       STATE.startLocation = 'Mangaluru';
-                      addAIMessage("Found your location nearby! Starting in Mangaluru. ✅");
+                      addAIMessage("Found your location nearby! Starting in Mangaluru.");
                       setTimeout(advanceStep, 400);
                     });
                 },
                 () => {
                   STATE.startLocation = 'Mangaluru';
-                  addAIMessage("Location permission default set to Mangaluru. ✅");
+                  addAIMessage("Location permission default set to Mangaluru.");
                   setTimeout(advanceStep, 400);
                 },
                 { timeout: 4000 }
               );
             } else {
               STATE.startLocation = 'Mangaluru';
-              addAIMessage("Starting in Mangaluru. ✅");
+              addAIMessage("Starting in Mangaluru.");
               setTimeout(advanceStep, 400);
             }
           });
@@ -404,40 +661,22 @@
     {
       id: 'people',
       getQuestion: () => t('group_q', STATE.language),
-      getChips: () => [
-        { label: `👤 ${t('solo', STATE.language)}`, value: 1, labelText: t('solo', STATE.language) },
-        { label: `👫 ${t('couple', STATE.language)}`, value: 2, labelText: t('couple', STATE.language) },
-        { label: `👨👩👧 ${t('small_group', STATE.language)}`, value: 4, labelText: t('small_group', STATE.language) },
-        { label: `👨👩👧👦 ${t('big_group', STATE.language)}`, value: 6, labelText: t('big_group', STATE.language) },
-        { label: `🎉 ${t('large_group', STATE.language)}`, value: 8, labelText: t('large_group', STATE.language) }
-      ],
-      onSelect: (val, chipObj) => {
+      renderCustom: () => createPeopleSlider((val, label) => {
         STATE.people = Number(val);
-        STATE.peopleLabel = chipObj ? chipObj.labelText : `${val} people`;
-        addUserMessage(STATE.peopleLabel);
+        STATE.peopleLabel = label;
+        addUserMessage(label);
         advanceStep();
-      }
+      })
     },
     {
       id: 'budget',
       getQuestion: () => t('budget_q', STATE.language),
-      getChips: () => [
-        { label: "₹0 (Completely Free)", value: 0 },
-        { label: "₹100 (Ultra Budget)", value: 100 },
-        { label: "₹300", value: 300 },
-        { label: "₹500", value: 500 },
-        { label: "₹800", value: 800 },
-        { label: "₹1,000", value: 1000 },
-        { label: "₹1,500", value: 1500 },
-        { label: "₹2,500", value: 2500 },
-        { label: "₹5,000+", value: 5000 }
-      ],
-      onSelect: (val) => {
+      renderCustom: () => createBudgetSlider((val) => {
         STATE.budget = Number(val);
         STATE.budgetLabel = `₹${val}`;
         addUserMessage(`Budget: ₹${val}`);
         advanceStep();
-      }
+      })
     },
     {
       id: 'transport',
@@ -445,15 +684,15 @@
       getChips: () => {
         if (STATE.budget <= 100) {
           return [
-            { label: "🚶 Walking Only (₹0)", value: "walk", labelText: "Walking Only" },
-            { label: "🚌 Local Bus (₹10-20)", value: "bus", labelText: "Local Bus" }
+            { label: "Walking Only (₹0)", value: "walk", labelText: "Walking Only" },
+            { label: "Local Bus (₹10-20)", value: "bus", labelText: "Local Bus" }
           ];
         }
         return [
-          { label: "🚶 Walking Only", value: "walk", labelText: "Walking Only" },
-          { label: "🚌 Local Bus", value: "bus", labelText: "Local Bus" },
-          { label: "🛺 Auto Rickshaw", value: "auto", labelText: "Auto Rickshaw" },
-          { label: "🚕 Cab / Taxi", value: "cab", labelText: "Cab / Taxi" }
+          { label: "Walking Only", value: "walk", labelText: "Walking Only" },
+          { label: "Local Bus", value: "bus", labelText: "Local Bus" },
+          { label: "Auto Rickshaw", value: "auto", labelText: "Auto Rickshaw" },
+          { label: "Cab / Taxi", value: "cab", labelText: "Cab / Taxi" }
         ];
       },
       onSelect: (val, chipObj) => {
@@ -467,10 +706,10 @@
       id: 'timeSlot',
       getQuestion: () => t('time_q', STATE.language),
       getChips: () => [
-        { label: "🌅 Morning (8 AM – 12 PM)", value: "morning", labelText: "Morning (8 AM - 12 PM)" },
-        { label: "☀️ Afternoon (12 PM – 4 PM)", value: "afternoon", labelText: "Afternoon (12 PM - 4 PM)" },
-        { label: "🌆 Evening (4 PM – 8 PM)", value: "evening", labelText: "Evening (4 PM - 8 PM)" },
-        { label: "📅 Full Day (8 AM – 8 PM)", value: "fullday", labelText: "Full Day (8 AM - 8 PM)" }
+        { label: "Morning (8 AM – 12 PM)", value: "morning", labelText: "Morning (8 AM - 12 PM)" },
+        { label: "Afternoon (12 PM – 4 PM)", value: "afternoon", labelText: "Afternoon (12 PM - 4 PM)" },
+        { label: "Evening (4 PM – 8 PM)", value: "evening", labelText: "Evening (4 PM - 8 PM)" },
+        { label: "Full Day (8 AM – 8 PM)", value: "fullday", labelText: "Full Day (8 AM - 8 PM)" }
       ],
       onSelect: (val, chipObj) => {
         STATE.timeSlotKey = val;
@@ -485,14 +724,14 @@
       getChips: () => {
         if (STATE.budget <= 100) {
           return [
-            { label: "🚫 No Food / Free Snacks (Save Budget)", value: "none", labelText: "No Food / Free Snacks" }
+            { label: "No Food / Free Snacks (Save Budget)", value: "none", labelText: "No Food / Free Snacks" }
           ];
         }
         return [
-          { label: "🥬 Vegetarian", value: "veg", labelText: "Vegetarian" },
-          { label: "🍗 Non-Vegetarian", value: "nonveg", labelText: "Non-Vegetarian" },
-          { label: "🍱 Anything Goes", value: "any", labelText: "Anything Goes" },
-          { label: "🚫 No Food (Save Budget)", value: "none", labelText: "No Food (Save Budget)" }
+          { label: "Vegetarian", value: "veg", labelText: "Vegetarian" },
+          { label: "Non-Vegetarian", value: "nonveg", labelText: "Non-Vegetarian" },
+          { label: "Anything Goes", value: "any", labelText: "Anything Goes" },
+          { label: "No Food (Save Budget)", value: "none", labelText: "No Food (Save Budget)" }
         ];
       },
       onSelect: (val, chipObj) => {
@@ -506,11 +745,11 @@
       id: 'mood',
       getQuestion: () => t('mood_q', STATE.language),
       getChips: () => [
-        { label: "😌 Chill & Relax", value: "chill", labelText: "Chill & Relax" },
-        { label: "🌿 Nature & Outdoors", value: "nature", labelText: "Nature & Outdoors" },
-        { label: "🏛️ Culture & Heritage", value: "culture", labelText: "Culture & Heritage" },
-        { label: "🏔️ Adventure & Explore", value: "adventure", labelText: "Adventure" },
-        { label: "🛍️ Shopping & Food Street", value: "shopping", labelText: "Shopping & Food" }
+        { label: "Chill & Relax", value: "chill", labelText: "Chill & Relax" },
+        { label: "Nature & Outdoors", value: "nature", labelText: "Nature & Outdoors" },
+        { label: "Culture & Heritage", value: "culture", labelText: "Culture & Heritage" },
+        { label: "Adventure & Explore", value: "adventure", labelText: "Adventure" },
+        { label: "Shopping & Food Street", value: "shopping", labelText: "Shopping & Food" }
       ],
       onSelect: (val, chipObj) => {
         STATE.moodKey = val;
@@ -523,10 +762,10 @@
       id: 'weather',
       getQuestion: () => t('weather_q', STATE.language),
       getChips: () => [
-        { label: "☀️ Clear / Sunny", value: "clear", labelText: "Clear / Sunny" },
-        { label: "⛅ Cloudy / Breeze", value: "cloudy", labelText: "Cloudy" },
-        { label: "🌧️ Light Rain", value: "light_rain", labelText: "Light Rain" },
-        { label: "🌊 Heavy Rain", value: "heavy_rain", labelText: "Heavy Rain" }
+        { label: "Clear / Sunny", value: "clear", labelText: "Clear / Sunny" },
+        { label: "Cloudy / Breeze", value: "cloudy", labelText: "Cloudy" },
+        { label: "Light Rain", value: "light_rain", labelText: "Light Rain" },
+        { label: "Heavy Rain", value: "heavy_rain", labelText: "Heavy Rain" }
       ],
       onSelect: (val, chipObj) => {
         STATE.weatherKey = val;
@@ -541,26 +780,26 @@
         return `
           <div style="font-weight: 700; margin-bottom: 8px;">${t('confirm_title', STATE.language)}</div>
           <div style="background: rgba(131, 56, 236, 0.08); padding: 10px 12px; border-radius: 10px; font-size: 0.85rem; line-height: 1.5; color: #1e293b;">
-            📍 <b>City:</b> ${STATE.destination}<br>
-            👥 <b>Group:</b> ${STATE.peopleLabel}<br>
-            💰 <b>Total Budget:</b> ₹${STATE.budget}<br>
-            🚌 <b>Transport:</b> ${STATE.transport}<br>
-            ⏰ <b>Time:</b> ${STATE.timeSlot}<br>
-            🍽️ <b>Food:</b> ${STATE.food}<br>
-            🎭 <b>Vibe:</b> ${STATE.mood}<br>
-            🌤️ <b>Weather:</b> ${STATE.weather}
+            <b>City:</b> ${STATE.destination}<br>
+            <b>Group:</b> ${STATE.peopleLabel}<br>
+            <b>Total Budget:</b> ₹${STATE.budget}<br>
+            <b>Transport:</b> ${STATE.transport}<br>
+            <b>Time:</b> ${STATE.timeSlot}<br>
+            <b>Food:</b> ${STATE.food}<br>
+            <b>Vibe:</b> ${STATE.mood}<br>
+            <b>Weather:</b> ${STATE.weather}
           </div>
         `;
       },
       getChips: () => [
-        { label: "✨ Generate My Itinerary Now!", value: "__GENERATE__" },
-        { label: "🔄 Start Over", value: "__RESET__" }
+        { label: "Generate My Itinerary Now", value: "__GENERATE__" },
+        { label: "Start Over", value: "__RESET__" }
       ],
       onSelect: (val) => {
         if (val === "__RESET__") {
           window.WeekendAI.reset();
         } else {
-          addUserMessage("✨ Generate Itinerary");
+          addUserMessage("Generate Itinerary");
           showTypingIndicator(() => {
             const itinHtml = generateMasterItinerary(STATE);
             addAIMessage(itinHtml);
@@ -585,14 +824,14 @@
     let notes = [];
 
     if (isHeavyRain) {
-      notes.push("🌧️ <b>Monsoon Advisory:</b> Outdoor viewpoints and beaches replaced with safe, sheltered indoor museums and covered promenades.");
+      notes.push("<b>Monsoon Advisory:</b> Outdoor viewpoints and beaches replaced with safe, sheltered indoor museums and covered promenades.");
     } else if (s.weatherKey === 'light_rain') {
-      notes.push("⛅ <b>Light Rain:</b> Weather is pleasant! Keep a pocket umbrella handy for breezy walks.");
+      notes.push("<b>Light Rain:</b> Weather is pleasant! Keep a pocket umbrella handy for breezy walks.");
     }
 
     const isUnder100 = budget <= 100;
     if (isUnder100) {
-      notes.push("💰 <b>₹100 Budget Rule Active:</b> All entry tickets and paid eateries eliminated. Itinerary prioritizes serene free spots, seaside walking, and verified public buses.");
+      notes.push("<b>₹100 Budget Rule Active:</b> All entry tickets and paid eateries eliminated. Itinerary prioritizes serene free spots, seaside walking, and verified public buses.");
     }
 
     let transDesc = "Walking";
@@ -666,7 +905,7 @@
       if (!existingBeach) {
         timelineItems[timelineItems.length - 1] = {
           time: "05:15 PM – 06:15 PM",
-          title: `🌅 Sunset at ${beachSpot.name}`,
+          title: `Sunset at ${beachSpot.name}`,
           desc: "Watch the sun dip below the horizon with ocean breeze. Perfect photography hour!",
           cost: "Free"
         };
@@ -674,14 +913,14 @@
     }
 
     if (hasMall || s.moodKey === 'shopping') {
-      notes.push(`🍿 <b>Gogupa Stall Tip:</b> Head to the verified Gogupa counters near ${chosenMallName} — fresh, hot plates for just <b>₹20/plate</b>! Highly recommended.`);
+      notes.push(`<b>Gogupa Stall Tip:</b> Head to the verified Gogupa counters near ${chosenMallName} — fresh, hot plates for just <b>₹20/plate</b>! Highly recommended.`);
     }
 
     if (s.foodKey !== 'none' && !isUnder100) {
       const perHeadFood = s.foodKey === 'veg' ? 80 : 150;
       foodCost = Math.min(Math.floor(budget * 0.35), perHeadFood * Math.min(s.people, 4));
       const foodDesc = s.foodKey === 'veg' ? (cityData.foodSpots && cityData.foodSpots.veg) || "Traditional Veg Thali" : (cityData.foodSpots && cityData.foodSpots.nonveg) || "Local Special Non-Veg Meal";
-      notes.push(`🍽️ <b>Food Recommendation:</b> Try ${foodDesc} (~₹${foodCost} total estimated).`);
+      notes.push(`<b>Food Recommendation:</b> Try ${foodDesc} (~₹${foodCost} total estimated).`);
     }
 
     let totalCalculated = actCost + transportCost + foodCost;
@@ -692,9 +931,9 @@
 
     let html = `
       <div class="wai-itinerary">
-        <div class="wai-itinerary-title">🗺️ ${t('itinerary_for', s.language).replace('{city}', city)}</div>
+        <div class="wai-itinerary-title">${t('itinerary_for', s.language).replace('{city}', city)}</div>
         <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">
-          👥 ${s.peopleLabel} • 💰 Total Budget: ₹${s.budget} • 🚌 ${transDesc}
+          ${s.peopleLabel} • Total Budget: ₹${s.budget} • ${transDesc}
         </div>
 
         <div class="wai-timeline">
@@ -781,15 +1020,30 @@
       <div class="wai-widget-container">
         <div class="wai-backdrop" id="wai-backdrop" style="z-index: 999997;"></div>
         
-        <div class="wai-trigger-badge" id="wai-trigger" style="z-index: 999998; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.2rem;">🤖</span>
-          <span>Weekend AI</span>
+        <div class="wai-trigger-badge" id="wai-trigger" style="z-index: 999998; cursor: pointer;">
+          <div class="wai-trigger-sparkle-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="wai-trigger-divider"></div>
+          <span class="wai-trigger-text">Weekend AI</span>
+          <div class="wai-trigger-arrow-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
         </div>
 
         <div class="wai-chat-window" id="wai-chat-window" style="z-index: 999999;">
           <div class="wai-header">
             <div class="wai-header-info">
-              <div class="wai-agent-avatar">🤖</div>
+              <div class="wai-agent-avatar" style="background: linear-gradient(135deg, #5850ec 0%, #7622dc 100%); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#ffffff"/>
+                </svg>
+              </div>
               <div>
                 <div class="wai-agent-name">Weekend AI</div>
                 <div style="font-size: 0.7rem; opacity: 0.85; font-weight: 400;">Master Travel Planner</div>
@@ -916,7 +1170,16 @@
       const qText = step.getQuestion();
       addAIMessage(qText);
 
-      const chips = step.getChips();
+      if (typeof step.renderCustom === 'function') {
+        const customEl = step.renderCustom();
+        if (customEl && DOM.chatBody) {
+          DOM.chatBody.appendChild(customEl);
+          scrollToBottom();
+        }
+        return;
+      }
+
+      const chips = (typeof step.getChips === 'function') ? step.getChips() : null;
       if (chips && chips.length > 0) {
         const chipsContainer = document.createElement('div');
         chipsContainer.className = 'wai-chips-container';
@@ -959,7 +1222,7 @@
       openChat();
 
       showTypingIndicator(() => {
-        addAIMessage(`✨ Awesome! You picked <b>${cityName}</b>. Let's plan your personalized weekend trip!`);
+        addAIMessage(`Awesome! You picked <b>${cityName}</b>. Let's plan your personalized weekend trip!`);
         renderStep();
       }, 400);
     },
