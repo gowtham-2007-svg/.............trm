@@ -30,18 +30,20 @@
   color: #ffffff;
   padding: 8px 12px 8px 10px;
   border-radius: 9999px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(104, 57, 230, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
   user-select: none;
+  animation: waiAttentionPulse 2.8s infinite ease-in-out;
 }
 
 .wai-trigger-badge:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(104, 57, 230, 0.55), 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: none;
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 14px 36px rgba(104, 57, 230, 0.6), 0 4px 14px rgba(0, 0, 0, 0.22);
 }
 
 .wai-trigger-sparkle-circle {
@@ -53,11 +55,14 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
+  animation: waiSparkleGlow 2.8s infinite ease-in-out;
 }
 
 .wai-trigger-badge:hover .wai-trigger-sparkle-circle {
-  transform: rotate(15deg) scale(1.05);
+  animation: none;
+  transform: rotate(18deg) scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .wai-trigger-divider {
@@ -77,22 +82,33 @@
   white-space: nowrap;
 }
 
+/* Button Arrow Highlight & Attention-Seeking Animation */
 .wai-trigger-arrow-circle {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 14px;
   flex-shrink: 0;
-  transition: transform 0.25s ease, background 0.25s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: arrowPulseSlide 0.8s infinite ease-in-out;
 }
 
 .wai-trigger-badge:hover .wai-trigger-arrow-circle {
-  transform: translateX(3px);
-  background: rgba(0, 0, 0, 0.28);
+  animation: none;
+  transform: scale(1.15) translateX(5px);
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.8), 0 0 25px rgba(104, 57, 230, 0.5);
+}
+
+.wai-trigger-badge:hover .wai-trigger-arrow-circle svg {
+  stroke: #6839e6;
 }
 
 /* 2. Chat Window (Desktop) */
@@ -509,6 +525,37 @@
 @keyframes weekendAiChipIn {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes arrowPulseSlide {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
+  }
+  50% {
+    transform: translateX(6px) scale(1.1);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
+  }
+}
+
+@keyframes waiAttentionPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 24px rgba(104, 57, 230, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 0 rgba(104, 57, 230, 0.45);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(104, 57, 230, 0.58), 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 8px rgba(104, 57, 230, 0);
+  }
+}
+
+@keyframes waiSparkleGlow {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(10deg);
+  }
 }
 
 /* 9. Mobile Responsive */
