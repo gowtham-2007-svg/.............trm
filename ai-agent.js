@@ -5,7 +5,7 @@
   const TRANSLATIONS = {
     en: {
       welcome: "Hi {name}! Welcome to Weekend AI! Where are you starting your trip from?",
-      loc_q: "Hi {name}! Welcome to Weekend AI! Where are you starting your trip from?",
+      loc_q: "Where are you starting your trip from?",
       loc_detect: "Use My Current Location",
       loc_detected: "Detected your location: {city}!",
       loc_choose: "Choose a Starting City",
@@ -1079,6 +1079,61 @@
     DOM.backdrop.addEventListener('click', closeChat);
   }
 
+  function buildWelcomeGreeting() {
+    const name = getUserDisplayName();
+    const greeting = name
+      ? `Hi, <span style="color:#8338EC;font-weight:700;">${name}</span>!`
+      : 'Hey there!';
+    return `
+      <div style="
+        background: linear-gradient(135deg, rgba(131,56,236,0.10) 0%, rgba(86,33,173,0.14) 100%);
+        border: 1px solid rgba(131,56,236,0.22);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 2px;
+      ">
+        <div style="font-size:1.05rem;font-weight:700;color:#1e293b;line-height:1.35;">${greeting}</div>
+        <div style="font-size:0.82rem;color:#5a3e85;margin-top:5px;font-weight:500;">Welcome to <b>Weekend AI</b> — your personal South India trip planner.</div>
+        <div style="font-size:0.78rem;color:#64748b;margin-top:4px;">I will craft a perfect weekend itinerary just for you in seconds.</div>
+      </div>
+    `;
+  }
+
+  // Speak the greeting using Web Speech API (respects the site mute toggle)
+  function speakWelcome() {
+    try {
+      const isMuted = localStorage.getItem('welcome-voice-muted') === 'true';
+      if (isMuted) return;
+      if (!window.speechSynthesis) return;
+
+      const name = getUserDisplayName();
+      const text = name
+        ? `Hi ${name}! Welcome to Weekend AI.`
+        : 'Hey there! Welcome to Weekend AI.';
+
+      // Cancel any ongoing speech first
+      window.speechSynthesis.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-IN';   // Indian English accent for South India context
+      utter.rate = 0.95;      // Slightly slower for a warm, clear greeting
+      utter.pitch = 1.05;
+      utter.volume = 1.0;
+
+      // Prefer a female voice if available for a friendlier tone
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v =>
+        v.lang.startsWith('en') && v.name.toLowerCase().includes('female')
+      ) || voices.find(v => v.lang.startsWith('en-IN'))
+        || voices.find(v => v.lang.startsWith('en'));
+      if (preferred) utter.voice = preferred;
+
+      window.speechSynthesis.speak(utter);
+    } catch (e) {
+      // Speech not supported — silently skip
+    }
+  }
+
   function openChat() {
     initUI();
     if (DOM.window) DOM.window.classList.add('wai-open');
@@ -1086,7 +1141,13 @@
     if (DOM.trigger) DOM.trigger.style.display = 'none';
 
     if (DOM.chatBody && DOM.chatBody.children.length === 0) {
-      renderStep();
+      // Speak the greeting as soon as chat opens
+      speakWelcome();
+      // Show personalized welcome greeting card, then begin the step flow
+      showTypingIndicator(() => {
+        addAIMessage(buildWelcomeGreeting());
+        setTimeout(() => renderStep(), 350);
+      }, 350);
     }
   }
 
