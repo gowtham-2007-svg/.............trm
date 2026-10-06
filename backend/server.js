@@ -1081,6 +1081,13 @@ const requestListener = async (req, res) => {
         return;
     }
 
+    // 3.9 Quick Reset route for first-visit onboarding test
+    if (pathname === '/reset') {
+        res.writeHead(302, { 'Location': '/?reset=true' });
+        res.end();
+        return;
+    }
+
     // 4. Default handler: Serve static files from the parent directory (workspace root)
     const mimeTypes = {
         '.html': 'text/html',

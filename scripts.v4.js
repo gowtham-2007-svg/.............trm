@@ -8037,6 +8037,11 @@ function initPlaceImageSliders() {
 
     function play() {
         if (hasPlayed || isMuted()) return;
+        // GUARD 1: Do not play while CSS onboarding class is active
+        if (document.documentElement.classList.contains('we-onboarding-active')) return;
+        // GUARD 2: Do not play while onboarding localStorage flag is NOT yet complete
+        // (protects against browser cache serving old scripts.v4.js)
+        if (localStorage.getItem('weekend_explorer_onboarding_completed') !== 'true') return;
         if (sessionStorage.getItem('welcomed') === 'true') {
             hasPlayed = true;
             return;
@@ -8064,7 +8069,7 @@ function initPlaceImageSliders() {
             });
         }
 
-        // Try playing immediately
+        // Try playing immediately if not in onboarding
         play();
 
         // Autoplay workaround: browsers block audio play on load without user interaction.
@@ -8074,6 +8079,11 @@ function initPlaceImageSliders() {
         const handleFirstInteraction = (e) => {
             // Do not play if they clicked the mute button directly
             if (e.target.closest('#welcome-mute-btn')) {
+                return;
+            }
+
+            // Do not play during onboarding flow! Wait until user is on Home page
+            if (document.documentElement.classList.contains('we-onboarding-active')) {
                 return;
             }
 
@@ -8096,7 +8106,8 @@ function initPlaceImageSliders() {
         interactionEvents.forEach(evt => document.addEventListener(evt, handleFirstInteraction));
     }
 
-    // Expose stop welcome audio globally
+    // Expose play & stop welcome audio globally
+    window.playWelcomeAudio = play;
     window.stopWelcomeAudio = function() {
         if (welcomeAudio) {
             welcomeAudio.pause();
@@ -9048,17 +9059,30 @@ function initPlaceImageSliders() {
         });
     }
 
-    // Auto popup sign-in modal 3 seconds after page load if user is not signed in
+    // Expose a controlled trigger so onboarding.js can fire this at the right time
+    // (1.5s AFTER user arrives on the home page, not 3s after page load)
+    window.triggerSignInPopup = function() {
+        if (window.Clerk && window.Clerk.user) return; // already signed in
+        setTimeout(() => {
+            if (window.Clerk) {
+                openSignInModal();
+            } else {
+                const checkClerkForPopup = setInterval(() => {
+                    if (window.Clerk) {
+                        clearInterval(checkClerkForPopup);
+                        openSignInModal();
+                    }
+                }, 100);
+            }
+        }, 1500);
+    };
+
+    // For RETURNING users (no onboarding shown), auto-popup after 3s as before
+    // For NEW users going through onboarding, this is suppressed by the class check
     setTimeout(() => {
-        if (window.Clerk) {
-            openSignInModal();
-        } else {
-            const checkClerkForPopup = setInterval(() => {
-                if (window.Clerk) {
-                    clearInterval(checkClerkForPopup);
-                    openSignInModal();
-                }
-            }, 100);
+        if (document.documentElement.classList.contains('we-onboarding-active')) return;
+        if (localStorage.getItem('weekend_explorer_onboarding_completed') === 'true') {
+            window.triggerSignInPopup();
         }
     }, 3000);
 

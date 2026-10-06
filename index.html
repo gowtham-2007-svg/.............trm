@@ -21,11 +21,36 @@
     <link rel="dns-prefetch" href="https://api.iconify.design">
     <link rel="stylesheet" href="styles.css?v=30">
     <link rel="stylesheet" href="ai-agent.css?v=12">
+    <link rel="stylesheet" href="onboarding.css?v=5">
+    <script>
+        if (window.location.search.includes('reset') || window.location.hash.includes('reset')) {
+            localStorage.removeItem('weekend_explorer_onboarding_completed');
+            sessionStorage.removeItem('welcomed');
+        }
+        if (localStorage.getItem('weekend_explorer_onboarding_completed') !== 'true') {
+            document.documentElement.classList.add('we-onboarding-active');
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
+    <!-- First-Visit Onboarding Experience Overlay -->
+    <div id="we-onboarding-overlay" class="we-onboarding-overlay" style="display:none;">
+        <div class="we-ambient-orb we-ambient-orb-1"></div>
+        <div class="we-ambient-orb we-ambient-orb-2"></div>
+        <div class="we-onboarding-shell" id="we-onboarding-shell">
+            <div class="we-intro-stage" id="we-intro-stage" style="animation-play-state:paused;">
+                <div class="we-intro-glow"></div>
+                <div class="we-intro-brand">
+                    <span class="we-intro-word we-word-weekend" style="animation-play-state:paused;">Weekend</span>
+                    <span class="we-intro-word we-word-explorer" style="animation-play-state:paused;">Explorer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mandatory Auth Overlay -->
     <div id="mandatory-auth-overlay"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 99999; display: none; align-items: center; justify-content: center;">
@@ -210,8 +235,9 @@
         type="text/javascript"></script>
     <div id="weekend-ai-container"></div>
     <script defer src="analytics.js"></script>
-    <script defer src="scripts.v4.js?v=307"></script>
+    <script defer src="scripts.v4.js?v=309"></script>
     <script defer src="ai-agent.js?v=11"></script>
+    <script defer src="onboarding.js?v=8"></script>
 </body>
 
 </html>
