@@ -24,8 +24,11 @@
         sessionStorage.removeItem('welcomed');
     }
 
-    // Check if returning user
-    const isCompleted = localStorage.getItem(STORAGE_KEY) === 'true';
+    // Clear old permanent localStorage block so it displays properly
+    // localStorage.removeItem(STORAGE_KEY);
+
+    // Check if user already finished onboarding in this browser session
+    const isCompleted = sessionStorage.getItem(STORAGE_KEY) === 'true';
     if (isCompleted) {
         document.documentElement.classList.remove('we-onboarding-active');
         const existingOverlay = document.getElementById('we-onboarding-overlay');
@@ -326,12 +329,12 @@
             </div>
         `;
 
-        // Save completion and user answers to localStorage
+        // Save completion and user answers to sessionStorage
         try {
-            localStorage.setItem(STORAGE_KEY, 'true');
+            sessionStorage.setItem(STORAGE_KEY, 'true');
             localStorage.setItem(ANSWERS_STORAGE_KEY, JSON.stringify(userSurveyAnswers));
         } catch (e) {
-            console.warn('LocalStorage not accessible:', e);
+            console.warn('Storage not accessible:', e);
         }
 
         // Give user time to read the completion message (~2.2s), then fade out into Home page
