@@ -288,7 +288,7 @@ const requestListener = async (req, res) => {
         return;
     }
     
-    console.log(`[REQUEST] ${req.method} ${parsedUrl.path}`);
+    // (request logging disabled in production for performance)
 
     // 2. Endpoint: Fetch Google Place Details (with Supabase caching)
     if (pathname.startsWith('/api/place-details/')) {
@@ -683,8 +683,71 @@ const requestListener = async (req, res) => {
         }
     }
 
+    // Local file-based database for website reviews
+    const REVIEWS_DB_PATH = path.join(__dirname, 'reviews_db.json');
+    let websiteReviews = [];
+
+    function loadReviewsDB() {
+        if (fs.existsSync(REVIEWS_DB_PATH)) {
+            try {
+                const raw = fs.readFileSync(REVIEWS_DB_PATH, 'utf8');
+                websiteReviews = JSON.parse(raw) || [];
+                console.log(`[REVIEWS DB] Loaded ${websiteReviews.length} website reviews`);
+            } catch (err) {
+                console.error('[REVIEWS DB] Error loading reviews database file:', err.message);
+                websiteReviews = [];
+            }
+        } else {
+            websiteReviews = [];
+        }
+    }
+
+    function saveReviewsDB() {
+        try {
+            fs.writeFileSync(REVIEWS_DB_PATH, JSON.stringify(websiteReviews, null, 2), 'utf8');
+        } catch (err) {
+            console.error('[REVIEWS DB] Error saving reviews database file:', err.message);
+        }
+    }
+
+    function getReviewsSummary() {
+        const total = websiteReviews.length;
+        if (total === 0) {
+            return {
+                reviews: [],
+                totalReviews: 0,
+                overallRating: 5.0,
+                ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
+            };
+        }
+
+        let sumRating = 0;
+        const distribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+
+        websiteReviews.forEach(r => {
+            const rNum = Math.max(1, Math.min(5, Math.round(Number(r.rating) || 5)));
+            distribution[rNum] = (distribution[rNum] || 0) + 1;
+            sumRating += Number(r.rating) || 5;
+        });
+
+        const avg = Math.round((sumRating / total) * 10) / 10;
+
+        // Sort latest first
+        const sortedReviews = [...websiteReviews].sort((a, b) => {
+            return new Date(b.createdAt || b.date).getTime() - new Date(a.createdAt || a.date).getTime();
+        });
+
+        return {
+            reviews: sortedReviews,
+            totalReviews: total,
+            overallRating: avg,
+            ratingDistribution: distribution
+        };
+    }
+
     // Load DB on startup
     loadLocalDB();
+    loadReviewsDB();
 
     function getLocalAnalyticsSummary(range) {
         const now = Date.now();
@@ -1081,6 +1144,91 @@ const requestListener = async (req, res) => {
         return;
     }
 
+    // 3.8. Website Reviews Endpoints
+    if (pathname === '/api/reviews') {
+        setCorsHeaders(res);
+        if (req.method === 'GET') {
+            const summary = getReviewsSummary();
+            const body = JSON.stringify({ success: true, ...summary });
+            const acceptEncoding = req.headers['accept-encoding'] || '';
+            const headers = {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'public, max-age=30, stale-while-revalidate=60'
+            };
+            if (acceptEncoding.includes('br')) {
+                headers['Content-Encoding'] = 'br';
+                res.writeHead(200, headers);
+                zlib.brotliCompress(body, (err, compressed) => {
+                    if (err) { res.end(body); } else { res.end(compressed); }
+                });
+            } else if (acceptEncoding.includes('gzip')) {
+                headers['Content-Encoding'] = 'gzip';
+                res.writeHead(200, headers);
+                zlib.gzip(body, (err, compressed) => {
+                    if (err) { res.end(body); } else { res.end(compressed); }
+                });
+            } else {
+                res.writeHead(200, headers);
+                res.end(body);
+            }
+            return;
+        }
+
+        if (req.method === 'POST') {
+            try {
+                const body = await getRequestBody(req);
+                const name = (body.name || '').trim();
+                const rating = Math.max(1, Math.min(5, Math.round(Number(body.rating) || 5)));
+                const text = (body.text || '').trim();
+                const location = (body.location || 'Karnataka, India').trim();
+                const tag = (body.tag || 'Explorer').trim();
+
+                if (!name || !text) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: false, error: 'Name and review text are required.' }));
+                    return;
+                }
+
+                const wordCount = text.split(/\s+/).filter(Boolean).length;
+                if (wordCount < 10) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: false, error: `Review must contain at least 10 words (currently ${wordCount} words).` }));
+                    return;
+                }
+
+                const newReview = {
+                    id: `rev_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+                    name,
+                    location,
+                    rating,
+                    tag,
+                    text,
+                    date: new Date().toISOString().split('T')[0],
+                    createdAt: new Date().toISOString()
+                };
+
+                websiteReviews.unshift(newReview);
+                saveReviewsDB();
+
+                const summary = getReviewsSummary();
+                console.log(`[WEBSITE REVIEW] New review submitted by ${name} (${rating} stars)`);
+
+                res.writeHead(201, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: true,
+                    message: 'Thank you! Your review has been published.',
+                    newReview,
+                    ...summary
+                }));
+            } catch (err) {
+                console.error('[SUBMIT REVIEW ERROR]', err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, error: 'Failed to submit review.' }));
+            }
+            return;
+        }
+    }
+
     // 3.9 Quick Reset route for first-visit onboarding test
     if (pathname === '/reset') {
         res.writeHead(302, { 'Location': '/?reset=true' });
@@ -1161,7 +1309,16 @@ const requestListener = async (req, res) => {
             const acceptEncoding = req.headers['accept-encoding'] || '';
             const isCompressible = /javascript|json|html|css|xml|svg|text/.test(contentType);
 
-            if (isCompressible && acceptEncoding.includes('gzip')) {
+            if (isCompressible && acceptEncoding.includes('br')) {
+                // Brotli: 20-30% smaller than gzip, supported by all modern browsers
+                headers['Content-Encoding'] = 'br';
+                res.writeHead(200, headers);
+                const rawStream = fs.createReadStream(targetPath);
+                const brStream = zlib.createBrotliCompress({
+                    params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 4 } // quality 4 = fast+good
+                });
+                rawStream.pipe(brStream).pipe(res);
+            } else if (isCompressible && acceptEncoding.includes('gzip')) {
                 headers['Content-Encoding'] = 'gzip';
                 res.writeHead(200, headers);
                 const rawStream = fs.createReadStream(targetPath);
