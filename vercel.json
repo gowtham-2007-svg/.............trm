@@ -2,7 +2,7 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/place-details/(.*)",
       "destination": "/api/index.js"
     }
   ],
