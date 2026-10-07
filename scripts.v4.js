@@ -8888,6 +8888,25 @@ function initPlaceImageSliders() {
         }
     });
 
+    // Reviews Navigation Click Handler
+    const handleReviewsClick = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        toggleDrawer(false);
+        closeAllInteractiveModals();
+
+        if (window.WeekendReviews && typeof window.WeekendReviews.openReviewsModal === 'function') {
+            window.WeekendReviews.openReviewsModal();
+        }
+    };
+
+    const navReviewsBtn = document.getElementById('nav-reviews');
+    const menuReviewsBtn = document.getElementById('menu-reviews');
+    if (navReviewsBtn) navReviewsBtn.addEventListener('click', handleReviewsClick);
+    if (menuReviewsBtn) menuReviewsBtn.addEventListener('click', handleReviewsClick);
+
     // ==========================================================================
     // CLERK AUTHENTICATION SYSTEM INTERACTION
     // ==========================================================================
