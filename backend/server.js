@@ -128,6 +128,7 @@ async function sendWelcomeEmail(recipientEmail, userName) {
     }
 
     // 3. Ethereal Test Account fallback
+
     if (nodemailer) {
         try {
             const testAccount = await nodemailer.createTestAccount();
@@ -200,7 +201,7 @@ function isSupabaseConfigured() {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     return url && url.trim() !== '' && !url.includes('YOUR_SUPABASE') &&
-           key && key.trim() !== '' && !key.includes('YOUR_SUPABASE');
+        key && key.trim() !== '' && !key.includes('YOUR_SUPABASE');
 }
 
 let supabase = null;
@@ -280,14 +281,14 @@ const requestListener = async (req, res) => {
 
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-    
+
     // Redirect /admin to /admin/ for correct relative asset loading
     if (pathname === '/admin') {
         res.writeHead(301, { 'Location': '/admin/' });
         res.end();
         return;
     }
-    
+
     // (request logging disabled in production for performance)
 
     // 2. Endpoint: Fetch Google Place Details (with Supabase caching)
@@ -607,7 +608,7 @@ const requestListener = async (req, res) => {
     async function verifyAdmin(req) {
         const sessionId = req.headers['x-clerk-session-id'] || (req.headers['authorization'] ? req.headers['authorization'].split(' ')[1] : null);
         const userId = req.headers['x-clerk-user-id'];
-        
+
         if (!sessionId || !userId) {
             console.warn('[Admin Auth] Missing sessionId or userId in headers');
             return false;
@@ -627,15 +628,15 @@ const requestListener = async (req, res) => {
                 console.warn('[Admin Auth] Clerk session is not active or user mismatch');
                 return false;
             }
-            
+
             // Verify user is admin
             const userRes = await axios.get(`https://api.clerk.com/v1/users/${userId}`, {
                 headers: { 'Authorization': `Bearer ${process.env.CLERK_SECRET_KEY}` }
             });
-            
+
             const email = userRes.data.email_addresses && userRes.data.email_addresses[0] ? userRes.data.email_addresses[0].email_address : '';
             const role = userRes.data.public_metadata ? userRes.data.public_metadata.role : '';
-            
+
             // Force yadhur689@gmail.com to be an admin always
             const adminEmails = ['yadhur689@gmail.com'];
             if (process.env.ADMIN_EMAILS) {
@@ -838,7 +839,7 @@ const requestListener = async (req, res) => {
             const midnight = new Date();
             midnight.setHours(0, 0, 0, 0);
             const startHr = midnight.getTime();
-            
+
             for (let i = startHr; i <= now; i += 60 * 60 * 1000) {
                 const hrStr = new Date(i).toLocaleTimeString('en-US', { hour12: false, hour: '2-digit' }) + ':00';
                 hourlyData[hrStr] = { views: 0, visitors: new Set() };
@@ -863,7 +864,7 @@ const requestListener = async (req, res) => {
         } else {
             const dailyData = {};
             const daysToGenerate = filterRange === '7days' ? 7 : (filterRange === '30days' ? 30 : 0);
-            
+
             if (daysToGenerate > 0) {
                 for (let i = daysToGenerate; i >= 0; i--) {
                     const d = new Date(now - i * 24 * 60 * 60 * 1000);
@@ -987,7 +988,7 @@ const requestListener = async (req, res) => {
                     duration_seconds: 15
                 };
                 analyticsSessions.push(session);
-                
+
                 // Add an initial placeholder pageview for context
                 analyticsPageViews.push({
                     session_id: sessionId,
@@ -1283,7 +1284,7 @@ const requestListener = async (req, res) => {
             const ext = path.extname(targetPath).toLowerCase();
             const contentType = mimeTypes[ext] || 'application/octet-stream';
             const etag = `W/"${fileStats.size.toString(16)}-${fileStats.mtimeMs.toString(16)}"`;
-            
+
             if (req.headers['if-none-match'] === etag) {
                 res.writeHead(304);
                 res.end();
@@ -1301,7 +1302,7 @@ const requestListener = async (req, res) => {
             if (ext === '.html') {
                 headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
             } else if (ext === '.js' || ext === '.css') {
-                headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=86400';
+                headers['Cache-Control'] = 'no-cache, must-revalidate';
             } else {
                 headers['Cache-Control'] = 'public, max-age=31536000, immutable';
             }

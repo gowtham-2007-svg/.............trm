@@ -253,8 +253,12 @@
         `;
     }
 
+    let autoPopupTriggered = false;
+
     // Open dedicated Reviews Modal
     async function openReviewsModal() {
+        autoPopupTriggered = true;
+
         await fetchReviews();
 
         let modalOverlay = document.getElementById('website-reviews-modal-overlay');
@@ -270,7 +274,7 @@
                 <header class="website-reviews-modal-header">
                     <div class="reviews-header-title-box">
                         <span class="reviews-badge-pill">COMMUNITY FEEDBACK</span>
-                        <h2 class="reviews-modal-title">Website Reviews & Ratings</h2>
+                        <h2 class="reviews-modal-title">Website Reviews &amp; Ratings</h2>
                     </div>
                     <button type="button" class="website-reviews-modal-close" id="reviews-modal-close-btn" aria-label="Close">
                         ✕
@@ -282,9 +286,16 @@
             </div>
         `;
 
+        // Set display first so element is in the layout, then animate in via CSS transition
+        modalOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Force a reflow so the browser registers the initial opacity:0 state before adding .active
+        // This allows the CSS transition to play correctly
+        void modalOverlay.offsetWidth;
+
         requestAnimationFrame(() => {
             modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
         });
 
         bindModalEvents();
@@ -295,9 +306,10 @@
         if (modalOverlay) {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            // Wait for CSS transition (0.4s) to finish before removing from DOM
             setTimeout(() => {
-                modalOverlay.remove();
-            }, 300);
+                if (modalOverlay.parentNode) modalOverlay.remove();
+            }, 420);
         }
     }
 
@@ -520,4 +532,134 @@
     // Auto-fetch initial reviews on startup
     fetchReviews();
 
+    // ─────────────────────────────────────────────────────────────────────────────
+    // AUTO-POPUP: Trigger Website Reviews Modal 5 Seconds AFTER Reaching Home Page
+    // Only fires after the user has completely cleared onboarding and arrived
+    // on the home page, browsing for 5 full seconds.
+    // ─────────────────────────────────────────────────────────────────────────────
+    const AUTO_POPUP_SESSION_KEY = 'we_reviews_popup_shown';
+
+    // Clear session lock if testing with ?reset or #reset
+    if (window.location.search.includes('reset') || window.location.hash.includes('reset')) {
+        sessionStorage.removeItem(AUTO_POPUP_SESSION_KEY);
+    }
+
+    let homePageCountdownStarted = false;
+    let homePageCountdownTimer = null;
+
+    /**
+     * Check if the user is currently still in the onboarding flow
+     */
+    function isOnboardingActive() {
+        if (document.documentElement.classList.contains('we-onboarding-active')) {
+            return true;
+        }
+        const overlay = document.getElementById('we-onboarding-overlay');
+        if (overlay && document.body.contains(overlay)) {
+            // If the overlay exists and is NOT yet fading out or removed
+            if (!overlay.classList.contains('we-fade-out')) {
+                return true;
+            }
+        }
+        // If onboarding has not been completed in storage and overlay is in DOM
+        if (sessionStorage.getItem('weekend_explorer_onboarding_completed') !== 'true' && document.getElementById('we-onboarding-overlay')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if a blocking modal (like mandatory sign-in) is actively covering the screen
+     */
+    function isAuthOverlayOpen() {
+        const auth = document.getElementById('mandatory-auth-overlay');
+        if (!auth) return false;
+        return auth.style.display === 'flex' || window.getComputedStyle(auth).display === 'flex';
+    }
+
+    /**
+     * Start the 5-second browsing countdown once the user has arrived on the Home Page
+     */
+    function startHomePageBrowsingCountdown() {
+        if (homePageCountdownStarted) return;
+        if (autoPopupTriggered) return;
+        if (sessionStorage.getItem(AUTO_POPUP_SESSION_KEY)) return;
+        if (document.getElementById('website-reviews-modal-overlay')) return;
+
+        // If onboarding is still running, abort — wait for completion event
+        if (isOnboardingActive()) {
+            return;
+        }
+
+        homePageCountdownStarted = true;
+        console.log('[REVIEWS] User has reached Home Page. Starting 5-second browsing timer...');
+
+        // Exact 5 seconds of browsing on the home page before popping up
+        homePageCountdownTimer = setTimeout(() => {
+            if (autoPopupTriggered || sessionStorage.getItem(AUTO_POPUP_SESSION_KEY)) return;
+            if (document.getElementById('website-reviews-modal-overlay')) return;
+
+            // If the auth overlay is actively open, wait until user closes it
+            if (isAuthOverlayOpen()) {
+                console.log('[REVIEWS] Auth overlay active. Waiting for dismissal before showing reviews popup...');
+                const authCheck = setInterval(() => {
+                    if (!isAuthOverlayOpen()) {
+                        clearInterval(authCheck);
+                        setTimeout(() => {
+                            if (!autoPopupTriggered && !document.getElementById('website-reviews-modal-overlay')) {
+                                sessionStorage.setItem(AUTO_POPUP_SESSION_KEY, '1');
+                                openReviewsModal();
+                            }
+                        }, 1200);
+                    }
+                }, 400);
+                return;
+            }
+
+            // User has browsed home page for 5 seconds — trigger review popup now
+            sessionStorage.setItem(AUTO_POPUP_SESSION_KEY, '1');
+            openReviewsModal();
+        }, 5000);
+    }
+
+    // ── Listen for Onboarding Completion (New Visitors) ──
+    window.addEventListener('we-onboarding-finished', () => {
+        console.log('[REVIEWS] Received we-onboarding-finished event! User reached home page.');
+        startHomePageBrowsingCountdown();
+    });
+
+    // ── MutationObserver watching for removal of 'we-onboarding-active' ──
+    const onboardingObserver = new MutationObserver(() => {
+        if (!isOnboardingActive()) {
+            onboardingObserver.disconnect();
+            startHomePageBrowsingCountdown();
+        }
+    });
+    try {
+        onboardingObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    } catch (e) {}
+
+    // ── Initial Check (Returning Visitors who bypass onboarding) ──
+    function initHomePageReviewTrigger() {
+        if (!isOnboardingActive()) {
+            // User bypassed onboarding or is a returning visitor — directly on home page
+            startHomePageBrowsingCountdown();
+        } else {
+            // Backup poller in case the event or observer was delayed
+            const backupPoller = setInterval(() => {
+                if (!isOnboardingActive()) {
+                    clearInterval(backupPoller);
+                    startHomePageBrowsingCountdown();
+                }
+            }, 300);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHomePageReviewTrigger);
+    } else {
+        initHomePageReviewTrigger();
+    }
+
 })();
+

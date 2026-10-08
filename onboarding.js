@@ -375,6 +375,9 @@
                 if (typeof window.triggerSignInPopup === 'function') {
                     window.triggerSignInPopup();
                 }
+
+                // Notify listeners that onboarding completed and home page is visible
+                window.dispatchEvent(new CustomEvent('we-onboarding-finished'));
             }, 750);
         } else {
             // Fallback: no overlay found
@@ -385,6 +388,7 @@
             if (typeof window.triggerSignInPopup === 'function') {
                 window.triggerSignInPopup();
             }
+            window.dispatchEvent(new CustomEvent('we-onboarding-finished'));
         }
     }
 
