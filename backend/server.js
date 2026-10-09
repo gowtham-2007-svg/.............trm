@@ -279,7 +279,8 @@ const requestListener = async (req, res) => {
         return;
     }
 
-    const parsedUrl = url.parse(req.url, true);
+    const rawUrl = req.headers['x-matched-path'] || req.headers['x-forwarded-uri'] || req.url;
+    const parsedUrl = url.parse(rawUrl, true);
     const pathname = parsedUrl.pathname;
 
     // Redirect /admin to /admin/ for correct relative asset loading

@@ -405,7 +405,7 @@
         const writeBtn = document.getElementById('modal-write-review-btn');
         const cancelBtn = document.getElementById('cancel-write-review-btn');
         const formContainer = document.getElementById('review-form-collapsible');
-        const form = document.getElemenById('website-review-form');
+        const form = document.getElementById('website-review-form');
         const starBtns = document.querySelectorAll('.review-star-btn');
         const starLabel = document.getElementById('review-star-label');
         const nameInput = document.getElementById('review-user-name');
