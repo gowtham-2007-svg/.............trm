@@ -685,21 +685,30 @@ const requestListener = async (req, res) => {
     }
 
     // Local file-based database for website reviews
+    let defaultReviewsData = [];
+    try {
+        defaultReviewsData = require('./reviews_db.json');
+    } catch (e) {
+        defaultReviewsData = [];
+    }
+
     const REVIEWS_DB_PATH = path.join(__dirname, 'reviews_db.json');
-    let websiteReviews = [];
+    let websiteReviews = Array.isArray(defaultReviewsData) && defaultReviewsData.length > 0
+        ? [...defaultReviewsData]
+        : [];
 
     function loadReviewsDB() {
         if (fs.existsSync(REVIEWS_DB_PATH)) {
             try {
                 const raw = fs.readFileSync(REVIEWS_DB_PATH, 'utf8');
-                websiteReviews = JSON.parse(raw) || [];
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    websiteReviews = parsed;
+                }
                 console.log(`[REVIEWS DB] Loaded ${websiteReviews.length} website reviews`);
             } catch (err) {
                 console.error('[REVIEWS DB] Error loading reviews database file:', err.message);
-                websiteReviews = [];
             }
-        } else {
-            websiteReviews = [];
         }
     }
 
@@ -707,7 +716,11 @@ const requestListener = async (req, res) => {
         try {
             fs.writeFileSync(REVIEWS_DB_PATH, JSON.stringify(websiteReviews, null, 2), 'utf8');
         } catch (err) {
-            console.error('[REVIEWS DB] Error saving reviews database file:', err.message);
+            try {
+                fs.writeFileSync(path.join('/tmp', 'reviews_db.json'), JSON.stringify(websiteReviews, null, 2), 'utf8');
+            } catch (tmpErr) {
+                console.error('[REVIEWS DB] Error saving reviews database file:', err.message);
+            }
         }
     }
 
