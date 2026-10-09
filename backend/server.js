@@ -657,10 +657,12 @@ const requestListener = async (req, res) => {
 
     // Local file-based database for tracking metrics
     const DB_PATH = path.join(__dirname, 'analytics_db.json');
+    const TMP_ANALYTICS_PATH = path.join('/tmp', 'analytics_db.json');
     let analyticsSessions = [];
     let analyticsPageViews = [];
 
     function loadLocalDB() {
+        let loaded = false;
         if (fs.existsSync(DB_PATH)) {
             try {
                 const raw = fs.readFileSync(DB_PATH, 'utf8');
@@ -668,20 +670,35 @@ const requestListener = async (req, res) => {
                 analyticsSessions = data.sessions || [];
                 analyticsPageViews = data.pageViews || [];
                 console.log(`[LOCAL DB] Loaded ${analyticsSessions.length} sessions and ${analyticsPageViews.length} page views`);
+                loaded = true;
             } catch (err) {
                 console.error('[LOCAL DB] Error loading database file, starting fresh:', err.message);
             }
         }
+        if (!loaded && fs.existsSync(TMP_ANALYTICS_PATH)) {
+            try {
+                const raw = fs.readFileSync(TMP_ANALYTICS_PATH, 'utf8');
+                const data = JSON.parse(raw);
+                analyticsSessions = data.sessions || [];
+                analyticsPageViews = data.pageViews || [];
+                console.log(`[LOCAL DB /tmp] Loaded ${analyticsSessions.length} sessions and ${analyticsPageViews.length} page views`);
+            } catch (err) {}
+        }
     }
 
     function saveLocalDB() {
+        const payload = JSON.stringify({
+            sessions: analyticsSessions,
+            pageViews: analyticsPageViews
+        }, null, 2);
         try {
-            fs.writeFileSync(DB_PATH, JSON.stringify({
-                sessions: analyticsSessions,
-                pageViews: analyticsPageViews
-            }, null, 2), 'utf8');
+            fs.writeFileSync(DB_PATH, payload, 'utf8');
         } catch (err) {
-            console.error('[LOCAL DB] Error saving database file:', err.message);
+            try {
+                fs.writeFileSync(TMP_ANALYTICS_PATH, payload, 'utf8');
+            } catch (tmpErr) {
+                console.error('[LOCAL DB] Error saving database file:', err.message);
+            }
         }
     }
 
@@ -808,11 +825,14 @@ const requestListener = async (req, res) => {
             dailyVisitors = days.length > 0 ? Math.round(sum / days.length) : 0;
         }
 
-        // 4. Active Users (Active in the last 5 minutes)
-        const fiveMinsAgo = now - 5 * 60 * 1000;
+        // 4. Active Users (Active in the last 3 minutes)
+        const threeMinsAgo = now - 3 * 60 * 1000;
         const activeUsers = new Set(
             analyticsSessions
-                .filter(s => new Date(s.last_active_at).getTime() >= fiveMinsAgo)
+                .filter(s => {
+                    const t = new Date(s.last_active_at).getTime();
+                    return !isNaN(t) && t >= threeMinsAgo;
+                })
                 .map(s => s.user_id || s.session_id)
         ).size;
 
@@ -948,10 +968,16 @@ const requestListener = async (req, res) => {
                     duration_seconds: 0
                 };
                 analyticsSessions.push(session);
-            } else if (userId) {
-                session.user_id = userId;
-                session.user_email = userEmail;
-                session.user_name = userName;
+            } else {
+                session.last_active_at = new Date().toISOString();
+                if (userId) {
+                    session.user_id = userId;
+                    session.user_email = userEmail || session.user_email;
+                    session.user_name = userName || session.user_name;
+                }
+                if (deviceType && session.device_type === 'Desktop') session.device_type = deviceType;
+                if (browser && session.browser === 'Unknown') session.browser = browser;
+                if (os && session.os === 'Unknown') session.os = os;
             }
 
             analyticsPageViews.push({
@@ -1068,8 +1094,34 @@ const requestListener = async (req, res) => {
                 return;
             }
 
+            // Record requesting admin as actively present
+            const adminUserId = req.headers['x-clerk-user-id'];
+            if (adminUserId) {
+                let adminSession = analyticsSessions.find(s => s.user_id === adminUserId);
+                if (adminSession) {
+                    adminSession.last_active_at = new Date().toISOString();
+                } else {
+                    analyticsSessions.push({
+                        session_id: 'admin-' + adminUserId,
+                        user_id: adminUserId,
+                        user_email: null,
+                        user_name: 'Administrator',
+                        device_type: 'Desktop',
+                        browser: 'Admin Console',
+                        os: 'Windows',
+                        started_at: new Date().toISOString(),
+                        last_active_at: new Date().toISOString(),
+                        duration_seconds: 30
+                    });
+                }
+                saveLocalDB();
+            }
+
             const range = parsedUrl.query.range || '7days';
             const data = getLocalAnalyticsSummary(range);
+            if (adminUserId) {
+                data.active_users = Math.max(1, data.active_users || 0);
+            }
 
             // Fetch actual Clerk registered users count for the stats card
             try {
@@ -1088,6 +1140,53 @@ const requestListener = async (req, res) => {
             console.error('[Admin Analytics Endpoint Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: err.stack }));
+        }
+        return;
+    }
+
+    // Route: Fast Real-Time Live Active Users Counter
+    if (pathname === '/api/admin/live-active-users' && req.method === 'GET') {
+        try {
+            const isAdmin = await verifyAdmin(req);
+            if (!isAdmin) {
+                res.writeHead(403, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Access Denied: Admin authorization failed' }));
+                return;
+            }
+
+            const now = Date.now();
+            const threeMinsAgo = now - 3 * 60 * 1000;
+            const activeSet = new Set();
+
+            analyticsSessions.forEach(s => {
+                const t = new Date(s.last_active_at).getTime();
+                if (!isNaN(t) && t >= threeMinsAgo) {
+                    activeSet.add(s.user_id || s.session_id);
+                }
+            });
+
+            // The requesting admin is active right now
+            const adminUserId = req.headers['x-clerk-user-id'];
+            if (adminUserId) {
+                let adminSession = analyticsSessions.find(s => s.user_id === adminUserId);
+                if (adminSession) {
+                    adminSession.last_active_at = new Date().toISOString();
+                }
+                activeSet.add(adminUserId);
+            }
+
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate'
+            });
+            res.end(JSON.stringify({
+                active_users: Math.max(1, activeSet.size),
+                timestamp: now
+            }));
+        } catch (err) {
+            console.error('[Admin Live Active Users Error]', err.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: err.message }));
         }
         return;
     }

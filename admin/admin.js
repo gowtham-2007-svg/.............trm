@@ -263,13 +263,52 @@ async function loadDashboardData(range) {
     }
 }
 
+let liveActiveUsersInterval = null;
+
+function startLiveActiveUsersPolling() {
+    if (liveActiveUsersInterval) clearInterval(liveActiveUsersInterval);
+    
+    liveActiveUsersInterval = setInterval(async () => {
+        const tabAnalytics = document.getElementById('tab-analytics');
+        if (!tabAnalytics || !tabAnalytics.classList.contains('active')) return;
+        if (!window.Clerk || !window.Clerk.user) return;
+
+        try {
+            const response = await fetch('/api/admin/live-active-users', {
+                method: 'GET',
+                headers: {
+                    'x-clerk-session-id': (window.Clerk && window.Clerk.session) ? window.Clerk.session.id : '',
+                    'x-clerk-user-id': (window.Clerk && window.Clerk.user) ? window.Clerk.user.id : ''
+                }
+            });
+
+            if (response.ok) {
+                const liveData = await response.json();
+                const count = liveData.active_users !== undefined ? liveData.active_users : 1;
+                const activeEl = document.getElementById('stat-active-users');
+                if (activeEl) {
+                    const currentVal = parseInt(activeEl.textContent, 10);
+                    if (currentVal !== count) {
+                        activeEl.textContent = count;
+                    }
+                }
+            }
+        } catch (pollErr) {
+            // Silently ignore background polling errors
+        }
+    }, 4000);
+}
+
 // Render values and charts inside Analytics Tab
 function renderAnalytics(data) {
     // Fill Cards
     document.getElementById('stat-total-users').textContent = data.clerk_total_users || 0;
     document.getElementById('stat-daily-visitors').textContent = data.daily_visitors || 0;
     document.getElementById('stat-total-visits').textContent = data.total_visits || 0;
-    document.getElementById('stat-active-users').textContent = data.active_users || 0;
+    document.getElementById('stat-active-users').textContent = data.active_users !== undefined ? data.active_users : 1;
+
+    // Start Real-Time Live Active Users Polling
+    startLiveActiveUsersPolling();
 
     // Time Formatting
     const avgSec = data.average_time_spent || 0;

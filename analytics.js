@@ -106,21 +106,29 @@
 
     // ── Initial Page View ──
     let isFirstLoad = true;
-    // Defer initial tracking to idle time so it doesn't compete with paint
-    const scheduleIdle = window.requestIdleCallback || (fn => setTimeout(fn, 200));
-    scheduleIdle(() => sendTracking('/', 'Home'));
+    const currentPath = window.location.pathname || '/';
+    const currentTitle = document.title || 'Weekend Explore';
 
-    // ── Heartbeat: 30s interval (50% fewer requests vs 15s) ──
-    const heartbeatInterval = setInterval(sendHeartbeat, 30000);
+    // Send initial page track promptly
+    const scheduleIdle = window.requestIdleCallback || (fn => setTimeout(fn, 150));
+    scheduleIdle(() => sendTracking(currentPath, currentTitle));
 
-    // Pause heartbeat when tab is hidden, resume when visible
+    // Send early heartbeat after 1.5s to establish live presence immediately
+    setTimeout(sendHeartbeat, 1500);
+
+    // ── Heartbeat: 15s interval for accurate real-time active user tracking ──
+    const heartbeatInterval = setInterval(sendHeartbeat, 15000);
+
+    // Heartbeat on visibility change (refreshes immediately when tab becomes visible)
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-            sendHeartbeat(); // Final beacon on hide
+        if (document.visibilityState === 'visible') {
+            sendHeartbeat();
+        } else if (document.visibilityState === 'hidden') {
+            sendHeartbeat();
         }
     });
 
-    // Unload: use sendBeacon (non-blocking, browser-guaranteed delivery)
+    // Unload: use sendBeacon
     window.addEventListener('pagehide', () => {
         sendBeaconOrFetch('/api/analytics/heartbeat', { sessionId });
     });
