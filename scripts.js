@@ -4141,10 +4141,12 @@ function renderDestination(id) {
     currentCityId = id;
     window.currentCityId = id;
 
-    // Show the AI widget button on the destination page
+    // Show the AI widget button on the destination page (don't auto-open)
     if (window.WeekendAI && typeof window.WeekendAI.show === 'function') {
         window.WeekendAI.show();
     }
+
+    const isPremiumCity = ['mangaluru', 'bangalore', 'mysuru', 'mysuru_east_west', 'manipal'].includes(dest.id);
 
     const destHTML = `
         <div class="page-content" style="position: relative;">
@@ -4294,6 +4296,11 @@ function renderDestination(id) {
                 }
             });
         });
+
+        // Ensure AI widget button is visible on the destination page
+        if (window.WeekendAI && typeof window.WeekendAI.show === 'function') {
+            window.WeekendAI.show();
+        }
     });
 }
 
@@ -9081,17 +9088,30 @@ function initPlaceImageSliders() {
         });
     }
 
-    // Auto popup sign-in modal 3 seconds after page load if user is not signed in
+    // Expose a controlled trigger so onboarding.js can fire this at the right time
+    // (1.5s AFTER user arrives on the home page, not 3s after page load)
+    window.triggerSignInPopup = function() {
+        if (window.Clerk && window.Clerk.user) return; // already signed in
+        setTimeout(() => {
+            if (window.Clerk) {
+                openSignInModal();
+            } else {
+                const checkClerkForPopup = setInterval(() => {
+                    if (window.Clerk) {
+                        clearInterval(checkClerkForPopup);
+                        openSignInModal();
+                    }
+                }, 100);
+            }
+        }, 1500);
+    };
+
+    // For RETURNING users (no onboarding shown), auto-popup after 3s as before
+    // For NEW users going through onboarding, this is suppressed by the class check
     setTimeout(() => {
-        if (window.Clerk) {
-            openSignInModal();
-        } else {
-            const checkClerkForPopup = setInterval(() => {
-                if (window.Clerk) {
-                    clearInterval(checkClerkForPopup);
-                    openSignInModal();
-                }
-            }, 100);
+        if (document.documentElement.classList.contains('we-onboarding-active')) return;
+        if (localStorage.getItem('weekend_explorer_onboarding_completed') === 'true') {
+            window.triggerSignInPopup();
         }
     }, 3000);
 

@@ -3316,6 +3316,16 @@ const bangaloreEastWestCategoryData = {
         name: 'Lakes & Scenic Parks in Bangalore (East & West)',
         places: [
             {
+                name: 'Lalbagh Botanical Garden',
+                image: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg',
+                description: 'Sprawling 240-acre botanical garden featuring the iconic glass house, tropical plant species, and serene walking avenues.',
+                rating: '4.8',
+                bestTime: '6:00 AM – 7:00 PM',
+                busRoutes: 'Located near Lalbagh Metro Station.',
+                bestChoice: 'Glass House Flower Displays & Morning Nature Stroll',
+                bestChoiceImg: 'https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg'
+            },
+            {
                 name: 'Ulsoor Lake (Halasuru Lake)',
                 image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800',
                 description: 'One of Bangalore’s oldest and largest lakes, spread over 120 acres with islands, boating, and paved walking paths.',
@@ -3348,7 +3358,7 @@ const bangaloreEastWestCategoryData = {
                 bestTime: '12:00 PM – 11:30 PM',
                 busRoutes: 'Located on 100ft Road, Indiranagar.',
                 bestChoice: 'Tintin In Toit Wheat Beer & Wood-Fired Pepperoni Pizza',
-                bestChoiceImg: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=200'
+                bestChoiceImg: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=800'
             },
             {
                 name: 'Windmills Craftworks (Whitefield)',
