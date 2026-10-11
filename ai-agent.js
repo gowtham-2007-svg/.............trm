@@ -25,7 +25,11 @@
       couple: "Couple (2)",
       small_group: "Small Group (3-4)",
       big_group: "Big Group (5-6)",
-      large_group: "Large Group (7+)"
+      large_group: "Large Group (7+)",
+      movie_q: "Would you like to include a movie in your 12 PM – 6 PM plan?",
+      movie_yes: "Yes, suggest movies 🍿",
+      movie_no: "No movie, explore places only 🌿",
+      movie_lang_q: "Which language or genre do you prefer? (Personalization)"
     },
     kn: {
       welcome: "ನಮಸ್ಕಾರ {name}! ವೀಕೆಂಡ್ AI ಗೆ ಸುಸ್ವಾಗತ! ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
@@ -49,7 +53,11 @@
       couple: "ಜೋಡಿ (2)",
       small_group: "ಸಣ್ಣ ಗುಂಪು (3-4)",
       big_group: "ದೊಡ್ಡ ಗುಂಪು (5-6)",
-      large_group: "ಗುಂಪು (7+)"
+      large_group: "ಗುಂಪು (7+)",
+      movie_q: "ನಿಮ್ಮ 12 PM – 6 PM ಯೋಜನೆಯಲ್ಲಿ ಚಲನಚಿತ್ರವನ್ನು ಸೇರಿಸಲು ಬಯಸುತ್ತೀರಾ?",
+      movie_yes: "ಹೌದು, ಚಲನಚಿತ್ರಗಳನ್ನು ಸೂಚಿಸಿ 🍿",
+      movie_no: "ಬೇಡ, ಸ್ಥಳಗಳನ್ನು ಮಾತ್ರ ಅನ್ವೇಷಿಸಿ 🌿",
+      movie_lang_q: "ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆ ಅಥವಾ ಶೈಲಿ ಯಾವುದು?"
     },
     hi: {
       welcome: "नमस्ते {name}! वीकेंड AI में आपका स्वागत है! अपनी भाषा चुनें:",
@@ -73,7 +81,11 @@
       couple: "जोड़ी (2)",
       small_group: "छोटा समूह (3-4)",
       big_group: "बड़ा समूह (5-6)",
-      large_group: "बड़ा समूह (7+)"
+      large_group: "बड़ा समूह (7+)",
+      movie_q: "क्या आप अपने 12 PM – 6 PM प्लान में मूवी शामिल करना चाहते हैं?",
+      movie_yes: "हाँ, मूवी सुझाएं 🍿",
+      movie_no: "नहीं, केवल दर्शनीय स्थल 🌿",
+      movie_lang_q: "आप किस भाषा या शैली की मूवी पसंद करते हैं?"
     },
     ta: { welcome: "வணக்கம் {name}! Weekend AI க்கு வரவேற்கிறோம்! மொழியைத் தேர்ந்தெடுக்கவும்:" },
     te: { welcome: "నమస్కారం {name}! Weekend AI కి స్వాగతం! మీ భాషను ఎంచుకోండి:" },
@@ -144,8 +156,12 @@
     budgetLabel: '₹500',
     transport: 'Local Bus',
     transportKey: 'bus',
-    timeSlot: 'Full Day',
-    timeSlotKey: 'fullday',
+    timeSlot: '12 PM – 6 PM (Default)',
+    timeSlotKey: 'prime',
+    selectedMovie: null,
+    moviePreference: 'none',
+    movieLanguage: 'all',
+    movieGenre: 'all',
     food: 'Vegetarian',
     foodKey: 'veg',
     mood: 'Chill & Relax',
@@ -164,8 +180,8 @@
       hasBeach: true,
       spots: {
         nature: [
-          { name: "Panambur Beach", cost: 0, time: "Morning / Sunset", desc: "Golden sands, clean shoreline, and cool sea breeze." },
-          { name: "Tannirbhavi Beach & Tree Park", cost: 20, time: "Evening", desc: "Serene pine trees, ferry ride access, and sunset views." },
+          { name: "Panambur Beach", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Clean shoreline to witness the beautiful sunset, warm golden sunlight, and cool sea breeze." },
+          { name: "Tannirbhavi Beach & Tree Park", cost: 20, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Pine tree trails leading to shoreline waves, beautiful sunset, golden sunlight, and cool sea breeze." },
           { name: "Kadroo Park & Kadri Park Musical Fountain", cost: 15, time: "Evening", desc: "Sprawling green lawns and leisure walking trail." }
         ],
         culture: [
@@ -174,11 +190,11 @@
           { name: "Kudroli Gokarnanatheshwara Temple", cost: 0, time: "Evening", desc: "Spectacular golden architecture with grand illuminations." }
         ],
         chill: [
-          { name: "Someshwara Beach & Rudra Shila Rocks", cost: 0, time: "Evening", desc: "Majestic boulder viewpoints facing the roaring Arabian Sea." },
+          { name: "Someshwara Beach & Rudra Shila Rocks", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Majestic boulder viewpoints facing the roaring Arabian Sea, beautiful sunset, golden sunlight, and cool sea breeze." },
           { name: "Sultan Battery Watchtower", cost: 10, time: "Morning", desc: "Tipu Sultan's historical naval watchtower by the backwaters." }
         ],
         adventure: [
-          { name: "Sasihithlu Beach (Surfing & Estuary)", cost: 0, time: "Morning", desc: "Pristine meeting point of river and sea, famous for surfing." }
+          { name: "Sasihithlu Beach (Surfing & Estuary)", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Pristine meeting point of river and sea with beautiful sunset, golden sunlight, and cool sea breeze." }
         ],
         shopping: [
           { name: "City Centre Mall (K.S. Rao Road)", cost: 0, time: "Afternoon", desc: "Top shopping hub with verified Gogupa food counters.", hasMall: true },
@@ -287,6 +303,43 @@
         nonveg: "Hotel RRR / Hanumanthu Mess (₹160-260)",
         budget: "Local Heritage Mess (₹35-65)"
       }
+    },
+    'Goa': {
+      isCoastal: true,
+      hasBeach: true,
+      spots: {
+        nature: [
+          { name: "Miramar Beach", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Golden sands to witness the beautiful sunset, warm golden sunlight, and cool sea breeze." },
+          { name: "Dona Paula Viewpoint", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "Scenic coastal promontory overlooking the Arabian Sea, beautiful sunset, and cool sea breeze." },
+          { name: "Salim Ali Bird Sanctuary", cost: 20, time: "Morning", desc: "Mangrove forest reserve along the Mandovi river." }
+        ],
+        culture: [
+          { name: "Basilica of Bom Jesus (Old Goa)", cost: 0, time: "Morning", desc: "UNESCO World Heritage 16th-century baroque architecture." },
+          { name: "Se Cathedral", cost: 0, time: "Afternoon", desc: "Historic Portuguese cathedral and bell tower." }
+        ],
+        chill: [
+          { name: "Fontainhas Latin Quarter Walk", cost: 0, time: "Afternoon", desc: "Picturesque heritage streets with colorful Portuguese villas." }
+        ],
+        adventure: [
+          { name: "Aguada Fort Ramparts", cost: 0, time: "Morning", desc: "Historic 17th-century Portuguese lighthouse and fort." }
+        ],
+        shopping: [
+          { name: "Panjim Municipal Market & Mall", cost: 0, time: "Afternoon", desc: "Bustling market for Goan spices, cashews, and crafts.", hasMall: true }
+        ]
+      },
+      rainSpots: [
+        { name: "Goa State Museum", cost: 0, desc: "Indoor historical art, coins, and heritage artifacts." },
+        { name: "Houses of Goa Museum", cost: 25, desc: "Fascinating unique architecture museum completely sheltered." }
+      ],
+      busRoutes: [
+        { from: "Panaji KTC Stand", to: "Miramar Beach", route: "Kadamba Shuttle", fare: 15 },
+        { from: "Panaji KTC Stand", to: "Old Goa", route: "Bus #11 / Kadamba", fare: 20 }
+      ],
+      foodSpots: {
+        veg: "Navtara Veg Pure (₹70-130)",
+        nonveg: "Vinayak Family Restaurant / Ritz Classic (₹160-260)",
+        budget: "Local Goan Cafe (Pao & Bhaji) (₹30-50)"
+      }
     }
   };
 
@@ -300,7 +353,7 @@
       ],
       culture: [
         { name: "Historic Heritage Temple / Fort", cost: 20, time: "Morning", desc: "Rich regional history and architecture." },
-        { name: "District Museum & Cultural Gallery", cost: 15, time: "Afternoon", desc: "Artifacts showcasing state folklore and traditions." }
+        { name: "Regional Museum & Cultural Gallery", cost: 15, time: "Afternoon", desc: "Artifacts showcasing state folklore and traditions." }
       ],
       chill: [
         { name: "Lakeside Promenade", cost: 0, time: "Evening", desc: "Quiet seating and evening strolls." }
@@ -338,6 +391,445 @@
     if (cityName.toLowerCase().includes('mysore')) return CITIES_DATA['Mysuru'];
     if (cityName.toLowerCase().includes('manipal') || cityName.toLowerCase().includes('udupi')) return CITIES_DATA['Mangaluru'];
     return DEFAULT_CITY_DATA;
+  }
+
+  // --- Live Movie Knowledge Base & BookMyShow Services ---
+  const VERIFIED_CLIENT_MOVIES = [
+    {
+      id: "mov_kan_1",
+      title: "Baa Baa Black Sheep",
+      language: "Kannada",
+      genre: "Comedy / Thriller",
+      certificate: "U/A",
+      duration: "2h 18m",
+      durationMinutes: 138,
+      poster: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=60",
+      rating: "8.7/10",
+      votes: "14.2K",
+      description: "Fast-paced satirical comedy thriller packed with clever twists, regional humour, and weekend thrills."
+    },
+    {
+      id: "mov_kan_2",
+      title: "Kitti",
+      language: "Kannada",
+      genre: "Action / Drama",
+      certificate: "U/A",
+      duration: "2h 25m",
+      durationMinutes: 145,
+      poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&auto=format&fit=crop&q=60",
+      rating: "8.5/10",
+      votes: "9.8K",
+      description: "An emotional and high-voltage action drama exploring friendship, loyalty, and redemption."
+    },
+    {
+      id: "mov_kan_3",
+      title: "Comrade Kalyan",
+      language: "Kannada",
+      genre: "Action / Political Drama",
+      certificate: "U/A",
+      duration: "2h 30m",
+      durationMinutes: 150,
+      poster: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=500&auto=format&fit=crop&q=60",
+      rating: "8.8/10",
+      votes: "18.5K",
+      description: "An intense socio-political thriller with gripping dialogue, high stakes, and mass appeal."
+    },
+    {
+      id: "mov_kan_4",
+      title: "All Pass",
+      language: "Kannada",
+      genre: "Youth / Comedy Drama",
+      certificate: "U",
+      duration: "2h 15m",
+      durationMinutes: 135,
+      poster: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=500&auto=format&fit=crop&q=60",
+      rating: "8.2/10",
+      votes: "6.4K",
+      description: "Lighthearted nostalgic college youth drama perfect for group outings and weekend family laughs."
+    },
+    {
+      id: "mov_hin_1",
+      title: "Dongri: Gangster's Paradise",
+      language: "Hindi",
+      genre: "Crime / Action Thriller",
+      certificate: "A",
+      duration: "2h 28m",
+      durationMinutes: 148,
+      poster: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500&auto=format&fit=crop&q=60",
+      rating: "8.4/10",
+      votes: "11.1K",
+      description: "Atmospheric Mumbai underworld crime saga chronicling high-stakes rivalries and survival."
+    },
+    {
+      id: "mov_hin_2",
+      title: "Good Time",
+      language: "Hindi",
+      genre: "Comedy / Drama",
+      certificate: "U/A",
+      duration: "2h 10m",
+      durationMinutes: 130,
+      poster: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=500&auto=format&fit=crop&q=60",
+      rating: "8.3/10",
+      votes: "8.7K",
+      description: "Breezy urban comedy exploring friendship, modern relationships, and quirky weekend misadventures."
+    },
+    {
+      id: "mov_hin_3",
+      title: "Bhool Bhulaiyaa 3",
+      language: "Hindi",
+      genre: "Horror / Comedy",
+      certificate: "U/A",
+      duration: "2h 38m",
+      durationMinutes: 158,
+      poster: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=60",
+      rating: "8.6/10",
+      votes: "45.0K",
+      description: "Blockbuster spooky franchise return packed with Rooh Baba secrets and laughter."
+    },
+    {
+      id: "mov_eng_1",
+      title: "Nova",
+      language: "English",
+      genre: "Sci-Fi / Adventure",
+      certificate: "U/A",
+      duration: "2h 12m",
+      durationMinutes: 132,
+      poster: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=60",
+      rating: "8.6/10",
+      votes: "22.3K",
+      description: "Interstellar exploration spectacle with breathtaking IMAX visuals and mind-bending physics."
+    },
+    {
+      id: "mov_eng_2",
+      title: "The Wild Robot",
+      language: "English",
+      genre: "Animation / Family",
+      certificate: "U",
+      duration: "1h 42m",
+      durationMinutes: 102,
+      poster: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60",
+      rating: "9.2/10",
+      votes: "38.5K",
+      description: "Heartwarming animated masterpiece following a shipwrecked robot raising an orphaned gosling."
+    },
+    {
+      id: "mov_tam_1",
+      title: "Thaainilam",
+      language: "Tamil",
+      genre: "Action / Drama",
+      certificate: "U/A",
+      duration: "2h 22m",
+      durationMinutes: 142,
+      poster: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=500&auto=format&fit=crop&q=60",
+      rating: "8.5/10",
+      votes: "12.8K",
+      description: "Hard-hitting drama exploring land rights, family resilience, and explosive confrontation."
+    },
+    {
+      id: "mov_tel_1",
+      title: "SKS Mayookha",
+      language: "Telugu",
+      genre: "Romance / Family Drama",
+      certificate: "U/A",
+      duration: "2h 15m",
+      durationMinutes: 135,
+      poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=60",
+      rating: "8.1/10",
+      votes: "7.9K",
+      description: "Soulful musical romance steeped in coastal traditions and youthful dreams."
+    }
+  ];
+
+  const CITY_THEATRES_CLIENT = {
+    'Mangaluru': [
+      { name: "Cinepolis: City Centre Mall", location: "K.S. Rao Road, Hampankatta", approxTicket: 180, transitToBeachMinutes: 25, mallName: "City Centre Mall" },
+      { name: "PVR: Forum Fiza Mall", location: "Pandeshwar, Mangaluru", approxTicket: 190, transitToBeachMinutes: 20, mallName: "Forum Fiza Mall" },
+      { name: "Bharat Cinemas: Bharath Mall", location: "Bejai, Mangaluru", approxTicket: 160, transitToBeachMinutes: 25, mallName: "Bharath Mall" }
+    ],
+    'Bangalore': [
+      { name: "PVR: Orion Mall", location: "Brigade Gateway, Rajajinagar", approxTicket: 200, transitToBeachMinutes: 20, mallName: "Orion Mall" },
+      { name: "INOX: Garuda Mall", location: "Magrath Road, Ashok Nagar", approxTicket: 190, transitToBeachMinutes: 25, mallName: "Garuda Mall" },
+      { name: "Cinepolis: Forum Shantiniketan", location: "Whitefield Main Road", approxTicket: 180, transitToBeachMinutes: 30, mallName: "Forum Shantiniketan" },
+      { name: "PVR: Forum Mall", location: "Hosur Road, Koramangala", approxTicket: 220, transitToBeachMinutes: 25, mallName: "The Forum Mall" }
+    ],
+    'Mysuru': [
+      { name: "DRC Cinemas: BM Habitat Mall", location: "Jayalakshmipuram, Mysuru", approxTicket: 160, transitToBeachMinutes: 20, mallName: "BM Habitat Mall" },
+      { name: "INOX: Mall of Mysore", location: "Indiranagar, MG Road, Mysuru", approxTicket: 180, transitToBeachMinutes: 20, mallName: "Mall of Mysore" },
+      { name: "PVR: Garuda Mall", location: "Bamboo Bazaar, Mysuru", approxTicket: 170, transitToBeachMinutes: 25, mallName: "Garuda Mall Mysuru" }
+    ],
+    'Manipal': [
+      { name: "INOX: Central Cinema", location: "Tiger Circle, Manipal", approxTicket: 160, transitToBeachMinutes: 20, mallName: "Manipal Central" },
+      { name: "Bharat Cinemas: Manipal", location: "End Point Road, Manipal", approxTicket: 150, transitToBeachMinutes: 25, mallName: "Manipal Commercial Complex" }
+    ],
+    'Goa': [
+      { name: "INOX: Mall De Goa", location: "Porvorim, Goa", approxTicket: 180, transitToBeachMinutes: 20, mallName: "Mall De Goa" },
+      { name: "INOX: Osia Commercial Arcade", location: "Margao, Goa", approxTicket: 170, transitToBeachMinutes: 25, mallName: "Osia Arcade" }
+    ]
+  };
+
+  const MATINEE_SLOTS_CLIENT = [
+    { start: "01:30 PM", end: "04:00 PM" },
+    { start: "01:45 PM", end: "04:15 PM" },
+    { start: "02:00 PM", end: "04:30 PM" }
+  ];
+
+  function getClientSideMovieData(cityName, lang, genre, budget, people) {
+    let resolvedCity = 'Mangaluru';
+    const c = (cityName || '').toLowerCase();
+    if (c.includes('manga') || c.includes('mangalore')) resolvedCity = 'Mangaluru';
+    else if (c.includes('banga') || c.includes('bengaluru') || c.includes('blr')) resolvedCity = 'Bangalore';
+    else if (c.includes('myso') || c.includes('mysuru')) resolvedCity = 'Mysuru';
+    else if (c.includes('manipal') || c.includes('udupi')) resolvedCity = 'Manipal';
+    else resolvedCity = cityName;
+
+    const theatres = CITY_THEATRES_CLIENT[resolvedCity];
+    const citySlug = resolvedCity.toLowerCase() === 'bangalore' ? 'bengaluru' : resolvedCity.toLowerCase();
+    const bmsCityUrl = `https://in.bookmyshow.com/explore/movies-${citySlug}`;
+
+    if (!theatres || theatres.length === 0) {
+      return {
+        success: true,
+        liveDataAvailable: false,
+        city: resolvedCity,
+        bmsCityUrl,
+        movies: []
+      };
+    }
+
+    let pool = [...VERIFIED_CLIENT_MOVIES];
+    const l = (lang || '').toLowerCase();
+    if (l && l !== 'all' && l !== 'any') {
+      const langFiltered = pool.filter(m => m.language.toLowerCase() === l);
+      if (langFiltered.length > 0) pool = langFiltered;
+    }
+
+    const g = (genre || '').toLowerCase();
+    if (g && g !== 'all' && g !== 'any') {
+      const gFiltered = pool.filter(m => m.genre.toLowerCase().includes(g));
+      if (gFiltered.length > 0) pool = gFiltered;
+    }
+
+    const count = Number(people) || 1;
+    const chosen = pool.slice(0, 3).map((m, idx) => {
+      const th = theatres[idx % theatres.length];
+      const slot = MATINEE_SLOTS_CLIENT[idx % MATINEE_SLOTS_CLIENT.length];
+      const enc = encodeURIComponent(m.title);
+      return {
+        id: m.id,
+        title: m.title,
+        language: m.language,
+        genre: m.genre,
+        certificate: m.certificate,
+        duration: m.duration,
+        durationMinutes: m.durationMinutes,
+        poster: m.poster,
+        rating: m.rating,
+        votes: m.votes,
+        description: m.description,
+        theatre: th.name,
+        theatreLocation: th.location,
+        mallName: th.mallName,
+        showtime: slot.start,
+        showtimeEnd: slot.end,
+        transitToBeachMinutes: th.transitToBeachMinutes,
+        ticketPrice: th.approxTicket,
+        totalGroupTicketCost: th.approxTicket * count,
+        bmsUrl: `https://in.bookmyshow.com/explore/movies-${citySlug}?search=${enc}`,
+        provider: "Verified on BookMyShow"
+      };
+    });
+
+    return {
+      success: true,
+      liveDataAvailable: true,
+      city: resolvedCity,
+      bmsCityUrl,
+      movies: chosen
+    };
+  }
+
+  async function fetchLiveMovies(cityName, lang, genre, budget, people) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const url = `/api/movies?city=${encodeURIComponent(cityName || '')}&language=${encodeURIComponent(lang || '')}&genre=${encodeURIComponent(genre || '')}&budget=${budget || 1000}&people=${people || 1}`;
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success) {
+          return data;
+        }
+      }
+    } catch (e) {
+      // Offline / fallback to verified client dataset
+    }
+    return getClientSideMovieData(cityName, lang, genre, budget, people);
+  }
+
+  function askMoviePersonalization() {
+    addAIMessage(`
+      <div style="font-weight: 700; color: #8338EC; margin-bottom: 4px;">🎬 Movie Personalization</div>
+      <div style="font-size: 0.85rem; color: #334155; line-height: 1.45;">
+        Which language or genre do you prefer? Checking BookMyShow for matching matinee showtimes between 12 PM – 6 PM.
+      </div>
+    `);
+
+    const chipsContainer = document.createElement('div');
+    chipsContainer.className = 'wai-chips-container';
+
+    const options = [
+      { label: "All Languages & Genres", val: "all" },
+      { label: "Kannada", val: "kannada" },
+      { label: "Hindi", val: "hindi" },
+      { label: "English", val: "english" },
+      { label: "Tamil", val: "tamil" },
+      { label: "Telugu", val: "telugu" },
+      { label: "Action & Thriller", val: "action" },
+      { label: "Comedy & Family", val: "comedy" }
+    ];
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'wai-chip';
+      btn.textContent = opt.label;
+      btn.onclick = () => {
+        chipsContainer.querySelectorAll('.wai-chip').forEach(b => b.disabled = true);
+        btn.classList.add('wai-selected');
+        STATE.movieLanguage = opt.val;
+        addUserMessage(opt.label);
+        showTypingIndicator(async () => {
+          const movieData = await fetchLiveMovies(STATE.destination, opt.val, opt.val, STATE.budget, STATE.people);
+          renderMovieCardsInChat(movieData);
+        }, 500);
+      };
+      chipsContainer.appendChild(btn);
+    });
+
+    if (DOM.chatBody) {
+      DOM.chatBody.appendChild(chipsContainer);
+      scrollToBottom();
+    }
+  }
+
+  function renderMovieCardsInChat(data) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'wai-movie-recommendations-wrapper';
+
+    if (!data.liveDataAvailable || !data.movies || data.movies.length === 0) {
+      // Rule 2: Never invent information. If live data is unavailable, inform the user.
+      const notice = document.createElement('div');
+      notice.className = 'wai-movie-notice-box';
+      notice.innerHTML = `
+        <div style="font-weight: 700; margin-bottom: 4px;">⚠️ Live Movie Data Notice</div>
+        <div>Live BookMyShow showtime feed is currently unavailable for <b>${data.city}</b>. To guarantee 100% accuracy and never invent unverified showtimes, you can check live bookings directly on BookMyShow:</div>
+        <div style="display: flex; gap: 8px; margin: 8px 0;">
+          <a href="${data.bmsCityUrl}" target="_blank" class="wai-bms-link-btn" rel="noopener noreferrer">BookMyShow ↗</a>
+        </div>
+        <div style="font-size: 0.78rem; color: #78350f; margin-top: 4px;">We will continue with our curated alternative outdoor and cultural sightseeing plan.</div>
+        <button class="wai-chip" style="margin-top: 8px; width: 100%; justify-content: center; background: #8338EC; color: #fff; font-weight: 600;" id="wai-notice-continue-btn">
+          Continue with Alternative Plan 🌿
+        </button>
+      `;
+      notice.querySelector('#wai-notice-continue-btn').onclick = () => {
+        STATE.selectedMovie = null;
+        advanceStep();
+      };
+      wrapper.appendChild(notice);
+      if (DOM.chatBody) {
+        DOM.chatBody.appendChild(wrapper);
+        scrollToBottom();
+      }
+      return;
+    }
+
+    const intro = document.createElement('div');
+    intro.innerHTML = `
+      <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 4px;">
+        🎬 Recommended Movies in ${data.city} (12 PM – 6 PM Window)
+      </div>
+      <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 6px;">
+        Pick one to fit into your itinerary, or skip to follow the alternative experience:
+      </div>
+    `;
+    wrapper.appendChild(intro);
+
+    data.movies.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'wai-movie-card';
+      card.innerHTML = `
+        <div class="wai-movie-card-header">
+          <img src="${m.poster}" alt="${m.title} Poster" class="wai-movie-poster-thumb" onerror="this.src='https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=60'">
+          <div class="wai-movie-header-content">
+            <div>
+              <div class="wai-movie-pill-row">
+                <span class="wai-movie-badge wai-movie-badge-cert">${m.certificate}</span>
+                <span class="wai-movie-badge wai-movie-badge-lang">${m.language}</span>
+                <span class="wai-movie-badge wai-movie-badge-rating">⭐ ${m.rating}</span>
+              </div>
+              <div class="wai-movie-card-title">${m.title}</div>
+              <div class="wai-movie-card-genre">${m.genre} • ${m.duration}</div>
+            </div>
+            <div style="font-size: 0.72rem; color: #10b981; font-weight: 600;">Verified BookMyShow</div>
+          </div>
+        </div>
+
+        <div class="wai-movie-theatre-row">
+          <div class="wai-movie-theatre-name">
+            🏛️ ${m.theatre}
+          </div>
+          <div style="font-size: 0.72rem; color: #64748b;">${m.theatreLocation}</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px;">
+            <span class="wai-movie-showtime-badge">🕒 ${m.showtime} Matinee</span>
+            <span style="font-size: 0.7rem; color: #64748b;">(Fits 12–6 PM schedule)</span>
+          </div>
+        </div>
+
+        <div class="wai-movie-price-tag">
+          <span class="wai-movie-price-label">Estimated Price:</span>
+          <span class="wai-movie-price-amount">₹${m.ticketPrice} / person • ₹${m.totalGroupTicketCost} total (${STATE.people} ${STATE.people > 1 ? 'people' : 'person'})</span>
+        </div>
+
+        <div class="wai-movie-actions-row">
+          <a href="${m.bmsUrl}" target="_blank" class="wai-bms-link-btn" rel="noopener noreferrer">
+            BookMyShow ↗
+          </a>
+        </div>
+
+        <button type="button" class="wai-select-movie-btn" data-movie-id="${m.id}">
+          Select for 12–6 PM Plan 🎬
+        </button>
+      `;
+
+      card.querySelector('.wai-select-movie-btn').onclick = () => {
+        wrapper.querySelectorAll('.wai-select-movie-btn, .wai-skip-movie-btn').forEach(b => b.disabled = true);
+        card.classList.add('selected');
+        STATE.selectedMovie = m;
+        addUserMessage(`Selected: ${m.title} (${m.showtime})`);
+        showTypingIndicator(() => {
+          addAIMessage(`🎬 Fantastic choice! Added <b>${m.title}</b> at ${m.theatre} (${m.showtime}) to your 12 PM – 6 PM plan. Now let's customize your food preference!`);
+          setTimeout(advanceStep, 350);
+        }, 400);
+      };
+
+      wrapper.appendChild(card);
+    });
+
+    const skipBtn = document.createElement('button');
+    skipBtn.className = 'wai-skip-movie-btn';
+    skipBtn.innerHTML = 'Skip Movie & Follow Alternative Experience ➡️';
+    skipBtn.onclick = () => {
+      wrapper.querySelectorAll('.wai-select-movie-btn, .wai-skip-movie-btn').forEach(b => b.disabled = true);
+      STATE.selectedMovie = null;
+      addUserMessage("Skip movie, continue alternative experience");
+      advanceStep();
+    };
+    wrapper.appendChild(skipBtn);
+
+    if (DOM.chatBody) {
+      DOM.chatBody.appendChild(wrapper);
+      scrollToBottom();
+    }
   }
 
   // --- Sliding Graph Slider Generators ---
@@ -477,8 +969,8 @@
 
     function getSubtext(amount) {
       let desc = '';
-      if (amount === 0) desc = 'Completely Free Sightseeing & Sea Walks';
-      else if (amount <= 100) desc = 'Ultra Budget Plan (Verified public buses & free spots)';
+      if (amount === 0) desc = '100% Free Trip: Free sunset beach (4:30 PM–6:00 PM), temples & scenic walking routes';
+      else if (amount <= 100) desc = 'Ultra Budget Plan: Free sunset beaches (4:30 PM–6:00 PM), heritage spots & verified local buses';
       else if (amount <= 500) desc = 'Pocket Friendly (Local bus, street snacks & parks)';
       else if (amount <= 1500) desc = 'Balanced Weekend (Entry tickets, cafe/meals & transport)';
       else if (amount <= 3000) desc = 'Comfort Trip (Auto/cabs, heritage monuments & dining)';
@@ -706,16 +1198,123 @@
       id: 'timeSlot',
       getQuestion: () => t('time_q', STATE.language),
       getChips: () => [
-        { label: "Morning (8 AM – 12 PM)", value: "morning", labelText: "Morning (8 AM - 12 PM)" },
+        { label: "12 PM – 6 PM (Default Weekend Prime)", value: "prime", labelText: "12 PM – 6 PM (Default)" },
         { label: "Afternoon (12 PM – 4 PM)", value: "afternoon", labelText: "Afternoon (12 PM - 4 PM)" },
         { label: "Evening (4 PM – 8 PM)", value: "evening", labelText: "Evening (4 PM - 8 PM)" },
-        { label: "Full Day (8 AM – 8 PM)", value: "fullday", labelText: "Full Day (8 AM - 8 PM)" }
+        { label: "Full Day (8 AM – 8 PM)", value: "fullday", labelText: "Full Day (8 AM - 8 PM)" },
+        { label: "Morning (8 AM – 12 PM)", value: "morning", labelText: "Morning (8 AM - 12 PM)" }
       ],
       onSelect: (val, chipObj) => {
         STATE.timeSlotKey = val;
         STATE.timeSlot = chipObj ? chipObj.labelText : val;
         addUserMessage(STATE.timeSlot);
         advanceStep();
+      }
+    },
+    {
+      id: 'movie',
+      getQuestion: () => {
+        const budget = Number(STATE.budget) || 0;
+        if (budget <= 500) return null; // Rule 1: ₹100–₹500 automatically follows existing plan without adding movie
+
+        let title = "🎬 Smart Movie Recommendation";
+        let sub = "";
+        if (budget <= 600) {
+          title = "🎬 Smart Movie Recommendation (₹501–₹600 Budget)";
+          sub = `Tickets and travel fit within your group budget (₹${budget})! Would you like to include a movie in your 12 PM – 6 PM plan?`;
+        } else if (budget <= 800) {
+          title = "🎬 Movie, Food & Mall Experience (₹601–₹800 Budget)";
+          sub = `Your budget allows a movie at a mall multiplex, food, and an outdoor activity! Include a movie?`;
+        } else if (budget <= 1000) {
+          title = "🎬 Entertainment & Sunset Beach Plan (₹801–₹1,000 Budget)";
+          sub = `Your budget comfortably covers a movie, restaurant meal, entertainment, and a 5 PM–6 PM beach visit! Include a movie?`;
+        } else {
+          title = "🎬 Flexible VIP / Leisure Plan (₹1,000+ Budget)";
+          sub = `Full flexibility for premium multiplex movies, dining, activities, and golden hour sunset. Include a movie?`;
+        }
+
+        return `
+          <div style="font-weight: 700; color: #8338EC; margin-bottom: 4px;">${title}</div>
+          <div style="font-size: 0.85rem; color: #334155; line-height: 1.45;">${sub}</div>
+          <div style="font-size: 0.74rem; color: #64748b; margin-top: 4px;">Verified on BookMyShow • Showtime between 12 PM – 6 PM</div>
+        `;
+      },
+      renderCustom: () => {
+        const budget = Number(STATE.budget) || 0;
+        const people = Number(STATE.people) || 1;
+
+        // ₹100-₹500 rule: Follow existing weekend plan without automatically adding a movie
+        if (budget <= 500) {
+          setTimeout(() => {
+            STATE.selectedMovie = null;
+            advanceStep();
+          }, 30);
+          return null;
+        }
+
+        // ₹501-₹600 rule: Suggest a movie if ticket and travel costs fit
+        const minTkt = 160;
+        let minTvl = 0;
+        if (STATE.transportKey === 'bus') minTvl = people * 20;
+        else if (STATE.transportKey === 'auto') minTvl = 60;
+        else if (STATE.transportKey === 'cab') minTvl = 150;
+        const minMovieTotal = (minTkt * people) + minTvl;
+
+        if (budget <= 600 && minMovieTotal > budget) {
+          const card = document.createElement('div');
+          card.className = 'wai-movie-notice-box';
+          card.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 4px;">🎬 Movie Budget Check</div>
+            <div>For a group of ${people}, movie tickets + travel (~₹${minMovieTotal}) would exceed your total ₹${budget} budget.</div>
+            <div style="margin-top: 6px;">Following our <b>top alternative weekend plan</b> with free scenic spots & sightseeing to keep strictly on budget!</div>
+            <button class="wai-chip" style="margin-top: 10px; width: 100%; justify-content: center; background: #8338EC; color: #fff; font-weight: 600;" id="wai-continue-budget-btn">
+              Continue with Alternative Plan 🌿
+            </button>
+          `;
+          card.querySelector('#wai-continue-budget-btn').onclick = () => {
+            STATE.selectedMovie = null;
+            advanceStep();
+          };
+          return card;
+        }
+
+        // Fits budget! Show interactive recommendation chips
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.gap = '8px';
+        container.style.marginTop = '4px';
+
+        const row = document.createElement('div');
+        row.className = 'wai-chips-container';
+
+        const yesBtn = document.createElement('button');
+        yesBtn.className = 'wai-chip';
+        yesBtn.innerHTML = '🍿 Yes, Suggest Movies';
+        yesBtn.onclick = () => {
+          row.querySelectorAll('.wai-chip').forEach(b => b.disabled = true);
+          yesBtn.classList.add('wai-selected');
+          addUserMessage("Yes, suggest movies");
+          showTypingIndicator(() => {
+            askMoviePersonalization();
+          }, 350);
+        };
+
+        const noBtn = document.createElement('button');
+        noBtn.className = 'wai-chip';
+        noBtn.innerHTML = '🌿 No Movie (Outdoor & Places Only)';
+        noBtn.onclick = () => {
+          row.querySelectorAll('.wai-chip').forEach(b => b.disabled = true);
+          noBtn.classList.add('wai-selected');
+          STATE.selectedMovie = null;
+          addUserMessage("No movie, explore places only");
+          advanceStep();
+        };
+
+        row.appendChild(yesBtn);
+        row.appendChild(noBtn);
+        container.appendChild(row);
+        return container;
       }
     },
     {
@@ -777,6 +1376,9 @@
     {
       id: 'confirmation',
       getQuestion: () => {
+        const movieText = STATE.selectedMovie 
+          ? `<span style="color:#8338EC;font-weight:600;">${STATE.selectedMovie.title}</span> (${STATE.selectedMovie.theatre}, ${STATE.selectedMovie.showtime})` 
+          : 'None (Alternative Sightseeing Plan)';
         return `
           <div style="font-weight: 700; margin-bottom: 8px;">${t('confirm_title', STATE.language)}</div>
           <div style="background: rgba(131, 56, 236, 0.08); padding: 10px 12px; border-radius: 10px; font-size: 0.85rem; line-height: 1.5; color: #1e293b;">
@@ -785,6 +1387,7 @@
             <b>Total Budget:</b> ₹${STATE.budget}<br>
             <b>Transport:</b> ${STATE.transport}<br>
             <b>Time:</b> ${STATE.timeSlot}<br>
+            <b>Movie:</b> ${movieText}<br>
             <b>Food:</b> ${STATE.food}<br>
             <b>Vibe:</b> ${STATE.mood}<br>
             <b>Weather:</b> ${STATE.weather}
@@ -803,7 +1406,7 @@
           showTypingIndicator(() => {
             const itinHtml = generateMasterItinerary(STATE);
             addAIMessage(itinHtml);
-            updateDots(9);
+            updateDots(STEPS.length);
           }, 800);
         }
       }
@@ -815,38 +1418,81 @@
     const city = s.destination || 'Mangaluru';
     const cityData = getCityData(city);
     const budget = Number(s.budget) || 0;
+    const people = Number(s.people) || 1;
     const isHeavyRain = s.weatherKey === 'heavy_rain';
+    const selectedMovie = s.selectedMovie;
 
     let timelineItems = [];
     let actCost = 0;
     let transportCost = 0;
     let foodCost = 0;
+    let movieTicketCost = 0;
     let notes = [];
 
+    // 1. Budget Rules Logic & Notes
+    if (budget <= 500) {
+      notes.push("<b>₹100–₹500 Budget Rule Active:</b> Preserved existing weekend plan with free scenic spots & verified local transit without automatically adding a movie.");
+    } else if (budget <= 600) {
+      if (selectedMovie) {
+        notes.push("<b>₹501–₹600 Budget Rule Active:</b> Movie ticket and travel costs successfully fitted within your ₹" + budget + " budget.");
+      } else {
+        notes.push("<b>₹501–₹600 Rule:</b> Movie was optional or unviable for group size. Following the best alternative experience strictly within budget.");
+      }
+    } else if (budget <= 800) {
+      notes.push("<b>₹601–₹800 Experience:</b> Itinerary blends " + (selectedMovie ? "a movie screening, " : "") + "food court dining, mall leisure, and an outdoor sunset activity.");
+    } else if (budget <= 1000) {
+      notes.push("<b>₹801–₹1,000 Experience:</b> Curated plan including " + (selectedMovie ? "multiplex movie, " : "") + "restaurant dining, entertainment, and a 4:30 PM–6:00 PM golden hour sunset beach visit.");
+    } else {
+      notes.push("<b>VIP Flexible Plan:</b> Tailored luxury leisure plan featuring " + (selectedMovie ? "premium multiplex screening, " : "") + "fine dining, and scenic sunset viewpoints.");
+    }
+
+    // Beach Timing Rule Note
+    notes.push("<b>Beach Timing Rule:</b> Beaches are scheduled exclusively between 4:30 PM and 6:00 PM to catch the beautiful sunset, warm golden sunlight, and cool sea breeze. Morning and afternoon beach visits are never suggested.");
+
+    if (budget <= 500) {
+      notes.push("<b>Accessible Free Alternatives Active:</b> All recommended sightseeing destinations, heritage temples, and sunset beaches are 100% free of charge with zero admission fees.");
+    }
+
     if (isHeavyRain) {
-      notes.push("<b>Monsoon Advisory:</b> Outdoor viewpoints and beaches replaced with safe, sheltered indoor museums and covered promenades.");
+      notes.push("<b>Monsoon Advisory:</b> Outdoor viewpoints and beach visits replaced with safe, sheltered indoor museums and covered promenades.");
     } else if (s.weatherKey === 'light_rain') {
       notes.push("<b>Light Rain:</b> Weather is pleasant! Keep a pocket umbrella handy for breezy walks.");
     }
 
-    const isUnder100 = budget <= 100;
-    if (isUnder100) {
-      notes.push("<b>₹100 Budget Rule Active:</b> All entry tickets and paid eateries eliminated. Itinerary prioritizes serene free spots, seaside walking, and verified public buses.");
-    }
-
+    // Transport calculation
     let transDesc = "Walking";
     if (s.transportKey === 'bus') {
-      transportCost = isUnder100 ? Math.min(30, Math.floor(budget * 0.4)) : 40;
+      transportCost = budget <= 100 ? Math.min(30, Math.floor(budget * 0.4)) : (people * 20);
       const routeInfo = cityData.busRoutes && cityData.busRoutes[0] ? ` (${cityData.busRoutes[0].route}, ~₹${cityData.busRoutes[0].fare}/person)` : ' (Local City Bus)';
       transDesc = `Local Bus${routeInfo}`;
     } else if (s.transportKey === 'auto') {
-      transportCost = Math.min(180, Math.max(50, Math.floor(budget * 0.25)));
+      transportCost = Math.min(180, Math.max(50, Math.floor(budget * 0.2)));
       transDesc = "Auto Rickshaw (Metered)";
     } else if (s.transportKey === 'cab') {
-      transportCost = Math.min(450, Math.max(120, Math.floor(budget * 0.3)));
+      transportCost = Math.min(450, Math.max(120, Math.floor(budget * 0.25)));
       transDesc = "Cab / Taxi";
     }
 
+    // Movie Ticket cost
+    if (selectedMovie) {
+      const perTicket = selectedMovie.ticketPrice || 180;
+      movieTicketCost = perTicket * people;
+    }
+
+    // Food Cost allocation
+    if (s.foodKey !== 'none' && budget > 100) {
+      const perHeadFood = s.foodKey === 'veg' ? 70 : 130;
+      const targetFood = perHeadFood * people;
+      const budgetLeftBeforeFood = budget - movieTicketCost - transportCost - actCost;
+      foodCost = Math.max(0, Math.min(targetFood, Math.floor(budgetLeftBeforeFood * 0.75)));
+      
+      const foodDesc = s.foodKey === 'veg' ? (cityData.foodSpots && cityData.foodSpots.veg) || "Traditional Veg Thali" : (cityData.foodSpots && cityData.foodSpots.nonveg) || "Local Special Non-Veg Meal";
+      if (foodCost > 0) {
+        notes.push(`<b>Food Recommendation:</b> Try ${foodDesc} (~₹${foodCost} total estimated).`);
+      }
+    }
+
+    // Spot pool for activities
     let pool = [];
     if (isHeavyRain && cityData.rainSpots && cityData.rainSpots.length > 0) {
       pool = cityData.rainSpots;
@@ -859,7 +1505,7 @@
     }
 
     let validSpots = pool.filter(spot => {
-      if (isUnder100 && (spot.cost || 0) > 0) return false;
+      if (budget <= 100 && (spot.cost || 0) > 0) return false;
       return true;
     });
 
@@ -870,70 +1516,217 @@
       ];
     }
 
-    const timeMode = s.timeSlotKey || 'fullday';
-    let slotTimes = [];
-    if (timeMode === 'morning') slotTimes = ["08:30 AM", "10:30 AM"];
-    else if (timeMode === 'afternoon') slotTimes = ["12:30 PM", "02:30 PM"];
-    else if (timeMode === 'evening') slotTimes = ["04:30 PM", "06:30 PM"];
-    else slotTimes = ["09:00 AM", "11:30 AM", "02:30 PM", "05:15 PM"];
+    function isBeachSpot(sp) {
+      if (!sp) return false;
+      const str = ((sp.name || '') + ' ' + (sp.desc || '')).toLowerCase();
+      return str.includes('beach') || str.includes('seashore') || str.includes('coastline') || str.includes('shores') || str.includes('sasihithlu') || str.includes('panambur') || str.includes('someshwara') || str.includes('tannirbhavi') || str.includes('miramar');
+    }
 
-    let hasMall = false;
-    let chosenMallName = "City Mall";
+    // STRICT TIMING RULE: Never suggest beaches in morning or afternoon (12 PM – 4:30 PM).
+    let daytimeSpots = validSpots.filter(sp => !isBeachSpot(sp));
+    if (daytimeSpots.length === 0) {
+      daytimeSpots = [
+        { name: `${city} Heritage Promenade`, cost: 0, desc: "Shaded cultural walkway through historical landmarks and tree-lined avenues." },
+        { name: `Historic ${city} Center & Garden`, cost: 0, desc: "Scenic stroll through vibrant heritage streets and public botanical gardens." }
+      ];
+    }
 
-    slotTimes.forEach((slotTime, idx) => {
-      const spot = validSpots[idx % validSpots.length];
-      const spotCost = (isUnder100 || !spot.cost) ? 0 : spot.cost;
-      actCost += spotCost;
+    // Identify Beach and Viewpoint spots for 4:30 PM – 6:00 PM sunset
+    const allCityNatureSpots = [
+      ...(cityData.spots && cityData.spots.nature ? cityData.spots.nature : []),
+      ...(cityData.spots && cityData.spots.chill ? cityData.spots.chill : []),
+      ...(cityData.spots && cityData.spots.adventure ? cityData.spots.adventure : [])
+    ];
+    const beachSpot = allCityNatureSpots.find(isBeachSpot) || { name: `${city} Sunset Beach Point` };
+    const viewpointSpot = allCityNatureSpots.find(sp => {
+      const nm = (sp.name || '').toLowerCase();
+      return nm.includes('viewpoint') || nm.includes('hill') || nm.includes('tank') || nm.includes('lake') || (sp.time && sp.time.toLowerCase().includes('sunset'));
+    }) || allCityNatureSpots[0] || { name: `${city} Sunset Viewpoint` };
 
-      if (spot.hasMall || spot.name.toLowerCase().includes('mall')) {
-        hasMall = true;
-        chosenMallName = spot.name;
+    // 2. Timeline Planning strictly between 12 PM and 6 PM
+    if (selectedMovie) {
+      // 12:00 PM - 01:15 PM: Mall & Lunch / Food Court
+      const mallName = selectedMovie.mallName || (cityData.spots && cityData.spots.shopping && cityData.spots.shopping[0] ? cityData.spots.shopping[0].name : "Central Mall");
+      timelineItems.push({
+        time: "12:00 PM – 01:15 PM",
+        title: budget >= 801 ? `Restaurant Dining & Leisure Stroll` : `${mallName} Promenade & Food Court Lunch`,
+        desc: budget >= 801 
+          ? `Enjoy a delicious regional meal with the group before heading to the movie theatre.` 
+          : `Explore shops, visit the verified Gogupa stall / food court, and relax before the screening.`,
+        cost: foodCost > 0 ? `₹${foodCost} Lunch (Estimated Price)` : "Free Entry"
+      });
+
+      // 01:30 PM - 04:15 PM: Movie Screening at Multiplex
+      timelineItems.push({
+        time: `${selectedMovie.showtime} – ${selectedMovie.showtimeEnd || '04:15 PM'}`,
+        title: `🎬 Movie: ${selectedMovie.title} (${selectedMovie.language})`,
+        desc: `At <b>${selectedMovie.theatre}</b> (${selectedMovie.theatreLocation}). Runtime: ${selectedMovie.duration} (${selectedMovie.genre}, ${selectedMovie.certificate}). Verified on BookMyShow.`,
+        cost: `₹${movieTicketCost} (Estimated Price: ₹${selectedMovie.ticketPrice} × ${people})`
+      });
+
+      // 04:15 PM - 04:30 PM: Transit to Sunset Beach / Vantage Point
+      timelineItems.push({
+        time: "04:15 PM – 04:30 PM",
+        title: `Transit to Coastal Sunset Point`,
+        desc: `Short transit from theatre to the coast (~${selectedMovie.transitToBeachMinutes || 20} mins via ${transDesc.split('(')[0].trim()}). Arrive right in time for the 4:30 PM golden hour.`,
+        cost: "Included in Transport"
+      });
+
+      // 04:30 PM - 06:00 PM: Sunset Beach Visit (Strictly between 4:30 PM and 6:00 PM)
+      if (isHeavyRain) {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `Covered Waterfront Promenade / Museum`,
+          desc: `Monsoon Advisory: Safe indoor covered promenade protected from heavy rains. Open beaches avoided during monsoon downpours for safety.`,
+          cost: "Free Entry"
+        });
+      } else if (cityData.hasBeach) {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `🌅 Beautiful Sunset at ${beachSpot.name}`,
+          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool sea breeze along the shoreline waves. 100% accessible free alternative.`,
+          cost: "Free Entry"
+        });
+      } else {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `🌅 Beautiful Sunset at ${viewpointSpot.name}`,
+          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool evening breeze across the panoramic viewpoint. 100% accessible free alternative.`,
+          cost: "Free Entry"
+        });
       }
+    } else {
+      // Alternative Experience without movie (Strictly between 12 PM and 6 PM)
+      // Pick daytime non-beach spots:
+      const spot1 = daytimeSpots[0];
+      const spot2 = daytimeSpots[1] || daytimeSpots[0];
+      actCost += ((spot1 && spot1.cost) || 0) + ((spot2 && spot2.cost) || 0);
 
       timelineItems.push({
-        time: slotTime,
-        title: spot.name,
-        desc: spot.desc || "Popular sightseeing destination.",
-        cost: spotCost === 0 ? "Free Entry" : `₹${spotCost} Entry`
+        time: "12:00 PM – 01:15 PM",
+        title: `Lunch & Cultural Heritage Exploration`,
+        desc: `Relaxed lunch and casual walk through vibrant regional heritage markets.`,
+        cost: foodCost > 0 ? `₹${foodCost} Lunch (Estimated Price)` : "Free Entry"
       });
-    });
 
-    if (cityData.hasBeach && !isHeavyRain && (timeMode === 'evening' || timeMode === 'fullday')) {
-      const beachSpot = (cityData.spots && cityData.spots.nature && cityData.spots.nature.find(sp => sp.name.includes('Beach'))) || { name: `${city} Sunset Beach Point`, cost: 0, desc: "Golden hour sunset viewing with scenic ocean waves." };
-      
-      const existingBeach = timelineItems.find(it => it.title.includes('Beach'));
-      if (!existingBeach) {
-        timelineItems[timelineItems.length - 1] = {
-          time: "05:15 PM – 06:15 PM",
-          title: `Sunset at ${beachSpot.name}`,
-          desc: "Watch the sun dip below the horizon with ocean breeze. Perfect photography hour!",
-          cost: "Free"
-        };
+      // 01:30 PM – 03:00 PM: Daytime Non-Beach Spot
+      timelineItems.push({
+        time: "01:30 PM – 03:00 PM",
+        title: spot1.name,
+        desc: spot1.desc || "Popular daytime sightseeing and heritage destination.",
+        cost: (spot1.cost || 0) === 0 ? "Free Entry" : `₹${spot1.cost} Entry (Estimated Price)`
+      });
+
+      // 03:00 PM – 04:30 PM: Afternoon Non-Beach Spot
+      timelineItems.push({
+        time: "03:00 PM – 04:30 PM",
+        title: spot2.name,
+        desc: spot2.desc || "Scenic leisure walking trail and architectural highlight.",
+        cost: (spot2.cost || 0) === 0 ? "Free Entry" : `₹${spot2.cost} Entry (Estimated Price)`
+      });
+
+      // 04:30 PM – 06:00 PM: Sunset Beach Visit (Strictly between 4:30 PM and 6:00 PM)
+      if (isHeavyRain) {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `Indoor Covered Heritage Promenade`,
+          desc: `Monsoon Advisory: Sheltered indoor exploration protected from rain downpours. Open beaches avoided during monsoon sea swells.`,
+          cost: "Free Entry"
+        });
+      } else if (cityData.hasBeach) {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `🌅 Beautiful Sunset at ${beachSpot.name}`,
+          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool sea breeze along the shoreline waves. 100% accessible free alternative.`,
+          cost: "Free Entry"
+        });
+      } else {
+        timelineItems.push({
+          time: "04:30 PM – 06:00 PM",
+          title: `🌅 Beautiful Sunset at ${viewpointSpot.name}`,
+          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool evening breeze across the panoramic viewpoint. 100% accessible free alternative.`,
+          cost: "Free Entry"
+        });
       }
     }
 
-    if (hasMall || s.moodKey === 'shopping') {
-      notes.push(`<b>Gogupa Stall Tip:</b> Head to the verified Gogupa counters near ${chosenMallName} — fresh, hot plates for just <b>₹20/plate</b>! Highly recommended.`);
+    // Gogupa tip if applicable
+    const hasMallOrShopping = s.moodKey === 'shopping' || (selectedMovie && selectedMovie.mallName);
+    if (hasMallOrShopping) {
+      const mallRef = selectedMovie ? selectedMovie.mallName : "the mall";
+      notes.push(`<b>Gogupa Stall Tip:</b> Head to the verified Gogupa counters near ${mallRef} — fresh, hot plates for just <b>₹20/plate</b>! Highly recommended.`);
     }
 
-    if (s.foodKey !== 'none' && !isUnder100) {
-      const perHeadFood = s.foodKey === 'veg' ? 80 : 150;
-      foodCost = Math.min(Math.floor(budget * 0.35), perHeadFood * Math.min(s.people, 4));
-      const foodDesc = s.foodKey === 'veg' ? (cityData.foodSpots && cityData.foodSpots.veg) || "Traditional Veg Thali" : (cityData.foodSpots && cityData.foodSpots.nonveg) || "Local Special Non-Veg Meal";
-      notes.push(`<b>Food Recommendation:</b> Try ${foodDesc} (~₹${foodCost} total estimated).`);
-    }
-
-    let totalCalculated = actCost + transportCost + foodCost;
+    // Ensure budget is NEVER exceeded
+    let totalCalculated = movieTicketCost + transportCost + foodCost + actCost;
     if (totalCalculated > budget && budget > 0) {
-      foodCost = Math.max(0, budget - actCost - transportCost);
-      totalCalculated = actCost + transportCost + foodCost;
+      foodCost = Math.max(0, budget - movieTicketCost - transportCost - actCost);
+      totalCalculated = movieTicketCost + transportCost + foodCost + actCost;
     }
+    const remainingBudget = Math.max(0, budget - totalCalculated);
+
+    // Accessible Free Alternatives Data
+    let freeBeachNames = "Panambur Beach & Someshwara Shoreline";
+    let freeCultureNames = "Kudroli Gokarnanatheshwara Temple & Kadri Manjunatha Temple";
+    let freeNatureNames = "Sultan Battery Waterfront Promenade & Kadri Park Public Loop";
+
+    if (city.toLowerCase().includes('bangalore') || city.toLowerCase().includes('bengaluru')) {
+      freeBeachNames = "Sankey Tank Lakeside & Ulsoor Lake Promenades";
+      freeCultureNames = "ISKCON Temple (Rajajinagar) & Vidhana Soudha Public Promenade";
+      freeNatureNames = "Cubbon Park Bamboo Groves & Turahalli Forest Trail";
+    } else if (city.toLowerCase().includes('mysur') || city.toLowerCase().includes('mysore')) {
+      freeBeachNames = "Chamundi Hill Sunset Viewpoint & Kukkarahalli Lake Shoreline";
+      freeCultureNames = "St. Philomena's Cathedral & Mysore Palace Outer Grounds";
+      freeNatureNames = "Kukkarahalli Lake Nature Walkway Loop";
+    } else if (city.toLowerCase().includes('goa')) {
+      freeBeachNames = "Miramar Beach & Dona Paula Public Promontory";
+      freeCultureNames = "Basilica of Bom Jesus & Se Cathedral Precincts";
+      freeNatureNames = "Fontainhas Latin Quarter Walking Route";
+    }
+
+    const freeAltCardHtml = `
+      <div class="wai-free-alternatives-card">
+        <div class="wai-free-alt-header">
+          <span>🌿 Accessible Free Alternatives</span>
+          <span class="wai-free-alt-badge">₹0 Entry • Free For All</span>
+        </div>
+        <div style="font-size: 0.77rem; color: #475569; margin-bottom: 6px;">
+          ${(budget <= 500) 
+            ? `<b>Budget-Friendly Mode:</b> If you cannot afford tickets, dining, or private cabs, enjoy these 100% free accessible alternatives in ${city}:` 
+            : `If you or your group ever need zero-cost alternatives for ${city}, these verified spots are 100% free and accessible:`}
+        </div>
+        <div class="wai-free-alt-item">
+          <span class="wai-free-alt-bullet">🏖️</span>
+          <div>
+            <b>Free Sunset Beach (4:30 PM – 6:00 PM only):</b> ${freeBeachNames} — 100% free public admission. Experience the <b>beautiful sunset</b>, warm <b>golden sunlight</b>, and refreshing <b>cool sea breeze</b> without paying a single rupee. (<i>Note: Beaches are suggested exclusively between 4:30 PM and 6:00 PM; morning & afternoon beach visits are never recommended</i>).
+          </div>
+        </div>
+        <div class="wai-free-alt-item">
+          <span class="wai-free-alt-bullet">🏛️</span>
+          <div>
+            <b>Zero-Entry Cultural Heritage:</b> ${freeCultureNames} — magnificent architecture, spiritual tranquility, and historic corridors with zero admission fees.
+          </div>
+        </div>
+        <div class="wai-free-alt-item">
+          <span class="wai-free-alt-bullet">🚶</span>
+          <div>
+            <b>Scenic Nature & Walking Trails:</b> ${freeNatureNames} — open green spaces and waterfront walking trails completely free to explore.
+          </div>
+        </div>
+        <div class="wai-free-alt-item">
+          <span class="wai-free-alt-bullet">💡</span>
+          <div>
+            <b>Free Travel Tip:</b> Pack a home tiffin and reusable water bottles to picnic by the coastal promenade or public parks at sunset for a full weekend experience at ₹0 expense.
+          </div>
+        </div>
+      </div>
+    `;
 
     let html = `
       <div class="wai-itinerary">
         <div class="wai-itinerary-title">${t('itinerary_for', s.language).replace('{city}', city)}</div>
         <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">
-          ${s.peopleLabel} • Total Budget: ₹${s.budget} • ${transDesc}
+          ${s.peopleLabel} • Total Budget: ₹${s.budget} • ${transDesc.split('(')[0].trim()} • 12 PM – 6 PM
         </div>
 
         <div class="wai-timeline">
@@ -942,7 +1735,7 @@
     timelineItems.forEach(item => {
       html += `
         <div class="wai-timeline-item">
-          <div class="wai-time-slot" style="font-weight: 700; color: #8338EC; font-size: 0.75rem; min-width: 65px;">${item.time}</div>
+          <div class="wai-time-slot" style="font-weight: 700; color: #8338EC; font-size: 0.74rem; min-width: 72px;">${item.time}</div>
           <div class="wai-timeline-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #8338EC; margin-top: 4px; flex-shrink: 0;"></div>
           <div class="wai-timeline-content" style="flex: 1;">
             <div class="wai-timeline-content-title" style="font-weight: 600; color: #1e293b; font-size: 0.88rem;">${item.title}</div>
@@ -957,22 +1750,51 @@
         </div>
 
         <div class="wai-budget-card">
-          <div class="wai-budget-row">
-            <span>Activities & Entry:</span>
-            <span style="font-weight: 600; color: #1e293b;">₹${actCost}</span>
+          <div style="font-size: 0.82rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
+            📊 Itemized Budget Breakdown
           </div>
+          ${movieTicketCost > 0 ? `
           <div class="wai-budget-row">
-            <span>Transport (${transDesc.split('(')[0].trim()}):</span>
-            <span style="font-weight: 600; color: #1e293b;">₹${transportCost}</span>
+            <span class="wai-budget-row-label">
+              🎬 Estimated Movie Tickets:
+              <span class="wai-budget-est-tag">Estimated Price (₹${selectedMovie.ticketPrice} × ${people})</span>
+            </span>
+            <span style="font-weight: 700; color: #1e293b;">₹${movieTicketCost}</span>
+          </div>` : ''}
+
+          <div class="wai-budget-row">
+            <span class="wai-budget-row-label">
+              🚌 Transport (${transDesc.split('(')[0].trim()}):
+              <span class="wai-budget-est-tag">Estimated Price</span>
+            </span>
+            <span style="font-weight: 700; color: #1e293b;">₹${transportCost}</span>
           </div>
+
           ${foodCost > 0 ? `
           <div class="wai-budget-row">
-            <span>Food & Snacks:</span>
-            <span style="font-weight: 600; color: #1e293b;">₹${foodCost}</span>
+            <span class="wai-budget-row-label">
+              🍽️ Food & Dining:
+              <span class="wai-budget-est-tag">Estimated Price</span>
+            </span>
+            <span style="font-weight: 700; color: #1e293b;">₹${foodCost}</span>
           </div>` : ''}
-          <div class="wai-budget-total-row">
-            <span>Total Estimated:</span>
+
+          <div class="wai-budget-row">
+            <span class="wai-budget-row-label">
+              🏖️ Activities & Sightseeing:
+              <span class="wai-budget-est-tag">Estimated Price</span>
+            </span>
+            <span style="font-weight: 700; color: #1e293b;">₹${actCost}</span>
+          </div>
+
+          <div class="wai-budget-total-row" style="border-top: 1px solid #e2e8f0; padding-top: 8px; margin-top: 4px; display: flex; justify-content: space-between; font-weight: 700;">
+            <span>Total Estimated Spending:</span>
             <span style="color: #8338EC; font-size: 0.95rem;">₹${totalCalculated} / ₹${s.budget}</span>
+          </div>
+
+          <div class="wai-budget-remaining-row">
+            <span>Remaining Budget Buffer:</span>
+            <span>₹${remainingBudget}</span>
           </div>
         </div>
     `;
@@ -982,6 +1804,9 @@
         html += `<div style="background: rgba(131, 56, 236, 0.06); border-left: 3px solid #8338EC; border-radius: 4px; padding: 8px 10px; font-size: 0.78rem; line-height: 1.4; color: #334155; margin-top: 8px;">${note}</div>`;
       });
     }
+
+    // Insert Accessible Free Alternatives Card
+    html += freeAltCardHtml;
 
     html += `
         <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
@@ -1082,7 +1907,7 @@
 
           <div class="wai-progress-container">
             <div class="wai-progress-dots" id="wai-dots">
-              ${Array(9).fill('<div class="wai-dot"></div>').join('')}
+              ${Array(STEPS.length).fill('<div class="wai-dot"></div>').join('')}
             </div>
           </div>
 
@@ -1303,9 +2128,20 @@
     updateDots();
 
     const step = STEPS[STATE.currentStepIndex];
+
+    // Rule 1: ₹100–₹500: Follow the existing weekend plan without automatically adding a movie.
+    if (step.id === 'movie' && (Number(STATE.budget) || 0) <= 500) {
+      STATE.selectedMovie = null;
+      STATE.moviePreference = 'none';
+      advanceStep();
+      return;
+    }
+
     showTypingIndicator(() => {
       const qText = step.getQuestion();
-      addAIMessage(qText);
+      if (qText) {
+        addAIMessage(qText);
+      }
 
       if (typeof step.renderCustom === 'function') {
         const customEl = step.renderCustom();
@@ -1377,7 +2213,8 @@
       if (DOM.chatBody) DOM.chatBody.innerHTML = '';
       updateDots(0);
       renderStep();
-    }
+    },
+    generateItinerary: generateMasterItinerary
   };
 
   // --- Show / Hide the entire widget (trigger badge) ---

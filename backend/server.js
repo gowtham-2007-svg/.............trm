@@ -1343,6 +1343,30 @@ const requestListener = async (req, res) => {
         }
     }
 
+    // 3.85 Live Movies Recommendation Endpoint (BookMyShow)
+    if (pathname === '/api/movies') {
+        setCorsHeaders(res);
+        try {
+            const moviesModule = require('../api/movies.js');
+            const city = parsedUrl.query.city || 'Mangaluru';
+            const language = parsedUrl.query.language || '';
+            const genre = parsedUrl.query.genre || '';
+            const budget = parsedUrl.query.budget || '1000';
+            const people = parsedUrl.query.people || '1';
+            const data = moviesModule.getMovieRecommendations({ city, language, genre, budget, people });
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'public, max-age=60, stale-while-revalidate=120'
+            });
+            res.end(JSON.stringify(data));
+        } catch (err) {
+            console.error('[MOVIES API ERROR]', err);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, error: 'Failed to fetch movies.' }));
+        }
+        return;
+    }
+
     // 3.9 Quick Reset route for first-visit onboarding test
     if (pathname === '/reset') {
         res.writeHead(302, { 'Location': '/?reset=true' });

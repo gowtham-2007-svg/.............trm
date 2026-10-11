@@ -6,6 +6,10 @@
             "destination": "/api/reviews.js"
         },
         {
+            "source": "/api/movies",
+            "destination": "/api/movies.js"
+        },
+        {
             "source": "/api/(.*)",
             "destination": "/api/index.js"
         }
