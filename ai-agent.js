@@ -1022,12 +1022,40 @@
         
         <div class="wai-trigger-badge" id="wai-trigger" style="z-index: 999998; cursor: pointer;">
           <div class="wai-trigger-sparkle-circle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#ffffff"/>
+            <!-- Animated AI Robot Mascot SVG -->
+            <svg class="wai-robot-mascot-svg" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Antenna stem -->
+              <line x1="16" y1="2.5" x2="16" y2="7" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Antenna pulse wave (radar ring) -->
+              <circle class="wai-antenna-pulse-wave" cx="16" cy="2.5" r="2.2" fill="none" stroke="rgba(56,189,248,0.55)" stroke-width="1"/>
+              <!-- Antenna dot (glows) -->
+              <circle class="wai-antenna-dot" cx="16" cy="2.5" r="1.4" fill="#38bdf8"/>
+              <!-- Robot head body -->
+              <rect x="8" y="7" width="16" height="13" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/>
+              <!-- Robot Eyes group (blinks) -->
+              <g class="wai-robot-eyes-group">
+                <rect x="11" y="11.5" width="3.2" height="3.2" rx="1.2" fill="#6839e6"/>
+                <rect x="17.8" y="11.5" width="3.2" height="3.2" rx="1.2" fill="#6839e6"/>
+                <!-- Eye shine highlights -->
+                <rect x="11.5" y="12" width="0.9" height="0.9" rx="0.4" fill="rgba(255,255,255,0.9)"/>
+                <rect x="18.3" y="12" width="0.9" height="0.9" rx="0.4" fill="rgba(255,255,255,0.9)"/>
+              </g>
+              <!-- Robot mouth (smile) -->
+              <path d="M13 17.5 Q16 20 19 17.5" stroke="#6839e6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <!-- Robot body -->
+              <rect x="11" y="20.5" width="10" height="7" rx="3" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>
+              <!-- Body center dot -->
+              <circle cx="16" cy="24" r="1.2" fill="#6839e6" opacity="0.7"/>
+              <!-- Orbiting sparkle star -->
+              <g class="wai-orbit-spark">
+                <path d="M27 6.5 L27.6 8.1 L29.3 8.1 L27.95 9.1 L28.5 10.7 L27 9.8 L25.5 10.7 L26.05 9.1 L24.7 8.1 L26.4 8.1 Z" fill="#facc15" opacity="0.95"/>
+              </g>
             </svg>
           </div>
           <div class="wai-trigger-divider"></div>
-          <span class="wai-trigger-text">Weekend AI</span>
+          <span class="wai-trigger-text">
+            <span class="wai-type-text" id="wai-type-text">Weekend AI</span><span class="wai-type-cursor" id="wai-type-cursor"></span>
+          </span>
           <div class="wai-trigger-arrow-circle">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1077,6 +1105,43 @@
     DOM.trigger.addEventListener('click', toggleChat);
     DOM.closeBtn.addEventListener('click', closeChat);
     DOM.backdrop.addEventListener('click', closeChat);
+
+    // --- Typewriter Agent Text Animation ---
+    (function startTypewriter() {
+      const phrases = ['Weekend AI', 'Ask AI Agent', 'Plan Your Trip', 'Weekend AI'];
+      const el = document.getElementById('wai-type-text');
+      if (!el) return;
+      let phraseIdx = 0, charIdx = 0, deleting = false, pausing = false;
+      const TYPING_MS = 80, DELETING_MS = 45, PAUSE_MS = 1800, PAUSE_AFTER_DELETE = 420;
+
+      function tick() {
+        if (!document.getElementById('wai-type-text')) return; // widget removed
+        const phrase = phrases[phraseIdx];
+        if (pausing) { pausing = false; setTimeout(tick, PAUSE_AFTER_DELETE); return; }
+        if (!deleting) {
+          charIdx++;
+          el.textContent = phrase.slice(0, charIdx);
+          if (charIdx === phrase.length) {
+            deleting = true;
+            setTimeout(tick, PAUSE_MS);
+          } else {
+            setTimeout(tick, TYPING_MS);
+          }
+        } else {
+          charIdx--;
+          el.textContent = phrase.slice(0, charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            pausing = true;
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            setTimeout(tick, PAUSE_AFTER_DELETE);
+          } else {
+            setTimeout(tick, DELETING_MS);
+          }
+        }
+      }
+      setTimeout(tick, 1200);
+    })();
   }
 
   function buildWelcomeGreeting() {
