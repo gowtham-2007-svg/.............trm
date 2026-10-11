@@ -145,6 +145,182 @@
 
     return text;
   }
+
+  // ============================================================
+  // --- Zero Rupee Situational Training Engine (15 Cases) ---
+  // ============================================================
+
+  const ZERO_RUPEE_CASES = [
+    {
+      id: 'go_out',
+      label: 'I want to go somewhere',
+      joke: 'Brother, your mind has booked the trip, but your wallet has rejected the payment.',
+      plan: 'No problem. Find a nearby free public park or walking route and explore your neighbourhood. Walk only if the destination is safely reachable on foot and the weather is clear. Evening walks between 4:30 PM and 6:00 PM can be beautiful, especially near water or a hilltop where you can enjoy the beautiful sunset, golden sunlight, and cool sea breeze without spending a single rupee.'
+    },
+    {
+      id: 'borrow_30',
+      label: 'A friend might lend me Rs 30',
+      joke: 'Brother, your bank balance is zero, but your friendship has a small credit department.',
+      plan: 'If your friend is comfortable lending Rs 30 and you can repay it, consider a simple low-cost plan. Check actual local prices before buying anything. Keep some money aside for essential needs rather than spending everything on entertainment. Borrowing is always optional and borrowed money must be repaid on time.'
+    },
+    {
+      id: 'maggi',
+      label: 'I want to eat Maggi',
+      joke: 'Your stomach wants a restaurant experience, but your wallet has booked a meeting about cost reduction.',
+      plan: 'First, check whether Maggi and a stove or cooker are already available at home. If yes, that solves it for nearly zero cost. If not, you could ask a trusted person at home for help. If you consider borrowing money, check the actual price at your local shop before assuming any amount will be enough. Prices vary by area and pack size.'
+    },
+    {
+      id: 'movie',
+      label: 'I want to watch a movie',
+      joke: 'Brother, your theatre budget has disappeared, but the movie plan is not over.',
+      plan: 'Look for good movies legally available for free on YouTube Movies, Hotstar free tier, or any platform you already have access to on your phone or TV. Do not pay for a new subscription today. If you need a genre or language suggestion, let me know and I will help you search. If mobile data costs money, use existing Wi-Fi or a movie you have already downloaded. Never watch from piracy sites as they carry legal and security risks.'
+    },
+    {
+      id: 'bored',
+      label: 'I have nothing to do',
+      joke: 'Brother, even your boredom is working overtime without a salary.',
+      plan: 'Try one of these at zero cost: take a walk around your neighbourhood with your phone camera and practise street photography; play an offline game already installed on your device; call or voice-note a friend you have not spoken to in a while; watch a free documentary on YouTube; start learning one new skill using free YouTube tutorials such as sketching, cooking, or coding; or simply sit quietly and plan next week properly. Your weekend does not need a payment receipt to be memorable.'
+    },
+    {
+      id: 'beach',
+      label: 'I want to visit the beach',
+      joke: 'Brother, your heart is at the beach, but your wallet is still at home.',
+      plan: 'If a safe public beach is reachable on foot from your location without any entry charge, plan a walk between 4:30 PM and 6:00 PM. That is the best window to enjoy the beautiful sunset, golden sunlight, and cool sea breeze along the shoreline. Do not visit beaches in the morning or afternoon as the heat can be harsh and the experience less rewarding. If the beach is not walkable or the weather is dangerous, choose the nearest free public park or a shaded promenade instead.'
+    },
+    {
+      id: 'friends_cancel',
+      label: 'My friends cancelled the plan',
+      joke: 'Brother, your friends cancelled the plan faster than a failed payment.',
+      plan: 'Do not cancel your entire day because of someone else. Try a solo walk, practise photography with your phone, visit a free public park, or watch a free movie at home. Unplanned solo time is often more productive than group plans. Keep all activities safe and strictly within your zero budget.'
+    },
+    {
+      id: 'luxury',
+      label: 'I want a luxury experience',
+      joke: 'Brother, five-star dreams and zero-rupee reality are having a serious negotiation right now.',
+      plan: 'For today, try a scenic walk to the best viewpoint in your area, explore a free public attraction or heritage site, practise photography, or set up a comfortable movie session at home. Meanwhile, start a small savings goal for your actual luxury trip. It is far better to save and enjoy the real thing than to borrow money you cannot repay for a temporary experience.'
+    },
+    {
+      id: 'rain',
+      label: 'It is raining and I planned to go out',
+      joke: 'Brother, even the weather has joined your budget committee and rejected outdoor spending.',
+      plan: 'Stay somewhere safe and dry. Enjoy an indoor movie on your device, play a word game or board game with whoever is around, try cooking something simple with available ingredients, or use the time to learn a skill from a free YouTube video. Avoid beaches, trekking paths, and open grounds during storms or dangerous rain conditions.'
+    },
+    {
+      id: 'impress',
+      label: 'I want to take someone out with no money',
+      joke: 'Brother, you want a romantic film scene, but your wallet cannot afford the opening credits.',
+      plan: 'Suggest a free walk in a safe public place such as a park or promenade. Focus on a meaningful conversation, share your favourite photographs or playlists, or plan a simple activity together at home. Be honest about your current budget situation. Never pressure the other person to pay, and never borrow money specifically to impress someone as that creates financial stress for very little return.'
+    },
+    {
+      id: 'two_hours',
+      label: 'I have only 2 hours free',
+      joke: 'Brother, two hours and zero rupees. Finally, a project that the finance team cannot reject.',
+      plan: 'Choose one nearby free activity, allow time to return home safely, and enjoy it without rushing. A short walk, a quick sketching or photography session, or watching a documentary works perfectly. If nothing suitable is within walking distance, choose an engaging activity at home such as reading, writing, or practising a skill.'
+    },
+    {
+      id: 'no_food',
+      label: 'I have no money and nothing to eat',
+      joke: null,
+      plan: 'Brother, this is not the time for a budget joke. Please contact a trusted friend, a family member, or an appropriate local food-support service right now and let them know that you need food. Your immediate physical needs always come before weekend entertainment plans. Everything else can wait.'
+    },
+    {
+      id: 'another_city',
+      label: 'I want to travel to another city',
+      joke: 'Brother, your travel dreams are interstate, but your wallet has not cleared the city limits.',
+      plan: 'Intercity transport, food on the road, accommodation, and emergency expenses all cost money. Without a budget, that trip puts you in a risky situation far from home. Instead, explore something nearby and free today, and genuinely plan the bigger trip for when you have enough saved. A well-funded trip is always safer and more enjoyable than a stressed one.'
+    },
+    {
+      id: 'games',
+      label: 'I want to play games or get entertained',
+      joke: 'Brother, your gaming budget has entered airplane mode.',
+      plan: 'Try offline games already installed on your phone that do not require internet or purchases. Play word games, memory games, or creative challenges with people around you. If you are outdoors, play informal games using what you already have such as stones, chalk, or a ball you own. Avoid any game that requires deposits, paid subscriptions, or in-app purchases.'
+    },
+    {
+      id: 'productive',
+      label: 'How can I use this weekend well with no money',
+      joke: 'Brother, your wallet has zero balance, but your personal development account is still open.',
+      plan: 'Learn a skill using completely free resources on YouTube or free websites such as freeCodeCamp or Khan Academy. Improve your resume or professional profile. Practise coding, writing, drawing, or cooking with available ingredients. Exercise at home using bodyweight routines. Plan and write down your goals for the next month. Your future does not require you to spend money today.'
+    }
+  ];
+
+  function renderZeroBudgetMode() {
+    // Show intent picker after budget is set to Rs 0
+    const wrapper = document.createElement('div');
+    wrapper.className = 'wai-zero-rupee-wrapper';
+
+    const header = document.createElement('div');
+    header.className = 'wai-zero-rupee-header';
+    header.innerHTML = `
+      <div class="wai-zero-rupee-title">Zero-Rupee Weekend Mode</div>
+      <div class="wai-zero-rupee-subtitle">Your budget is Rs 0. No problem at all. What is your situation right now?</div>
+    `;
+    wrapper.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'wai-zero-rupee-grid';
+
+    ZERO_RUPEE_CASES.forEach(function(cas) {
+      const btn = document.createElement('button');
+      btn.className = 'wai-zero-rupee-chip';
+      btn.textContent = cas.label;
+      btn.onclick = function() {
+        grid.querySelectorAll('.wai-zero-rupee-chip').forEach(function(b) { b.disabled = true; });
+        btn.classList.add('wai-zero-rupee-chip-selected');
+        addUserMessage(cas.label);
+        showTypingIndicator(function() {
+          addAIMessage(buildZeroRupeeResponse(cas));
+          showTypingIndicator(function() {
+            addAIMessage(buildZeroRupeeFooter());
+          }, 600);
+        }, 500);
+      };
+      grid.appendChild(btn);
+    });
+
+    wrapper.appendChild(grid);
+
+    if (DOM.chatBody) {
+      DOM.chatBody.appendChild(wrapper);
+      scrollToBottom();
+    }
+  }
+
+  function buildZeroRupeeResponse(cas) {
+    let html = '<div class="wai-zero-rupee-card">';
+
+    if (cas.joke) {
+      html += '<div class="wai-zero-rupee-joke">' + cas.joke + '</div>';
+    }
+
+    html += '<div class="wai-zero-rupee-plan">' + cas.plan + '</div>';
+
+    // Case-specific situational notes
+    if (cas.id === 'beach') {
+      html += '<div class="wai-zero-rupee-rule-note">Beach Timing Rule: Beaches are suggested only between 4:30 PM and 6:00 PM. Morning and afternoon beach visits are never recommended.</div>';
+    }
+    if (cas.id === 'borrow_30' || cas.id === 'maggi') {
+      html += '<div class="wai-zero-rupee-rule-note">Borrow Rule: Borrowing is always optional. Borrowed money must be repaid. Never borrow more than you can return comfortably.</div>';
+    }
+    if (cas.id === 'no_food') {
+      html += '<div class="wai-zero-rupee-urgent-note">If you are in immediate difficulty and cannot reach anyone, look for a local Anganwadi centre, NGO food service, or community kitchen in your area.</div>';
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  function buildZeroRupeeFooter() {
+    return (
+      '<div class="wai-zero-rupee-footer">' +
+      '<div style="font-weight:700;margin-bottom:6px;">What else can I help you with?</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;">' +
+      '<button class="wai-chip" onclick="window.WeekendAI.reset()">Start a New Plan</button>' +
+      '<button class="wai-chip" onclick="window.WeekendAI._showZeroRupeeAgain()">Ask Another Zero-Rupee Situation</button>' +
+      '</div>' +
+      '</div>'
+    );
+  }
+
   // --- Initial State ---
   const INITIAL_STATE = {
     language: 'en',
@@ -1167,7 +1343,20 @@
         STATE.budget = Number(val);
         STATE.budgetLabel = `₹${val}`;
         addUserMessage(`Budget: ₹${val}`);
-        advanceStep();
+        if (Number(val) === 0) {
+          // --- Zero-Rupee Mode: bypass remaining steps, show situational engine ---
+          showTypingIndicator(() => {
+            addAIMessage(
+              '<div style="font-weight:700;color:#8338EC;margin-bottom:4px;">Zero-Rupee Weekend Activated</div>' +
+              '<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Brother, your budget is Rs 0 today. That is completely fine and there is no shame in that at all. ' +
+              'Let me give you a real, practical, and actually enjoyable plan for free. ' +
+              'Tell me what you have in mind.</div>'
+            );
+            renderZeroBudgetMode();
+          }, 600);
+        } else {
+          advanceStep();
+        }
       })
     },
     {
@@ -2214,7 +2403,13 @@
       updateDots(0);
       renderStep();
     },
-    generateItinerary: generateMasterItinerary
+    generateItinerary: generateMasterItinerary,
+    _showZeroRupeeAgain: function () {
+      showTypingIndicator(function () {
+        addAIMessage('<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Sure, pick another situation and I will help you with a practical plan.</div>');
+        renderZeroBudgetMode();
+      }, 400);
+    }
   };
 
   // --- Show / Hide the entire widget (trigger badge) ---
