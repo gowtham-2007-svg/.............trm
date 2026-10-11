@@ -909,6 +909,27 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 820px) {
+    .website-reviews-modal-overlay {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .website-reviews-modal-overlay::before {
+        display: none;
+    }
+
+    .website-reviews-modal-shell {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        background: rgba(15, 12, 30, 0.92);
+        max-height: 92vh;
+    }
+
+    .website-reviews-modal-body {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+
     .reviews-summary-card {
         grid-template-columns: 1fr;
         gap: 1.1rem;

@@ -1108,6 +1108,13 @@
 
     // --- Typewriter Agent Text Animation ---
     (function startTypewriter() {
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        window.__waiIsScrolling = true;
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => { window.__waiIsScrolling = false; }, 160);
+      }, { passive: true });
+
       const phrases = ['Weekend AI', 'Ask AI Agent', 'Plan Your Trip', 'Weekend AI'];
       const el = document.getElementById('wai-type-text');
       if (!el) return;
@@ -1116,6 +1123,10 @@
 
       function tick() {
         if (!document.getElementById('wai-type-text')) return; // widget removed
+        if (window.__waiIsScrolling) {
+          setTimeout(tick, 150);
+          return;
+        }
         const phrase = phrases[phraseIdx];
         if (pausing) { pausing = false; setTimeout(tick, PAUSE_AFTER_DELETE); return; }
         if (!deleting) {

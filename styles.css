@@ -58,13 +58,14 @@ button, a {
 }
 
 img {
-    content-visibility: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .dest-card-wrapper,
 .place-card,
 .category-card {
-    contain: layout style paint;
+    contain: layout style;
 }
 
 html {
@@ -74,6 +75,12 @@ html {
     scrollbar-width: none;
     -ms-overflow-style: none;
     min-height: 100vh;
+}
+
+@media (pointer: coarse) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -87,10 +94,11 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
 }
 
 body::before {
@@ -1938,7 +1946,7 @@ main {
     }
 
     /* Responsive Layout Adjustments */
-    @media (max-width: 1024px) {
+    @media (min-width: 769px) and (max-width: 1024px) {
         .destinations-row {
             grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
@@ -2228,37 +2236,46 @@ main {
     .destinations-row {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.85rem !important;
-        padding: 0 0.85rem !important;
+        gap: 0.75rem !important;
+        padding: 0 0.75rem !important;
         overflow-x: visible !important;
     }
 
     .dest-card {
         height: auto !important;
         aspect-ratio: 3 / 4 !important;
-        border-radius: 18px !important;
+        border-radius: 16px !important;
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+    }
+
+    .dest-card:active {
+        transform: scale(0.97) translate3d(0, 0, 0) !important;
+        transition: transform 0.12s ease-out !important;
     }
 
     .dest-card h3 {
-        font-size: 1.05rem !important;
+        font-size: 0.95rem !important;
         font-weight: 700 !important;
         line-height: 1.25 !important;
+        word-break: break-word !important;
     }
 
     .dest-card-overlay {
-        padding: 0.85rem 2.4rem 0.85rem 0.85rem !important;
+        padding: 0.75rem 2.2rem 0.75rem 0.75rem !important;
     }
 
     .dest-card .arrow-btn {
-        width: 32px !important;
-        height: 32px !important;
-        bottom: 0.85rem !important;
-        right: 0.85rem !important;
+        width: 28px !important;
+        height: 28px !important;
+        bottom: 0.75rem !important;
+        right: 0.75rem !important;
     }
 
     .dest-card .arrow-btn svg {
-        width: 15px !important;
-        height: 15px !important;
+        width: 14px !important;
+        height: 14px !important;
     }
 
     .dest-header {
