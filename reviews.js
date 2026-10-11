@@ -702,10 +702,10 @@
                 return;
             }
 
-            // User has browsed home page for 5 seconds — trigger review popup now
+            // User has browsed home page for 20 seconds — trigger review popup now
             sessionStorage.setItem(AUTO_POPUP_SESSION_KEY, '1');
             openReviewsModal();
-        }, 5000);
+        }, 20000);
     }
 
     // ── Listen for Onboarding Completion (New Visitors) ──
