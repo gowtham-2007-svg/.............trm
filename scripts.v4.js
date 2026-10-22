@@ -2,7 +2,7 @@ const destinations = [
     {
         id: 'mangaluru',
         name: 'Mangaluru',
-        image: 'assets/destinations/mangaluru.png',
+        image: 'assets/destinations/mangaluru_hd.jpg',
         color: '#FF6B6B',
         famousPlaces: [
             {
@@ -30,7 +30,7 @@ const destinations = [
     {
         id: 'mysuru',
         name: 'Mysuru – North & South',
-        image: 'assets/destinations/mysuru.png',
+        image: 'assets/destinations/mysuru_hd.jpg',
         color: '#FFD93D',
         famousPlaces: [
             {
@@ -86,7 +86,7 @@ const destinations = [
     {
         id: 'bangalore',
         name: 'Bangalore – North & South',
-        image: 'assets/destinations/bangalore.png',
+        image: 'assets/destinations/bangalore_hd.jpg',
         color: '#8338EC',
         famousPlaces: [
             {
