@@ -8,6 +8,16 @@
 
     const DEFAULT_REVIEWS = [
         {
+            id: "rev_1792643253370_k9nms7",
+            name: "Weekendexplore explore",
+            location: "Karnataka, India",
+            rating: 5,
+            tag: "Weekend Getaway",
+            text: "Weekend Explore is an amazing platform for planning weekend trips! The website makes it easy to discover beautiful destinations",
+            date: "2026-10-22",
+            createdAt: "2026-10-22T04:27:33.37+00:00"
+        },
+        {
             id: "rev_1791350015181_f3zyoh",
             name: "Darshan K",
             location: "Mysuru",
@@ -15,7 +25,7 @@
             tag: "Weekend Getaway",
             text: "This travel guide website is truly amazing and super helpful for weekend trips.",
             date: "2026-10-07",
-            createdAt: "2026-10-07T05:13:35.182Z"
+            createdAt: "2026-10-07T05:13:35.182+00:00"
         },
         {
             id: "rev_1791349285050_4hmtc8",
@@ -25,7 +35,7 @@
             tag: "Weekend Getaway",
             text: "Weekend Explore is a very helpful website for planning weekend trips. I really like the simple interface, destination suggestions, travel information, and useful itinerary features. It makes trip planning easier and more convenient.",
             date: "2026-10-07",
-            createdAt: "2026-10-07T05:01:25.050Z"
+            createdAt: "2026-10-07T05:01:25.05+00:00"
         },
         {
             id: "rev_1791349050468_61rjn0",
@@ -35,49 +45,25 @@
             tag: "Nature & Beaches",
             text: "The beach recommendations and curated weekend spots are fantastic!",
             date: "2026-10-07",
-            createdAt: "2026-10-07T04:57:30.468Z"
-        },
-        {
-            id: "rev_init_1",
-            name: "Kavya Ramesh",
-            location: "Bangalore, Karnataka",
-            rating: 5,
-            tag: "Solo Explorer",
-            text: "Weekend Explore made discovering hidden places around Bangalore so effortless! The bus route tips and verified timings saved me so much time. Absolutely love the clean interface!",
-            date: "2026-03-28",
-            createdAt: "2026-03-28T14:32:00.000Z"
-        },
-        {
-            id: "rev_init_2",
-            name: "Aditya Hegde",
-            location: "Mangaluru, Karnataka",
-            rating: 5,
-            tag: "Coastal Getaways",
-            text: "The Mangaluru beach recommendations and local seafood canteen suggestions were 100% spot-on. The AI agent even helped customize an itinerary within our ₹1,500 budget.",
-            date: "2026-04-01",
-            createdAt: "2026-04-01T09:15:00.000Z"
-        },
-        {
-            id: "rev_init_3",
-            name: "Pooja Shankar",
-            location: "Mysuru, Karnataka",
-            rating: 5,
-            tag: "Heritage & Culture",
-            text: "Planning our family weekend in Mysuru was so seamless. The detailed category breakdown with temples, gardens, and heritage walks is the best I've seen on any travel site.",
-            date: "2026-04-03",
-            createdAt: "2026-04-03T18:45:00.000Z"
-        },
-        {
-            id: "rev_init_4",
-            name: "Rohan D'Souza",
-            location: "Udupi, Karnataka",
-            rating: 5,
-            tag: "Weekend Roadtrips",
-            text: "Super smooth website! Very responsive on mobile and gives accurate recommendations without useless clutter. Highly recommended for anyone exploring South India.",
-            date: "2026-04-05",
-            createdAt: "2026-04-05T11:20:00.000Z"
+            createdAt: "2026-10-07T04:57:30.468+00:00"
         }
     ];
+
+    function calculateInitialReviews(list) {
+        let sum = 0;
+        const dist = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+        list.forEach(r => {
+            const star = Math.max(1, Math.min(5, Math.round(Number(r.rating) || 5)));
+            dist[star] = (dist[star] || 0) + 1;
+            sum += Number(r.rating) || 5;
+        });
+        return {
+            reviews: list,
+            totalReviews: list.length,
+            overallRating: list.length > 0 ? (Math.round((sum / list.length) * 10) / 10).toFixed(1) : "0.0",
+            ratingDistribution: dist
+        };
+    }
 
     // Initialize from localStorage cache if available
     let initialCached = null;
@@ -90,32 +76,27 @@
 
     let reviewsData = (initialCached && Array.isArray(initialCached.reviews) && initialCached.reviews.length > 0)
         ? initialCached
-        : {
-            reviews: [...DEFAULT_REVIEWS],
-            totalReviews: DEFAULT_REVIEWS.length,
-            overallRating: 4.9,
-            ratingDistribution: { 5: 6, 4: 1, 3: 0, 2: 0, 1: 0 }
-        };
+        : calculateInitialReviews(DEFAULT_REVIEWS);
 
     let activeFilter = 'all'; // 'all', '5', '4', 'latest'
     let selectedRating = 5;
 
     const RATING_DESCRIPTIONS = {
-        1: "Needs Improvement 😕",
-        2: "Fair Experience 🙂",
-        3: "Good & Useful 👍",
-        4: "Very Good & Helpful 🌟",
-        5: "Exceptional! Best Travel Guide 🚀"
+        1: "Needs Improvement",
+        2: "Fair Experience",
+        3: "Good & Helpful",
+        4: "Very Good Experience",
+        5: "Exceptional — Highly Recommended"
     };
 
-    // Helper: Star SVG generator
+    // Helper: Star SVG generator (Dark Gold Stars #D97706)
     function getStarsSvg(rating, max = 5, size = 16) {
         let starsHtml = '';
         const numRating = Math.round(rating);
         for (let i = 1; i <= max; i++) {
             const isFilled = i <= numRating;
             starsHtml += `
-                <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${isFilled ? '#facc15' : 'none'}" stroke="#facc15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${isFilled ? '#D97706' : 'none'}" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
             `;
@@ -173,11 +154,16 @@
         return reviewsData;
     }
 
+    function getTag(tag) {
+        if (!tag) return 'Weekend Getaway';
+        return String(tag).trim();
+    }
+
     // Generate Reviews Modal Body HTML
     function generateModalContentHTML() {
         const { reviews, totalReviews, overallRating, ratingDistribution } = reviewsData;
         const total = totalReviews || reviews.length || 0;
-        const rating = overallRating ? overallRating.toFixed(1) : "5.0";
+        const rating = total > 0 ? (overallRating ? Number(overallRating).toFixed(1) : "5.0") : "0.0";
 
         // Filter reviews according to active filter
         let filteredReviews = [...reviews];
@@ -191,12 +177,12 @@
 
         return `
             <div class="reviews-modal-container">
-                <!-- Summary Banner -->
+                <!-- Summary Banner (Referral Style with Purple Left Border) -->
                 <div class="reviews-summary-card">
                     <div class="reviews-score-box">
                         <div class="reviews-big-score">${rating}</div>
                         <div class="reviews-stars-row">
-                            ${getStarsSvg(parseFloat(rating), 5, 22)}
+                            ${getStarsSvg(parseFloat(rating), 5, 20)}
                         </div>
                         <div class="reviews-total-count">Based on <strong>${total} verified reviews</strong></div>
                     </div>
@@ -220,7 +206,7 @@
                     <div class="reviews-action-box">
                         <button type="button" class="reviews-write-btn" id="modal-write-review-btn">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                            Write a Review
+                            <span>Write a Review</span>
                         </button>
                     </div>
                 </div>
@@ -229,12 +215,16 @@
                 <div class="review-form-collapsible" id="review-form-collapsible" style="display: none;">
                     <div class="review-form-card">
                         <div class="review-form-card-header">
-                            <h4>Share Your Review & Experience</h4>
-                            <button type="button" class="review-form-cancel-btn" id="cancel-write-review-btn">Cancel</button>
+                            <div>
+                                <h4>Share Your Experience</h4>
+                                <p class="review-form-card-subtitle">Your honest review helps travelers discover the best weekend destinations.</p>
+                            </div>
+                            <button type="button" class="review-form-cancel-btn" id="cancel-write-review-btn">✕ Close</button>
                         </div>
 
                         <!-- Interactive Star Rating Picker -->
                         <div class="review-star-picker-wrapper">
+                            <span class="review-star-picker-caption">Tap to rate your experience</span>
                             <div class="review-star-picker" id="review-star-picker">
                                 ${[1, 2, 3, 4, 5].map(star => `
                                     <button type="button" class="review-star-btn ${star <= selectedRating ? 'active' : ''}" data-star="${star}" aria-label="${star} Star">
@@ -272,10 +262,10 @@
                             <div class="review-form-group">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                                     <label class="review-form-label" for="review-text-input">Your Review (10 words minimum) *</label>
-                                    <span class="review-word-counter" id="review-word-counter" style="font-size: 0.78rem; font-weight: 600; color: #94a3b8;">0 / 10 words</span>
+                                    <span class="review-word-counter" id="review-word-counter" style="font-size: 0.78rem; font-weight: 600; color: var(--we-text-muted);">0 / 10 words</span>
                                 </div>
                                 <textarea id="review-text-input" class="review-form-textarea" placeholder="Share your experience in at least 10 words (e.g. how the destination categories, food recommendations, or trip planner helped you)..." required></textarea>
-                                <span class="review-word-error" id="review-word-error" style="font-size: 0.78rem; color: #f87171; display: none; margin-top: 4px; font-weight: 500;">Please write at least 10 words before submitting.</span>
+                                <span class="review-word-error" id="review-word-error" style="font-size: 0.78rem; color: #dc2626; display: none; margin-top: 4px; font-weight: 500;">Please write at least 10 words before submitting.</span>
                             </div>
 
                             <button type="submit" class="review-submit-btn" id="review-submit-btn">
@@ -289,13 +279,13 @@
                 <div class="reviews-filter-bar">
                     <div class="reviews-filter-chips">
                         <button type="button" class="reviews-filter-chip ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">All Reviews (${total})</button>
-                        <button type="button" class="reviews-filter-chip ${activeFilter === '5' ? 'active' : ''}" data-filter="5">⭐⭐⭐⭐⭐ 5 Stars</button>
-                        <button type="button" class="reviews-filter-chip ${activeFilter === '4' ? 'active' : ''}" data-filter="4">⭐⭐⭐⭐ 4 Stars</button>
+                        <button type="button" class="reviews-filter-chip ${activeFilter === '5' ? 'active' : ''}" data-filter="5">5 Stars</button>
+                        <button type="button" class="reviews-filter-chip ${activeFilter === '4' ? 'active' : ''}" data-filter="4">4 Stars</button>
                         <button type="button" class="reviews-filter-chip ${activeFilter === 'latest' ? 'active' : ''}" data-filter="latest">Latest First</button>
                     </div>
                     <div class="reviews-live-indicator" id="reviews-refresh-feed-btn" title="Click to refresh live community reviews" style="cursor: pointer; user-select: none;">
                         <span class="reviews-live-dot"></span>
-                        Live Community Feed ↻
+                        Live Community Feed
                     </div>
                 </div>
 
@@ -303,36 +293,38 @@
                 <div class="reviews-grid" id="reviews-feed-grid">
                     ${filteredReviews.length > 0 ? filteredReviews.map((rev, idx) => {
             const initial = (rev.name || 'E').charAt(0).toUpperCase();
+            const ratingNum = Number(rev.rating) || 5;
             return `
-                            <div class="review-card" style="animation-delay: ${idx * 50}ms;">
+                            <div class="review-card">
                                 <div class="review-card-header">
                                     <div class="review-avatar">${initial}</div>
                                     <div class="review-author-meta">
                                         <div class="review-author-name">
-                                            ${escapeHtml(rev.name)}
+                                            <span>${escapeHtml(rev.name)}</span>
                                             <span class="review-verified-badge" title="Verified Traveler">
-                                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                                             </span>
                                         </div>
                                         <div class="review-author-location">${escapeHtml(rev.location || 'Karnataka, India')}</div>
                                     </div>
-                                    <div class="review-rating-badge">
-                                        ${getStarsSvg(rev.rating, 1, 14)}
-                                        <span>${Number(rev.rating).toFixed(1)}</span>
+                                    <div class="review-rating-badge" title="${ratingNum} out of 5 stars">
+                                        <div class="review-card-stars">${getStarsSvg(ratingNum, 1, 14)}</div>
+                                        <span class="review-rating-num">${ratingNum.toFixed(1)}</span>
                                     </div>
                                 </div>
 
-                                <p class="review-text">"${escapeHtml(rev.text)}"</p>
+                                <p class="review-text">${escapeHtml(rev.text)}</p>
 
                                 <div class="review-card-footer">
-                                    <span class="review-tag-pill">${escapeHtml(rev.tag || 'Explorer')}</span>
+                                    <span class="review-tag-pill">${escapeHtml(getTag(rev.tag))}</span>
                                     <span class="review-date">${formatDate(rev.date || rev.createdAt)}</span>
                                 </div>
                             </div>
                         `;
         }).join('') : `
                         <div class="reviews-empty-state" style="grid-column: 1 / -1;">
-                            <p>No reviews found matching this filter. Be the first to share your experience!</p>
+                            <h4>No reviews found matching this filter</h4>
+                            <p>${total === 0 ? "Be the first traveler to share your journey and inspire others." : "Try selecting 'All Reviews' to see all community feedback."}</p>
                         </div>
                     `}
                 </div>
@@ -389,10 +381,7 @@
         modalOverlay.innerHTML = `
             <div class="website-reviews-modal-shell">
                 <header class="website-reviews-modal-header">
-                    <div class="reviews-header-title-box">
-                        <span class="reviews-badge-pill">COMMUNITY FEEDBACK</span>
-                        <h2 class="reviews-modal-title">Website Reviews &amp; Ratings</h2>
-                    </div>
+                    <h2 class="reviews-modal-title">Website Reviews &amp; Ratings</h2>
                     <button type="button" class="website-reviews-modal-close" id="reviews-modal-close-btn" aria-label="Close">
                         ✕
                     </button>
@@ -540,7 +529,7 @@
                     body.innerHTML = generateModalContentHTML();
                     bindModalEvents();
                 }
-                showToast("✨ Reviews updated with latest live community feedback!");
+                showToast("Reviews updated with latest live community feedback.");
             });
         }
 
@@ -559,10 +548,10 @@
                 const words = countWords(textInput.value);
                 wordCounter.textContent = `${words} / 10 words`;
                 if (words >= 10) {
-                    wordCounter.style.color = '#4ade80';
+                    wordCounter.style.color = '#D000D8';
                     if (wordError) wordError.style.display = 'none';
                 } else {
-                    wordCounter.style.color = '#facc15';
+                    wordCounter.style.color = '#777777';
                 }
             });
         }
@@ -616,7 +605,7 @@
                         try {
                             localStorage.setItem('weekend_explore_cached_reviews', JSON.stringify(data));
                         } catch (e) {}
-                        showToast("✨ Thank you! Your review has been published.");
+                        showToast("Thank you! Your review has been published.");
 
                         // Re-render modal content
                         const body = document.getElementById('website-reviews-modal-body');
@@ -658,7 +647,7 @@
                     try {
                         localStorage.setItem('weekend_explore_cached_reviews', JSON.stringify(reviewsData));
                     } catch (e) {}
-                    showToast("✨ Thank you! Your review has been published to the community feed.");
+                    showToast("Thank you! Your review has been published to the community feed.");
                     const body = document.getElementById('website-reviews-modal-body');
                     if (body) {
                         body.innerHTML = generateModalContentHTML();
@@ -679,7 +668,7 @@
         const toast = document.createElement('div');
         toast.className = 'review-toast';
         toast.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D000D8" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
             <span>${escapeHtml(message)}</span>
         `;
         document.body.appendChild(toast);

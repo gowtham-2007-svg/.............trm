@@ -15,78 +15,7 @@ try {
     console.warn('[REVIEWS API] Optional Supabase client not loaded:', e.message);
 }
 
-const DEFAULT_REVIEWS = [
-    {
-        id: "rev_1791350015181_f3zyoh",
-        name: "Darshan K",
-        location: "Mysuru",
-        rating: 5,
-        tag: "Weekend Getaway",
-        text: "This travel guide website is truly amazing and super helpful for weekend trips.",
-        date: "2026-10-07",
-        createdAt: "2026-10-07T05:13:35.182Z"
-    },
-    {
-        id: "rev_1791349285050_4hmtc8",
-        name: "Gowtham N",
-        location: "Karnataka, India",
-        rating: 4,
-        tag: "Weekend Getaway",
-        text: "Weekend Explore is a very helpful website for planning weekend trips. I really like the simple interface, destination suggestions, travel information, and useful itinerary features. It makes trip planning easier and more convenient.",
-        date: "2026-10-07",
-        createdAt: "2026-10-07T05:01:25.050Z"
-    },
-    {
-        id: "rev_1791349050468_61rjn0",
-        name: "Ananya Rao",
-        location: "Mangaluru",
-        rating: 5,
-        tag: "Nature & Beaches",
-        text: "The beach recommendations and curated weekend spots are fantastic!",
-        date: "2026-10-07",
-        createdAt: "2026-10-07T04:57:30.468Z"
-    },
-    {
-        id: "rev_init_1",
-        name: "Kavya Ramesh",
-        location: "Bangalore, Karnataka",
-        rating: 5,
-        tag: "Solo Explorer",
-        text: "Weekend Explore made discovering hidden places around Bangalore so effortless! The bus route tips and verified timings saved me so much time. Absolutely love the clean interface!",
-        date: "2026-03-28",
-        createdAt: "2026-03-28T14:32:00.000Z"
-    },
-    {
-        id: "rev_init_2",
-        name: "Aditya Hegde",
-        location: "Mangaluru, Karnataka",
-        rating: 5,
-        tag: "Coastal Getaways",
-        text: "The Mangaluru beach recommendations and local seafood canteen suggestions were 100% spot-on. The AI agent even helped customize an itinerary within our ₹1,500 budget.",
-        date: "2026-04-01",
-        createdAt: "2026-04-01T09:15:00.000Z"
-    },
-    {
-        id: "rev_init_3",
-        name: "Pooja Shankar",
-        location: "Mysuru, Karnataka",
-        rating: 5,
-        tag: "Heritage & Culture",
-        text: "Planning our family weekend in Mysuru was so seamless. The detailed category breakdown with temples, gardens, and heritage walks is the best I've seen on any travel site.",
-        date: "2026-04-03",
-        createdAt: "2026-04-03T18:45:00.000Z"
-    },
-    {
-        id: "rev_init_4",
-        name: "Rohan D'Souza",
-        location: "Udupi, Karnataka",
-        rating: 5,
-        tag: "Weekend Roadtrips",
-        text: "Super smooth website! Very responsive on mobile and gives accurate recommendations without useless clutter. Highly recommended for anyone exploring South India.",
-        date: "2026-04-05",
-        createdAt: "2026-04-05T11:20:00.000Z"
-    }
-];
+const DEFAULT_REVIEWS = [];
 
 // Load reviews with Supabase priority and local fallback
 async function fetchAllReviews() {
@@ -98,7 +27,7 @@ async function fetchAllReviews() {
                 .select('*')
                 .order('created_at', { ascending: false });
 
-            if (!error && Array.isArray(data) && data.length > 0) {
+            if (!error && Array.isArray(data)) {
                 return data.map(r => ({
                     id: r.id,
                     name: r.name,
@@ -159,7 +88,7 @@ function calculateSummary(reviews) {
         sum += Number(r.rating) || 5;
     });
 
-    const avg = total > 0 ? Math.round((sum / total) * 10) / 10 : 5.0;
+    const avg = total > 0 ? Math.round((sum / total) * 10) / 10 : 0.0;
     const sorted = [...reviews].sort((a, b) => {
         return new Date(b.createdAt || b.date).getTime() - new Date(a.createdAt || a.date).getTime();
     });
@@ -193,12 +122,34 @@ function parseJsonBody(req) {
 module.exports = async (req, res) => {
     // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') {
         res.statusCode = 204;
         res.end();
+        return;
+    }
+
+    if (req.method === 'DELETE') {
+        if (supabase) {
+            try {
+                await supabase.from('website_reviews').delete().neq('id', '');
+            } catch (e) {}
+        }
+        const targets = [
+            path.join(process.cwd(), 'backend', 'reviews_db.json'),
+            path.join(__dirname, '..', 'backend', 'reviews_db.json'),
+            path.join('/tmp', 'reviews_db.json')
+        ];
+        for (const t of targets) {
+            try {
+                fs.writeFileSync(t, JSON.stringify([], null, 2), 'utf8');
+            } catch (e) {}
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.statusCode = 200;
+        res.end(JSON.stringify({ success: true, message: 'All reviews have been removed.', ...calculateSummary([]) }));
         return;
     }
 

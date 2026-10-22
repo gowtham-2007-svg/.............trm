@@ -748,7 +748,7 @@ const requestListener = async (req, res) => {
             return {
                 reviews: [],
                 totalReviews: 0,
-                overallRating: 5.0,
+                overallRating: 0.0,
                 ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
             };
         }
@@ -785,7 +785,7 @@ const requestListener = async (req, res) => {
                 .select('*')
                 .order('created_at', { ascending: false });
 
-            if (!error && Array.isArray(data) && data.length > 0) {
+            if (!error && Array.isArray(data)) {
                 websiteReviews = data.map(r => ({
                     id: r.id,
                     name: r.name,
@@ -1317,6 +1317,20 @@ const requestListener = async (req, res) => {
                 res.writeHead(200, headers);
                 res.end(body);
             }
+            return;
+        }
+
+        if (req.method === 'DELETE') {
+            if (supabase) {
+                try {
+                    await supabase.from('website_reviews').delete().neq('id', '');
+                } catch (e) {}
+            }
+            websiteReviews = [];
+            saveReviewsDB();
+            const summary = getReviewsSummary();
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'All reviews have been removed.', ...summary }));
             return;
         }
 
