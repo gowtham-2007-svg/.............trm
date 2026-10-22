@@ -8918,11 +8918,134 @@ function initPlaceImageSliders() {
     if (menuReviewsBtn) menuReviewsBtn.addEventListener('click', handleReviewsClick);
 
     // ==========================================================================
-    // CLERK AUTHENTICATION SYSTEM INTERACTION
+    // CLERK AUTHENTICATION SYSTEM & SECURE PERSISTENT SESSION MANAGER
     // ==========================================================================
+
+    const AUTH_STORAGE_KEY = 'we_auth_session';
+    const AUTH_PROMPT_SHOWN_KEY = 'we_auth_prompt_shown';
 
     const authNavBtn = document.getElementById('nav-auth-btn');
     const userButtonDiv = document.getElementById('user-button');
+
+    // Helper: Read validated session from localStorage
+    function getStoredSession() {
+        try {
+            const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if (parsed && parsed.authenticated === true && parsed.userId) {
+                return parsed;
+            }
+        } catch (e) {
+            console.warn('[AUTH SESSION] Error reading stored session:', e);
+        }
+        return null;
+    }
+
+    // Helper: Persist session state securely across page refreshes, navigation & future visits
+    function saveStoredSession(user, session) {
+        if (!user) return;
+        try {
+            const displayName = user.firstName || user.fullName || 'Explorer';
+            const userEmail = (user.primaryEmailAddress && user.primaryEmailAddress.emailAddress)
+                ? user.primaryEmailAddress.emailAddress
+                : (user.emailAddresses && user.emailAddresses[0] ? user.emailAddresses[0].emailAddress : '');
+
+            const sessionData = {
+                authenticated: true,
+                userId: user.id,
+                name: displayName,
+                email: userEmail,
+                imageUrl: user.imageUrl || '',
+                sessionId: (session && session.id) ? session.id : '',
+                lastVerified: Date.now()
+            };
+            localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(sessionData));
+            sessionStorage.removeItem('we_explicit_logout');
+        } catch (e) {
+            console.warn('[AUTH SESSION] Failed to persist session:', e);
+        }
+    }
+
+    // Helper: Clear session on explicit sign-out or session expiration
+    function clearStoredSession() {
+        try {
+            localStorage.removeItem(AUTH_STORAGE_KEY);
+        } catch (e) {}
+    }
+
+    // Check if user is authenticated (active Clerk session or persisted session)
+    function isUserAuthenticated() {
+        if (window.Clerk && window.Clerk.user) return true;
+        const stored = getStoredSession();
+        return !!stored;
+    }
+
+    // Expose global auth helper so reviews, AI agent, and analytics can access user info seamlessly
+    window.WeekendAuth = {
+        isAuthenticated: isUserAuthenticated,
+        getUser: function () {
+            if (window.Clerk && window.Clerk.user) {
+                const u = window.Clerk.user;
+                return {
+                    id: u.id,
+                    name: u.firstName || u.fullName || 'Explorer',
+                    email: u.primaryEmailAddress ? u.primaryEmailAddress.emailAddress : '',
+                    imageUrl: u.imageUrl || ''
+                };
+            }
+            const s = getStoredSession();
+            if (s) {
+                return {
+                    id: s.userId,
+                    name: s.name,
+                    email: s.email,
+                    imageUrl: s.imageUrl
+                };
+            }
+            return null;
+        },
+        signOut: async function () {
+            clearStoredSession();
+            sessionStorage.setItem('we_explicit_logout', 'true');
+            if (window.Clerk) {
+                try {
+                    await window.Clerk.signOut();
+                } catch (e) {
+                    console.warn('[Clerk SignOut Error]', e);
+                }
+            }
+            updateAuthUI();
+            window.dispatchEvent(new CustomEvent('we-auth-state-changed', { detail: { authenticated: false } }));
+        }
+    };
+
+    // Immediate optimistic UI hydration from stored session:
+    // Prevents "Sign In" button flicker (FOUS) and avoids any accidental sign-in popups on page load/refresh
+    function applyOptimisticAuthState() {
+        const stored = getStoredSession();
+        const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
+
+        if (stored) {
+            // User was previously authenticated — maintain authenticated state across refreshes & navigation
+            if (authNavBtn) authNavBtn.style.display = 'none';
+            if (userButtonDiv) {
+                userButtonDiv.style.display = 'flex';
+                if (!userButtonDiv.hasChildNodes() || userButtonDiv.innerHTML === '') {
+                    const initial = (stored.name || 'E').charAt(0).toUpperCase();
+                    userButtonDiv.innerHTML = `
+                        <div class="we-auth-avatar-placeholder" title="${stored.name || 'Account'}" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#8338EC,#FF007F);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;cursor:pointer;box-shadow:0 2px 8px rgba(131,56,236,0.3);user-select:none;">
+                            ${initial}
+                        </div>
+                    `;
+                }
+            }
+            if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
+        }
+    }
+
+    // Apply immediate optimistic state as early as possible
+    applyOptimisticAuthState();
 
     async function initializeClerk() {
         if (!window.Clerk) {
@@ -8982,38 +9105,50 @@ function initPlaceImageSliders() {
                     }
                 }
             });
+
             updateAuthUI();
 
-            // Listen for auth state changes
-            window.Clerk.addListener(({ user }) => {
+            // Listen for Clerk auth state changes (login, logout, token refresh, account update)
+            window.Clerk.addListener(({ user, session }) => {
                 updateAuthUI();
             });
-            
+
         } catch (error) {
             console.error('Failed to initialize Clerk:', error);
+            // If Clerk failed to load (e.g. offline/network blocked), keep persistent session alive if present
+            applyOptimisticAuthState();
         }
     }
 
     function updateAuthUI() {
         const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
-        const signInContainer = document.getElementById('sign-in-container');
         const authBtnText = authNavBtn ? authNavBtn.querySelector('.auth-btn-text') : null;
 
         if (window.Clerk && window.Clerk.user) {
-            // User is signed in
+            // User is authenticated
+            saveStoredSession(window.Clerk.user, window.Clerk.session);
+
             if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
             if (authNavBtn) {
                 authNavBtn.style.display = 'none';
             }
             if (userButtonDiv) {
                 userButtonDiv.style.display = 'flex';
-                window.Clerk.mountUserButton(userButtonDiv);
+                userButtonDiv.innerHTML = ''; // Replace optimistic placeholder with real Clerk UserButton
+                window.Clerk.mountUserButton(userButtonDiv, {
+                    afterSignOutUrl: window.location.href
+                });
             }
 
-            // Trigger Welcome Toast & Email once per session
+            // Dispatch global event for other components (Reviews, AI Agent, Analytics)
+            window.dispatchEvent(new CustomEvent('we-auth-state-changed', {
+                detail: { authenticated: true, user: window.Clerk.user }
+            }));
+
+            // Trigger Welcome Toast & Email once per user account
             const userId = window.Clerk.user.id;
-            if (!sessionStorage.getItem('welcome_email_triggered_' + userId)) {
-                sessionStorage.setItem('welcome_email_triggered_' + userId, 'true');
+            if (!localStorage.getItem('welcome_email_triggered_' + userId)) {
+                localStorage.setItem('welcome_email_triggered_' + userId, 'true');
                 const displayName = window.Clerk.user.firstName || window.Clerk.user.fullName || 'Explorer';
                 const userEmail = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress)
                     ? window.Clerk.user.primaryEmailAddress.emailAddress
@@ -9036,20 +9171,33 @@ function initPlaceImageSliders() {
                 }
             }
         } else {
-            // User is NOT signed in
+            // User is NOT signed in with Clerk
+            // If Clerk is fully loaded and confirms no user, clear session
+            if (window.Clerk && window.Clerk.loaded) {
+                clearStoredSession();
+            }
+
             if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto';
             if (authNavBtn) {
-                authNavBtn.style.display = 'flex'; 
+                authNavBtn.style.display = 'flex';
                 authNavBtn.classList.remove('logged-in');
                 if (authBtnText) authBtnText.textContent = 'Sign In';
             }
-            if (userButtonDiv) userButtonDiv.style.display = 'none';
+            if (userButtonDiv) {
+                userButtonDiv.style.display = 'none';
+                userButtonDiv.innerHTML = '';
+            }
+
+            window.dispatchEvent(new CustomEvent('we-auth-state-changed', {
+                detail: { authenticated: false }
+            }));
         }
     }
 
     function openSignInModal() {
-        if (window.Clerk && window.Clerk.user) return;
+        // If already authenticated, never prompt or open sign-in modal
+        if (isUserAuthenticated()) return;
 
         const mandatoryOverlay = document.getElementById('mandatory-auth-overlay');
         const signInContainer = document.getElementById('sign-in-container');
@@ -9058,7 +9206,7 @@ function initPlaceImageSliders() {
             mandatoryOverlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             try {
-                window.Clerk.mountSignIn(signInContainer, { 
+                window.Clerk.mountSignIn(signInContainer, {
                     routing: 'virtual',
                     afterSignInUrl: window.location.href,
                     afterSignUpUrl: window.location.href
@@ -9078,7 +9226,7 @@ function initPlaceImageSliders() {
         authNavBtn.addEventListener('click', async (e) => {
             if (window.Clerk) {
                 if (window.Clerk.user) {
-                    await window.Clerk.signOut();
+                    await window.WeekendAuth.signOut();
                 } else {
                     openSignInModal();
                 }
@@ -9088,40 +9236,45 @@ function initPlaceImageSliders() {
         });
     }
 
-    // Expose a controlled trigger so onboarding.js can fire this at the right time
-    // (1.5s AFTER user arrives on the home page, not 3s after page load)
-    window.triggerSignInPopup = function() {
-        if (window.Clerk && window.Clerk.user) return; // already signed in
+    // Controlled one-time trigger for first-visit onboarding only.
+    // NEVER repeatedly asks users to authenticate across page refreshes, navigation, or future visits.
+    window.triggerSignInPopup = function () {
+        // If user is already authenticated (current session or persisted), do nothing
+        if (isUserAuthenticated()) return;
+
+        // If user already saw/dismissed the prompt, or explicitly logged out, never ask again
+        if (localStorage.getItem(AUTH_PROMPT_SHOWN_KEY) === 'true' || sessionStorage.getItem('we_explicit_logout') === 'true') {
+            return;
+        }
+
+        // Mark as prompted so they are never nagged repeatedly
+        localStorage.setItem(AUTH_PROMPT_SHOWN_KEY, 'true');
+
         setTimeout(() => {
+            if (isUserAuthenticated()) return;
             if (window.Clerk) {
                 openSignInModal();
             } else {
                 const checkClerkForPopup = setInterval(() => {
                     if (window.Clerk) {
                         clearInterval(checkClerkForPopup);
-                        openSignInModal();
+                        if (!isUserAuthenticated()) {
+                            openSignInModal();
+                        }
                     }
                 }, 100);
             }
         }, 1500);
     };
 
-    // For RETURNING users (no onboarding shown), auto-popup after 3s as before
-    // For NEW users going through onboarding, this is suppressed by the class check
-    setTimeout(() => {
-        if (document.documentElement.classList.contains('we-onboarding-active')) return;
-        if (localStorage.getItem('weekend_explorer_onboarding_completed') === 'true') {
-            window.triggerSignInPopup();
-        }
-    }, 3000);
-
-    // Allow closing the sign in modal if they click on the blurred background
+    // Close sign in modal if clicking blurred background & record prompt dismissed
     const mOverlay = document.getElementById('mandatory-auth-overlay');
     if (mOverlay) {
         mOverlay.addEventListener('click', (e) => {
             if (e.target === mOverlay) {
                 mOverlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
+                localStorage.setItem(AUTH_PROMPT_SHOWN_KEY, 'true');
                 const signInContainer = document.getElementById('sign-in-container');
                 if (window.Clerk && signInContainer) {
                     try {
@@ -9131,6 +9284,21 @@ function initPlaceImageSliders() {
             }
         });
     }
+
+    // Multi-tab synchronization: keep session state consistent across all browser tabs
+    window.addEventListener('storage', (e) => {
+        if (e.key === AUTH_STORAGE_KEY) {
+            if (e.newValue) {
+                applyOptimisticAuthState();
+                if (window.Clerk && window.Clerk.loaded) {
+                    updateAuthUI();
+                }
+            } else {
+                clearStoredSession();
+                updateAuthUI();
+            }
+        }
+    });
 
     // Initialize Clerk when DOM is ready, waiting for async script if necessary
     function tryInitializeClerk() {

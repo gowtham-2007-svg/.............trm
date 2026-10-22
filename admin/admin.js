@@ -139,6 +139,11 @@ function checkAuth(user) {
 
     if (!window.Clerk || !window.Clerk.user) {
         // User not signed in
+        try {
+            if (window.Clerk && window.Clerk.loaded) {
+                localStorage.removeItem('we_auth_session');
+            }
+        } catch (e) {}
         dashboardLayout.style.display = 'none';
         deniedOverlay.style.display = 'none';
         authOverlay.style.display = 'flex';
@@ -151,13 +156,33 @@ function checkAuth(user) {
             });
         }
     } else {
-        // User signed in - check backend permission by attempting to load data
+        // User signed in - save persistent session descriptor
+        try {
+            const u = window.Clerk.user;
+            const sessionData = {
+                authenticated: true,
+                userId: u.id,
+                name: u.firstName || u.fullName || 'Admin',
+                email: (u.primaryEmailAddress && u.primaryEmailAddress.emailAddress) || '',
+                imageUrl: u.imageUrl || '',
+                sessionId: window.Clerk.session ? window.Clerk.session.id : '',
+                lastVerified: Date.now()
+            };
+            localStorage.setItem('we_auth_session', JSON.stringify(sessionData));
+            sessionStorage.removeItem('we_explicit_logout');
+        } catch (e) {}
+
+        // Check backend permission by attempting to load data
         loadDashboardData('7days');
     }
 }
 
 // Sign out utility for the access denied page
 async function signOutAndRedirect() {
+    try {
+        localStorage.removeItem('we_auth_session');
+        sessionStorage.setItem('we_explicit_logout', 'true');
+    } catch (e) {}
     if (window.Clerk) {
         await window.Clerk.signOut();
         window.location.reload();

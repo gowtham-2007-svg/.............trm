@@ -98,6 +98,12 @@
   // Helper to get logged-in user name from Clerk / Google authentication
   function getUserDisplayName() {
     try {
+      if (window.WeekendAuth && typeof window.WeekendAuth.getUser === 'function') {
+        const u = window.WeekendAuth.getUser();
+        if (u && u.name) {
+          return u.name.split(' ')[0];
+        }
+      }
       if (window.Clerk && window.Clerk.user) {
         const u = window.Clerk.user;
         if (u.firstName && u.firstName.trim()) {

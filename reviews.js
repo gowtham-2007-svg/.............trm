@@ -116,9 +116,13 @@
         }
     }
 
-    // Helper: Get user's logged in name from Clerk if available
+    // Helper: Get user's logged in name from Clerk or persisted session if available
     function getLoggedInUserName() {
         try {
+            if (window.WeekendAuth && typeof window.WeekendAuth.getUser === 'function') {
+                const u = window.WeekendAuth.getUser();
+                if (u && u.name) return u.name;
+            }
             if (window.Clerk && window.Clerk.user) {
                 const u = window.Clerk.user;
                 if (u.fullName && u.fullName.trim()) return u.fullName.trim();
