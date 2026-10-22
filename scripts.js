@@ -2,7 +2,7 @@ const destinations = [
     {
         id: 'mangaluru',
         name: 'Mangaluru',
-        image: 'assets/destinations/mangaluru.png',
+        image: 'assets/destinations/mangaluru_new.png',
         color: '#FF6B6B',
         famousPlaces: [
             {
@@ -30,7 +30,7 @@ const destinations = [
     {
         id: 'mysuru',
         name: 'Mysuru – North & South',
-        image: 'assets/destinations/mysuru.png',
+        image: 'assets/destinations/mysuru_new.png',
         color: '#FFD93D',
         famousPlaces: [
             {
@@ -86,7 +86,7 @@ const destinations = [
     {
         id: 'bangalore',
         name: 'Bangalore – North & South',
-        image: 'assets/destinations/bangalore.png',
+        image: 'assets/destinations/bangalore_new.png',
         color: '#8338EC',
         famousPlaces: [
             {
@@ -3792,6 +3792,10 @@ function clearBackgroundIntervals() {
                 }
             });
             activeSwiperInstances = [];
+        }
+        if (window._weSliderObserver) {
+            try { window._weSliderObserver.disconnect(); } catch(err) {}
+            window._weSliderObserver = null;
         }
     } catch(e) {
         console.warn(e);
@@ -7767,12 +7771,25 @@ window.showFoodPopup = function(name, img, price) {
     }
 };
 
+function getSliderVisibilityObserver() {
+    if (!window._weSliderObserver && ('IntersectionObserver' in window)) {
+        window._weSliderObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.dataset.inView = entry.isIntersecting ? 'true' : 'false';
+            });
+        }, { threshold: 0.1, rootMargin: '80px 0px' });
+    }
+    return window._weSliderObserver;
+}
+
 function initBestFoodSliders() {
     // Clear any previous intervals to avoid duplicate loops
     bestFoodSliderIntervals.forEach(intervalId => clearInterval(intervalId));
     bestFoodSliderIntervals = [];
 
     const sliderCards = document.querySelectorAll('.best-food-slider-card');
+    const obs = getSliderVisibilityObserver();
+
     sliderCards.forEach(card => {
         const placeName = card.getAttribute('data-place-name');
         
@@ -7799,11 +7816,14 @@ function initBestFoodSliders() {
             return;
         }
 
-        // Start autoplay
+        // Start autoplay (only ticks when card is in viewport to conserve mobile CPU & battery)
         const startAutoplay = () => {
+            if (obs) obs.observe(card);
             const intervalId = setInterval(() => {
+                if (document.hidden) return;
+                if (card.dataset.inView === 'false') return;
                 navigateSliderCard(card, 1);
-            }, 3000);
+            }, 3500);
             card.setAttribute('data-interval-id', intervalId);
             bestFoodSliderIntervals.push(intervalId);
         };
@@ -7863,10 +7883,12 @@ window.handleSliderNav = function(event, btn, direction) {
     // Navigate card
     navigateSliderCard(card, direction);
 
-    // Restart autoplay
+    // Restart autoplay (only ticks when card is in viewport)
     const newIntervalId = setInterval(() => {
+        if (document.hidden) return;
+        if (card.dataset.inView === 'false') return;
         navigateSliderCard(card, 1);
-    }, 3000);
+    }, 3500);
     card.setAttribute('data-interval-id', newIntervalId);
     bestFoodSliderIntervals.push(newIntervalId);
 };
@@ -7934,13 +7956,19 @@ function initPlaceImageSliders() {
     window.placeImageSliderIntervals = [];
 
     const sliders = document.querySelectorAll('.place-img-slider');
+    const obs = getSliderVisibilityObserver();
+
     sliders.forEach(slider => {
         const dotContainer = slider.nextElementSibling;
         const dots = dotContainer ? dotContainer.querySelectorAll('.slider-dot') : [];
         const slideCount = slider.children.length;
         if (slideCount <= 1) return;
 
+        if (obs) obs.observe(slider);
+
         const intervalId = setInterval(() => {
+            if (document.hidden) return;
+            if (slider.dataset.inView === 'false') return;
             let activeIndex = parseInt(slider.getAttribute('data-active-index') || '0');
             activeIndex = (activeIndex + 1) % slideCount;
             slider.setAttribute('data-active-index', activeIndex);
@@ -7953,7 +7981,7 @@ function initPlaceImageSliders() {
                     dot.style.background = 'rgba(255,255,255,0.5)';
                 }
             });
-        }, 3000);
+        }, 3500);
 
         window.placeImageSliderIntervals.push(intervalId);
 
@@ -9426,9 +9454,8 @@ function showWelcomeMessage(userName) {
         }, 100), { passive: true });
     }
 
-    // 5. Ensure Passive Scroll & Touch Event Listeners
-    window.addEventListener('scroll', perfThrottle(() => {}, 16), { passive: true });
-    window.addEventListener('touchmove', () => {}, { passive: true });
+    // 5. Card Hover Prefetch & Image decoding optimization
+    // (Unnecessary empty scroll/touchmove listeners removed to keep main thread free)
 
     // Initialize on DOM Ready
     if (document.readyState === 'loading') {

@@ -1512,8 +1512,12 @@ const requestListener = async (req, res) => {
 
             if (ext === '.html') {
                 headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+            } else if (req.url && req.url.includes('?v=')) {
+                // Versioned asset query: immutable cache for instant 0ms loads across refreshes
+                headers['Cache-Control'] = 'public, max-age=31536000, immutable';
             } else if (ext === '.js' || ext === '.css') {
-                headers['Cache-Control'] = 'no-cache, must-revalidate';
+                // Non-versioned static code: short cache with stale-while-revalidate for fast rendering
+                headers['Cache-Control'] = 'public, max-age=1800, stale-while-revalidate=86400';
             } else {
                 headers['Cache-Control'] = 'public, max-age=31536000, immutable';
             }
