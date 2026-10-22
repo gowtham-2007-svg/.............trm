@@ -1,6 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 
+// Optional Supabase integration for persistent cloud database
+let supabase = null;
+try {
+    const { createClient } = require('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_KEY;
+
+    if (supabaseUrl && supabaseKey && !supabaseUrl.includes('YOUR_SUPABASE') && !supabaseKey.includes('YOUR_SUPABASE')) {
+        supabase = createClient(supabaseUrl, supabaseKey);
+    }
+} catch (e) {
+    console.warn('[REVIEWS API] Optional Supabase client not loaded:', e.message);
+}
+
 const DEFAULT_REVIEWS = [
     {
         id: "rev_1791350015181_f3zyoh",
@@ -74,7 +88,38 @@ const DEFAULT_REVIEWS = [
     }
 ];
 
-function loadReviews() {
+// Load reviews with Supabase priority and local fallback
+async function fetchAllReviews() {
+    // 1. Try Supabase cloud database
+    if (supabase) {
+        try {
+            const { data, error } = await supabase
+                .from('website_reviews')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (!error && Array.isArray(data) && data.length > 0) {
+                return data.map(r => ({
+                    id: r.id,
+                    name: r.name,
+                    location: r.location || 'Karnataka, India',
+                    rating: Number(r.rating) || 5,
+                    tag: r.tag || 'Explorer',
+                    text: r.text,
+                    date: r.date || (r.created_at ? r.created_at.split('T')[0] : new Date().toISOString().split('T')[0]),
+                    createdAt: r.created_at || r.createdAt || new Date().toISOString()
+                }));
+            }
+        } catch (dbErr) {
+            console.warn('[REVIEWS API] Could not fetch from Supabase:', dbErr.message);
+        }
+    }
+
+    // 2. Fallback to local files
+    return loadLocalReviews();
+}
+
+function loadLocalReviews() {
     const candidates = [
         path.join(process.cwd(), 'backend', 'reviews_db.json'),
         path.join(__dirname, '..', 'backend', 'reviews_db.json'),
@@ -93,7 +138,6 @@ function loadReviews() {
         } catch (e) {}
     }
 
-    // Try bundled require if available
     try {
         const bundled = require('../backend/reviews_db.json');
         if (Array.isArray(bundled) && bundled.length > 0) {
@@ -159,10 +203,10 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'GET') {
-        const reviews = loadReviews();
+        const reviews = await fetchAllReviews();
         const summary = calculateSummary(reviews);
         res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
+        res.setHeader('Cache-Control', 'public, max-age=15, stale-while-revalidate=30');
         res.statusCode = 200;
         res.end(JSON.stringify({ success: true, ...summary }));
         return;
@@ -192,6 +236,7 @@ module.exports = async (req, res) => {
                 return;
             }
 
+            const nowIso = new Date().toISOString();
             const newReview = {
                 id: `rev_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
                 name,
@@ -199,14 +244,43 @@ module.exports = async (req, res) => {
                 rating,
                 tag,
                 text,
-                date: new Date().toISOString().split('T')[0],
-                createdAt: new Date().toISOString()
+                date: nowIso.split('T')[0],
+                createdAt: nowIso
             };
 
-            const currentReviews = loadReviews();
-            currentReviews.unshift(newReview);
+            // 1. Insert into Supabase cloud database if available
+            if (supabase) {
+                try {
+                    const { error: insertErr } = await supabase
+                        .from('website_reviews')
+                        .insert([{
+                            id: newReview.id,
+                            name: newReview.name,
+                            location: newReview.location,
+                            rating: newReview.rating,
+                            tag: newReview.tag,
+                            text: newReview.text,
+                            date: newReview.date,
+                            created_at: newReview.createdAt
+                        }]);
 
-            // Persist if possible
+                    if (insertErr) {
+                        console.error('[SUPABASE REVIEWS INSERT ERROR]', insertErr.message);
+                    } else {
+                        console.log(`[SUPABASE REVIEWS] Review from ${name} saved in database.`);
+                    }
+                } catch (dbErr) {
+                    console.error('[SUPABASE REVIEWS EXCEPTION]', dbErr.message);
+                }
+            }
+
+            // 2. Persist locally to file if writable
+            const currentReviews = await fetchAllReviews();
+            // Prepend new review if not already returned from Supabase
+            if (!currentReviews.some(r => r.id === newReview.id)) {
+                currentReviews.unshift(newReview);
+            }
+
             const targets = [
                 path.join(process.cwd(), 'backend', 'reviews_db.json'),
                 path.join(__dirname, '..', 'backend', 'reviews_db.json'),

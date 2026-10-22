@@ -777,6 +777,35 @@ const requestListener = async (req, res) => {
         };
     }
 
+    async function syncReviewsFromSupabase() {
+        if (!supabase) return false;
+        try {
+            const { data, error } = await supabase
+                .from('website_reviews')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (!error && Array.isArray(data) && data.length > 0) {
+                websiteReviews = data.map(r => ({
+                    id: r.id,
+                    name: r.name,
+                    location: r.location || 'Karnataka, India',
+                    rating: Number(r.rating) || 5,
+                    tag: r.tag || 'Explorer',
+                    text: r.text,
+                    date: r.date || (r.created_at ? r.created_at.split('T')[0] : new Date().toISOString().split('T')[0]),
+                    createdAt: r.created_at || r.createdAt || new Date().toISOString()
+                }));
+                saveReviewsDB();
+                console.log(`[SUPABASE REVIEWS] Synced ${websiteReviews.length} reviews from Supabase database.`);
+                return true;
+            }
+        } catch (err) {
+            console.warn('[SUPABASE REVIEWS] Could not sync reviews from Supabase:', err.message);
+        }
+        return false;
+    }
+
     // Load DB on startup
     loadLocalDB();
     loadReviewsDB();
@@ -1262,12 +1291,15 @@ const requestListener = async (req, res) => {
     if (pathname === '/api/reviews') {
         setCorsHeaders(res);
         if (req.method === 'GET') {
+            if (supabase) {
+                await syncReviewsFromSupabase();
+            }
             const summary = getReviewsSummary();
             const body = JSON.stringify({ success: true, ...summary });
             const acceptEncoding = req.headers['accept-encoding'] || '';
             const headers = {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'public, max-age=30, stale-while-revalidate=60'
+                'Cache-Control': 'public, max-age=15, stale-while-revalidate=30'
             };
             if (acceptEncoding.includes('br')) {
                 headers['Content-Encoding'] = 'br';
@@ -1310,6 +1342,7 @@ const requestListener = async (req, res) => {
                     return;
                 }
 
+                const nowIso = new Date().toISOString();
                 const newReview = {
                     id: `rev_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
                     name,
@@ -1317,10 +1350,37 @@ const requestListener = async (req, res) => {
                     rating,
                     tag,
                     text,
-                    date: new Date().toISOString().split('T')[0],
-                    createdAt: new Date().toISOString()
+                    date: nowIso.split('T')[0],
+                    createdAt: nowIso
                 };
 
+                // 1. Insert into Supabase cloud database if available
+                if (supabase) {
+                    try {
+                        const { error: insertErr } = await supabase
+                            .from('website_reviews')
+                            .insert([{
+                                id: newReview.id,
+                                name: newReview.name,
+                                location: newReview.location,
+                                rating: newReview.rating,
+                                tag: newReview.tag,
+                                text: newReview.text,
+                                date: newReview.date,
+                                created_at: newReview.createdAt
+                            }]);
+
+                        if (insertErr) {
+                            console.error('[SUPABASE REVIEWS INSERT ERROR]', insertErr.message);
+                        } else {
+                            console.log(`[SUPABASE REVIEWS] Review successfully stored in database by ${name}`);
+                        }
+                    } catch (dbErr) {
+                        console.error('[SUPABASE REVIEWS EXCEPTION]', dbErr.message);
+                    }
+                }
+
+                // 2. Prepend locally & save to local reviews_db.json
                 websiteReviews.unshift(newReview);
                 saveReviewsDB();
 
