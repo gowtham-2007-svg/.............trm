@@ -30,7 +30,7 @@ const destinations = [
     {
         id: 'mysuru',
         name: 'Mysuru – North & South',
-        image: 'assets/destinations/mysuru_hd.jpg',
+        image: 'assets/destinations/mysuru_hd.jpg?v=2',
         color: '#FFD93D',
         famousPlaces: [
             {
