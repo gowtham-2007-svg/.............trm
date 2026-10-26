@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend Explorer - Cartoon & Truck Animation Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1e293b;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Ambient glow background */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 380px;
+            height: 380px;
+            background: #8338EC;
+            top: 15%;
+            left: 20%;
+        }
+        .orb-2 {
+            width: 420px;
+            height: 420px;
+            background: #3A86EF;
+            bottom: 10%;
+            right: 20%;
+        }
+
+        .completion-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .completion-line-1 {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            font-weight: 500;
+            color: #64748b;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .completion-line-2 {
+            font-size: clamp(2rem, 5.5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #8338EC 0%, #a855f7 50%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(22px);
+            animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+            filter: drop-shadow(0 4px 20px rgba(131, 56, 236, 0.25));
+        }
+
+        @keyframes textFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Adventure Animation Stage */
+        .adventure-stage {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        /* Road track across bottom */
+        .road-track {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(131,56,236,0) 0%, rgba(131,56,236,0.6) 20%, rgba(58,134,239,0.8) 50%, rgba(131,56,236,0.6) 80%, rgba(131,56,236,0) 100%);
+            box-shadow: 0 0 16px rgba(131, 56, 236, 0.5);
+        }
+
+        .road-dashes {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #8338EC 0px, #8338EC 25px, transparent 25px, transparent 55px);
+            opacity: 0.6;
+            animation: roadMove 1.5s linear infinite;
+        }
+
+        @keyframes roadMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Cartoon Explorer Boy Container */
+        .boy-runner-container {
+            position: absolute;
+            bottom: 14px;
+            left: -140px;
+            width: 120px;
+            height: 130px;
+            z-index: 5;
+            animation: boyRunAcross 4.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .boy-img-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            animation: boyRunBounce 0.32s ease-in-out infinite alternate;
+        }
+
+        .boy-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.45));
+            transition: opacity 0.2s ease;
+        }
+
+        /* Hop animation onto truck */
+        .boy-hopping {
+            animation: boyHopOntoTruck 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards !important;
+        }
+
+        @keyframes boyRunBounce {
+            0% {
+                transform: translateY(0) rotate(-3deg);
+            }
+            100% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+        }
+
+        @keyframes boyRunAcross {
+            0% {
+                left: -130px;
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            50% {
+                /* Arrives at center-left */
+                left: calc(50% - 130px);
+            }
+            60% {
+                /* Pauses and spots the truck */
+                left: calc(50% - 95px);
+            }
+            100% {
+                left: calc(50% - 95px);
+            }
+        }
+
+        @keyframes boyHopOntoTruck {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            40% {
+                transform: translate(35px, -55px) scale(1.05) rotate(10deg);
+                opacity: 1;
+            }
+            75% {
+                transform: translate(65px, -24px) scale(0.85) rotate(0deg);
+                opacity: 1;
+            }
+            95% {
+                transform: translate(75px, -18px) scale(0.75);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(75px, -18px) scale(0.7);
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Little Dust Cloud while running */
+        .dust-particle {
+            position: absolute;
+            bottom: 4px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(131, 56, 236, 0.2);
+            animation: dustPuff 0.6s ease-out infinite;
+        }
+
+        @keyframes dustPuff {
+            0% {
+                transform: scale(0.3) translateX(0);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.5) translateX(-25px);
+                opacity: 0;
+            }
+        }
+
+        /* Small Adventure Truck */
+        .truck-container {
+            position: absolute;
+            bottom: 14px;
+            right: -240px;
+            width: 170px;
+            height: 110px;
+            z-index: 4;
+            animation: truckDriveSequence 5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+        }
+
+        @keyframes truckDriveSequence {
+            0% {
+                right: -240px;
+                transform: translateX(0);
+            }
+            38% {
+                /* Drives in from right and stops near center */
+                right: calc(50% - 100px);
+                transform: translateX(0);
+            }
+            42% {
+                /* Gentle braking suspension dip */
+                right: calc(50% - 95px);
+                transform: translateY(3px);
+            }
+            46% {
+                right: calc(50% - 95px);
+                transform: translateY(0);
+            }
+            72% {
+                /* Stays parked while boy hops on and horn beeps */
+                right: calc(50% - 95px);
+                transform: translateX(0);
+            }
+            78% {
+                /* Rev up bounce */
+                right: calc(50% - 95px);
+                transform: translateY(-4px) rotate(1deg);
+            }
+            100% {
+                /* Drives off fast to the right into the website! */
+                right: -400px;
+                transform: translateX(60vw);
+            }
+        }
+
+        .truck-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.55));
+        }
+
+        /* Spinning Wheels */
+        .wheel-group {
+            transform-origin: center;
+            animation: wheelSpin 1s linear infinite;
+        }
+
+        @keyframes wheelSpin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Headlight glow beam */
+        .headlight-glow {
+            position: absolute;
+            left: -40px;
+            bottom: 18px;
+            width: 60px;
+            height: 35px;
+            background: radial-gradient(ellipse at right, rgba(254, 240, 138, 0.75) 0%, rgba(254, 240, 138, 0.25) 45%, transparent 80%);
+            border-radius: 50%;
+            filter: blur(4px);
+            pointer-events: none;
+        }
+
+        /* Seated Cartoon Boy on Truck */
+        .seated-boy {
+            position: absolute;
+            top: 6px;
+            left: 28px;
+            width: 65px;
+            height: 70px;
+            z-index: 6;
+            opacity: 0;
+            transform: scale(0.6) translateY(10px);
+            transition: all 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            pointer-events: none;
+        }
+
+        .seated-boy.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            animation: boyCheer 0.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes boyCheer {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-4px) rotate(3deg);
+            }
+        }
+
+        /* Beep beep horn badge */
+        .horn-badge {
+            position: absolute;
+            top: -12px;
+            left: 8px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 10px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .horn-badge.honk {
+            opacity: 1;
+            transform: scale(1.1) translateY(-6px);
+        }
+
+        /* Exhaust Smoke Puffs */
+        .exhaust-puffs {
+            position: absolute;
+            bottom: 22px;
+            right: 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .puff {
+            width: 8px;
+            height: 8px;
+            background: rgba(148, 163, 184, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .truck-accelerating .puff {
+            animation: puffFloat 0.6s ease-out infinite;
+        }
+        .truck-accelerating .puff:nth-child(2) { animation-delay: 0.15s; }
+        .truck-accelerating .puff:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes puffFloat {
+            0% {
+                opacity: 0.8;
+                transform: translate(0, 0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(30px, -15px) scale(2);
+            }
+        }
+
+        /* Controls for testing */
+        .replay-btn {
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, #8338EC, #3A86EF);
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(131, 56, 236, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .replay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(131, 56, 236, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <div class="completion-stage">
+        <div class="completion-line-1">You're all set.</div>
+        <div class="completion-line-2">Let's explore your weekend.</div>
+
+        <div class="adventure-stage" id="adventure-stage">
+            <div class="road-track"></div>
+            <div class="road-dashes"></div>
+
+            <!-- Running Cartoon Boy -->
+            <div class="boy-runner-container" id="boy-runner">
+                <div class="boy-img-wrap" id="boy-wrap">
+                    <img src="assets/cartoon-boy.png" alt="Explorer Boy" class="boy-img" id="boy-img">
+                </div>
+                <div class="dust-particle"></div>
+            </div>
+
+            <!-- Small Adventure Truck -->
+            <div class="truck-container" id="truck">
+                <div class="horn-badge" id="horn-badge">HONK! 🚗</div>
+                <div class="headlight-glow"></div>
+
+                <!-- Seated Boy on Truck (revealed when hopped) -->
+                <img src="assets/cartoon-boy.png" alt="Boy on Truck" class="seated-boy" id="seated-boy">
+
+                <!-- High Quality SVG Adventure Truck -->
+                <svg class="truck-svg" viewBox="0 0 170 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Truck Body Gradient -->
+                    <defs>
+                        <linearGradient id="truckBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8338EC"/>
+                            <stop offset="50%" stop-color="#9333EA"/>
+                            <stop offset="100%" stop-color="#3A86EF"/>
+                        </linearGradient>
+                        <linearGradient id="cabinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="100%" stop-color="#e2e8f0"/>
+                        </linearGradient>
+                        <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#94a3b8"/>
+                            <stop offset="100%" stop-color="#475569"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Open Truck Bed / Cargo Area (Left side) -->
+                    <rect x="22" y="44" width="60" height="26" rx="4" fill="url(#truckBodyGrad)"/>
+                    <!-- Wooden/Metal Bed Railings -->
+                    <rect x="20" y="38" width="62" height="4" rx="2" fill="url(#metalGrad)"/>
+                    <rect x="28" y="42" width="3" height="6" fill="#334155"/>
+                    <rect x="52" y="42" width="3" height="6" fill="#334155"/>
+                    <rect x="76" y="42" width="3" height="6" fill="#334155"/>
+
+                    <!-- Luggage inside bed -->
+                    <rect x="26" y="28" width="16" height="11" rx="2" fill="#f59e0b"/>
+                    <rect x="29" y="32" width="10" height="2" fill="#b45309"/>
+
+                    <!-- Truck Main Cabin (Right side, facing forward/left) -->
+                    <!-- Cabin base -->
+                    <path d="M78 44 H145 C150 44 154 48 154 54 V70 H78 V44 Z" fill="url(#truckBodyGrad)"/>
+                    <!-- Cabin Top / Windshield -->
+                    <path d="M82 44 L92 24 H126 C131 24 135 28 137 33 L142 44 H82 Z" fill="url(#cabinGrad)"/>
+                    <!-- Front Windshield Glass -->
+                    <path d="M125 27 L134 42 H110 V27 H125 Z" fill="#38bdf8" fill-opacity="0.75"/>
+                    <!-- Side Window Glass -->
+                    <rect x="94" y="27" width="13" height="15" rx="1" fill="#38bdf8" fill-opacity="0.6"/>
+
+                    <!-- Roof Rack with Sleeping Bag & Surf/Tent -->
+                    <rect x="88" y="21" width="42" height="3" rx="1.5" fill="#334155"/>
+                    <ellipse cx="98" cy="18" rx="8" ry="4" fill="#10b981"/>
+                    <ellipse cx="116" cy="18" rx="10" ry="4" fill="#ec4899"/>
+
+                    <!-- Front Hood & Bumper -->
+                    <rect x="142" y="52" width="16" height="16" rx="3" fill="url(#truckBodyGrad)"/>
+                    <!-- Front Bumper -->
+                    <rect x="152" y="64" width="8" height="6" rx="2" fill="#cbd5e1"/>
+                    <!-- Headlight -->
+                    <circle cx="154" cy="56" r="4.5" fill="#fef08a"/>
+                    <circle cx="154" cy="56" r="2.5" fill="#ffffff"/>
+
+                    <!-- Front Grille -->
+                    <line x1="150" y1="60" x2="150" y2="64" stroke="#1e293b" stroke-width="1.5"/>
+                    <line x1="147" y1="60" x2="147" y2="64" stroke="#1e293b" stroke-width="1.5"/>
+
+                    <!-- Door Handle -->
+                    <rect x="100" y="49" width="6" height="2" rx="1" fill="#ffffff"/>
+
+                    <!-- Rear Bumper & Tail Light -->
+                    <rect x="18" y="64" width="5" height="5" rx="1.5" fill="#cbd5e1"/>
+                    <rect x="19" y="48" width="3" height="5" rx="1" fill="#ef4444"/>
+
+                    <!-- Wheel Wells -->
+                    <circle cx="48" cy="72" r="17" fill="#0b0f19"/>
+                    <circle cx="128" cy="72" r="17" fill="#0b0f19"/>
+
+                    <!-- Back Wheel (Left) -->
+                    <g transform="translate(48, 72)">
+                        <circle cx="0" cy="0" r="14" fill="#1e293b"/>
+                        <circle cx="0" cy="0" r="9" fill="#94a3b8"/>
+                        <circle cx="0" cy="0" r="4" fill="#f8fafc"/>
+                        <g class="wheel-group">
+                            <line x1="-7" y1="0" x2="7" y2="0" stroke="#334155" stroke-width="2"/>
+                            <line x1="0" y1="-7" x2="0" y2="7" stroke="#334155" stroke-width="2"/>
+                        </g>
+                    </g>
+
+                    <!-- Front Wheel (Right) -->
+                    <g transform="translate(128, 72)">
+                        <circle cx="0" cy="0" r="14" fill="#1e293b"/>
+                        <circle cx="0" cy="0" r="9" fill="#94a3b8"/>
+                        <circle cx="0" cy="0" r="4" fill="#f8fafc"/>
+                        <g class="wheel-group">
+                            <line x1="-7" y1="0" x2="7" y2="0" stroke="#334155" stroke-width="2"/>
+                            <line x1="0" y1="-7" x2="0" y2="7" stroke="#334155" stroke-width="2"/>
+                        </g>
+                    </g>
+                </svg>
+
+                <div class="exhaust-puffs">
+                    <span class="puff"></span>
+                    <span class="puff"></span>
+                    <span class="puff"></span>
+                </div>
+            </div>
+        </div>
+
+        <button class="replay-btn" onclick="restartAnimation()">🔄 Replay Animation</button>
+    </div>
+
+    <script>
+        function runSequence() {
+            const runner = document.getElementById('boy-runner');
+            const boyImg = document.getElementById('boy-img');
+            const truck = document.getElementById('truck');
+            const seatedBoy = document.getElementById('seated-boy');
+            const horn = document.getElementById('horn-badge');
+
+            // Reset states
+            runner.style.animation = 'none';
+            boyImg.classList.remove('boy-hopping');
+            truck.style.animation = 'none';
+            truck.classList.remove('truck-accelerating');
+            seatedBoy.classList.remove('visible');
+            horn.classList.remove('honk');
+
+            void runner.offsetWidth;
+            void truck.offsetWidth;
+
+            // Start animations
+            runner.style.animation = 'boyRunAcross 4.6s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+            truck.style.animation = 'truckDriveSequence 5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards';
+
+            // 1. Boy reaches truck and hops
+            setTimeout(() => {
+                boyImg.classList.add('boy-hopping');
+            }, 2500);
+
+            // 2. Boy lands on truck
+            setTimeout(() => {
+                seatedBoy.classList.add('visible');
+            }, 3000);
+
+            // 3. Horn honks
+            setTimeout(() => {
+                horn.classList.add('honk');
+            }, 3300);
+            setTimeout(() => {
+                horn.classList.remove('honk');
+            }, 3800);
+
+            // 4. Truck revs and zooms off
+            setTimeout(() => {
+                truck.classList.add('truck-accelerating');
+            }, 3600);
+        }
+
+        function restartAnimation() {
+            runSequence();
+        }
+
+        window.addEventListener('load', () => {
+            runSequence();
+        });
+    </script>
+</body>
+</html>

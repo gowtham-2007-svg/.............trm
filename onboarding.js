@@ -10,6 +10,28 @@
     const ANSWERS_STORAGE_KEY = 'weekend_explorer_onboarding_answers';
 
     // Global helper for resetting and testing onboarding
+
+    // Global function to trigger Cartoon & Truck Adventure Animation anytime
+    window.playAdventureAnimation = function () {
+        let overlay = document.getElementById('we-onboarding-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'we-onboarding-overlay';
+            overlay.className = 'we-onboarding-overlay';
+            overlay.innerHTML = `
+                <div class="we-ambient-orb we-ambient-orb-1"></div>
+                <div class="we-ambient-orb we-ambient-orb-2"></div>
+                <div class="we-onboarding-shell" id="we-onboarding-shell"></div>
+            `;
+            document.body.prepend(overlay);
+        }
+        overlay.classList.remove('we-fade-out');
+        overlay.style.display = 'flex';
+        document.documentElement.classList.add('we-onboarding-active');
+        const shell = document.getElementById('we-onboarding-shell');
+        renderCompletionStage(shell);
+    };
+
     window.resetWeekendOnboarding = function () {
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(ANSWERS_STORAGE_KEY);
@@ -18,7 +40,8 @@
     };
 
     // Check for ?reset or #reset in URL to allow easy testing
-    if (window.location.search.includes('reset') || window.location.hash.includes('reset')) {
+    if (window.location.search.includes('reset') || window.location.hash.includes('reset') || window.location.search.includes('intro') || window.location.hash.includes('intro')) {
+        sessionStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(ANSWERS_STORAGE_KEY);
         sessionStorage.removeItem('welcomed');
@@ -321,11 +344,139 @@
      * "Let's explore your weekend."
      * Animated smoothly and transitions into the EXISTING Home page.
      */
+    function playTruckHorn() {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            if (ctx.state === 'suspended') ctx.resume();
+
+            function beep(delay, duration) {
+                const osc1 = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc1.type = 'triangle';
+                osc2.type = 'sine';
+                osc1.frequency.setValueAtTime(349.23, ctx.currentTime + delay);
+                osc2.frequency.setValueAtTime(440.00, ctx.currentTime + delay);
+
+                gain.gain.setValueAtTime(0, ctx.currentTime + delay);
+                gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + delay + 0.02);
+                gain.gain.linearRampToValueAtTime(0, ctx.currentTime + delay + duration);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc1.start(ctx.currentTime + delay);
+                osc2.start(ctx.currentTime + delay);
+                osc1.stop(ctx.currentTime + delay + duration);
+                osc2.stop(ctx.currentTime + delay + duration);
+            }
+
+            beep(0, 0.12);
+            beep(0.16, 0.14);
+
+            setTimeout(() => { try { ctx.close(); } catch(e) {} }, 1200);
+        } catch(e) {}
+    }
+
     function renderCompletionStage(container) {
         container.innerHTML = `
             <div class="we-completion-stage" id="we-completion-stage">
                 <div class="we-completion-line-1">You're all set.</div>
                 <div class="we-completion-line-2">Let's explore your weekend.</div>
+
+                <div class="we-adventure-stage" id="we-adventure-stage">
+                    <div class="we-road-track"></div>
+                    <div class="we-road-dashes"></div>
+
+                    <!-- Running Cartoon Explorer Boy -->
+                    <div class="we-boy-runner-container" id="we-boy-runner">
+                        <div class="we-boy-img-wrap" id="we-boy-wrap">
+                            <img src="assets/cartoon-boy.png" alt="Explorer Boy" class="we-boy-img" id="we-boy-img">
+                        </div>
+                        <div class="we-dust-particle"></div>
+                    </div>
+
+                    <!-- Small Adventure Truck -->
+                    <div class="we-truck-container" id="we-truck">
+                        <div class="we-horn-badge" id="we-horn-badge">HONK! 🚗</div>
+                        <div class="we-headlight-glow"></div>
+
+                        <!-- Seated Boy on Truck (revealed when hopped) -->
+                        <img src="assets/cartoon-boy.png" alt="Boy on Truck" class="we-seated-boy" id="we-seated-boy">
+
+                        <!-- SVG Adventure Truck -->
+                        <svg class="we-truck-svg" viewBox="0 0 170 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="weTruckBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#8338EC"/>
+                                    <stop offset="50%" stop-color="#9333EA"/>
+                                    <stop offset="100%" stop-color="#3A86EF"/>
+                                </linearGradient>
+                                <linearGradient id="weCabinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="100%" stop-color="#e2e8f0"/>
+                                </linearGradient>
+                                <linearGradient id="weMetalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#94a3b8"/>
+                                    <stop offset="100%" stop-color="#475569"/>
+                                </linearGradient>
+                            </defs>
+                            <rect x="22" y="44" width="60" height="26" rx="4" fill="url(#weTruckBodyGrad)"/>
+                            <rect x="20" y="38" width="62" height="4" rx="2" fill="url(#weMetalGrad)"/>
+                            <rect x="28" y="42" width="3" height="6" fill="#334155"/>
+                            <rect x="52" y="42" width="3" height="6" fill="#334155"/>
+                            <rect x="76" y="42" width="3" height="6" fill="#334155"/>
+                            <rect x="26" y="28" width="16" height="11" rx="2" fill="#f59e0b"/>
+                            <rect x="29" y="32" width="10" height="2" fill="#b45309"/>
+                            <path d="M78 44 H145 C150 44 154 48 154 54 V70 H78 V44 Z" fill="url(#weTruckBodyGrad)"/>
+                            <path d="M82 44 L92 24 H126 C131 24 135 28 137 33 L142 44 H82 Z" fill="url(#weCabinGrad)"/>
+                            <path d="M125 27 L134 42 H110 V27 H125 Z" fill="#38bdf8" fill-opacity="0.75"/>
+                            <rect x="94" y="27" width="13" height="15" rx="1" fill="#38bdf8" fill-opacity="0.6"/>
+                            <rect x="88" y="21" width="42" height="3" rx="1.5" fill="#334155"/>
+                            <ellipse cx="98" cy="18" rx="8" ry="4" fill="#10b981"/>
+                            <ellipse cx="116" cy="18" rx="10" ry="4" fill="#ec4899"/>
+                            <rect x="142" y="52" width="16" height="16" rx="3" fill="url(#weTruckBodyGrad)"/>
+                            <rect x="152" y="64" width="8" height="6" rx="2" fill="#cbd5e1"/>
+                            <circle cx="154" cy="56" r="4.5" fill="#fef08a"/>
+                            <circle cx="154" cy="56" r="2.5" fill="#ffffff"/>
+                            <line x1="150" y1="60" x2="150" y2="64" stroke="#1e293b" stroke-width="1.5"/>
+                            <line x1="147" y1="60" x2="147" y2="64" stroke="#1e293b" stroke-width="1.5"/>
+                            <rect x="100" y="49" width="6" height="2" rx="1" fill="#ffffff"/>
+                            <rect x="18" y="64" width="5" height="5" rx="1.5" fill="#cbd5e1"/>
+                            <rect x="19" y="48" width="3" height="5" rx="1" fill="#ef4444"/>
+                            <circle cx="48" cy="72" r="17" fill="#0b0f19"/>
+                            <circle cx="128" cy="72" r="17" fill="#0b0f19"/>
+                            <g transform="translate(48, 72)">
+                                <circle cx="0" cy="0" r="14" fill="#1e293b"/>
+                                <circle cx="0" cy="0" r="9" fill="#94a3b8"/>
+                                <circle cx="0" cy="0" r="4" fill="#f8fafc"/>
+                                <g class="we-wheel-group">
+                                    <line x1="-7" y1="0" x2="7" y2="0" stroke="#334155" stroke-width="2"/>
+                                    <line x1="0" y1="-7" x2="0" y2="7" stroke="#334155" stroke-width="2"/>
+                                </g>
+                            </g>
+                            <g transform="translate(128, 72)">
+                                <circle cx="0" cy="0" r="14" fill="#1e293b"/>
+                                <circle cx="0" cy="0" r="9" fill="#94a3b8"/>
+                                <circle cx="0" cy="0" r="4" fill="#f8fafc"/>
+                                <g class="we-wheel-group">
+                                    <line x1="-7" y1="0" x2="7" y2="0" stroke="#334155" stroke-width="2"/>
+                                    <line x1="0" y1="-7" x2="0" y2="7" stroke="#334155" stroke-width="2"/>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <div class="we-exhaust-puffs">
+                            <span class="we-puff"></span>
+                            <span class="we-puff"></span>
+                            <span class="we-puff"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
 
@@ -337,10 +488,40 @@
             console.warn('Storage not accessible:', e);
         }
 
-        // Give user time to read the completion message (~2.2s), then fade out into Home page
+        const boyImg = document.getElementById('we-boy-img');
+        const seatedBoy = document.getElementById('we-seated-boy');
+        const horn = document.getElementById('we-horn-badge');
+        const truck = document.getElementById('we-truck');
+
+        // Choreography Timeline
+        // 1. Boy reaches truck and hops
+        setTimeout(() => {
+            if (boyImg) boyImg.classList.add('we-boy-hopping');
+        }, 2400);
+
+        // 2. Boy lands on truck bed
+        setTimeout(() => {
+            if (seatedBoy) seatedBoy.classList.add('visible');
+        }, 2950);
+
+        // 3. Horn honks beep-beep!
+        setTimeout(() => {
+            if (horn) horn.classList.add('honk');
+            playTruckHorn();
+        }, 3250);
+        setTimeout(() => {
+            if (horn) horn.classList.remove('honk');
+        }, 3750);
+
+        // 4. Truck revs and accelerates
+        setTimeout(() => {
+            if (truck) truck.classList.add('we-truck-accelerating');
+        }, 3550);
+
+        // 5. Truck drives off into distance and website opens!
         setTimeout(() => {
             finishOnboarding();
-        }, 2200);
+        }, 4850);
     }
 
     function finishOnboarding() {
