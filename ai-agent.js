@@ -1136,7 +1136,46 @@
     return card;
   }
 
-  function createBudgetSlider(onConfirm) {
+  
+  // --- Navigation & Google Maps URL Generator Helpers ---
+  function cleanLocationQuery(title, city) {
+    if (!title) return city || '';
+    // Strip emojis and unicode variation selectors
+    let q = title.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE00}-\u{FE0F}]/gu, '').trim();
+    if (q.startsWith('Movie:')) q = q.replace(/^Movie:\s*/, '');
+    if (q.toLowerCase().includes('sunset at ')) q = q.replace(/.*sunset at\s*/i, '');
+    if (/morning breakfast|breakfast & coffee|park walk/i.test(q)) {
+      q = 'popular breakfast cafe, ' + city;
+    } else if (/regional lunch/i.test(q)) {
+      q = 'popular traditional restaurant, ' + city;
+    } else if (/street food|dinner & night/i.test(q)) {
+      q = 'popular dinner restaurant, ' + city;
+    } else if (!q.toLowerCase().includes(city.toLowerCase())) {
+      q = q + ', ' + city;
+    }
+    return q;
+  }
+
+  function getGoogleMapsUrl(title, city) {
+    const q = cleanLocationQuery(title, city);
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+  }
+
+  function getFullRouteUrl(stops, city) {
+    if (!stops || stops.length === 0) {
+      return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(city);
+    }
+    const cleanQueries = stops.map(st => cleanLocationQuery(st.title, city));
+    const origin = cleanQueries[0];
+    const destination = cleanQueries[cleanQueries.length - 1];
+    const waypoints = cleanQueries.slice(1, -1).join('|');
+    if (waypoints) {
+      return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination) + '&waypoints=' + encodeURIComponent(waypoints);
+    }
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(city) + '&destination=' + encodeURIComponent(destination);
+  }
+
+  function createBudgetSlider(onDirectGenerate, onCustomize) {
     const card = document.createElement('div');
     card.className = 'wai-slider-card';
 
@@ -1200,14 +1239,30 @@
         <button type="button" class="wai-slider-preset-chip ${BUDGET_STEPS[currentStepIdx] === 5000 ? 'active' : ''}" data-val="5000">₹5,000+</button>
       </div>
 
-      <button type="button" class="wai-slider-confirm-btn" id="wai-budget-confirm">
-        Set Budget: ₹${BUDGET_STEPS[currentStepIdx].toLocaleString('en-IN')}
-      </button>
+      <!-- Manual exact budget input -->
+      <div class="wai-budget-manual-row">
+        <span class="wai-budget-manual-label">Or enter exact budget:</span>
+        <div class="wai-budget-input-wrapper">
+          <span class="wai-budget-rupee-sign">₹</span>
+          <input type="number" id="wai-budget-manual-input" class="wai-budget-manual-input" value="${BUDGET_STEPS[currentStepIdx]}" min="0" max="50000" placeholder="500">
+        </div>
+      </div>
+
+      <div class="wai-budget-actions">
+        <button type="button" class="wai-slider-confirm-btn" id="wai-budget-generate-now">
+          ✨ Generate Itinerary Directly (₹${BUDGET_STEPS[currentStepIdx].toLocaleString('en-IN')})
+        </button>
+        <button type="button" class="wai-slider-sub-btn" id="wai-budget-confirm">
+          Customize Details (Transport, Time, Mood) →
+        </button>
+      </div>
     `;
 
     const badge = card.querySelector('#wai-budget-badge');
     const subtext = card.querySelector('#wai-budget-subtext');
     const range = card.querySelector('#wai-budget-range');
+    const manualInput = card.querySelector('#wai-budget-manual-input');
+    const generateBtn = card.querySelector('#wai-budget-generate-now');
     const confirmBtn = card.querySelector('#wai-budget-confirm');
     const graphBars = card.querySelectorAll('#wai-budget-graph .wai-graph-bar');
     const presetChips = card.querySelectorAll('.wai-slider-preset-chip');
@@ -1225,7 +1280,8 @@
       
       badge.textContent = formatted;
       subtext.textContent = getSubtext(amount);
-      confirmBtn.textContent = `Set Budget: ${formatted}`;
+      if (manualInput) manualInput.value = amount;
+      if (generateBtn) generateBtn.textContent = `✨ Generate Itinerary Directly (${formatted})`;
       
       updateTrack(currentStepIdx);
 
@@ -1261,10 +1317,44 @@
       });
     });
 
+    if (manualInput) {
+      manualInput.addEventListener('input', (e) => {
+        const val = Math.max(0, Number(e.target.value) || 0);
+        const formatted = `₹${val.toLocaleString('en-IN')}`;
+        badge.textContent = formatted;
+        subtext.textContent = getSubtext(val);
+        if (generateBtn) generateBtn.textContent = `✨ Generate Itinerary Directly (${formatted})`;
+        let closestIdx = 0, minDiff = Infinity;
+        BUDGET_STEPS.forEach((b, i) => {
+          const diff = Math.abs(b - val);
+          if (diff < minDiff) { minDiff = diff; closestIdx = i; }
+        });
+        currentStepIdx = closestIdx;
+        range.value = closestIdx;
+        updateTrack(closestIdx);
+      });
+    }
+
+    if (generateBtn) {
+      generateBtn.addEventListener('click', () => {
+        card.classList.add('wai-card-disabled');
+        const finalAmount = manualInput ? Math.max(0, Number(manualInput.value) || BUDGET_STEPS[currentStepIdx]) : BUDGET_STEPS[currentStepIdx];
+        if (typeof onDirectGenerate === 'function') {
+          onDirectGenerate(finalAmount);
+        } else if (typeof onCustomize === 'function') {
+          onCustomize(finalAmount);
+        }
+      });
+    }
+
     confirmBtn.addEventListener('click', () => {
       card.classList.add('wai-card-disabled');
-      const finalAmount = BUDGET_STEPS[currentStepIdx];
-      onConfirm(finalAmount);
+      const finalAmount = manualInput ? Math.max(0, Number(manualInput.value) || BUDGET_STEPS[currentStepIdx]) : BUDGET_STEPS[currentStepIdx];
+      if (typeof onCustomize === 'function') {
+        onCustomize(finalAmount);
+      } else if (typeof onDirectGenerate === 'function') {
+        onDirectGenerate(finalAmount);
+      }
     });
 
     updateTrack(currentStepIdx);
@@ -1345,25 +1435,50 @@
     {
       id: 'budget',
       getQuestion: () => t('budget_q', STATE.language),
-      renderCustom: () => createBudgetSlider((val) => {
-        STATE.budget = Number(val);
-        STATE.budgetLabel = `₹${val}`;
-        addUserMessage(`Budget: ₹${val}`);
-        if (Number(val) === 0) {
-          // --- Zero-Rupee Mode: bypass remaining steps, show situational engine ---
-          showTypingIndicator(() => {
-            addAIMessage(
-              '<div style="font-weight:700;color:#8338EC;margin-bottom:4px;">Zero-Rupee Weekend Activated</div>' +
-              '<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Brother, your budget is Rs 0 today. That is completely fine and there is no shame in that at all. ' +
-              'Let me give you a real, practical, and actually enjoyable plan for free. ' +
-              'Tell me what you have in mind.</div>'
-            );
-            renderZeroBudgetMode();
-          }, 600);
-        } else {
-          advanceStep();
+      renderCustom: () => createBudgetSlider(
+        // Direct Generate Callback
+        (val) => {
+          STATE.budget = Number(val);
+          STATE.budgetLabel = `₹${val}`;
+          addUserMessage(`Budget: ₹${val}`);
+          if (Number(val) === 0) {
+            showTypingIndicator(() => {
+              addAIMessage(
+                '<div style="font-weight:700;color:#8338EC;margin-bottom:4px;">Zero-Rupee Weekend Activated</div>' +
+                '<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Brother, your budget is Rs 0 today. That is completely fine and there is no shame in that at all. ' +
+                'Let me give you a real, practical, and actually enjoyable plan for free. ' +
+                'Tell me what you have in mind.</div>'
+              );
+              renderZeroBudgetMode();
+            }, 600);
+          } else {
+            showTypingIndicator(() => {
+              const itinHtml = generateMasterItinerary(STATE);
+              addAIMessage(itinHtml);
+              updateDots(STEPS.length);
+            }, 750);
+          }
+        },
+        // Customize Step-by-Step Callback
+        (val) => {
+          STATE.budget = Number(val);
+          STATE.budgetLabel = `₹${val}`;
+          addUserMessage(`Budget: ₹${val}`);
+          if (Number(val) === 0) {
+            showTypingIndicator(() => {
+              addAIMessage(
+                '<div style="font-weight:700;color:#8338EC;margin-bottom:4px;">Zero-Rupee Weekend Activated</div>' +
+                '<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Brother, your budget is Rs 0 today. That is completely fine and there is no shame in that at all. ' +
+                'Let me give you a real, practical, and actually enjoyable plan for free. ' +
+                'Tell me what you have in mind.</div>'
+              );
+              renderZeroBudgetMode();
+            }, 600);
+          } else {
+            advanceStep();
+          }
         }
-      })
+      )
     },
     {
       id: 'transport',
@@ -2045,6 +2160,12 @@
         <div class="wai-stops-container">
     `;
 
+    // Attach Google Maps location links to all stops
+    stops.forEach((st) => {
+      st.mapsUrl = getGoogleMapsUrl(st.title, city);
+    });
+    const fullRouteUrl = getFullRouteUrl(stops, city);
+
     stops.forEach((st, idx) => {
       const isFree = st.costNum === 0 && (st.costLabel === 'Free Entry' || st.costLabel.includes('Free'));
       html += `
@@ -2063,6 +2184,12 @@
             </div>
             <p class="wai-stop-desc">${st.desc}</p>
           </div>
+          <div class="wai-stop-footer">
+            <a href="${st.mapsUrl}" target="_blank" rel="noopener noreferrer" class="wai-stop-map-link" title="Open ${st.title} in Google Maps">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Go There ↗</span>
+            </a>
+          </div>
         </div>
       `;
 
@@ -2076,6 +2203,35 @@
     });
 
     html += `
+        </div>
+
+        <!-- Consolidated Location Links Section at Last -->
+        <div class="wai-nav-card">
+          <div class="wai-nav-card-header">
+            <span class="wai-nav-card-icon">📍</span>
+            <div class="wai-nav-card-title-group">
+              <div class="wai-nav-card-title">Location Links to Go There</div>
+              <div class="wai-nav-card-sub">Tap any destination to navigate directly in Google Maps</div>
+            </div>
+          </div>
+          <div class="wai-nav-links-list">
+            ${stops.map((st, sIdx) => `
+              <div class="wai-nav-link-item">
+                <div class="wai-nav-link-meta">
+                  <span class="wai-nav-badge">${sIdx + 1}</span>
+                  <span class="wai-nav-item-name">${st.title}</span>
+                </div>
+                <a href="${st.mapsUrl}" target="_blank" rel="noopener noreferrer" class="wai-nav-go-pill" title="Navigate to ${st.title}">
+                  <span>Go There</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                </a>
+              </div>
+            `).join('')}
+          </div>
+          <a href="${fullRouteUrl}" target="_blank" rel="noopener noreferrer" class="wai-nav-full-route-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+            <span>Open Complete Trip Route in Google Maps</span>
+          </a>
         </div>
     `;
 

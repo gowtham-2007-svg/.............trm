@@ -1687,3 +1687,244 @@
 }
 
 
+
+/* Stop Card Footer & Direct Map Link */
+.wai-stop-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed #f1f5f9;
+}
+
+.wai-stop-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #8338EC;
+  text-decoration: none;
+  background: rgba(131, 56, 236, 0.08);
+  padding: 3px 9px;
+  border-radius: 6px;
+  transition: all 0.18s ease;
+}
+
+.wai-stop-map-link:hover {
+  background: #8338EC;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Consolidated Trip Navigation Card at Last */
+.wai-nav-card {
+  background: #ffffff;
+  border: 1px solid rgba(131, 56, 236, 0.22);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(131, 56, 236, 0.06);
+}
+
+.wai-nav-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.wai-nav-card-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.wai-nav-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.wai-nav-card-sub {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.wai-nav-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.wai-nav-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.wai-nav-link-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.wai-nav-link-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.wai-nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(131, 56, 236, 0.12);
+  color: #8338EC;
+  font-size: 0.68rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wai-nav-item-name {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wai-nav-go-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #8338EC;
+  background: #ffffff;
+  border: 1px solid rgba(131, 56, 236, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+}
+
+.wai-nav-go-pill:hover {
+  background: #8338EC;
+  color: #ffffff;
+  border-color: #8338EC;
+}
+
+.wai-nav-full-route-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  background: linear-gradient(135deg, #8338EC 0%, #3b82f6 100%);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(131, 56, 236, 0.25);
+  transition: transform 0.18s ease, filter 0.18s ease;
+  box-sizing: border-box;
+}
+
+.wai-nav-full-route-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  color: #ffffff;
+}
+
+/* Manual budget input row & action buttons */
+.wai-budget-manual-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 10px 0 6px 0;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.wai-budget-manual-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.wai-budget-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+.wai-budget-rupee-sign {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #8338EC;
+}
+
+.wai-budget-manual-input {
+  width: 75px;
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e293b;
+  font-family: inherit;
+  background: transparent;
+}
+
+.wai-budget-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.wai-slider-sub-btn {
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+}
+
+.wai-slider-sub-btn:hover {
+  color: #1e293b;
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
