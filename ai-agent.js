@@ -1616,91 +1616,58 @@
     const people = Number(s.people) || 1;
     const isHeavyRain = s.weatherKey === 'heavy_rain';
     const selectedMovie = s.selectedMovie;
+    const timeSlotKey = s.timeSlotKey || 'prime';
+    const moodKey = s.moodKey || 'chill';
+    const foodKey = s.foodKey || 'veg';
+    const transportKey = s.transportKey || 'bus';
 
-    let timelineItems = [];
-    let actCost = 0;
+    // 1. Transport Calculation & Label
     let transportCost = 0;
-    let foodCost = 0;
+    let transLabel = s.transport || 'Local Transit';
+    if (transportKey === 'walk') {
+      transportCost = 0;
+      transLabel = 'Walking (₹0)';
+    } else if (transportKey === 'bus') {
+      const busFare = (cityData.busRoutes && cityData.busRoutes[0] && cityData.busRoutes[0].fare) || 15;
+      const numTrips = (timeSlotKey === 'fullday') ? 4 : 2;
+      const estimatedBus = busFare * numTrips * people;
+      transportCost = budget <= 100 ? Math.min(20, Math.floor(budget * 0.3)) : Math.min(Math.floor(budget * 0.25) || 40, estimatedBus);
+      transLabel = `Local Bus (~₹${transportCost})`;
+    } else if (transportKey === 'auto') {
+      transportCost = budget <= 200 ? 40 : Math.min(180, Math.max(50, Math.floor(budget * 0.2)));
+      transLabel = `Auto Rickshaw (~₹${transportCost})`;
+    } else if (transportKey === 'cab') {
+      transportCost = budget <= 400 ? 120 : Math.min(450, Math.max(120, Math.floor(budget * 0.25)));
+      transLabel = `Cab / Taxi (~₹${transportCost})`;
+    }
+
+    // 2. Movie Ticket Cost
     let movieTicketCost = 0;
-    let notes = [];
-
-    // 1. Budget Rules Logic & Notes
-    if (budget <= 500) {
-      notes.push("<b>₹100–₹500 Budget Rule Active:</b> Preserved existing weekend plan with free scenic spots & verified local transit without automatically adding a movie.");
-    } else if (budget <= 600) {
-      if (selectedMovie) {
-        notes.push("<b>₹501–₹600 Budget Rule Active:</b> Movie ticket and travel costs successfully fitted within your ₹" + budget + " budget.");
-      } else {
-        notes.push("<b>₹501–₹600 Rule:</b> Movie was optional or unviable for group size. Following the best alternative experience strictly within budget.");
-      }
-    } else if (budget <= 800) {
-      notes.push("<b>₹601–₹800 Experience:</b> Itinerary blends " + (selectedMovie ? "a movie screening, " : "") + "food court dining, mall leisure, and an outdoor sunset activity.");
-    } else if (budget <= 1000) {
-      notes.push("<b>₹801–₹1,000 Experience:</b> Curated plan including " + (selectedMovie ? "multiplex movie, " : "") + "restaurant dining, entertainment, and a 4:30 PM–6:00 PM golden hour sunset beach visit.");
-    } else {
-      notes.push("<b>VIP Flexible Plan:</b> Tailored luxury leisure plan featuring " + (selectedMovie ? "premium multiplex screening, " : "") + "fine dining, and scenic sunset viewpoints.");
-    }
-
-    // Beach Timing Rule Note
-    notes.push("<b>Beach Timing Rule:</b> Beaches are scheduled exclusively between 4:30 PM and 6:00 PM to catch the beautiful sunset, warm golden sunlight, and cool sea breeze. Morning and afternoon beach visits are never suggested.");
-
-    if (budget <= 500) {
-      notes.push("<b>Accessible Free Alternatives Active:</b> All recommended sightseeing destinations, heritage temples, and sunset beaches are 100% free of charge with zero admission fees.");
-    }
-
-    if (isHeavyRain) {
-      notes.push("<b>Monsoon Advisory:</b> Outdoor viewpoints and beach visits replaced with safe, sheltered indoor museums and covered promenades.");
-    } else if (s.weatherKey === 'light_rain') {
-      notes.push("<b>Light Rain:</b> Weather is pleasant! Keep a pocket umbrella handy for breezy walks.");
-    }
-
-    // Transport calculation
-    let transDesc = "Walking";
-    if (s.transportKey === 'bus') {
-      transportCost = budget <= 100 ? Math.min(30, Math.floor(budget * 0.4)) : (people * 20);
-      const routeInfo = cityData.busRoutes && cityData.busRoutes[0] ? ` (${cityData.busRoutes[0].route}, ~₹${cityData.busRoutes[0].fare}/person)` : ' (Local City Bus)';
-      transDesc = `Local Bus${routeInfo}`;
-    } else if (s.transportKey === 'auto') {
-      transportCost = Math.min(180, Math.max(50, Math.floor(budget * 0.2)));
-      transDesc = "Auto Rickshaw (Metered)";
-    } else if (s.transportKey === 'cab') {
-      transportCost = Math.min(450, Math.max(120, Math.floor(budget * 0.25)));
-      transDesc = "Cab / Taxi";
-    }
-
-    // Movie Ticket cost
     if (selectedMovie) {
-      const perTicket = selectedMovie.ticketPrice || 180;
-      movieTicketCost = perTicket * people;
+      const tktPrice = selectedMovie.ticketPrice || 180;
+      movieTicketCost = tktPrice * people;
     }
 
-    // Food Cost allocation
-    if (s.foodKey !== 'none' && budget > 100) {
-      const perHeadFood = s.foodKey === 'veg' ? 70 : 130;
-      const targetFood = perHeadFood * people;
-      const budgetLeftBeforeFood = budget - movieTicketCost - transportCost - actCost;
-      foodCost = Math.max(0, Math.min(targetFood, Math.floor(budgetLeftBeforeFood * 0.75)));
-      
-      const foodDesc = s.foodKey === 'veg' ? (cityData.foodSpots && cityData.foodSpots.veg) || "Traditional Veg Thali" : (cityData.foodSpots && cityData.foodSpots.nonveg) || "Local Special Non-Veg Meal";
-      if (foodCost > 0) {
-        notes.push(`<b>Food Recommendation:</b> Try ${foodDesc} (~₹${foodCost} total estimated).`);
-      }
+    // 3. Activity Spots Selection
+    function isBeachSpot(sp) {
+      if (!sp) return false;
+      const str = ((sp.name || '') + ' ' + (sp.desc || '')).toLowerCase();
+      return str.includes('beach') || str.includes('seashore') || str.includes('coastline') || str.includes('shores') || str.includes('sasihithlu') || str.includes('panambur') || str.includes('someshwara') || str.includes('tannirbhavi') || str.includes('miramar');
     }
 
-    // Spot pool for activities
-    let pool = [];
+    let candidateSpots = [];
     if (isHeavyRain && cityData.rainSpots && cityData.rainSpots.length > 0) {
-      pool = cityData.rainSpots;
+      candidateSpots = cityData.rainSpots;
     } else {
-      const moodKey = s.moodKey || 'chill';
-      const categorySpots = (cityData.spots && cityData.spots[moodKey]) ? cityData.spots[moodKey] : (cityData.spots && cityData.spots.chill) || [];
-      const natureSpots = (cityData.spots && cityData.spots.nature) || [];
-      const cultureSpots = (cityData.spots && cityData.spots.culture) || [];
-      pool = [...categorySpots, ...natureSpots, ...cultureSpots];
+      const catSpots = (cityData.spots && cityData.spots[moodKey]) ? cityData.spots[moodKey] : (cityData.spots && cityData.spots.chill) || [];
+      const natSpots = (cityData.spots && cityData.spots.nature) || [];
+      const culSpots = (cityData.spots && cityData.spots.culture) || [];
+      candidateSpots = [...catSpots, ...natSpots, ...culSpots];
     }
 
-    let validSpots = pool.filter(spot => {
-      if (budget <= 100 && (spot.cost || 0) > 0) return false;
+    // Filter by budget if ultra budget
+    let validSpots = candidateSpots.filter(sp => {
+      if (budget <= 100 && (sp.cost || 0) > 0) return false;
       return true;
     });
 
@@ -1711,13 +1678,7 @@
       ];
     }
 
-    function isBeachSpot(sp) {
-      if (!sp) return false;
-      const str = ((sp.name || '') + ' ' + (sp.desc || '')).toLowerCase();
-      return str.includes('beach') || str.includes('seashore') || str.includes('coastline') || str.includes('shores') || str.includes('sasihithlu') || str.includes('panambur') || str.includes('someshwara') || str.includes('tannirbhavi') || str.includes('miramar');
-    }
-
-    // STRICT TIMING RULE: Never suggest beaches in morning or afternoon (12 PM – 4:30 PM).
+    // Daytime non-beach spots
     let daytimeSpots = validSpots.filter(sp => !isBeachSpot(sp));
     if (daytimeSpots.length === 0) {
       daytimeSpots = [
@@ -1726,286 +1687,428 @@
       ];
     }
 
-    // Identify Beach and Viewpoint spots for 4:30 PM – 6:00 PM sunset
-    const allCityNatureSpots = [
+    // Sunset / Beach spot (for 4:30 PM - 6:00 PM)
+    const allNature = [
       ...(cityData.spots && cityData.spots.nature ? cityData.spots.nature : []),
       ...(cityData.spots && cityData.spots.chill ? cityData.spots.chill : []),
       ...(cityData.spots && cityData.spots.adventure ? cityData.spots.adventure : [])
     ];
-    const beachSpot = allCityNatureSpots.find(isBeachSpot) || { name: `${city} Sunset Beach Point` };
-    const viewpointSpot = allCityNatureSpots.find(sp => {
+    const beachSpot = allNature.find(isBeachSpot) || { name: `${city} Sunset Beach Point`, desc: "Watch the evening sunset over the shoreline." };
+    const viewpointSpot = allNature.find(sp => {
       const nm = (sp.name || '').toLowerCase();
-      return nm.includes('viewpoint') || nm.includes('hill') || nm.includes('tank') || nm.includes('lake') || (sp.time && sp.time.toLowerCase().includes('sunset'));
-    }) || allCityNatureSpots[0] || { name: `${city} Sunset Viewpoint` };
+      return nm.includes('viewpoint') || nm.includes('hill') || nm.includes('lake') || nm.includes('tank');
+    }) || allNature[0] || { name: `${city} Sunset Viewpoint`, desc: "Panoramic viewpoint for golden hour sunset." };
 
-    // 2. Timeline Planning strictly between 12 PM and 6 PM
-    if (selectedMovie) {
-      // 12:00 PM - 01:15 PM: Mall & Lunch / Food Court
-      const mallName = selectedMovie.mallName || (cityData.spots && cityData.spots.shopping && cityData.spots.shopping[0] ? cityData.spots.shopping[0].name : "Central Mall");
-      timelineItems.push({
-        time: "12:00 PM – 01:15 PM",
-        title: budget >= 801 ? `Restaurant Dining & Leisure Stroll` : `${mallName} Promenade & Food Court Lunch`,
-        desc: budget >= 801 
-          ? `Enjoy a delicious regional meal with the group before heading to the movie theatre.` 
-          : `Explore shops, visit the verified Gogupa stall / food court, and relax before the screening.`,
-        cost: foodCost > 0 ? `₹${foodCost} Lunch (Estimated Price)` : "Free Entry"
+    // Function to condense description to 1 clean, high-value sentence
+    function cleanSentence(desc, fallback) {
+      if (!desc) return fallback || '';
+      let s = desc.split('.')[0].trim();
+      if (!s.endsWith('.')) s += '.';
+      return s;
+    }
+
+    // 4. Build Timeline Stops Chronologically
+    let stops = [];
+    let actCost = 0;
+
+    function addStop(time, icon, title, desc, costNum, costLabel, transitAfter) {
+      if (costNum > 0) actCost += costNum;
+      stops.push({
+        time,
+        icon,
+        title,
+        desc: cleanSentence(desc, title),
+        costNum: costNum || 0,
+        costLabel: costLabel || (costNum > 0 ? `₹${costNum} (Est. Entry)` : 'Free Entry'),
+        transitAfter: transitAfter || null
       });
+    }
 
-      // 01:30 PM - 04:15 PM: Movie Screening at Multiplex
-      timelineItems.push({
-        time: `${selectedMovie.showtime} – ${selectedMovie.showtimeEnd || '04:15 PM'}`,
-        title: `🎬 Movie: ${selectedMovie.title} (${selectedMovie.language})`,
-        desc: `At <b>${selectedMovie.theatre}</b> (${selectedMovie.theatreLocation}). Runtime: ${selectedMovie.duration} (${selectedMovie.genre}, ${selectedMovie.certificate}). Verified on BookMyShow.`,
-        cost: `₹${movieTicketCost} (Estimated Price: ₹${selectedMovie.ticketPrice} × ${people})`
-      });
+    const transitHint = `~15m via ${transLabel.split('(')[0].trim()}`;
 
-      // 04:15 PM - 04:30 PM: Transit to Sunset Beach / Vantage Point
-      timelineItems.push({
-        time: "04:15 PM – 04:30 PM",
-        title: `Transit to Coastal Sunset Point`,
-        desc: `Short transit from theatre to the coast (~${selectedMovie.transitToBeachMinutes || 20} mins via ${transDesc.split('(')[0].trim()}). Arrive right in time for the 4:30 PM golden hour.`,
-        cost: "Included in Transport"
-      });
-
-      // 04:30 PM - 06:00 PM: Sunset Beach Visit (Strictly between 4:30 PM and 6:00 PM)
-      if (isHeavyRain) {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `Covered Waterfront Promenade / Museum`,
-          desc: `Monsoon Advisory: Safe indoor covered promenade protected from heavy rains. Open beaches avoided during monsoon downpours for safety.`,
-          cost: "Free Entry"
-        });
-      } else if (cityData.hasBeach) {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `🌅 Beautiful Sunset at ${beachSpot.name}`,
-          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool sea breeze along the shoreline waves. 100% accessible free alternative.`,
-          cost: "Free Entry"
-        });
-      } else {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `🌅 Beautiful Sunset at ${viewpointSpot.name}`,
-          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool evening breeze across the panoramic viewpoint. 100% accessible free alternative.`,
-          cost: "Free Entry"
-        });
-      }
+    if (timeSlotKey === 'morning') {
+      // 8 AM - 12 PM
+      addStop(
+        "08:30 AM – 09:30 AM",
+        "☕",
+        "Morning Breakfast & Coffee",
+        foodKey === 'none' ? "Morning walk and traditional canteen atmosphere." : "Savor fresh South Indian tiffin and filter coffee at a popular local canteen.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        transitHint
+      );
+      const sp1 = daytimeSpots[0] || { name: `${city} Heritage Site`, cost: 0, desc: "Historic architecture and scenic morning walkways." };
+      addStop(
+        "09:45 AM – 11:00 AM",
+        "🏛️",
+        sp1.name,
+        sp1.desc,
+        sp1.cost || 0,
+        null,
+        transitHint
+      );
+      const sp2 = daytimeSpots[1] || daytimeSpots[0];
+      addStop(
+        "11:15 AM – 12:00 PM",
+        "🌿",
+        sp2.name,
+        sp2.desc,
+        sp2.cost || 0,
+        null,
+        null
+      );
+    } else if (timeSlotKey === 'afternoon') {
+      // 12 PM - 4 PM
+      addStop(
+        "12:00 PM – 01:15 PM",
+        "🍽️",
+        "Regional Lunch Experience",
+        foodKey === 'none' ? "Leisurely break and stroll through local markets." : "Enjoy an authentic regional meal at a verified local restaurant.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        transitHint
+      );
+      const sp1 = daytimeSpots[0];
+      addStop(
+        "01:30 PM – 02:45 PM",
+        "🏛️",
+        sp1.name,
+        sp1.desc,
+        sp1.cost || 0,
+        null,
+        transitHint
+      );
+      const sp2 = daytimeSpots[1] || daytimeSpots[0];
+      addStop(
+        "03:00 PM – 04:00 PM",
+        "🌿",
+        sp2.name,
+        sp2.desc,
+        sp2.cost || 0,
+        null,
+        null
+      );
+    } else if (timeSlotKey === 'evening') {
+      // 4 PM - 8 PM (Strict 4:30 - 6:00 PM sunset)
+      addStop(
+        "04:00 PM – 04:30 PM",
+        "🚗",
+        `Transit to Sunset Shoreline`,
+        "Travel to the coast to arrive right in time for the golden hour sunset.",
+        0,
+        "Included in Transit",
+        null
+      );
+      const sunsetName = isHeavyRain ? "Indoor Waterfront Promenade" : (cityData.hasBeach ? beachSpot.name : viewpointSpot.name);
+      const sunsetDesc = isHeavyRain ? "Safe sheltered indoor promenade with scenic views of coastal waters." : "Experience the beautiful sunset under warm golden light and cool evening breeze.";
+      addStop(
+        "04:30 PM – 06:00 PM",
+        "🌅",
+        `Sunset at ${sunsetName}`,
+        sunsetDesc,
+        0,
+        "Free Entry",
+        transitHint
+      );
+      addStop(
+        "06:15 PM – 07:30 PM",
+        "🍢",
+        foodKey === 'none' ? "Evening Heritage Market Walk" : "Evening Street Food & Dinner",
+        foodKey === 'none' ? "Vibrant stroll through illuminated city streets and local shops." : "Taste famous street delicacies, local snacks, and refreshments at the market stalls.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        null
+      );
+    } else if (timeSlotKey === 'fullday') {
+      // 8 AM - 8 PM
+      addStop(
+        "08:30 AM – 09:30 AM",
+        "☕",
+        "Morning Breakfast & Park Walk",
+        foodKey === 'none' ? "Early morning stroll through green botanical gardens." : "Enjoy fresh breakfast and coffee before a full day of exploring.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        transitHint
+      );
+      const sp1 = daytimeSpots[0];
+      addStop(
+        "10:00 AM – 12:00 PM",
+        "🏛️",
+        sp1.name,
+        sp1.desc,
+        sp1.cost || 0,
+        null,
+        transitHint
+      );
+      addStop(
+        "12:15 PM – 01:30 PM",
+        "🍽️",
+        "Regional Lunch & Rest",
+        "Authentic regional meal with relaxation before afternoon destinations.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        transitHint
+      );
+      const sp2 = daytimeSpots[1] || daytimeSpots[0];
+      addStop(
+        "01:45 PM – 04:00 PM",
+        "🎨",
+        sp2.name,
+        sp2.desc,
+        sp2.cost || 0,
+        null,
+        transitHint
+      );
+      const sunsetName = isHeavyRain ? "Indoor Waterfront Center" : (cityData.hasBeach ? beachSpot.name : viewpointSpot.name);
+      addStop(
+        "04:30 PM – 06:00 PM",
+        "🌅",
+        `Golden Hour Sunset at ${sunsetName}`,
+        "Watch the sunset over the coast during prime golden hour.",
+        0,
+        "Free Entry",
+        transitHint
+      );
+      addStop(
+        "06:30 PM – 08:00 PM",
+        "🍢",
+        "Dinner & Night Market Walk",
+        "Delicious evening dining and lively bazaar souvenir shopping.",
+        0,
+        foodKey === 'none' ? "Free Entry" : "Included in Food",
+        null
+      );
     } else {
-      // Alternative Experience without movie (Strictly between 12 PM and 6 PM)
-      // Pick daytime non-beach spots:
-      const spot1 = daytimeSpots[0];
-      const spot2 = daytimeSpots[1] || daytimeSpots[0];
-      actCost += ((spot1 && spot1.cost) || 0) + ((spot2 && spot2.cost) || 0);
-
-      timelineItems.push({
-        time: "12:00 PM – 01:15 PM",
-        title: `Lunch & Cultural Heritage Exploration`,
-        desc: `Relaxed lunch and casual walk through vibrant regional heritage markets.`,
-        cost: foodCost > 0 ? `₹${foodCost} Lunch (Estimated Price)` : "Free Entry"
-      });
-
-      // 01:30 PM – 03:00 PM: Daytime Non-Beach Spot
-      timelineItems.push({
-        time: "01:30 PM – 03:00 PM",
-        title: spot1.name,
-        desc: spot1.desc || "Popular daytime sightseeing and heritage destination.",
-        cost: (spot1.cost || 0) === 0 ? "Free Entry" : `₹${spot1.cost} Entry (Estimated Price)`
-      });
-
-      // 03:00 PM – 04:30 PM: Afternoon Non-Beach Spot
-      timelineItems.push({
-        time: "03:00 PM – 04:30 PM",
-        title: spot2.name,
-        desc: spot2.desc || "Scenic leisure walking trail and architectural highlight.",
-        cost: (spot2.cost || 0) === 0 ? "Free Entry" : `₹${spot2.cost} Entry (Estimated Price)`
-      });
-
-      // 04:30 PM – 06:00 PM: Sunset Beach Visit (Strictly between 4:30 PM and 6:00 PM)
-      if (isHeavyRain) {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `Indoor Covered Heritage Promenade`,
-          desc: `Monsoon Advisory: Sheltered indoor exploration protected from rain downpours. Open beaches avoided during monsoon sea swells.`,
-          cost: "Free Entry"
-        });
-      } else if (cityData.hasBeach) {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `🌅 Beautiful Sunset at ${beachSpot.name}`,
-          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool sea breeze along the shoreline waves. 100% accessible free alternative.`,
-          cost: "Free Entry"
-        });
+      // 'prime' 12 PM - 6 PM (Default)
+      if (selectedMovie) {
+        addStop(
+          "12:00 PM – 01:15 PM",
+          "🍽️",
+          "Lunch & Mall Leisure",
+          `Enjoy lunch and explore shops near ${selectedMovie.theatreLocation || 'the theatre'}.`,
+          0,
+          foodKey === 'none' ? "Free Entry" : "Included in Food",
+          transitHint
+        );
+        addStop(
+          `${selectedMovie.showtime} – ${selectedMovie.showtimeEnd || '04:15 PM'}`,
+          "🎬",
+          `Movie: ${selectedMovie.title} (${selectedMovie.language})`,
+          `At ${selectedMovie.theatre} • ${selectedMovie.genre} (${selectedMovie.duration}).`,
+          movieTicketCost,
+          `₹${movieTicketCost} (Est. ${people > 1 ? people + ' Tkts' : 'Ticket'})`,
+          "~15m transit to sunset"
+        );
+        const sunsetName = isHeavyRain ? "Indoor Waterfront Promenade" : (cityData.hasBeach ? beachSpot.name : viewpointSpot.name);
+        addStop(
+          "04:30 PM – 06:00 PM",
+          "🌅",
+          `Sunset at ${sunsetName}`,
+          "Experience the beautiful golden hour sunset and refreshing sea breeze.",
+          0,
+          "Free Entry",
+          null
+        );
       } else {
-        timelineItems.push({
-          time: "04:30 PM – 06:00 PM",
-          title: `🌅 Beautiful Sunset at ${viewpointSpot.name}`,
-          desc: `Experience the beautiful sunset under warm golden sunlight and refreshing cool evening breeze across the panoramic viewpoint. 100% accessible free alternative.`,
-          cost: "Free Entry"
-        });
+        addStop(
+          "12:00 PM – 01:15 PM",
+          "🍽️",
+          "Regional Lunch & Cultural Walk",
+          foodKey === 'none' ? "Leisurely walk through historic city center." : "Enjoy a traditional lunch plate at a popular regional restaurant.",
+          0,
+          foodKey === 'none' ? "Free Entry" : "Included in Food",
+          transitHint
+        );
+        const sp1 = daytimeSpots[0];
+        addStop(
+          "01:30 PM – 02:45 PM",
+          "🏛️",
+          sp1.name,
+          sp1.desc,
+          sp1.cost || 0,
+          null,
+          transitHint
+        );
+        const sp2 = daytimeSpots[1] || daytimeSpots[0];
+        addStop(
+          "03:00 PM – 04:15 PM",
+          "🌿",
+          sp2.name,
+          sp2.desc,
+          sp2.cost || 0,
+          null,
+          transitHint
+        );
+        const sunsetName = isHeavyRain ? "Indoor Waterfront Promenade" : (cityData.hasBeach ? beachSpot.name : viewpointSpot.name);
+        addStop(
+          "04:30 PM – 06:00 PM",
+          "🌅",
+          `Sunset at ${sunsetName}`,
+          "Experience the beautiful golden hour sunset and refreshing coastal breeze.",
+          0,
+          "Free Entry",
+          null
+        );
       }
     }
 
-    // Gogupa tip if applicable
-    const hasMallOrShopping = s.moodKey === 'shopping' || (selectedMovie && selectedMovie.mallName);
-    if (hasMallOrShopping) {
-      const mallRef = selectedMovie ? selectedMovie.mallName : "the mall";
-      notes.push(`<b>Gogupa Stall Tip:</b> Head to the verified Gogupa counters near ${mallRef} — fresh, hot plates for just <b>₹20/plate</b>! Highly recommended.`);
+    // 5. Airtight Budget Arithmetic
+    let foodCost = 0;
+    let snackCost = 0;
+    const initialSpent = transportCost + movieTicketCost + actCost;
+
+    if (budget > initialSpent && foodKey !== 'none') {
+      const leftover = budget - initialSpent;
+      if (leftover >= 60) {
+        foodCost = Math.floor(leftover * 0.8);
+        snackCost = leftover - foodCost;
+      } else {
+        foodCost = leftover;
+        snackCost = 0;
+      }
     }
 
-    // Ensure budget is NEVER exceeded
-    let totalCalculated = movieTicketCost + transportCost + foodCost + actCost;
+    // Ensure total never exceeds budget
+    let totalCalculated = transportCost + movieTicketCost + actCost + foodCost + snackCost;
     if (totalCalculated > budget && budget > 0) {
-      foodCost = Math.max(0, budget - movieTicketCost - transportCost - actCost);
-      totalCalculated = movieTicketCost + transportCost + foodCost + actCost;
-    }
-    const remainingBudget = Math.max(0, budget - totalCalculated);
-
-    // Accessible Free Alternatives Data
-    let freeBeachNames = "Panambur Beach & Someshwara Shoreline";
-    let freeCultureNames = "Kudroli Gokarnanatheshwara Temple & Kadri Manjunatha Temple";
-    let freeNatureNames = "Sultan Battery Waterfront Promenade & Kadri Park Public Loop";
-
-    if (city.toLowerCase().includes('bangalore') || city.toLowerCase().includes('bengaluru')) {
-      freeBeachNames = "Sankey Tank Lakeside & Ulsoor Lake Promenades";
-      freeCultureNames = "ISKCON Temple (Rajajinagar) & Vidhana Soudha Public Promenade";
-      freeNatureNames = "Cubbon Park Bamboo Groves & Turahalli Forest Trail";
-    } else if (city.toLowerCase().includes('mysur') || city.toLowerCase().includes('mysore')) {
-      freeBeachNames = "Chamundi Hill Sunset Viewpoint & Kukkarahalli Lake Shoreline";
-      freeCultureNames = "St. Philomena's Cathedral & Mysore Palace Outer Grounds";
-      freeNatureNames = "Kukkarahalli Lake Nature Walkway Loop";
-    } else if (city.toLowerCase().includes('goa')) {
-      freeBeachNames = "Miramar Beach & Dona Paula Public Promontory";
-      freeCultureNames = "Basilica of Bom Jesus & Se Cathedral Precincts";
-      freeNatureNames = "Fontainhas Latin Quarter Walking Route";
+      const diff = totalCalculated - budget;
+      if (snackCost >= diff) {
+        snackCost -= diff;
+      } else {
+        foodCost = Math.max(0, foodCost - (diff - snackCost));
+        snackCost = 0;
+      }
+      totalCalculated = transportCost + movieTicketCost + actCost + foodCost + snackCost;
     }
 
-    const freeAltCardHtml = `
-      <div class="wai-free-alternatives-card">
-        <div class="wai-free-alt-header">
-          <span>🌿 Accessible Free Alternatives</span>
-          <span class="wai-free-alt-badge">₹0 Entry • Free For All</span>
-        </div>
-        <div style="font-size: 0.77rem; color: #475569; margin-bottom: 6px;">
-          ${(budget <= 500) 
-            ? `<b>Budget-Friendly Mode:</b> If you cannot afford tickets, dining, or private cabs, enjoy these 100% free accessible alternatives in ${city}:` 
-            : `If you or your group ever need zero-cost alternatives for ${city}, these verified spots are 100% free and accessible:`}
-        </div>
-        <div class="wai-free-alt-item">
-          <span class="wai-free-alt-bullet">🏖️</span>
-          <div>
-            <b>Free Sunset Beach (4:30 PM – 6:00 PM only):</b> ${freeBeachNames} — 100% free public admission. Experience the <b>beautiful sunset</b>, warm <b>golden sunlight</b>, and refreshing <b>cool sea breeze</b> without paying a single rupee. (<i>Note: Beaches are suggested exclusively between 4:30 PM and 6:00 PM; morning & afternoon beach visits are never recommended</i>).
-          </div>
-        </div>
-        <div class="wai-free-alt-item">
-          <span class="wai-free-alt-bullet">🏛️</span>
-          <div>
-            <b>Zero-Entry Cultural Heritage:</b> ${freeCultureNames} — magnificent architecture, spiritual tranquility, and historic corridors with zero admission fees.
-          </div>
-        </div>
-        <div class="wai-free-alt-item">
-          <span class="wai-free-alt-bullet">🚶</span>
-          <div>
-            <b>Scenic Nature & Walking Trails:</b> ${freeNatureNames} — open green spaces and waterfront walking trails completely free to explore.
-          </div>
-        </div>
-        <div class="wai-free-alt-item">
-          <span class="wai-free-alt-bullet">💡</span>
-          <div>
-            <b>Free Travel Tip:</b> Pack a home tiffin and reusable water bottles to picnic by the coastal promenade or public parks at sunset for a full weekend experience at ₹0 expense.
-          </div>
-        </div>
-      </div>
-    `;
+    const remainingBalance = Math.max(0, budget - totalCalculated);
+    const budgetPercent = budget > 0 ? Math.min(100, Math.round((totalCalculated / budget) * 100)) : 100;
 
+    // Update stop cost display for Food if foodCost > 0
+    stops.forEach(st => {
+      if (st.costLabel === "Included in Food") {
+        st.costLabel = foodCost > 0 ? `₹${foodCost} (Est. Meal)` : "Free Entry";
+      }
+    });
+
+    // 6. Render Premium Compact HTML
     let html = `
       <div class="wai-itinerary">
-        <div class="wai-itinerary-title">${t('itinerary_for', s.language).replace('{city}', city)}</div>
-        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">
-          ${s.peopleLabel} • Total Budget: ₹${s.budget} • ${transDesc.split('(')[0].trim()} • 12 PM – 6 PM
+        <!-- Compact Header -->
+        <div class="wai-itin-header">
+          <div class="wai-itinerary-title">
+            <span>🌴 ${t('itinerary_for', s.language).replace('{city}', city)}</span>
+          </div>
+          <div class="wai-itin-meta">
+            <span class="wai-itin-pill">👥 ${s.peopleLabel || 'Solo'}</span>
+            <span class="wai-itin-pill">⏱️ ${s.timeSlot ? s.timeSlot.split('(')[0].trim() : '12 PM – 6 PM'}</span>
+            <span class="wai-itin-pill">🚌 ${transportKey === 'walk' ? 'Walking' : transportKey === 'bus' ? 'Bus' : transportKey === 'auto' ? 'Auto' : 'Cab'}</span>
+            <span class="wai-itin-pill">✨ ${s.mood ? s.mood.split('&')[0].trim() : 'Chill'}</span>
+          </div>
         </div>
 
-        <div class="wai-timeline">
+        <!-- Compact Top Budget Summary -->
+        <div class="wai-budget-summary-card">
+          <div class="wai-budget-metric-grid">
+            <div class="wai-metric-item">
+              <span class="wai-metric-label">Total Budget</span>
+              <span class="wai-metric-val">₹${budget.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="wai-metric-divider"></div>
+            <div class="wai-metric-item">
+              <span class="wai-metric-label">Planned Spend</span>
+              <span class="wai-metric-val primary">₹${totalCalculated.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="wai-metric-divider"></div>
+            <div class="wai-metric-item">
+              <span class="wai-metric-label">Remaining</span>
+              <span class="wai-metric-val ${remainingBalance === 0 ? 'exact' : 'positive'}">
+                ${remainingBalance === 0 ? '₹0 (Exact)' : `₹${remainingBalance.toLocaleString('en-IN')}`}
+              </span>
+            </div>
+          </div>
+
+          <div class="wai-budget-progress-track">
+            <div class="wai-budget-progress-fill" style="width: ${budgetPercent}%;"></div>
+          </div>
+
+          <div class="wai-budget-pills-row">
+            ${transportCost > 0 ? `<span class="wai-budget-cat-pill">🚌 Transit: ₹${transportCost}</span>` : `<span class="wai-budget-cat-pill">🚶 Transit: ₹0</span>`}
+            ${foodCost > 0 ? `<span class="wai-budget-cat-pill">🍽️ Food: ₹${foodCost}</span>` : ''}
+            ${actCost > 0 ? `<span class="wai-budget-cat-pill">🎟️ Entry: ₹${actCost}</span>` : `<span class="wai-budget-cat-pill">🏛️ Entry: Free</span>`}
+            ${movieTicketCost > 0 ? `<span class="wai-budget-cat-pill">🎬 Movie: ₹${movieTicketCost}</span>` : ''}
+            ${snackCost > 0 ? `<span class="wai-budget-cat-pill">☕ Snacks: ₹${snackCost}</span>` : ''}
+          </div>
+        </div>
+
+        <!-- Chronological Stops (Mobile-First Cards) -->
+        <div class="wai-stops-container">
     `;
 
-    timelineItems.forEach(item => {
+    stops.forEach((st, idx) => {
+      const isFree = st.costNum === 0 && (st.costLabel === 'Free Entry' || st.costLabel.includes('Free'));
       html += `
-        <div class="wai-timeline-item">
-          <div class="wai-time-slot" style="font-weight: 700; color: #8338EC; font-size: 0.74rem; min-width: 72px;">${item.time}</div>
-          <div class="wai-timeline-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #8338EC; margin-top: 4px; flex-shrink: 0;"></div>
-          <div class="wai-timeline-content" style="flex: 1;">
-            <div class="wai-timeline-content-title" style="font-weight: 600; color: #1e293b; font-size: 0.88rem;">${item.title}</div>
-            <div class="wai-timeline-content-desc" style="font-size: 0.8rem; color: #64748b; margin-top: 2px;">${item.desc}</div>
-            <div style="font-size: 0.75rem; font-weight: 600; color: #10b981; margin-top: 4px;">${item.cost}</div>
+        <div class="wai-stop-card">
+          <div class="wai-stop-top">
+            <div class="wai-stop-time">
+              <span>🕒</span>
+              <span>${st.time}</span>
+            </div>
+            <span class="wai-stop-price ${isFree ? 'free' : 'paid'}">${st.costLabel}</span>
+          </div>
+          <div class="wai-stop-body">
+            <div class="wai-stop-title-wrap">
+              <span class="wai-stop-icon">${st.icon}</span>
+              <h4 class="wai-stop-name">${st.title}</h4>
+            </div>
+            <p class="wai-stop-desc">${st.desc}</p>
           </div>
         </div>
       `;
+
+      if (st.transitAfter && idx < stops.length - 1) {
+        html += `
+          <div class="wai-transit-connector">
+            <span>↓ ${st.transitAfter}</span>
+          </div>
+        `;
+      }
     });
 
     html += `
         </div>
-
-        <div class="wai-budget-card">
-          <div style="font-size: 0.82rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
-            📊 Itemized Budget Breakdown
-          </div>
-          ${movieTicketCost > 0 ? `
-          <div class="wai-budget-row">
-            <span class="wai-budget-row-label">
-              🎬 Estimated Movie Tickets:
-              <span class="wai-budget-est-tag">Estimated Price (₹${selectedMovie.ticketPrice} × ${people})</span>
-            </span>
-            <span style="font-weight: 700; color: #1e293b;">₹${movieTicketCost}</span>
-          </div>` : ''}
-
-          <div class="wai-budget-row">
-            <span class="wai-budget-row-label">
-              🚌 Transport (${transDesc.split('(')[0].trim()}):
-              <span class="wai-budget-est-tag">Estimated Price</span>
-            </span>
-            <span style="font-weight: 700; color: #1e293b;">₹${transportCost}</span>
-          </div>
-
-          ${foodCost > 0 ? `
-          <div class="wai-budget-row">
-            <span class="wai-budget-row-label">
-              🍽️ Food & Dining:
-              <span class="wai-budget-est-tag">Estimated Price</span>
-            </span>
-            <span style="font-weight: 700; color: #1e293b;">₹${foodCost}</span>
-          </div>` : ''}
-
-          <div class="wai-budget-row">
-            <span class="wai-budget-row-label">
-              🏖️ Activities & Sightseeing:
-              <span class="wai-budget-est-tag">Estimated Price</span>
-            </span>
-            <span style="font-weight: 700; color: #1e293b;">₹${actCost}</span>
-          </div>
-
-          <div class="wai-budget-total-row" style="border-top: 1px solid #e2e8f0; padding-top: 8px; margin-top: 4px; display: flex; justify-content: space-between; font-weight: 700;">
-            <span>Total Estimated Spending:</span>
-            <span style="color: #8338EC; font-size: 0.95rem;">₹${totalCalculated} / ₹${s.budget}</span>
-          </div>
-
-          <div class="wai-budget-remaining-row">
-            <span>Remaining Budget Buffer:</span>
-            <span>₹${remainingBudget}</span>
-          </div>
-        </div>
     `;
 
-    if (notes.length > 0) {
-      notes.forEach(note => {
-        html += `<div style="background: rgba(131, 56, 236, 0.06); border-left: 3px solid #8338EC; border-radius: 4px; padding: 8px 10px; font-size: 0.78rem; line-height: 1.4; color: #334155; margin-top: 8px;">${note}</div>`;
-      });
+    // Concise, single-line practical note if weather/gogupa applies
+    if (isHeavyRain) {
+      html += `
+        <div class="wai-itin-note">
+          <span>🌧️</span>
+          <span><b>Monsoon Advisory:</b> Sheltered indoor spots prioritized for safety during heavy rain.</span>
+        </div>
+      `;
+    } else if (s.weatherKey === 'light_rain') {
+      html += `
+        <div class="wai-itin-note">
+          <span>🌦️</span>
+          <span><b>Weather Note:</b> Pleasant light breeze with gentle showers. Carry an umbrella.</span>
+        </div>
+      `;
     }
 
-    // Insert Accessible Free Alternatives Card
-    html += freeAltCardHtml;
+    if (moodKey === 'shopping' || (selectedMovie && selectedMovie.mallName)) {
+      html += `
+        <div class="wai-itin-note">
+          <span>💡</span>
+          <span><b>Local Tip:</b> Hot fresh plates available at verified local Gogupa counters (~₹20/plate).</span>
+        </div>
+      `;
+    }
 
     html += `
-        <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
-          <button class="wai-chip" style="width: 100%; text-align: center; justify-content: center; background: #8338EC; color: #ffffff; border: none; font-weight: 600;" onclick="window.WeekendAI.reset()">
+        <!-- Action Row -->
+        <div style="margin-top: 10px;">
+          <button type="button" class="wai-chip" style="width: 100%; justify-content: center; background: #8338EC; color: #ffffff; border: none; font-weight: 600; padding: 10px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;" onclick="window.WeekendAI.reset()">
             ${t('start_over', s.language)}
           </button>
         </div>
@@ -2014,6 +2117,7 @@
 
     return html;
   }
+
 
   // --- DOM References & UI Controller ---
   let DOM = {};
