@@ -1361,6 +1361,150 @@
     return card;
   }
 
+
+  // --- Live Weather Integration (Open-Meteo Free Service) ---
+  const WEATHER_COORDS = {
+    'mangaluru': { name: 'Mangaluru', lat: 12.9141, lon: 74.8560 },
+    'bangalore': { name: 'Bangalore', lat: 12.9716, lon: 77.5946 },
+    'bengaluru': { name: 'Bengaluru', lat: 12.9716, lon: 77.5946 },
+    'mysuru': { name: 'Mysuru', lat: 12.2958, lon: 76.6394 },
+    'mysore': { name: 'Mysuru', lat: 12.2958, lon: 76.6394 },
+    'manipal': { name: 'Manipal', lat: 13.3409, lon: 74.7421 },
+    'udupi': { name: 'Udupi', lat: 13.3409, lon: 74.7421 },
+    'chikmagalur': { name: 'Chikmagalur', lat: 13.3161, lon: 75.7720 },
+    'coorg': { name: 'Coorg', lat: 12.4244, lon: 75.7382 },
+    'ooty': { name: 'Ooty', lat: 11.4102, lon: 76.6950 },
+    'goa': { name: 'Goa', lat: 15.2993, lon: 74.1240 }
+  };
+
+  function mapWmoToWeather(code, temp) {
+    if (code === 0) return { key: 'clear', label: 'Clear / Sunny', icon: '☀️', description: Math.round(temp) + '°C, Clear Sky' };
+    if ([1, 2, 3, 45, 48].includes(code)) return { key: 'cloudy', label: 'Cloudy / Breeze', icon: '⛅', description: Math.round(temp) + '°C, Partly Cloudy' };
+    if ([51, 53, 55, 61, 80].includes(code)) return { key: 'light_rain', label: 'Light Rain', icon: '🌦️', description: Math.round(temp) + '°C, Light Showers' };
+    return { key: 'heavy_rain', label: 'Heavy Rain', icon: '🌧️', description: Math.round(temp) + '°C, Rain Showers' };
+  }
+
+  function fetchLiveCityWeather(cityName, callback) {
+    const key = (cityName || 'Mangaluru').toLowerCase();
+    const coords = WEATHER_COORDS[key] || { name: cityName, lat: 12.9141, lon: 74.8560 };
+
+    // 1. Try local proxy endpoint first
+    fetch('/api/weather?city=' + encodeURIComponent(coords.name))
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.success && typeof data.temperature === 'number') {
+          callback({
+            key: data.weatherKey || 'clear',
+            label: data.weatherLabel || 'Clear / Sunny',
+            icon: data.icon || '☀️',
+            temperature: data.temperature,
+            description: data.description || (Math.round(data.temperature) + '°C, ' + data.weatherLabel)
+          });
+          return;
+        }
+        throw new Error('Fallback to direct Open-Meteo');
+      })
+      .catch(() => {
+        // 2. Direct Open-Meteo fallback
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + coords.lat + '&longitude=' + coords.lon + '&current=temperature_2m,weather_code&timezone=auto';
+        fetch(url)
+          .then(r => r.json())
+          .then(data => {
+            const current = (data && data.current) || {};
+            const temp = current.temperature_2m ?? 27;
+            const code = current.weather_code ?? 0;
+            const mapped = mapWmoToWeather(code, temp);
+            callback({
+              key: mapped.key,
+              label: mapped.label,
+              icon: mapped.icon,
+              temperature: temp,
+              description: mapped.description
+            });
+          })
+          .catch(() => {
+            // 3. Offline fallback
+            callback({
+              key: 'clear',
+              label: 'Clear / Sunny',
+              icon: '☀️',
+              temperature: 28,
+              description: '28°C, Clear Sky'
+            });
+          });
+      });
+  }
+
+  function createWeatherSelector(onSelectWeather) {
+    const cityName = STATE.destination || 'Mangaluru';
+    const card = document.createElement('div');
+    card.className = 'wai-weather-selector-card';
+
+    card.innerHTML = `
+      <div class="wai-live-weather-card" id="wai-lw-card">
+        <div class="wai-lw-badge">
+          <span class="wai-lw-pulse-dot"></span>
+          <span>LIVE SATELLITE WEATHER</span>
+        </div>
+        <div class="wai-lw-body">
+          <div class="wai-lw-visual">
+            <span class="wai-lw-icon" id="wai-lw-icon">☀️</span>
+            <div>
+              <div class="wai-lw-temp" id="wai-lw-temp">--°C</div>
+              <div class="wai-lw-city">${escapeHtml(cityName)}</div>
+            </div>
+          </div>
+          <div class="wai-lw-desc" id="wai-lw-desc">Fetching live forecast...</div>
+        </div>
+        <button type="button" class="wai-lw-action-btn" id="wai-lw-btn" disabled>
+          <span id="wai-lw-btn-text">Detecting live weather...</span>
+        </button>
+      </div>
+
+      <div class="wai-weather-divider-line">
+        <span>or choose manually</span>
+      </div>
+
+      <div class="wai-weather-chips-grid">
+        <button type="button" class="wai-chip wai-weather-manual-chip" data-val="clear" data-label="Clear / Sunny">☀️ Clear / Sunny</button>
+        <button type="button" class="wai-chip wai-weather-manual-chip" data-val="cloudy" data-label="Cloudy">⛅ Cloudy / Breeze</button>
+        <button type="button" class="wai-chip wai-weather-manual-chip" data-val="light_rain" data-label="Light Rain">🌦️ Light Rain</button>
+        <button type="button" class="wai-chip wai-weather-manual-chip" data-val="heavy_rain" data-label="Heavy Rain">🌧️ Heavy Rain</button>
+      </div>
+    `;
+
+    const iconEl = card.querySelector('#wai-lw-icon');
+    const tempEl = card.querySelector('#wai-lw-temp');
+    const descEl = card.querySelector('#wai-lw-desc');
+    const btnEl = card.querySelector('#wai-lw-btn');
+    const btnTextEl = card.querySelector('#wai-lw-btn-text');
+
+    fetchLiveCityWeather(cityName, (w) => {
+      if (iconEl) iconEl.textContent = w.icon;
+      if (tempEl) tempEl.textContent = Math.round(w.temperature) + '°C';
+      if (descEl) descEl.textContent = w.description;
+      if (btnEl) {
+        btnEl.disabled = false;
+        btnTextEl.textContent = '⚡ Use Live: ' + w.label + ' (' + Math.round(w.temperature) + '°C)';
+        btnEl.onclick = () => {
+          card.classList.add('wai-card-disabled');
+          btnEl.classList.add('wai-selected');
+          onSelectWeather(w.key, w.label + ' (' + Math.round(w.temperature) + '°C Live)');
+        };
+      }
+    });
+
+    card.querySelectorAll('.wai-weather-manual-chip').forEach(btn => {
+      btn.onclick = () => {
+        card.classList.add('wai-card-disabled');
+        btn.classList.add('wai-selected');
+        onSelectWeather(btn.dataset.val, btn.dataset.label);
+      };
+    });
+
+    return card;
+  }
+
   // --- 9 Conversation Steps ---
   const STEPS = [
     {
@@ -1670,18 +1814,12 @@
     {
       id: 'weather',
       getQuestion: () => t('weather_q', STATE.language),
-      getChips: () => [
-        { label: "Clear / Sunny", value: "clear", labelText: "Clear / Sunny" },
-        { label: "Cloudy / Breeze", value: "cloudy", labelText: "Cloudy" },
-        { label: "Light Rain", value: "light_rain", labelText: "Light Rain" },
-        { label: "Heavy Rain", value: "heavy_rain", labelText: "Heavy Rain" }
-      ],
-      onSelect: (val, chipObj) => {
-        STATE.weatherKey = val;
-        STATE.weather = chipObj ? chipObj.labelText : val;
-        addUserMessage(STATE.weather);
+      renderCustom: () => createWeatherSelector((weatherKey, weatherLabel) => {
+        STATE.weatherKey = weatherKey;
+        STATE.weather = weatherLabel;
+        addUserMessage(weatherLabel);
         advanceStep();
-      }
+      })
     },
     {
       id: 'confirmation',

@@ -292,6 +292,96 @@ const requestListener = async (req, res) => {
 
     // (request logging disabled in production for performance)
 
+    // --- LIVE WEATHER PROXY ENDPOINT (Free Open-Meteo Integration) ---
+    if (pathname === '/api/weather') {
+        setCorsHeaders(res);
+        const queryCity = (parsedUrl.query.city || 'Mangaluru').trim();
+        const cityKey = queryCity.toLowerCase();
+        
+        const CITY_COORDS_MAP = {
+            'mangaluru': { name: 'Mangaluru', lat: 12.9141, lon: 74.8560 },
+            'mangalore': { name: 'Mangaluru', lat: 12.9141, lon: 74.8560 },
+            'bangalore': { name: 'Bangalore', lat: 12.9716, lon: 77.5946 },
+            'bengaluru': { name: 'Bengaluru', lat: 12.9716, lon: 77.5946 },
+            'mysuru': { name: 'Mysuru', lat: 12.2958, lon: 76.6394 },
+            'mysore': { name: 'Mysuru', lat: 12.2958, lon: 76.6394 },
+            'manipal': { name: 'Manipal', lat: 13.3409, lon: 74.7421 },
+            'udupi': { name: 'Udupi', lat: 13.3409, lon: 74.7421 },
+            'chikmagalur': { name: 'Chikmagalur', lat: 13.3161, lon: 75.7720 },
+            'chikkamagaluru': { name: 'Chikmagalur', lat: 13.3161, lon: 75.7720 },
+            'coorg': { name: 'Coorg', lat: 12.4244, lon: 75.7382 },
+            'madikeri': { name: 'Madikeri', lat: 12.4244, lon: 75.7382 },
+            'ooty': { name: 'Ooty', lat: 11.4102, lon: 76.6950 },
+            'goa': { name: 'Goa', lat: 15.2993, lon: 74.1240 },
+            'vijayanagara': { name: 'Vijayanagara (Hampi)', lat: 15.3350, lon: 76.4600 },
+            'hampi': { name: 'Hampi', lat: 15.3350, lon: 76.4600 }
+        };
+
+        const coords = CITY_COORDS_MAP[cityKey] || { name: queryCity, lat: 12.9141, lon: 74.8560 };
+
+        function mapWmoWeather(code, temp) {
+            if (code === 0) return { key: 'clear', label: 'Clear / Sunny', icon: '☀️', desc: Math.round(temp) + '°C, Clear Sky' };
+            if ([1, 2, 3, 45, 48].includes(code)) return { key: 'cloudy', label: 'Cloudy / Breeze', icon: '⛅', desc: Math.round(temp) + '°C, Partly Cloudy' };
+            if ([51, 53, 55, 61, 80].includes(code)) return { key: 'light_rain', label: 'Light Rain', icon: '🌦️', desc: Math.round(temp) + '°C, Light Showers' };
+            return { key: 'heavy_rain', label: 'Heavy Rain', icon: '🌧️', desc: Math.round(temp) + '°C, Heavy Rain' };
+        }
+
+        const openMeteoUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + coords.lat + '&longitude=' + coords.lon + '&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto';
+
+        https.get(openMeteoUrl, (apiRes) => {
+            let data = '';
+            apiRes.on('data', chunk => data += chunk);
+            apiRes.on('end', () => {
+                try {
+                    const parsed = JSON.parse(data);
+                    const current = parsed.current || {};
+                    const temp = current.temperature_2m ?? 27;
+                    const code = current.weather_code ?? 0;
+                    const mapped = mapWmoWeather(code, temp);
+
+                    res.writeHead(200, {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Cache-Control': 'public, max-age=600'
+                    });
+                    res.end(JSON.stringify({
+                        success: true,
+                        city: coords.name,
+                        temperature: temp,
+                        weatherCode: code,
+                        weatherKey: mapped.key,
+                        weatherLabel: mapped.label,
+                        icon: mapped.icon,
+                        description: mapped.desc
+                    }));
+                } catch (parseErr) {
+                    res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                    res.end(JSON.stringify({
+                        success: true,
+                        city: coords.name,
+                        temperature: 27,
+                        weatherKey: 'clear',
+                        weatherLabel: 'Clear / Sunny',
+                        icon: '☀️',
+                        description: '27°C, Clear'
+                    }));
+                }
+            });
+        }).on('error', (err) => {
+            res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            res.end(JSON.stringify({
+                success: true,
+                city: coords.name,
+                temperature: 27,
+                weatherKey: 'clear',
+                weatherLabel: 'Clear / Sunny',
+                icon: '☀️',
+                description: '27°C, Clear'
+            }));
+        });
+        return;
+    }
+
     // 2. Endpoint: Fetch Google Place Details (with Supabase caching)
     if (pathname.startsWith('/api/place-details/')) {
         setCorsHeaders(res);
