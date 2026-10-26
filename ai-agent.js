@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+  }
+
   // --- Multi-Language Translations ---
   const TRANSLATIONS = {
     en: {
@@ -1365,6 +1369,7 @@
   // --- Live Weather Integration (Open-Meteo Free Service) ---
   const WEATHER_COORDS = {
     'mangaluru': { name: 'Mangaluru', lat: 12.9141, lon: 74.8560 },
+    'mangalore': { name: 'Mangaluru', lat: 12.9141, lon: 74.8560 },
     'bangalore': { name: 'Bangalore', lat: 12.9716, lon: 77.5946 },
     'bengaluru': { name: 'Bengaluru', lat: 12.9716, lon: 77.5946 },
     'mysuru': { name: 'Mysuru', lat: 12.2958, lon: 76.6394 },
@@ -1372,26 +1377,43 @@
     'manipal': { name: 'Manipal', lat: 13.3409, lon: 74.7421 },
     'udupi': { name: 'Udupi', lat: 13.3409, lon: 74.7421 },
     'chikmagalur': { name: 'Chikmagalur', lat: 13.3161, lon: 75.7720 },
+    'chikkamagaluru': { name: 'Chikmagalur', lat: 13.3161, lon: 75.7720 },
     'coorg': { name: 'Coorg', lat: 12.4244, lon: 75.7382 },
+    'madikeri': { name: 'Madikeri', lat: 12.4244, lon: 75.7382 },
     'ooty': { name: 'Ooty', lat: 11.4102, lon: 76.6950 },
-    'goa': { name: 'Goa', lat: 15.2993, lon: 74.1240 }
+    'goa': { name: 'Goa', lat: 15.2993, lon: 74.1240 },
+    'vijayanagara': { name: 'Vijayanagara (Hampi)', lat: 15.3350, lon: 76.4600 },
+    'hampi': { name: 'Hampi', lat: 15.3350, lon: 76.4600 }
   };
 
+  function getCityCoordinates(cityName) {
+    const raw = (cityName || 'Mangaluru').toLowerCase();
+    for (const key in WEATHER_COORDS) {
+      if (raw.includes(key) || key.includes(raw)) {
+        return WEATHER_COORDS[key];
+      }
+    }
+    return { name: cityName, lat: 12.9141, lon: 74.8560 };
+  }
+
   function mapWmoToWeather(code, temp) {
-    if (code === 0) return { key: 'clear', label: 'Clear / Sunny', icon: '☀️', description: Math.round(temp) + '°C, Clear Sky' };
-    if ([1, 2, 3, 45, 48].includes(code)) return { key: 'cloudy', label: 'Cloudy / Breeze', icon: '⛅', description: Math.round(temp) + '°C, Partly Cloudy' };
-    if ([51, 53, 55, 61, 80].includes(code)) return { key: 'light_rain', label: 'Light Rain', icon: '🌦️', description: Math.round(temp) + '°C, Light Showers' };
-    return { key: 'heavy_rain', label: 'Heavy Rain', icon: '🌧️', description: Math.round(temp) + '°C, Rain Showers' };
+    if (code === 0) return { key: 'clear', label: 'Clear / Sunny', icon: '☀️', description: Math.round(temp) + '°C, Clear Sky • No Rain' };
+    if ([1, 2, 3, 45, 48].includes(code)) return { key: 'cloudy', label: 'Cloudy / Breeze', icon: '⛅', description: Math.round(temp) + '°C, Partly Cloudy • Dry' };
+    if ([51, 53, 55, 61, 80].includes(code)) return { key: 'light_rain', label: 'Light Rain', icon: '🌦️', description: Math.round(temp) + '°C, Light Rain / Showers' };
+    return { key: 'heavy_rain', label: 'Heavy Rain', icon: '🌧️', description: Math.round(temp) + '°C, Rain Detected' };
   }
 
   function fetchLiveCityWeather(cityName, callback) {
-    const key = (cityName || 'Mangaluru').toLowerCase();
-    const coords = WEATHER_COORDS[key] || { name: cityName, lat: 12.9141, lon: 74.8560 };
+    const coords = getCityCoordinates(cityName);
 
-    // 1. Try local proxy endpoint first
-    fetch('/api/weather?city=' + encodeURIComponent(coords.name))
+    // 1. Try local proxy endpoint first with 2s timeout
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2200) : null;
+
+    fetch('/api/weather?city=' + encodeURIComponent(coords.name), { signal: controller ? controller.signal : undefined })
       .then(r => r.json())
       .then(data => {
+        if (timeoutId) clearTimeout(timeoutId);
         if (data && data.success && typeof data.temperature === 'number') {
           callback({
             key: data.weatherKey || 'clear',
@@ -1405,13 +1427,14 @@
         throw new Error('Fallback to direct Open-Meteo');
       })
       .catch(() => {
+        if (timeoutId) clearTimeout(timeoutId);
         // 2. Direct Open-Meteo fallback
         const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + coords.lat + '&longitude=' + coords.lon + '&current=temperature_2m,weather_code&timezone=auto';
         fetch(url)
           .then(r => r.json())
           .then(data => {
             const current = (data && data.current) || {};
-            const temp = current.temperature_2m ?? 27;
+            const temp = current.temperature_2m ?? 26;
             const code = current.weather_code ?? 0;
             const mapped = mapWmoToWeather(code, temp);
             callback({
@@ -1423,7 +1446,7 @@
             });
           })
           .catch(() => {
-            // 3. Offline fallback
+            // 3. Resilient seasonal fallback (never freezes)
             callback({
               key: 'clear',
               label: 'Clear / Sunny',
@@ -1440,29 +1463,41 @@
     const card = document.createElement('div');
     card.className = 'wai-weather-selector-card';
 
+    let hasHandled = false;
+    let autoTimer = null;
+
+    function applySelection(key, label) {
+      if (hasHandled) return;
+      hasHandled = true;
+      if (autoTimer) clearTimeout(autoTimer);
+      card.classList.add('wai-card-disabled');
+      onSelectWeather(key, label);
+    }
+
     card.innerHTML = `
       <div class="wai-live-weather-card" id="wai-lw-card">
         <div class="wai-lw-badge">
           <span class="wai-lw-pulse-dot"></span>
-          <span>LIVE SATELLITE WEATHER</span>
+          <span>LIVE WEATHER & RAIN DETECTION</span>
         </div>
         <div class="wai-lw-body">
           <div class="wai-lw-visual">
-            <span class="wai-lw-icon" id="wai-lw-icon">☀️</span>
+            <span class="wai-lw-icon" id="wai-lw-icon">⏳</span>
             <div>
               <div class="wai-lw-temp" id="wai-lw-temp">--°C</div>
               <div class="wai-lw-city">${escapeHtml(cityName)}</div>
             </div>
           </div>
-          <div class="wai-lw-desc" id="wai-lw-desc">Fetching live forecast...</div>
+          <div class="wai-lw-desc" id="wai-lw-desc">Detecting live satellite weather & rain...</div>
         </div>
-        <button type="button" class="wai-lw-action-btn" id="wai-lw-btn" disabled>
-          <span id="wai-lw-btn-text">Detecting live weather...</span>
+        <div class="wai-lw-rain-banner" id="wai-lw-rain-banner" style="display:none;"></div>
+        <button type="button" class="wai-lw-action-btn" id="wai-lw-btn">
+          <span id="wai-lw-btn-text">Detecting live conditions...</span>
         </button>
       </div>
 
       <div class="wai-weather-divider-line">
-        <span>or choose manually</span>
+        <span>or choose condition manually</span>
       </div>
 
       <div class="wai-weather-chips-grid">
@@ -1476,29 +1511,48 @@
     const iconEl = card.querySelector('#wai-lw-icon');
     const tempEl = card.querySelector('#wai-lw-temp');
     const descEl = card.querySelector('#wai-lw-desc');
+    const rainBanner = card.querySelector('#wai-lw-rain-banner');
     const btnEl = card.querySelector('#wai-lw-btn');
     const btnTextEl = card.querySelector('#wai-lw-btn-text');
 
     fetchLiveCityWeather(cityName, (w) => {
+      if (hasHandled) return;
+
       if (iconEl) iconEl.textContent = w.icon;
       if (tempEl) tempEl.textContent = Math.round(w.temperature) + '°C';
       if (descEl) descEl.textContent = w.description;
+
+      const isRain = w.key === 'light_rain' || w.key === 'heavy_rain';
+      if (rainBanner && isRain) {
+        rainBanner.style.display = 'block';
+        rainBanner.innerHTML = '🌧️ <b>Rain detected in ' + escapeHtml(cityName) + '!</b> Indoor attractions & covered venues will be prioritized.';
+      }
+
       if (btnEl) {
-        btnEl.disabled = false;
-        btnTextEl.textContent = '⚡ Use Live: ' + w.label + ' (' + Math.round(w.temperature) + '°C)';
+        btnTextEl.textContent = '⚡ Use Live: ' + w.label + ' (' + Math.round(w.temperature) + '°C) • Continuing...';
         btnEl.onclick = () => {
-          card.classList.add('wai-card-disabled');
-          btnEl.classList.add('wai-selected');
-          onSelectWeather(w.key, w.label + ' (' + Math.round(w.temperature) + '°C Live)');
+          applySelection(w.key, w.label + ' (' + Math.round(w.temperature) + '°C Live)');
         };
       }
+
+      // Smoothly center the weather card on mobile & desktop
+      setTimeout(() => {
+        try {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch(e) {}
+      }, 60);
+
+      // Automatically continue to next plan step after 2.2 seconds!
+      autoTimer = setTimeout(() => {
+        if (!hasHandled) {
+          applySelection(w.key, w.label + ' (' + Math.round(w.temperature) + '°C Live)');
+        }
+      }, 2200);
     });
 
     card.querySelectorAll('.wai-weather-manual-chip').forEach(btn => {
       btn.onclick = () => {
-        card.classList.add('wai-card-disabled');
-        btn.classList.add('wai-selected');
-        onSelectWeather(btn.dataset.val, btn.dataset.label);
+        applySelection(btn.dataset.val, btn.dataset.label);
       };
     });
 
@@ -2741,6 +2795,11 @@
         if (customEl && DOM.chatBody) {
           DOM.chatBody.appendChild(customEl);
           scrollToBottom();
+          setTimeout(() => {
+            try {
+              customEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch(e) {}
+          }, 80);
         }
         return;
       }

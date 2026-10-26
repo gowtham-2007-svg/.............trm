@@ -2069,3 +2069,14 @@
   font-size: 0.78rem !important;
   padding: 7px 10px !important;
 }
+
+.wai-lw-rain-banner {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #b91c1c;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
