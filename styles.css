@@ -4045,6 +4045,293 @@ main {
     line-height: 1.5;
 }
 
+/* ==========================================================================
+   Team ID Badges Showcase - Infinite Right-to-Left Scrolling Marquee
+   ========================================================================== */
+.team-badges-section {
+    background: linear-gradient(135deg, rgba(131, 56, 236, 0.04) 0%, rgba(58, 134, 239, 0.05) 100%);
+    border: 1px solid rgba(131, 56, 236, 0.14);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1rem 1.1rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+    transition: var(--transition);
+}
+
+.team-badges-section:hover {
+    border-color: rgba(131, 56, 236, 0.3);
+    box-shadow: 0 12px 30px rgba(131, 56, 236, 0.08);
+}
+
+.team-badges-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding: 0 0.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.team-badges-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.team-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    background: rgba(131, 56, 236, 0.1);
+    color: var(--primary-color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(131, 56, 236, 0.2);
+}
+
+.team-badge-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
+    animation: badgePulse 2s infinite ease-in-out;
+}
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+.team-badges-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.team-badges-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.team-scroll-hint {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+/* Marquee Scrolling Container */
+.team-badges-marquee-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 0.4rem 0 0.5rem;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.team-badges-track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+    animation: teamBadgeScrollLeft 22s linear infinite;
+    will-change: transform;
+}
+
+/* Hover stops animation smoothly for reading */
+.team-badges-marquee-container:hover .team-badges-track {
+    animation-play-state: paused !important;
+}
+
+/* Right-to-Left Continuous Scrolling Animation (3 sets = -33.333333% seamless reset) */
+@keyframes teamBadgeScrollLeft {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-33.333333%, 0, 0);
+    }
+}
+
+/* Badge Card Component */
+.team-badge-card {
+    flex: 0 0 auto;
+    width: 200px;
+    background: transparent;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(131, 56, 236, 0.15);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+    user-select: none;
+    position: relative;
+}
+
+.team-badge-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 42px rgba(131, 56, 236, 0.26), 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-color: rgba(131, 56, 236, 0.45);
+}
+
+.team-badge-card:active {
+    transform: translateY(-2px) scale(0.99);
+}
+
+.team-badge-img-wrap {
+    width: 100%;
+    aspect-ratio: 833 / 1024;
+    position: relative;
+    overflow: hidden;
+    border-radius: 29px;
+    background: #081a36;
+}
+
+.team-badge-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-radius: 29px;
+    transition: transform 0.4s ease;
+}
+
+.team-badge-card:hover .team-badge-img-wrap img {
+    transform: scale(1.03);
+}
+
+.team-badge-zoom-hint {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.team-badge-card:hover .team-badge-zoom-hint {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.team-badge-card-footer {
+    display: none;
+}
+
+/* Badge Lightbox Modal (For viewing badge full detail) */
+.badge-lightbox-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 15, 29, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.badge-lightbox-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.badge-lightbox-content {
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.92) translateY(12px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.badge-lightbox-backdrop.active .badge-lightbox-content {
+    transform: scale(1) translateY(0);
+}
+
+.badge-lightbox-img {
+    width: 100%;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 32px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 50px rgba(131, 56, 236, 0.35);
+}
+
+.badge-lightbox-close {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.badge-lightbox-close:hover {
+    background: #F43F5E;
+    border-color: #F43F5E;
+    transform: rotate(90deg);
+}
+
+@media (max-width: 550px) {
+    .team-badge-card {
+        width: 165px;
+        border-radius: 24px;
+    }
+    .team-badge-img-wrap,
+    .team-badge-img-wrap img {
+        border-radius: 23px;
+    }
+    .team-badges-section {
+        padding: 1rem 0.75rem;
+        border-radius: 20px;
+    }
+    .team-badges-track {
+        gap: 0.9rem;
+    }
+}
+
 /* FAQ Accordion styles */
 .faq-list {
     display: flex;

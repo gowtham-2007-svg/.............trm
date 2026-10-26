@@ -4152,7 +4152,7 @@ function renderDestination(id) {
         <div class="page-content" style="position: relative;">
             <header class="dest-header dest-header-flex">
                 <div class="dest-header-row">
-                    <a href="#" class="back-btn" id="back-home" style="margin-bottom: 0;">
+                    <a href="#" class="back-btn" id="back-home" style="margin-bottom: 0;" title="Back to Home (Ctrl + K / ⌘K)" aria-keyshortcuts="Control+K Meta+K">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                         Back to Home
                     </a>
@@ -8366,6 +8366,138 @@ function initPlaceImageSliders() {
         };
     }
 
+    // Helper: Initialize interactive team ID badges and lightbox
+    function setupTeamBadges(modal) {
+        if (!modal) return;
+        const badgeCards = modal.querySelectorAll('.team-badge-card');
+        if (!badgeCards.length) return;
+
+        badgeCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgSrc = card.getAttribute('data-badge-img');
+                const memberName = card.getAttribute('data-badge-name') || 'Weekend Explore Member';
+                if (!imgSrc) return;
+
+                let lightbox = document.getElementById('badge-lightbox-modal');
+                if (!lightbox) {
+                    lightbox = document.createElement('div');
+                    lightbox.id = 'badge-lightbox-modal';
+                    lightbox.className = 'badge-lightbox-backdrop';
+                    lightbox.innerHTML = `
+                        <div class="badge-lightbox-content">
+                            <button class="badge-lightbox-close" aria-label="Close Preview" title="Close (Esc)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                            <img class="badge-lightbox-img" src="" alt="Badge Preview" />
+                        </div>
+                    `;
+                    document.body.appendChild(lightbox);
+
+                    const closeBtn = lightbox.querySelector('.badge-lightbox-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            lightbox.classList.remove('active');
+                        });
+                    }
+                    lightbox.addEventListener('click', (e) => {
+                        if (e.target === lightbox) lightbox.classList.remove('active');
+                    });
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                            lightbox.classList.remove('active');
+                        }
+                    });
+                }
+
+                const imgEl = lightbox.querySelector('.badge-lightbox-img');
+                if (imgEl) {
+                    imgEl.src = imgSrc;
+                    imgEl.alt = memberName;
+                }
+                lightbox.classList.add('active');
+            });
+        });
+    }
+
+    const getTeamBadgesMarqueeHTML = () => `
+        <!-- Team ID Badges - Right-to-Left Auto-Scrolling Showcase -->
+        <div class="team-badges-section full-width">
+            <div class="team-badges-header">
+                <div class="team-badges-title-wrap">
+                    <span class="team-badge-pill">
+                        <span class="team-badge-pulse-dot"></span>
+                        <span>Team &amp; Story</span>
+                    </span>
+                    <h5 class="team-badges-title">Members of Weekend Explore</h5>
+                </div>
+                <div class="team-badges-meta">
+                    <span class="team-scroll-hint">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        Right to Left • Hover to pause
+                    </span>
+                </div>
+            </div>
+
+            <div class="team-badges-marquee-container" id="team-badges-marquee">
+                <div class="team-badges-track">
+                    <!-- Pair 1 -->
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/gowtham_badge.png" alt="Gautam N - Member of Weekend Explore Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/deekishth_badge.png" alt="Deekishth KR - Member of Weekend Explore Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Pair 2 (for seamless loop) -->
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Pair 3 (widescreen guarantee) -->
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
     // Modal Content Templates & Initializers
     const MENU_ACTIONS = {
         'menu-about-us': {
@@ -8428,13 +8560,16 @@ function initPlaceImageSliders() {
                                 <p>We want to help everyone break the routine, explore new places, create unforgettable memories, and experience the beautiful culture and nature of Karnataka.</p>
                             </div>
                         </div>
+                        ${getTeamBadgesMarqueeHTML()}
                         <div class="about-row-item full-width-banner" style="text-align: center; background: rgba(131, 56, 236, 0.05); border: 1px dashed var(--primary-color); display: block; padding: 1rem;">
                             <h5 style="color: var(--primary-color); margin-bottom: 0px; font-size: 1.05rem; font-weight: 700;">Explore More. Travel Smarter. Make Every Weekend Memorable.</h5>
                         </div>
                     </div>
                 </div>
             `,
-            init: null,
+            init: (modal) => {
+                setupTeamBadges(modal);
+            },
             speechText: "About Us. Simplifying weekend travel planning across Karnataka. Weekend Explore is designed to help you discover the best places to visit during your weekends, whether you are looking for quick getaways or local explorations. Our current focus is on Bengaluru, Mangaluru, and Mysuru to help you break the routine, explore new places, and make every weekend exciting and adventurous."
         },
         'menu-more-info': {
@@ -8453,6 +8588,8 @@ function initPlaceImageSliders() {
                             </div>
                         </div>
                     </div>
+
+                    ${getTeamBadgesMarqueeHTML()}
 
                     <!-- Description Card -->
                     <div class="about-card full-width">
@@ -8563,6 +8700,7 @@ function initPlaceImageSliders() {
                 </div>
             `,
             init: (modal) => {
+                setupTeamBadges(modal);
                 const questions = modal.querySelectorAll('.faq-question');
                 questions.forEach((q, index) => {
                     q.addEventListener('click', () => {
@@ -9708,8 +9846,224 @@ if (document.readyState === 'loading') {
     setTimeout(initBusRouteAutoScroll, 300);
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// GLOBAL KEYBOARD SHORTCUT: Ctrl+K / Cmd+K -> Home Navigation ('/')
+// ─────────────────────────────────────────────────────────────────────────────
+(function initHomeShortcutBundle() {
+    if (window.__weekendExploreHomeShortcutAttached) return;
+    window.__weekendExploreHomeShortcutAttached = true;
 
+    let lastTriggerTime = 0;
 
+    function isTypingContext(e) {
+        try {
+            const activeEl = document.activeElement;
+            const target = (e && e.composedPath && e.composedPath()[0]) || (e && e.target) || activeEl;
 
+            const isElementEditable = (el) => {
+                if (!el || !(el instanceof Element)) return false;
+                if (el.isContentEditable) return true;
 
+                const tag = (el.tagName || '').toUpperCase();
+                if (tag === 'TEXTAREA' || tag === 'SELECT') return true;
+                if (tag === 'INPUT') {
+                    const type = (el.type || 'text').toLowerCase();
+                    const nonTypingTypes = ['checkbox', 'radio', 'button', 'submit', 'reset', 'range', 'color', 'file', 'image'];
+                    if (!nonTypingTypes.includes(type)) return true;
+                }
+                if (typeof el.closest === 'function') {
+                    if (el.closest('[contenteditable="true"], [contenteditable=""], [contenteditable="plaintext-only"]')) {
+                        return true;
+                    }
+                }
+                return false;
+            };
 
+            if (isElementEditable(target)) return true;
+            if (isElementEditable(activeEl)) return true;
+
+            if (e && e.composedPath) {
+                const path = e.composedPath();
+                for (let i = 0; i < path.length; i++) {
+                    if (isElementEditable(path[i])) return true;
+                }
+            }
+        } catch (err) {
+            console.warn('[Shortcut] Context check error:', err);
+        }
+        return false;
+    }
+
+    function showHomeShortcutToast(message) {
+        try {
+            let toast = document.getElementById('we-shortcut-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'we-shortcut-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 24px;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-20px);
+                    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+                    color: #ffffff;
+                    border: 1px solid rgba(131, 56, 236, 0.6);
+                    padding: 10px 20px;
+                    border-radius: 9999px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    z-index: 99999999;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(131, 56, 236, 0.45);
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+                    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+                `;
+                document.body.appendChild(toast);
+            }
+
+            const isMac = (navigator.platform || '').toUpperCase().indexOf('MAC') >= 0;
+            const shortcutLabel = isMac ? '⌘K' : 'Ctrl+K';
+            const text = message || 'Navigated to Home';
+
+            toast.innerHTML = `
+                <span style="font-size: 18px; display: inline-flex; align-items: center;">🏠</span>
+                <span style="letter-spacing: -0.2px;">${text}</span>
+                <span style="background: rgba(131, 56, 236, 0.35); border: 1px solid rgba(131, 56, 236, 0.6); border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: #e9d5ff;">${shortcutLabel}</span>
+            `;
+
+            requestAnimationFrame(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+            });
+
+            clearTimeout(toast._hideTimer);
+            toast._hideTimer = setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-20px)';
+            }, 1600);
+        } catch (e) {}
+    }
+
+    function cleanupModalsAndOverlays() {
+        try {
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.querySelector('.drawer-overlay');
+            if (drawer) drawer.classList.remove('active');
+            if (drawerOverlay) drawerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+
+            document.querySelectorAll('.menu-modal-overlay').forEach(modal => {
+                modal.classList.remove('active');
+                setTimeout(() => modal.remove(), 250);
+            });
+
+            const underDevModal = document.getElementById('under-dev-modal');
+            if (underDevModal) underDevModal.remove();
+
+            if (window.WeekendReviews && typeof window.WeekendReviews.closeReviewsModal === 'function') {
+                window.WeekendReviews.closeReviewsModal();
+            } else {
+                const revOverlay = document.getElementById('website-reviews-modal-overlay');
+                if (revOverlay) {
+                    revOverlay.classList.remove('active');
+                    setTimeout(() => revOverlay.remove(), 250);
+                }
+            }
+
+            if (window.WeekendAI) {
+                if (typeof window.WeekendAI.close === 'function') window.WeekendAI.close();
+                if (typeof window.WeekendAI.hide === 'function') window.WeekendAI.hide();
+            }
+
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+        } catch (err) {
+            console.warn('[Shortcut] Cleanup error:', err);
+        }
+    }
+
+    function navigateToHome() {
+        const path = window.location.pathname || '';
+        const isMainApp = path === '/' || path === '' || path === '/index.html' || path.endsWith('/index.html');
+
+        console.log('[Shortcut] Ctrl+K triggered -> navigating to Home');
+
+        if (isMainApp) {
+            const isDestinationOpen = Boolean(window.currentCityId || document.querySelector('.dest-header') || document.getElementById('back-home'));
+            const isModalOpen = Boolean(
+                document.querySelector('.menu-modal-overlay.active') ||
+                document.getElementById('website-reviews-modal-overlay') ||
+                document.getElementById('under-dev-modal') ||
+                document.querySelector('.drawer-overlay.active')
+            );
+            const isScrolled = window.scrollY > 80;
+
+            cleanupModalsAndOverlays();
+
+            if (isDestinationOpen && typeof window.renderHome === 'function') {
+                window.renderHome();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showHomeShortcutToast('Navigated to Home');
+            } else if (isModalOpen || isScrolled) {
+                if (typeof window.renderHome === 'function') {
+                    window.renderHome();
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showHomeShortcutToast('Returned to Top');
+            } else {
+                showHomeShortcutToast('Home Page');
+                window.location.href = '/';
+            }
+
+            if (window.location.pathname !== '/' || window.location.search || window.location.hash) {
+                try {
+                    window.history.pushState(null, '', '/');
+                } catch (e) {}
+            }
+        } else {
+            window.location.href = '/';
+        }
+    }
+
+    function handleKeyDown(e) {
+        const isModifier = (e.ctrlKey || e.metaKey) && !e.altKey;
+        if (!isModifier) return;
+
+        const key = (e.key || '').toLowerCase();
+        const code = e.code;
+        const keyCode = e.keyCode || e.which;
+        const isK = key === 'k' || code === 'KeyK' || keyCode === 75;
+
+        if (!isK) return;
+
+        if (e.repeat) {
+            e.preventDefault();
+            return;
+        }
+
+        if (isTypingContext(e)) {
+            return;
+        }
+
+        const now = Date.now();
+        if (now - lastTriggerTime < 300) {
+            e.preventDefault();
+            return;
+        }
+        lastTriggerTime = now;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        navigateToHome();
+    }
+
+    window.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener('keydown', handleKeyDown, true);
+    window.navigateToHome = navigateToHome;
+})();

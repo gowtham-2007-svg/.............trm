@@ -70,7 +70,7 @@
             <h2>Admin Authorization</h2>
             <p>Please sign in to access the Weekend Explore Admin Panel.</p>
             <div id="admin-signin-container"></div>
-            <button class="back-btn" onclick="window.location.href='/'">← Return to Website</button>
+            <button class="back-btn" onclick="window.location.href='/'" title="Return to Website (Ctrl + K / ⌘K)" aria-keyshortcuts="Control+K Meta+K">← Return to Website</button>
         </div>
     </div>
 
@@ -85,7 +85,7 @@
             <h2>Access Denied</h2>
             <p>Your account does not have administrator permissions to view this dashboard.</p>
             <button class="back-btn" onclick="signOutAndRedirect()">Switch Account</button>
-            <button class="back-btn secondary" onclick="window.location.href='/'">Return to Home</button>
+            <button class="back-btn secondary" onclick="window.location.href='/'" title="Return to Home (Ctrl + K / ⌘K)" aria-keyshortcuts="Control+K Meta+K">Return to Home</button>
         </div>
     </div>
 
@@ -233,6 +233,7 @@
         src="https://stirring-skylark-9.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js" 
         type="text/javascript"></script>
     <script src="/admin/admin.js"></script>
+    <script defer src="/shortcut.js?v=1"></script>
     <script defer src="/analytics.js"></script>
 </body>
 </html>

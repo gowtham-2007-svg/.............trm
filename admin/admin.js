@@ -539,3 +539,91 @@ if (document.readyState === 'loading') {
 } else {
     initAdminClerk();
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GLOBAL KEYBOARD SHORTCUT: Ctrl+K / Cmd+K -> Home Navigation ('/')
+// ─────────────────────────────────────────────────────────────────────────────
+(function initAdminHomeShortcut() {
+    if (window.__weekendExploreHomeShortcutAttached) return;
+    window.__weekendExploreHomeShortcutAttached = true;
+
+    function isTypingContext(e) {
+        try {
+            const activeEl = document.activeElement;
+            const target = (e && e.composedPath && e.composedPath()[0]) || (e && e.target) || activeEl;
+
+            const isElementEditable = (el) => {
+                if (!el || !(el instanceof Element)) return false;
+                if (el.isContentEditable) return true;
+
+                const tag = (el.tagName || '').toUpperCase();
+                if (tag === 'TEXTAREA' || tag === 'SELECT') return true;
+                if (tag === 'INPUT') {
+                    const type = (el.type || 'text').toLowerCase();
+                    const nonTypingTypes = ['checkbox', 'radio', 'button', 'submit', 'reset', 'range', 'color', 'file', 'image'];
+                    if (!nonTypingTypes.includes(type)) return true;
+                }
+                if (typeof el.closest === 'function') {
+                    if (el.closest('[contenteditable="true"], [contenteditable=""], [contenteditable="plaintext-only"]')) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            if (isElementEditable(target)) return true;
+            if
+            
+            (isElementEditable(activeEl)) return true;
+
+            if (e && e.composedPath) {
+                const path = e.composedPath();
+                for (let i = 0; i < path.length; i++) {
+                    if (isElementEditable(path[i])) return true;
+                }
+            }
+        } catch (err) {
+            console.warn('[Shortcut] Context check error:', err);
+        }
+        return false;
+    }
+
+    let lastTriggerTime = 0;
+
+    function handleKeyDown(e) {
+        const isModifier = (e.ctrlKey || e.metaKey) && !e.altKey;
+        if (!isModifier) return;
+
+        const key = (e.key || '').toLowerCase();
+        const code = e.code;
+        const keyCode = e.keyCode || e.which;
+        const isK = key === 'k' || code === 'KeyK' || keyCode === 75;
+
+        if (!isK) return;
+
+        if (e.repeat) {
+            e.preventDefault();
+            return;
+        }
+
+        if (isTypingContext(e)) {
+            return;
+        }
+
+        const now = Date.now();
+        if (now - lastTriggerTime < 300) {
+            e.preventDefault();
+            return;
+        }
+        lastTriggerTime = now;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log('[Admin Shortcut] Ctrl+K triggered -> navigating to /');
+        window.location.href = '/';
+    }
+
+    window.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener('keydown', handleKeyDown, true);
+})();
