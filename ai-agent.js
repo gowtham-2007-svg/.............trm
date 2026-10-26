@@ -359,8 +359,199 @@
 
   let STATE = JSON.parse(JSON.stringify(INITIAL_STATE));
 
+
+  // --- Curated Restaurants Knowledge Base (50 Mangaluru + 50 Hassan) ---
+  const CURATED_RESTAURANTS = [
+    // === MANGALORE NON-VEG (25) ===
+    { id: 'mng_nv_1', city: 'Mangaluru', name: 'Gajalee Sea Food', cat: 'nonveg', price: 1000, famous: 'Pomfret & anjal tawa fry, clam koshimbir, crab', area: 'Circuit House, Kadri Hills', meal: ['lunch', 'dinner'], maps: 'Gajalee Sea Food, Kadri Hills, Mangalore' },
+    { id: 'mng_nv_2', city: 'Mangaluru', name: 'Hotel Narayana', cat: 'nonveg', price: 600, famous: 'Fresh fish thali meals, anjal & pomfret fry', area: 'Bunder', meal: ['lunch'], maps: 'Hotel Narayana, Bunder, Mangalore' },
+    { id: 'mng_nv_3', city: 'Mangaluru', name: 'Janatha Lunch Home', cat: 'nonveg', price: 650, famous: 'Special fish thali & spicy anjal ghee roast', area: 'Kankanady', meal: ['lunch', 'dinner'], maps: 'Janatha Lunch Home, Kankanady, Mangalore' },
+    { id: 'mng_nv_4', city: 'Mangaluru', name: 'Anupama Restaurant', cat: 'nonveg', price: 800, famous: 'Kane rava fry & chicken ghee roast', area: 'Abhiman Complex, Kadri', meal: ['lunch', 'dinner'], maps: 'Anupama Restaurant, Kadri, Mangalore' },
+    { id: 'mng_nv_5', city: 'Mangaluru', name: 'Naadu Restaurant', cat: 'nonveg', price: 700, famous: 'Kori roti, chicken sukka & prawn curry', area: 'Ladyhill', meal: ['lunch', 'dinner'], maps: 'Naadu Restaurant, Ladyhill, Mangalore' },
+    { id: 'mng_nv_6', city: 'Mangaluru', name: 'Fish Land', cat: 'nonveg', price: 800, famous: 'Fresh coastal seafood & crisp fish fry', area: 'Father Muller Rd, Kankanady', meal: ['lunch'], maps: 'Fish Land, Kankanady, Mangalore' },
+    { id: 'mng_nv_7', city: 'Mangaluru', name: 'Surabhi Rooftop Garden Restaurant', cat: 'nonveg', price: 800, famous: 'Rooftop coastal seafood & South Indian dining', area: 'Kavoor Cross Rd, Bejai', meal: ['dinner'], maps: 'Surabhi Rooftop Garden Restaurant, Bejai, Mangalore' },
+    { id: 'mng_nv_8', city: 'Mangaluru', name: 'Celebration Coastal Cuisine', cat: 'nonveg', price: 600, famous: 'Coastal curries, seer fish & seafood feasts', area: 'Gandhinagar, Lalbagh', meal: ['lunch', 'dinner'], maps: 'Celebration Coastal Cuisine, Lalbagh, Mangalore' },
+    { id: 'mng_nv_9', city: 'Mangaluru', name: "Gilli's Coastal Classic", cat: 'nonveg', price: 1000, famous: 'Coastal cuisine, dum biryani & seafood platters', area: 'Gandhinagar', meal: ['lunch', 'dinner'], maps: "Gilli's Coastal Classic, Gandhinagar, Mangalore" },
+    { id: 'mng_nv_10', city: 'Mangaluru', name: 'Coral (The Ocean Pearl)', cat: 'nonveg', price: 1400, famous: 'Seafood, Mangalorean specialties & fine dining', area: 'The Ocean Pearl, Kodialbail', meal: ['lunch', 'dinner'], maps: 'Coral Restaurant, The Ocean Pearl, Kodialbail, Mangalore' },
+    { id: 'mng_nv_11', city: 'Mangaluru', name: 'New Kudla Family Restaurant', cat: 'nonveg', price: 700, famous: 'Ghee roast crab, prawns, neer dosa & kori rotti', area: 'Hampankatta / City', meal: ['lunch', 'dinner'], maps: 'New Kudla Family Restaurant, Mangalore' },
+    { id: 'mng_nv_12', city: 'Mangaluru', name: 'Kuzhi Mandi Restaurant', cat: 'nonveg', price: 500, famous: 'Authentic Arabian chicken & mutton mandi', area: 'City Center', meal: ['lunch', 'dinner'], maps: 'Kuzhi Mandi Restaurant, Mangalore' },
+    { id: 'mng_nv_13', city: 'Mangaluru', name: 'Manhas Mandi', cat: 'nonveg', price: 500, famous: 'Afghani charcoal grills & fragrant mandi', area: 'Thokkottu', meal: ['lunch', 'dinner'], maps: 'Manhas Mandi, Thokkottu, Mangalore' },
+    { id: 'mng_nv_14', city: 'Mangaluru', name: 'Mangala Bar & Restaurant', cat: 'nonveg', price: 700, famous: 'Mangalorean non-veg delicacies & fresh seafood', area: 'Silva Cross Road, Valencia', meal: ['dinner'], maps: 'Mangala Bar and Restaurant, Mangalore' },
+    { id: 'mng_nv_15', city: 'Mangaluru', name: "Hotel Pereira's Inn", cat: 'nonveg', price: 400, famous: 'Konkani Catholic pork bafat, lemon pork & pepper pork', area: 'Hampankatta', meal: ['lunch', 'dinner'], maps: "Hotel Pereira's Inn, Hampankatta, Mangalore" },
+    { id: 'mng_nv_16', city: 'Mangaluru', name: 'KA 12 The Coorg Kitchenette', cat: 'nonveg', price: 700, famous: 'Traditional Coorg pandi curry & kadambuttu', area: 'Bejai Church Rd, Kodialbail', meal: ['lunch', 'dinner'], maps: 'KA 12 The Coorg Kitchenette, Kodialbail, Mangalore' },
+    { id: 'mng_nv_17', city: 'Mangaluru', name: 'Upparige The Lounge Bar', cat: 'nonveg', price: 800, famous: 'North Indian, coastal seafood & lounge appetizers', area: 'Hotel Sadanand, KS Rao Rd', meal: ['dinner'], maps: 'Upparige The Lounge Bar, Mangalore' },
+    { id: 'mng_nv_18', city: 'Mangaluru', name: 'Shoolin Palace', cat: 'nonveg', price: 700, famous: 'Indo-Chinese, Mangalorean curries & multicuisine', area: 'Kottara', meal: ['lunch', 'dinner'], maps: 'Shoolin Palace, Kottara, Mangalore' },
+    { id: 'mng_nv_19', city: 'Mangaluru', name: 'Pingara Sea Food Restaurant', cat: 'nonveg', price: 300, famous: 'Chicken lollipop, dum biryani & crispy seafood', area: 'NH 66, Kulai', meal: ['lunch', 'dinner'], maps: 'Pingara Sea Food Restaurant, Kulai, Mangalore' },
+    { id: 'mng_nv_20', city: 'Mangaluru', name: 'Hotel Sai Vilas Lunch Home', cat: 'nonveg', price: 400, famous: 'Fish thali meals & coastal seafood buffet', area: 'Surathkal', meal: ['lunch'], maps: 'Hotel Sai Vilas Lunch Home, Surathkal, Mangalore' },
+    { id: 'mng_nv_21', city: 'Mangaluru', name: "New Diner's Paradise", cat: 'nonveg', price: 600, famous: 'Chicken tandoori, kebabs & aromatic biryani', area: 'K S Rao Road', meal: ['dinner'], maps: "New Diner's Paradise, KS Rao Road, Mangalore" },
+    { id: 'mng_nv_22', city: 'Mangaluru', name: 'Mangalore Kabab Korner', cat: 'nonveg', price: 500, famous: 'Hot chicken kababs, shawarma & biryani', area: 'City Center', meal: ['dinner'], maps: 'Mangalore Kabab Korner, Mangalore' },
+    { id: 'mng_nv_23', city: 'Mangaluru', name: 'Hao Ming', cat: 'nonveg', price: 700, famous: 'Authentic Chinese soups, noodles & Thai curries', area: 'Balmatta', meal: ['lunch', 'dinner'], maps: 'Hao Ming Chinese Restaurant, Mangalore' },
+    { id: 'mng_nv_24', city: 'Mangaluru', name: 'Maharaja Family Restaurant', cat: 'nonveg', price: 600, famous: 'Chicken ghee roast, fish curry & North Indian', area: 'Trade Centre, Bunts Hostel Rd', meal: ['lunch', 'dinner'], maps: 'Maharaja Family Restaurant, Bunts Hostel Road, Mangalore' },
+    { id: 'mng_nv_25', city: 'Mangaluru', name: 'Vinamra Bar & Restaurant', cat: 'nonveg', price: 600, famous: 'Coastal seafood & Chinese non-veg specials', area: 'Ullal', meal: ['dinner'], maps: 'Vinamra Bar and Restaurant, Ullal, Mangalore' },
+
+    // === MANGALORE VEG (25) ===
+    { id: 'mng_v_1', city: 'Mangaluru', name: 'Woodlands Restaurant', cat: 'veg', price: 300, famous: 'South Indian meals, crisp ghee dosa & mini gudbad', area: 'Bunts Hostel Rd, Jyothi Circle', meal: ['breakfast', 'lunch'], maps: 'Woodlands Restaurant, Bunts Hostel Road, Mangalore' },
+    { id: 'mng_v_2', city: 'Mangaluru', name: 'Suvarna Brahmins', cat: 'veg', price: 200, famous: 'Golden masala dosa, idli & traditional morning tiffin', area: 'Car Street, near Venkataramana Temple', meal: ['breakfast'], maps: 'Suvarna Brahmins, Car Street, Mangalore' },
+    { id: 'mng_v_3', city: 'Mangaluru', name: 'Hotel Janatha Deluxe', cat: 'veg', price: 500, famous: 'Neer dosa, Mangalore buns, kottige & filter coffee', area: 'Pathumudi Soudha, Hampankatta', meal: ['breakfast', 'lunch'], maps: 'Hotel Janatha Deluxe, Hampankatta, Mangalore' },
+    { id: 'mng_v_4', city: 'Mangaluru', name: 'Om Mahal Restaurant', cat: 'veg', price: 150, famous: 'Rava dosa, tuppa dosa & traditional masala dosa', area: 'Car Street / City', meal: ['breakfast'], maps: 'Om Mahal Restaurant, Mangalore' },
+    { id: 'mng_v_5', city: 'Mangaluru', name: 'Sagar Ratna', cat: 'veg', price: 500, famous: 'Paneer ghee roast, royal veg thali & South Indian', area: 'The Ocean Pearl, Kodialbail', meal: ['lunch', 'dinner'], maps: 'Sagar Ratna, The Ocean Pearl, Kodialbail, Mangalore' },
+    { id: 'mng_v_6', city: 'Mangaluru', name: 'Utsava Fine Dining', cat: 'veg', price: 600, famous: 'Hara bhara kebab, ghee rice, butter naan & curries', area: 'City Center', meal: ['lunch', 'dinner'], maps: 'Utsava Fine Dining, Mangalore' },
+    { id: 'mng_v_7', city: 'Mangaluru', name: 'The Coconut Groove (TCG)', cat: 'veg', price: 600, famous: 'Varied pure veg multicuisine & sizzlers', area: 'Kodialbail', meal: ['lunch', 'dinner'], maps: 'The Coconut Groove, Mangalore' },
+    { id: 'mng_v_8', city: 'Mangaluru', name: 'Mango Grove', cat: 'veg', price: 500, famous: 'Paneer satay, crispy baby corn fry & fried rice', area: 'Arya Samaj Road', meal: ['lunch', 'dinner'], maps: 'Mango Grove, Arya Samaj Road, Mangalore' },
+    { id: 'mng_v_9', city: 'Mangaluru', name: 'Hotel Shri Krishna Bhavan', cat: 'veg', price: 250, famous: 'Budget pure veg South Indian thali meals', area: 'Near Bendoorwell Circle', meal: ['breakfast', 'lunch'], maps: 'Hotel Shri Krishna Bhavan, Bendoorwell, Mangalore' },
+    { id: 'mng_v_10', city: 'Mangaluru', name: 'Manohar Vilas', cat: 'veg', price: 200, famous: 'Rava onion dosa, hot goli baje & evening chaats', area: 'Kankanady', meal: ['breakfast', 'evening'], maps: 'Manohar Vilas, Kankanady, Mangalore' },
+    { id: 'mng_v_11', city: 'Mangaluru', name: 'Grand Madhuvan NX Veg Restaurant', cat: 'veg', price: 500, famous: 'North & South Indian veg, Chinese specials', area: 'AJ Grand Hotel, Boloor', meal: ['lunch', 'dinner'], maps: 'Grand Madhuvan NX Veg Restaurant, Boloor, Mangalore' },
+    { id: 'mng_v_12', city: 'Mangaluru', name: 'Shree Vishnu Vaibhava', cat: 'veg', price: 400, famous: 'South Indian pure veg thali & morning tiffins', area: 'Lalbagh', meal: ['breakfast', 'lunch'], maps: 'Shree Vishnu Vaibhava, Lalbagh, Mangalore' },
+    { id: 'mng_v_13', city: 'Mangaluru', name: 'Hotel Shree Sai Prasad Veg', cat: 'veg', price: 300, famous: 'Homely South Indian veg meals & rasam', area: 'City Center', meal: ['lunch'], maps: 'Hotel Shree Sai Prasad Veg, Mangalore' },
+    { id: 'mng_v_14', city: 'Mangaluru', name: 'Chutney', cat: 'veg', price: 400, famous: 'Classic vegetarian Indian cuisine & dosas', area: 'Deepa Comforts, MG Road', meal: ['lunch', 'dinner'], maps: 'Chutney Restaurant, MG Road, Mangalore' },
+    { id: 'mng_v_15', city: 'Mangaluru', name: "Kakunje's Kafe", cat: 'veg', price: 400, famous: 'Indian & Asian cafe food, coffee & desserts', area: 'Kodialbail', meal: ['evening'], maps: "Kakunje's Kafe, Mangalore" },
+    { id: 'mng_v_16', city: 'Mangaluru', name: 'Chintu Da Dhaba (Pure Veg)', cat: 'veg', price: 500, famous: 'Punjabi dhaba-style dal makhani & paneer tikka', area: 'City Center', meal: ['dinner'], maps: 'Chintu Da Dhaba, Mangalore' },
+    { id: 'mng_v_17', city: 'Mangaluru', name: 'Dinki Dine', cat: 'veg', price: 300, famous: 'Veg tiffin, fruit shakes, cold coffee & snacks', area: 'Near Kadri Park', meal: ['breakfast', 'evening'], maps: 'Dinki Dine, Kadri Park, Mangalore' },
+    { id: 'mng_v_18', city: 'Mangaluru', name: 'Royal Zaika Multicuisine Buffet', cat: 'veg', price: 500, famous: 'Pure vegetarian multicuisine buffet spread', area: 'City Center', meal: ['lunch', 'dinner'], maps: 'Royal Zaika Multicuisine Buffet, Mangalore' },
+    { id: 'mng_v_19', city: 'Mangaluru', name: 'Diana Restaurant', cat: 'veg', price: 150, famous: 'Hot fluffy Mangalore goli baje & filter coffee', area: 'Balmatta Road', meal: ['breakfast', 'evening'], maps: 'Diana Restaurant, Balmatta Road, Mangalore' },
+    { id: 'mng_v_20', city: 'Mangaluru', name: "Pabba's Ice Cream Parlour", cat: 'veg', price: 200, famous: 'World-famous Gudbad, Parfait, Tiramisu & snack sundaes', area: 'Lalbagh, MG Road', meal: ['evening', 'dinner'], maps: "Pabba's Ice Cream Parlour, Lalbagh, Mangalore" },
+    { id: 'mng_v_21', city: 'Mangaluru', name: 'Ideal Ice Cream', cat: 'veg', price: 150, famous: 'Legendary Gudbad, cassata, Marzi Paan & ice cream cups', area: 'Ideal Towers, Hampankatta', meal: ['evening', 'dinner'], maps: 'Ideal Ice Cream, Ideal Towers, Hampankatta, Mangalore' },
+    { id: 'mng_v_22', city: 'Mangaluru', name: 'New Taj Mahal Cafe', cat: 'veg', price: 150, famous: 'Authentic Mangalore buns, goli baje & biscuit rotti', area: 'Pancha Mahal, Kodialbail', meal: ['breakfast', 'evening'], maps: 'New Taj Mahal Cafe, Kodialbail, Mangalore' },
+    { id: 'mng_v_23', city: 'Mangaluru', name: 'Paakashala', cat: 'veg', price: 500, famous: 'Pure veg North & South Indian fine delicacies', area: 'City Center', meal: ['lunch', 'dinner'], maps: 'Paakashala, Mangalore' },
+    { id: 'mng_v_24', city: 'Mangaluru', name: 'Shri Shankara Bhavana', cat: 'veg', price: 250, famous: 'Traditional South Indian thali meals & payasam', area: 'Car Street', meal: ['lunch'], maps: 'Shri Shankara Bhavana, Mangalore' },
+    { id: 'mng_v_25', city: 'Mangaluru', name: 'Mohini Vilas', cat: 'veg', price: 250, famous: 'Classic South Indian veg meals, set dosa & coffee', area: 'GHS Road', meal: ['breakfast', 'lunch'], maps: 'Mohini Vilas, GHS Road, Mangalore' },
+
+    // === HASSAN VEGETARIAN (25 FROM PDF) ===
+    { id: 'has_v_1', city: 'Hassan', name: 'HVR Veg', cat: 'veg', price: 150, famous: 'Crispy benne dosa & traditional South Indian breakfast', area: 'Basettikoppal Main Rd, Krishnaraja Pura', meal: ['breakfast'], maps: 'HVR Veg, Basettikoppal Main Road, Krishnaraja Pura, Hassan' },
+    { id: 'has_v_2', city: 'Hassan', name: 'Hotel Shruthi Veg', cat: 'veg', price: 200, famous: 'Crispy masala dosa, paneer curries & North/South meals', area: 'Behind City Bus Stand, Pension Mohalla', meal: ['breakfast', 'lunch'], maps: 'Hotel Shruthi Veg, Behind City Bus Stand, Hassan' },
+    { id: 'has_v_3', city: 'Hassan', name: 'Shri Gajanana Refreshments', cat: 'veg', price: 120, famous: 'Tuppa set dosa, benne masala & strong filter coffee', area: 'Sampige Road, K.R. Puram', meal: ['breakfast'], maps: 'Shri Gajanana Refreshments, Sampige Road, KR Puram, Hassan' },
+    { id: 'has_v_4', city: 'Hassan', name: 'Swad Veg Restaurant', cat: 'veg', price: 220, famous: 'South Indian full meals, ghee roast dosa & North Indian', area: 'Thanniruhalla, near SDM College', meal: ['lunch', 'dinner'], maps: 'Swad Veg Restaurant, Thanniruhalla, Hassan' },
+    { id: 'has_v_5', city: 'Hassan', name: 'Parijata Restaurant', cat: 'veg', price: 300, famous: 'South & North Indian family dining & paneer butter masala', area: 'High School Field Rd, Rangoli Halla', meal: ['lunch', 'dinner'], maps: 'Parijata Restaurant, Rangoli Halla, Hassan' },
+    { id: 'has_v_6', city: 'Hassan', name: 'Pathanjali Pure Veg Restaurant', cat: 'veg', price: 250, famous: 'Wholesome pure veg meals & multi-cuisine curries', area: 'Hassan city center', meal: ['lunch', 'dinner'], maps: 'Pathanjali Pure Veg Restaurant, Hassan' },
+    { id: 'has_v_7', city: 'Hassan', name: 'Sri Krishna Bhavan / Vaibhav', cat: 'veg', price: 180, famous: 'Soft idli, medu vada, crispy dosa & South meals', area: 'Hassan city', meal: ['breakfast', 'lunch'], maps: 'Sri Krishna Bhavan, Hassan' },
+    { id: 'has_v_8', city: 'Hassan', name: 'Vishnu Udupi Thindi', cat: 'veg', price: 160, famous: 'South Indian breakfast tiffins & authentic Mangalore buns', area: 'Ring Road, Sai Pushpa Arcade', meal: ['breakfast'], maps: 'Vishnu Udupi Thindi, Ring Road, Hassan' },
+    { id: 'has_v_9', city: 'Hassan', name: 'Hotel Udupi Gokul', cat: 'veg', price: 160, famous: 'Udupi tiffin, rava dosa & traditional thali meals', area: 'Murarappa Chambers, K.R. Puram', meal: ['breakfast', 'lunch'], maps: 'Hotel Udupi Gokul, KR Puram, Hassan' },
+    { id: 'has_v_10', city: 'Hassan', name: 'Sanman Hotel', cat: 'veg', price: 120, famous: 'Budget South Indian breakfast & piping hot coffee', area: 'Old Bus Stand Road, Ammeer Mohalla', meal: ['breakfast'], maps: 'Sanman Hotel, Old Bus Stand Road, Hassan' },
+    { id: 'has_v_11', city: 'Hassan', name: 'Udupi Hotel Santhosh Veg', cat: 'veg', price: 160, famous: 'Vegetarian breakfast tiffin & authentic noon meals', area: 'M.G. Road', meal: ['breakfast', 'lunch'], maps: 'Udupi Hotel Santhosh Veg, MG Road, Hassan' },
+    { id: 'has_v_12', city: 'Hassan', name: 'Panjurli Grand Veg', cat: 'veg', price: 250, famous: 'Family veg dining, North & South Indian delicacies', area: 'Race Course Road, Rangoli Halla', meal: ['lunch', 'dinner'], maps: 'Panjurli Grand Veg, Race Course Road, Hassan' },
+    { id: 'has_v_13', city: 'Hassan', name: 'Suvarna Sagar Restaurant', cat: 'veg', price: 280, famous: 'Vegetarian meals, special dosa & Chinese noodles', area: 'Suvarna Arcade, B.M. Road', meal: ['lunch', 'dinner'], maps: 'Suvarna Sagar Restaurant, BM Road, Hassan' },
+    { id: 'has_v_14', city: 'Hassan', name: 'Hotel Shruthi Veg – Bus Stand', cat: 'veg', price: 200, famous: 'Quick South Indian tiffins & traveling meals', area: 'Kasturi Ba Road, City Bus Stand', meal: ['breakfast', 'lunch'], maps: 'Hotel Shruthi Veg Bus Stand, Hassan' },
+    { id: 'has_v_15', city: 'Hassan', name: 'Mamu Idli Hotel', cat: 'veg', price: 90, famous: 'Mouthwatering button idli & spicy signature coconut chutney', area: 'Chikka Garadi Street, Pension Mohalla', meal: ['breakfast'], maps: 'Mamu Idli Hotel, Pension Mohalla, Hassan' },
+    { id: 'has_v_16', city: 'Hassan', name: 'Suruchi Veg Hotel', cat: 'veg', price: 160, famous: 'Golden dosa, afternoon meals & hot evening bajji', area: 'Bustheynahalli Circle', meal: ['lunch', 'evening'], maps: 'Suruchi Veg Hotel, Bustheynahalli, Hassan' },
+    { id: 'has_v_17', city: 'Hassan', name: 'Lakshmi Prasanna Veg Restaurant', cat: 'veg', price: 240, famous: 'Pure veg North & South Indian family curries', area: 'Mayura International, B.M. Road', meal: ['lunch', 'dinner'], maps: 'Lakshmi Prasanna Veg Restaurant, BM Road, Hassan' },
+    { id: 'has_v_18', city: 'Hassan', name: "Krish's Restaurant & Cafe Pure Veg", cat: 'veg', price: 220, famous: 'Cozy cafe bites, sandwiches, veg meals & beverages', area: 'Salagame Road, opp. MCE', meal: ['evening'], maps: "Krish's Restaurant and Cafe, Salagame Road, Hassan" },
+    { id: 'has_v_19', city: 'Hassan', name: 'Hotel Horanadu Veg', cat: 'veg', price: 160, famous: 'Set dosa, South Indian lunch & aromatic filter coffee', area: 'Gorur Road, Hassan', meal: ['breakfast', 'lunch'], maps: 'Hotel Horanadu Veg, Gorur Road, Hassan' },
+    { id: 'has_v_20', city: 'Hassan', name: 'Ramdev Rajasthani Dhaba Pure Veg', cat: 'veg', price: 220, famous: 'Authentic Rajasthani dal baati churma, paneer & roti', area: 'Hassan Highway / City', meal: ['dinner'], maps: 'Ramdev Rajasthani Dhaba, Hassan' },
+    { id: 'has_v_21', city: 'Hassan', name: 'Prakruthi Darshan', cat: 'veg', price: 220, famous: 'Wholesome vegetarian family dining & thali', area: 'Hassan city', meal: ['lunch', 'dinner'], maps: 'Prakruthi Darshan, Hassan' },
+    { id: 'has_v_22', city: 'Hassan', name: 'New Prakruthi Grand Restaurant', cat: 'veg', price: 220, famous: 'Vegetarian multi-cuisine, fried rice & gravies', area: 'APMC area, Hassan', meal: ['lunch', 'dinner'], maps: 'New Prakruthi Grand Restaurant, APMC, Hassan' },
+    { id: 'has_v_23', city: 'Hassan', name: 'Hotel Raama / Swaad', cat: 'veg', price: 320, famous: 'Air-conditioned veg family dining & gourmet North Indian', area: 'Thanniruhalla, Hassan', meal: ['lunch', 'dinner'], maps: 'Hotel Raama Swaad, Thanniruhalla, Hassan' },
+    { id: 'has_v_24', city: 'Hassan', name: 'Shri Krishna Bhavan Veg Restaurant', cat: 'veg', price: 180, famous: 'Traditional idli, medu vada, dosa & sambar', area: 'Hassan district', meal: ['breakfast', 'lunch'], maps: 'Shri Krishna Bhavan Veg, Hassan' },
+    { id: 'has_v_25', city: 'Hassan', name: 'Adyar Ananda Bhavan (A2B)', cat: 'veg', price: 300, famous: 'Famous South Indian meals, ghee sweets & mini tiffins', area: 'NH 75, Udayapura / Baldari Village', meal: ['breakfast', 'lunch'], maps: 'Adyar Ananda Bhavan A2B, NH 75, Hassan' },
+
+    // === HASSAN NON-VEGETARIAN & MIXED-MENU (25 FROM PDF) ===
+    { id: 'has_nv_1', city: 'Hassan', name: 'Empire Restaurant @ Hassan', cat: 'nonveg', price: 400, famous: 'Iconic Empire biryani, grilled chicken, ghee rice & kebabs', area: 'NH 75, Addihalli, near Shanthigrama toll', meal: ['lunch', 'dinner'], maps: 'Empire Restaurant, Shanthigrama, Hassan' },
+    { id: 'has_nv_2', city: 'Hassan', name: 'Imperio Restaurant', cat: 'nonveg', price: 450, famous: 'Arabian chicken mandi, peri peri chicken & dum biryani', area: 'Hassan Bypass, Boovanahalli, NH 75', meal: ['lunch', 'dinner'], maps: 'Imperio Restaurant, Boovanahalli, Hassan' },
+    { id: 'has_nv_3', city: 'Hassan', name: '13Milestone', cat: 'nonveg', price: 550, famous: 'Arabian mandi, charcoal grills & multi-cuisine dining', area: 'B.M. Road, Shanthigrama', meal: ['lunch', 'dinner'], maps: '13Milestone, BM Road, Hassan' },
+    { id: 'has_nv_4', city: 'Hassan', name: 'Mamatha Hotel', cat: 'nonveg', price: 320, famous: 'Nati-style spicy mutton chops, country chicken & fish curry', area: 'B.M. Road, beside Bhanu Theatre, Rangoli Halla', meal: ['lunch', 'dinner'], maps: 'Mamatha Hotel, Rangoli Halla, Hassan' },
+    { id: 'has_nv_5', city: 'Hassan', name: 'MFC Restaurant', cat: 'nonveg', price: 280, famous: 'Tandoori chicken, reshmi kebabs & chicken biryani', area: 'Ring Road, Vivekanagara', meal: ['dinner'], maps: 'MFC Restaurant, Ring Road, Vivekanagara, Hassan' },
+    { id: 'has_nv_6', city: 'Hassan', name: 'Eats of Arab', cat: 'nonveg', price: 350, famous: 'Authentic shawarma, grilled alfaham chicken & Arabian platters', area: 'Samskruth Bhavan Road, Hassan', meal: ['dinner'], maps: 'Eats of Arab, Samskruth Bhavan Road, Hassan' },
+    { id: 'has_nv_7', city: 'Hassan', name: 'The Meridian Hotel', cat: 'nonveg', price: 450, famous: 'Indian non-veg curries, butter chicken & thali meals', area: 'Rangoli Halla, Hassan', meal: ['lunch', 'dinner'], maps: 'The Meridian Hotel, Rangoli Halla, Hassan' },
+    { id: 'has_nv_8', city: 'Hassan', name: 'Donne Biryani Mane', cat: 'nonveg', price: 220, famous: 'Fragrant seeraga samba donne biryani, mutton & chicken', area: 'Race Course Road, opp. Govt High School', meal: ['lunch', 'dinner'], maps: 'Donne Biryani Mane, Race Course Road, Hassan' },
+    { id: 'has_nv_9', city: 'Hassan', name: 'Pillai Mess Mutton Biryani Hotel', cat: 'nonveg', price: 280, famous: 'Local legendary mutton biryani & spicy pepper fry', area: 'Hosaline Road, Pension Mohalla', meal: ['lunch'], maps: 'Pillai Mess Mutton Biryani Hotel, Hassan' },
+    { id: 'has_nv_10', city: 'Hassan', name: 'Namma Halli Mane Nati Style Restaurant', cat: 'nonveg', price: 350, famous: 'Nati-style country chicken, mutton curry & soft ragi mudde', area: 'NH 75, B.M. Road, Byrapura/Alur', meal: ['lunch', 'dinner'], maps: 'Namma Halli Mane Nati Style, Hassan' },
+    { id: 'has_nv_11', city: 'Hassan', name: 'Crabaz Chattinad', cat: 'nonveg', price: 380, famous: 'Spicy Chettinad crab masala, chicken sukka & tandoori', area: 'Ring Road, Uddur, Hassan', meal: ['dinner'], maps: 'Crabaz Chattinad, Uddur, Hassan' },
+    { id: 'has_nv_12', city: 'Hassan', name: 'Marata Nati Style', cat: 'nonveg', price: 320, famous: 'Spicy Maratha-style mutton fry, chicken curry & ragi balls', area: 'Trinity Circle, M.G. Road, Vidya Nagar', meal: ['lunch', 'dinner'], maps: 'Marata Nati Style, MG Road, Hassan' },
+    { id: 'has_nv_13', city: 'Hassan', name: 'Hotel New Chalukya', cat: 'nonveg', price: 320, famous: 'Karnataka non-veg meals, egg fried rice & chilli chicken', area: 'Belur Ring Road Bypass, Uddur', meal: ['lunch', 'dinner'], maps: 'Hotel New Chalukya, Uddur, Hassan' },
+    { id: 'has_nv_14', city: 'Hassan', name: 'Hotel Southern Star', cat: 'nonveg', price: 650, famous: 'Premium multi-cuisine dining, kebabs & coastal curries', area: 'B.M. Road, Hassan', meal: ['lunch', 'dinner'], maps: 'Hotel Southern Star, BM Road, Hassan' },
+    { id: 'has_nv_15', city: 'Hassan', name: 'Suvarna Gate', cat: 'nonveg', price: 400, famous: 'Crispy chicken lollipop, pepper chicken & Chinese starters', area: 'Hassan city center', meal: ['dinner'], maps: 'Suvarna Gate, Hassan' },
+    { id: 'has_nv_16', city: 'Hassan', name: 'Amber Castle Restaurant', cat: 'nonveg', price: 450, famous: 'Mughlai biryani, tandoori platters & non-veg gravies', area: 'Harshamahal Road, near SBG Theatre', meal: ['dinner'], maps: 'Amber Castle Restaurant, Harshamahal Road, Hassan' },
+    { id: 'has_nv_17', city: 'Hassan', name: 'Five Star Chicken – R.C. Road', cat: 'nonveg', price: 180, famous: 'Crunchy fried chicken, rolls & quick chicken bites', area: 'Opp. Govt Medical College, R.C. Road', meal: ['evening'], maps: 'Five Star Chicken, RC Road, Hassan' },
+    { id: 'has_nv_18', city: 'Hassan', name: 'Five Star Chicken – Salagame Road', cat: 'nonveg', price: 180, famous: 'Spicy fried chicken, nuggets & evening snacks', area: 'Near Aralikatte Circle, Salagame Road', meal: ['evening'], maps: 'Five Star Chicken, Salagame Road, Hassan' },
+    { id: 'has_nv_19', city: 'Hassan', name: 'The Bell Pepper', cat: 'nonveg', price: 380, famous: 'Continental, North Indian sizzlers & non-veg delicacies', area: 'Samskruth Bhavan Road, Hassan', meal: ['dinner'], maps: 'The Bell Pepper, Samskruth Bhavan Road, Hassan' },
+    { id: 'has_nv_20', city: 'Hassan', name: 'Hotel Mayura International', cat: 'nonveg', price: 450, famous: 'Traditional non-veg thali, Chinese gravies & chicken ghee roast', area: 'B.M. Road, Thanniruhalla', meal: ['lunch', 'dinner'], maps: 'Hotel Mayura International, BM Road, Hassan' },
+    { id: 'has_nv_21', city: 'Hassan', name: 'Twist Restaurant', cat: 'nonveg', price: 380, famous: 'North Indian tandoori chicken, Chinese & family dining', area: 'Race Course Road, Rangoli Halla', meal: ['dinner'], maps: 'Twist Restaurant, Rangoli Halla, Hassan' },
+    { id: 'has_nv_22', city: 'Hassan', name: 'Hotel GRR', cat: 'nonveg', price: 180, famous: 'Affordable non-veg meals, egg curry & chicken rice', area: 'Opp. Bus Stand, Bus Stand Road, Rangoli Halla', meal: ['lunch'], maps: 'Hotel GRR, Bus Stand Road, Hassan' },
+    { id: 'has_nv_23', city: 'Hassan', name: 'Hoysala Military Hotel', cat: 'nonveg', price: 350, famous: 'Authentic military mutton chops, ragi mudde & donne biryani', area: 'Hassan city', meal: ['lunch', 'dinner'], maps: 'Hoysala Military Hotel, Hassan' },
+    { id: 'has_nv_24', city: 'Hassan', name: 'Hassan Donne Biriyani Mane', cat: 'nonveg', price: 220, famous: 'Authentic mutton & chicken donne biryani with kabab', area: '4th A Cross, Kuvempu Nagar', meal: ['lunch', 'dinner'], maps: 'Hassan Donne Biriyani Mane, Kuvempu Nagar, Hassan' },
+    { id: 'has_nv_25', city: 'Hassan', name: 'Hotel Nash', cat: 'nonveg', price: 280, famous: 'Kerala malabar biryani, parotta & spicy chicken curry', area: 'K.R. Puram, Hassan', meal: ['lunch', 'dinner'], maps: 'Hotel Nash, KR Puram, Hassan' }
+  ];
+
+  function getCuratedRestaurant(city, mealType, foodPref, usedIds) {
+    const rawCity = (city || 'Mangaluru').toLowerCase();
+    const isHassan = rawCity.includes('hassan');
+    const targetCity = isHassan ? 'Hassan' : (rawCity.includes('mangal') || rawCity.includes('manipal') || rawCity.includes('udupi') ? 'Mangaluru' : null);
+
+    // If city is not Mangaluru or Hassan, return null to allow default regional logic
+    if (!targetCity) return null;
+
+    let pool = CURATED_RESTAURANTS.filter(r => r.city === targetCity);
+
+    // Filter by food preference (veg vs nonveg vs any)
+    if (foodPref === 'veg') {
+      pool = pool.filter(r => r.cat === 'veg');
+    } else if (foodPref === 'nonveg') {
+      pool = pool.filter(r => r.cat === 'nonveg');
+    }
+
+    // Filter by meal type ('breakfast', 'lunch', 'dinner', 'evening')
+    let mealMatches = pool.filter(r => r.meal.includes(mealType));
+    if (mealMatches.length === 0) {
+      if (mealType === 'breakfast') {
+        mealMatches = CURATED_RESTAURANTS.filter(r => r.city === targetCity && r.meal.includes('breakfast'));
+      } else {
+        mealMatches = pool;
+      }
+    }
+
+    // Filter out already used restaurants in this itinerary
+    let unused = mealMatches.filter(r => !usedIds.includes(r.id));
+    if (unused.length === 0) unused = mealMatches;
+
+    // Pick top restaurant from list
+    const selected = unused[0];
+    if (selected) {
+      usedIds.push(selected.id);
+    }
+    return selected;
+  }
+
   // --- City Knowledge Base ---
   const CITIES_DATA = {
+    'Hassan': {
+      isCoastal: false,
+      hasBeach: false,
+      spots: {
+        nature: [
+          { name: "Shettihalli Rosary Church (Submerged Church Ruins)", cost: 0, time: "Sunset (4:30 PM – 6:00 PM)", desc: "19th-century French Gothic church ruins partially submerged in Hemavathi backwaters with stunning golden hour views." },
+          { name: "Gorur Dam & Hemavathi Reservoir Gardens", cost: 20, time: "Morning / Afternoon", desc: "Sprawling reservoir dam with landscaped terraced gardens and refreshing river breezes." },
+          { name: "Maharaja Park", cost: 10, time: "Evening", desc: "Picturesque public garden in Hassan city with towering trees and quiet walking paths." }
+        ],
+        culture: [
+          { name: "Hasanamba Temple", cost: 0, time: "Morning", desc: "Historic 12th-century shrine dedicated to Goddess Hasanamba, the guardian deity of Hassan." },
+          { name: "Belur & Halebidu Hoysala Temple Heritage Circuit", cost: 25, time: "Morning / Afternoon", desc: "UNESCO World Heritage site with world-famous 12th-century soapstone Hoysala temple carvings." },
+          { name: "Lakshmi Narasimha Temple (Javagal)", cost: 0, time: "Afternoon", desc: "Intricately sculpted Hoysala stone architectural marvel." }
+        ],
+        chill: [
+          { name: "Gorur Backwaters Leisure Walkway", cost: 0, time: "Evening", desc: "Tranquil open lakeside seating, cool breezes, and peaceful water expanse." },
+          { name: "Hemavathi Promenade Garden", cost: 0, time: "Morning", desc: "Tree-lined morning walking trails near river basin." }
+        ],
+        adventure: [
+          { name: "Bisle Ghat Viewpoint Trail", cost: 0, time: "Morning", desc: "Dramatic panoramic ridge overlook framing three Western Ghats mountain ranges." }
+        ],
+        shopping: [
+          { name: "B.M. Road Market & Heritage Bazaar", cost: 0, time: "Evening", desc: "Vibrant local market for fresh coffee beans, local spices, and snacks.", hasMall: true }
+        ]
+      },
+      rainSpots: [
+        { name: "Hassan District Museum & Archeological Gallery", cost: 10, desc: "Sheltered indoor museum with Hoysala sculptures, arms, and coins." },
+        { name: "Mayura Complex Indoor Promenade", cost: 0, desc: "Safe covered shopping and dining area protected from rains." }
+      ],
+      busRoutes: [
+        { from: "City Bus Stand", to: "Shettihalli Church", route: "Bus #18 / Alur route", fare: 20 },
+        { from: "City Bus Stand", to: "Gorur Dam", route: "Bus #24", fare: 18 },
+        { from: "City Bus Stand", to: "Belur", route: "KSRTC Express", fare: 35 }
+      ],
+      foodSpots: {
+        veg: "HVR Veg / Swad Veg / Parijata (₹100–250 per meal)",
+        nonveg: "Empire Restaurant / Mamatha Hotel / Donne Biryani Mane (₹200–450 per meal)",
+        budget: "Shri Gajanana Refreshments / Mamu Idli (₹50–120 per tiffin)"
+      }
+    },
     'Mangaluru': {
       isCoastal: true,
       hasBeach: true,
@@ -575,6 +766,7 @@
     }
     if (cityName.toLowerCase().includes('bengaluru')) return CITIES_DATA['Bangalore'];
     if (cityName.toLowerCase().includes('mysore')) return CITIES_DATA['Mysuru'];
+    if (cityName.toLowerCase().includes('hassan')) return CITIES_DATA['Hassan'];
     if (cityName.toLowerCase().includes('manipal') || cityName.toLowerCase().includes('udupi')) return CITIES_DATA['Mangaluru'];
     return DEFAULT_CITY_DATA;
   }
@@ -1567,6 +1759,7 @@
       getChips: () => [
         { label: t('loc_detect', STATE.language), value: "__GEOLOCATE__" },
         { label: "Mangaluru", value: "Mangaluru" },
+        { label: "Hassan", value: "Hassan" },
         { label: "Bangalore", value: "Bangalore" },
         { label: "Mysuru", value: "Mysuru" },
         { label: "Manipal / Udupi", value: "Manipal" },
@@ -2017,8 +2210,9 @@
     // 4. Build Timeline Stops Chronologically
     let stops = [];
     let actCost = 0;
+    const usedRestaurantIds = [];
 
-    function addStop(time, icon, title, desc, costNum, costLabel, transitAfter) {
+    function addStop(time, icon, title, desc, costNum, costLabel, transitAfter, customQuery) {
       if (costNum > 0) actCost += costNum;
       stops.push({
         time,
@@ -2027,22 +2221,32 @@
         desc: cleanSentence(desc, title),
         costNum: costNum || 0,
         costLabel: costLabel || (costNum > 0 ? `₹${costNum} (Est. Entry)` : 'Free Entry'),
-        transitAfter: transitAfter || null
+        transitAfter: transitAfter || null,
+        customQuery: customQuery || null
       });
     }
+
+    // Helper to get breakfast, lunch, and dinner from PDF / curated list
+    const bfastRest = getCuratedRestaurant(city, 'breakfast', foodKey, usedRestaurantIds);
+    const lunchRest = getCuratedRestaurant(city, 'lunch', foodKey, usedRestaurantIds);
+    const dinnerRest = getCuratedRestaurant(city, 'dinner', foodKey, usedRestaurantIds);
+    const eveningRest = getCuratedRestaurant(city, 'evening', foodKey, usedRestaurantIds);
 
     const transitHint = `~15m via ${transLabel.split('(')[0].trim()}`;
 
     if (timeSlotKey === 'morning') {
       // 8 AM - 12 PM
+      const bfastTitle = bfastRest ? `Breakfast at ${bfastRest.name} (${bfastRest.area})` : "Morning Breakfast & Coffee";
+      const bfastDesc = bfastRest ? `Famous for ${bfastRest.famous}.` : (foodKey === 'none' ? "Morning walk and traditional canteen atmosphere." : "Savor fresh regional breakfast tiffin and filter coffee.");
       addStop(
         "08:30 AM – 09:30 AM",
         "☕",
-        "Morning Breakfast & Coffee",
-        foodKey === 'none' ? "Morning walk and traditional canteen atmosphere." : "Savor fresh South Indian tiffin and filter coffee at a popular local canteen.",
+        bfastTitle,
+        bfastDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        transitHint
+        transitHint,
+        bfastRest ? bfastRest.maps : null
       );
       const sp1 = daytimeSpots[0] || { name: `${city} Heritage Site`, cost: 0, desc: "Historic architecture and scenic morning walkways." };
       addStop(
@@ -2066,14 +2270,17 @@
       );
     } else if (timeSlotKey === 'afternoon') {
       // 12 PM - 4 PM
+      const lunchTitle = lunchRest ? `Lunch at ${lunchRest.name} (${lunchRest.area})` : "Regional Lunch Experience";
+      const lunchDesc = lunchRest ? `Famous for ${lunchRest.famous}.` : (foodKey === 'none' ? "Leisurely break and stroll through local markets." : "Enjoy an authentic regional meal at a verified local restaurant.");
       addStop(
         "12:00 PM – 01:15 PM",
         "🍽️",
-        "Regional Lunch Experience",
-        foodKey === 'none' ? "Leisurely break and stroll through local markets." : "Enjoy an authentic regional meal at a verified local restaurant.",
+        lunchTitle,
+        lunchDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        transitHint
+        transitHint,
+        lunchRest ? lunchRest.maps : null
       );
       const sp1 = daytimeSpots[0];
       addStop(
@@ -2117,25 +2324,31 @@
         "Free Entry",
         transitHint
       );
+      const evTitle = dinnerRest ? `Dinner at ${dinnerRest.name} (${dinnerRest.area})` : (foodKey === 'none' ? "Evening Heritage Market Walk" : "Evening Street Food & Dinner");
+      const evDesc = dinnerRest ? `Famous for ${dinnerRest.famous}.` : (foodKey === 'none' ? "Vibrant stroll through illuminated city streets and local shops." : "Taste famous delicacies and refreshments at popular local tables.");
       addStop(
         "06:15 PM – 07:30 PM",
         "🍢",
-        foodKey === 'none' ? "Evening Heritage Market Walk" : "Evening Street Food & Dinner",
-        foodKey === 'none' ? "Vibrant stroll through illuminated city streets and local shops." : "Taste famous street delicacies, local snacks, and refreshments at the market stalls.",
+        evTitle,
+        evDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        null
+        null,
+        dinnerRest ? dinnerRest.maps : null
       );
     } else if (timeSlotKey === 'fullday') {
       // 8 AM - 8 PM
+      const fullBfastTitle = bfastRest ? `Breakfast at ${bfastRest.name} (${bfastRest.area})` : "Morning Breakfast & Coffee";
+      const fullBfastDesc = bfastRest ? `Famous for ${bfastRest.famous}.` : (foodKey === 'none' ? "Early morning stroll through green botanical gardens." : "Enjoy fresh breakfast and coffee before a full day of exploring.");
       addStop(
         "08:30 AM – 09:30 AM",
         "☕",
-        "Morning Breakfast & Park Walk",
-        foodKey === 'none' ? "Early morning stroll through green botanical gardens." : "Enjoy fresh breakfast and coffee before a full day of exploring.",
+        fullBfastTitle,
+        fullBfastDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        transitHint
+        transitHint,
+        bfastRest ? bfastRest.maps : null
       );
       const sp1 = daytimeSpots[0];
       addStop(
@@ -2147,14 +2360,17 @@
         null,
         transitHint
       );
+      const fullLunchTitle = lunchRest ? `Lunch at ${lunchRest.name} (${lunchRest.area})` : "Regional Lunch & Rest";
+      const fullLunchDesc = lunchRest ? `Famous for ${lunchRest.famous}.` : "Authentic regional meal with relaxation before afternoon destinations.";
       addStop(
         "12:15 PM – 01:30 PM",
         "🍽️",
-        "Regional Lunch & Rest",
-        "Authentic regional meal with relaxation before afternoon destinations.",
+        fullLunchTitle,
+        fullLunchDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        transitHint
+        transitHint,
+        lunchRest ? lunchRest.maps : null
       );
       const sp2 = daytimeSpots[1] || daytimeSpots[0];
       addStop(
@@ -2176,14 +2392,17 @@
         "Free Entry",
         transitHint
       );
+      const fullDinnerTitle = dinnerRest ? `Dinner at ${dinnerRest.name} (${dinnerRest.area})` : "Dinner & Night Market Walk";
+      const fullDinnerDesc = dinnerRest ? `Famous for ${dinnerRest.famous}.` : "Delicious evening dining and lively bazaar souvenir shopping.";
       addStop(
         "06:30 PM – 08:00 PM",
         "🍢",
-        "Dinner & Night Market Walk",
-        "Delicious evening dining and lively bazaar souvenir shopping.",
+        fullDinnerTitle,
+        fullDinnerDesc,
         0,
         foodKey === 'none' ? "Free Entry" : "Included in Food",
-        null
+        null,
+        dinnerRest ? dinnerRest.maps : null
       );
     } else {
       // 'prime' 12 PM - 6 PM (Default)
@@ -2217,14 +2436,17 @@
           null
         );
       } else {
+        const primeLunchTitle = lunchRest ? `Lunch at ${lunchRest.name} (${lunchRest.area})` : "Regional Lunch & Cultural Walk";
+        const primeLunchDesc = lunchRest ? `Famous for ${lunchRest.famous}.` : (foodKey === 'none' ? "Leisurely walk through historic city center." : "Enjoy a traditional lunch plate at a popular regional restaurant.");
         addStop(
           "12:00 PM – 01:15 PM",
           "🍽️",
-          "Regional Lunch & Cultural Walk",
-          foodKey === 'none' ? "Leisurely walk through historic city center." : "Enjoy a traditional lunch plate at a popular regional restaurant.",
+          primeLunchTitle,
+          primeLunchDesc,
           0,
           foodKey === 'none' ? "Free Entry" : "Included in Food",
-          transitHint
+          transitHint,
+          lunchRest ? lunchRest.maps : null
         );
         const sp1 = daytimeSpots[0];
         addStop(
@@ -2352,9 +2574,11 @@
         <div class="wai-stops-container">
     `;
 
-    // Attach Google Maps location links to all stops
+    // Attach Google Maps location links to all stops (use customQuery from PDF if present)
     stops.forEach((st) => {
-      st.mapsUrl = getGoogleMapsUrl(st.title, city);
+      st.mapsUrl = st.customQuery 
+        ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(st.customQuery)
+        : getGoogleMapsUrl(st.title, city);
     });
     const fullRouteUrl = getFullRouteUrl(stops, city);
 
