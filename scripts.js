@@ -4038,10 +4038,6 @@ function renderHome() {
     const homeHTML = `
         <div class="page-content">
             <section class="hero">
-                <div class="badge">
-                    <img src="https://api.iconify.design/material-symbols:location-on.svg?color=%238338EC" alt="Loc">
-                    Explore with Weekend Explore
-                </div>
                 <h1 style="color: #ffffff;">Where do<br><span class="hero-accent" style="color: #ffffff; -webkit-text-fill-color: #ffffff; background: none;">you want to go?</span></h1>
                 <p style="color: #ffffff; opacity: 0.95;">Choose your perfect destination and create beautiful memories.</p>
             </section>
