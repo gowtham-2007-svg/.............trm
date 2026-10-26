@@ -8416,25 +8416,33 @@ function initPlaceImageSliders() {
 
             <div class="team-badges-marquee-container" id="team-badges-marquee">
                 <div class="team-badges-track">
-                    <!-- Pair 1 -->
+                    <!-- Set 1 -->
                     <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
                         <div class="team-badge-img-wrap">
-                            <img src="assets/team/gowtham_badge.png" alt="Gautam N - Member of Weekend Explore Badge" loading="lazy" />
+                            <img src="assets/team/gowtham_badge.png" alt="Gautam N - Founder of Weekend Explore Badge" loading="lazy" />
                             <span class="team-badge-zoom-hint" title="Click to expand">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
                         <div class="team-badge-img-wrap">
-                            <img src="assets/team/deekishth_badge.png" alt="Deekishth KR - Member of Weekend Explore Badge" loading="lazy" />
+                            <img src="assets/team/divya_badge.png" alt="Divya Shettar - Co-Founder of Weekend Explore Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/deekishth_badge.png" alt="Deekishth KR - Co-Founder of Weekend Explore Badge" loading="lazy" />
                             <span class="team-badge-zoom-hint" title="Click to expand">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
                             </span>
                         </div>
                     </div>
 
-                    <!-- Pair 2 (for seamless loop) -->
+                    <!-- Set 2 (for seamless loop) -->
                     <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
@@ -8443,7 +8451,15 @@ function initPlaceImageSliders() {
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/divya_badge.png" alt="Divya Shettar Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
                             <span class="team-badge-zoom-hint" title="Click to expand">
@@ -8452,7 +8468,7 @@ function initPlaceImageSliders() {
                         </div>
                     </div>
 
-                    <!-- Pair 3 (widescreen guarantee) -->
+                    <!-- Set 3 (widescreen guarantee) -->
                     <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
@@ -8461,7 +8477,15 @@ function initPlaceImageSliders() {
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Member)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
+                        <div class="team-badge-img-wrap">
+                            <img src="assets/team/divya_badge.png" alt="Divya Shettar Badge" loading="lazy" />
+                            <span class="team-badge-zoom-hint" title="Click to expand">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
                             <span class="team-badge-zoom-hint" title="Click to expand">
