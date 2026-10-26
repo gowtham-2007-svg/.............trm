@@ -8662,19 +8662,6 @@ function initPlaceImageSliders() {
             title: 'More Information',
             getHTML: () => `
                 <div class="about-view">
-                    <!-- Creator Card -->
-                    <div class="about-card full-width" style="border-left: 4px solid var(--primary-color); background: var(--bg-light);">
-                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <div style="font-size: 2rem;">🎓</div>
-                            <div>
-                                <h5 style="margin-bottom: 0.25rem;">Founded by <a href="https://www.gowthamnataraj.online/" target="_blank" style="color: inherit; text-decoration: underline;">Gowtham N</a></h5>
-                                <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem;">First-year Engineering Student | Yenepoya University, Mangaluru (NIAT Program)</p>
-                                <p>Created with a simple vision: to help people discover amazing places, experiences, and destinations for their weekends without spending hours searching online.</p>
-                                <a href="https://www.gowthamnataraj.online/" target="_blank" style="display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">Visit Portfolio →</a>
-                            </div>
-                        </div>
-                    </div>
-
                     ${getTeamBadgesMarqueeHTML()}
 
                     <!-- Description Card -->
@@ -8843,7 +8830,7 @@ function initPlaceImageSliders() {
                     }
                 }
             },
-            speechText: "More Information. Weekend Explore was founded by Gowtham, a first year Engineering student at Yenepoya University, Mangaluru, under the N I A T program. Gowtham created this platform with a simple vision: to help you discover amazing places, experiences, and destinations for your weekends without spending hours searching online."
+            speechText: "More Information. Weekend Explore helps you discover amazing places, experiences, and destinations for your weekends across Karnataka without spending hours searching online."
         },
         'menu-support': {
             title: 'Support Center',
