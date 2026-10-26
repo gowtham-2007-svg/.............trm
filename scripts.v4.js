@@ -8350,6 +8350,11 @@ function initPlaceImageSliders() {
 
         badgeCards.forEach(card => {
             card.addEventListener('click', () => {
+                const badgeLink = card.getAttribute('data-badge-link');
+                if (badgeLink) {
+                    window.open(badgeLink, '_blank', 'noopener,noreferrer');
+                    return;
+                }
                 const imgSrc = card.getAttribute('data-badge-img');
                 const memberName = card.getAttribute('data-badge-name') || 'Weekend Explore Member';
                 if (!imgSrc) return;
@@ -8417,11 +8422,11 @@ function initPlaceImageSliders() {
             <div class="team-badges-marquee-container" id="team-badges-marquee">
                 <div class="team-badges-track">
                     <!-- Set 1 -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N - Founder of Weekend Explore Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
@@ -8443,11 +8448,11 @@ function initPlaceImageSliders() {
                     </div>
 
                     <!-- Set 2 (for seamless loop) -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
@@ -8469,11 +8474,11 @@ function initPlaceImageSliders() {
                     </div>
 
                     <!-- Set 3 (widescreen guarantee) -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
