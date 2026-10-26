@@ -4314,6 +4314,111 @@ main {
     transform: rotate(90deg);
 }
 
+/* Lightbox Portfolio Auto-Redirect Bar */
+.badge-lightbox-nav-bar {
+    margin-top: 14px;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(131, 56, 236, 0.45);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    border-radius: 18px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+.badge-nav-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.badge-nav-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #00F0FF;
+    border-radius: 50%;
+    animation: badgeNavSpin 0.8s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes badgeNavSpin {
+    to { transform: rotate(360deg); }
+}
+
+.badge-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.badge-nav-btn {
+    padding: 6px 13px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+}
+
+.badge-nav-btn.primary {
+    background: linear-gradient(135deg, #0077FE 0%, #8338EC 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(131, 56, 236, 0.35);
+}
+
+.badge-nav-btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(131, 56, 236, 0.5);
+}
+
+.badge-nav-btn.secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.badge-nav-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+}
+
+.badge-nav-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.badge-nav-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00F0FF, #8338EC);
+    transition: width 3s linear;
+}
+
+.badge-nav-progress-fill.running {
+    width: 100%;
+}
+
 @media (max-width: 550px) {
     .team-badge-card {
         width: 165px;

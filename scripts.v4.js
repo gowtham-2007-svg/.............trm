@@ -8342,21 +8342,33 @@ function initPlaceImageSliders() {
         };
     }
 
-    // Helper: Initialize interactive team ID badges and lightbox
+    // Helper: Initialize interactive team ID badges and lightbox with 3-second portfolio auto-redirect
     function setupTeamBadges(modal) {
         if (!modal) return;
         const badgeCards = modal.querySelectorAll('.team-badge-card');
         if (!badgeCards.length) return;
 
+        let redirectTimer = null;
+        let countdownInterval = null;
+
+        const clearPendingRedirect = () => {
+            if (redirectTimer) {
+                clearTimeout(redirectTimer);
+                redirectTimer = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            const bar = document.getElementById('badge-redirect-bar');
+            if (bar) bar.style.display = 'none';
+        };
+
         badgeCards.forEach(card => {
             card.addEventListener('click', () => {
-                const badgeLink = card.getAttribute('data-badge-link');
-                if (badgeLink) {
-                    window.open(badgeLink, '_blank', 'noopener,noreferrer');
-                    return;
-                }
                 const imgSrc = card.getAttribute('data-badge-img');
                 const memberName = card.getAttribute('data-badge-name') || 'Weekend Explore Member';
+                const badgeLink = card.getAttribute('data-badge-link');
                 if (!imgSrc) return;
 
                 let lightbox = document.getElementById('badge-lightbox-modal');
@@ -8370,6 +8382,23 @@ function initPlaceImageSliders() {
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                             </button>
                             <img class="badge-lightbox-img" src="" alt="Badge Preview" />
+                            <div class="badge-lightbox-nav-bar" id="badge-redirect-bar" style="display: none;">
+                                <div class="badge-nav-info">
+                                    <span class="badge-nav-spinner"></span>
+                                    <span class="badge-nav-text">Opening portfolio in <strong id="badge-nav-seconds">3</strong>s...</span>
+                                </div>
+                                <div class="badge-nav-actions">
+                                    <a id="badge-nav-now-btn" href="#" target="_blank" rel="noopener noreferrer" class="badge-nav-btn primary">
+                                        Open Now ↗
+                                    </a>
+                                    <button id="badge-nav-cancel-btn" type="button" class="badge-nav-btn secondary">
+                                        Cancel
+                                    </button>
+                                </div>
+                                <div class="badge-nav-progress">
+                                    <div class="badge-nav-progress-fill" id="badge-nav-progress-fill"></div>
+                                </div>
+                            </div>
                         </div>
                     `;
                     document.body.appendChild(lightbox);
@@ -8377,24 +8406,76 @@ function initPlaceImageSliders() {
                     const closeBtn = lightbox.querySelector('.badge-lightbox-close');
                     if (closeBtn) {
                         closeBtn.addEventListener('click', () => {
+                            clearPendingRedirect();
                             lightbox.classList.remove('active');
                         });
                     }
                     lightbox.addEventListener('click', (e) => {
-                        if (e.target === lightbox) lightbox.classList.remove('active');
-                    });
-                    document.addEventListener('keydown', (e) => {
-                        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                        if (e.target === lightbox) {
+                            clearPendingRedirect();
                             lightbox.classList.remove('active');
                         }
                     });
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                            clearPendingRedirect();
+                            lightbox.classList.remove('active');
+                        }
+                    });
+
+                    const cancelBtn = lightbox.querySelector('#badge-nav-cancel-btn');
+                    if (cancelBtn) {
+                        cancelBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            clearPendingRedirect();
+                        });
+                    }
                 }
+
+                // Clear any existing redirect
+                clearPendingRedirect();
 
                 const imgEl = lightbox.querySelector('.badge-lightbox-img');
                 if (imgEl) {
                     imgEl.src = imgSrc;
                     imgEl.alt = memberName;
                 }
+
+                const redirectBar = lightbox.querySelector('#badge-redirect-bar');
+                const navNowBtn = lightbox.querySelector('#badge-nav-now-btn');
+                const navSecEl = lightbox.querySelector('#badge-nav-seconds');
+                const progressFill = lightbox.querySelector('#badge-nav-progress-fill');
+
+                if (badgeLink && redirectBar) {
+                    redirectBar.style.display = 'flex';
+                    if (navNowBtn) {
+                        navNowBtn.href = badgeLink;
+                        navNowBtn.onclick = () => {
+                            clearPendingRedirect();
+                        };
+                    }
+                    if (navSecEl) navSecEl.textContent = '3';
+                    if (progressFill) {
+                        progressFill.classList.remove('running');
+                        progressFill.style.width = '0%';
+                        void progressFill.offsetWidth;
+                        progressFill.classList.add('running');
+                    }
+
+                    let remaining = 3;
+                    countdownInterval = setInterval(() => {
+                        remaining -= 1;
+                        if (navSecEl) navSecEl.textContent = remaining > 0 ? remaining : '0';
+                    }, 1000);
+
+                    redirectTimer = setTimeout(() => {
+                        clearPendingRedirect();
+                        window.open(badgeLink, '_blank', 'noopener,noreferrer');
+                    }, 3000);
+                } else if (redirectBar) {
+                    redirectBar.style.display = 'none';
+                }
+
                 lightbox.classList.add('active');
             });
         });
@@ -8414,7 +8495,7 @@ function initPlaceImageSliders() {
                 <div class="team-badges-meta">
                     <span class="team-scroll-hint">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                        Right to Left • Hover to pause
+                        Right to Left • Hover to pause • Click to visit portfolio in 3s
                     </span>
                 </div>
             </div>
@@ -8422,79 +8503,79 @@ function initPlaceImageSliders() {
             <div class="team-badges-marquee-container" id="team-badges-marquee">
                 <div class="team-badges-track">
                     <!-- Set 1 -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to view Gautam Nataraj's portfolio (gowthamnataraj.online) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N - Founder of Weekend Explore Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (gowthamnataraj.online)">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)" data-badge-link="https://my-portfolio-d7hh.vercel.app/" title="Click to view Divya Shettar's portfolio (my-portfolio-d7hh.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/divya_badge.png" alt="Divya Shettar - Co-Founder of Weekend Explore Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (my-portfolio-d7hh.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)" data-badge-link="https://deeksith.vercel.app/" title="Click to view Deekishth KR's portfolio (deeksith.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/deekishth_badge.png" alt="Deekishth KR - Co-Founder of Weekend Explore Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (deeksith.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
 
                     <!-- Set 2 (for seamless loop) -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to view Gautam Nataraj's portfolio (gowthamnataraj.online) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (gowthamnataraj.online)">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)" data-badge-link="https://my-portfolio-d7hh.vercel.app/" title="Click to view Divya Shettar's portfolio (my-portfolio-d7hh.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/divya_badge.png" alt="Divya Shettar Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (my-portfolio-d7hh.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)" data-badge-link="https://deeksith.vercel.app/" title="Click to view Deekishth KR's portfolio (deeksith.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (deeksith.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
 
                     <!-- Set 3 (widescreen guarantee) -->
-                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to visit Gautam Nataraj's Portfolio (gowthamnataraj.online)">
+                    <div class="team-badge-card" data-badge-img="assets/team/gowtham_badge.png" data-badge-name="Gautam N (Founder)" data-badge-link="https://gowthamnataraj.online" title="Click to view Gautam Nataraj's portfolio (gowthamnataraj.online) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/gowtham_badge.png" alt="Gautam N Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Visit Portfolio (gowthamnataraj.online)">
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (gowthamnataraj.online)">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/divya_badge.png" data-badge-name="Divya Shettar (Co-Founder)" data-badge-link="https://my-portfolio-d7hh.vercel.app/" title="Click to view Divya Shettar's portfolio (my-portfolio-d7hh.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/divya_badge.png" alt="Divya Shettar Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (my-portfolio-d7hh.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
-                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)">
+                    <div class="team-badge-card" data-badge-img="assets/team/deekishth_badge.png" data-badge-name="Deekishth KR (Co-Founder)" data-badge-link="https://deeksith.vercel.app/" title="Click to view Deekishth KR's portfolio (deeksith.vercel.app) - opens in 3s">
                         <div class="team-badge-img-wrap">
                             <img src="assets/team/deekishth_badge.png" alt="Deekishth KR Badge" loading="lazy" />
-                            <span class="team-badge-zoom-hint" title="Click to expand">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            <span class="team-badge-zoom-hint" title="Visit Portfolio in 3s (deeksith.vercel.app)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             </span>
                         </div>
                     </div>
