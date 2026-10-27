@@ -12,7 +12,7 @@
 
 Instead of searching across multiple travel platforms, users can discover destinations, experiences, and travel ideas across **South India** in one place.
 
-The project combines **travel discovery, personalization, and AI-assisted recommendations** to help users find destinations based on their interests, available time, budget, and travel preferences.
+The project combines **travel discovery, personalization, and AI-assisted recommendations** to help users find destinations based on their interests, available time, budget, and travel preferences .
 
 ---
 
@@ -32,8 +32,7 @@ This process can be **time-consuming and overwhelming**, especially when users h
 
 ### 💡 **Solution**
 
-**Weekend Explorer** brings travel discovery and trip planning together into one simple platform, helping users discover suitable destinations and experiences across South India.
-
+Weekend Explorer brings travel discovery and trip planning together into one simple platform, helping users discover suitable destinations and experiences across South India. It enables travelers to explore famous tourist attractions, temples, beaches, waterfalls, restaurants, shopping malls, and hidden gems through curated destination listings, interactive maps, and detailed location information. With intuitive navigation, engaging visuals, and convenient trip-planning features, Weekend Explorer makes it easier to discover new places, plan memorable weekend getaways, and experience the beauty, culture, and diversity of South India.
 ---
 
 # 🚀 **Key Features**
