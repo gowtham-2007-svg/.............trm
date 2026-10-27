@@ -353,9 +353,9 @@ The project can evolve from a **travel discovery website** into a complete:
 ---
 
 # 👩‍💻 **Author**
-
+## **Gautham**
 ## **Divya Shettar**
-
+## **Deekshit KR**
 **B.Tech CSE (AI) Student**
 
 Interested in:
