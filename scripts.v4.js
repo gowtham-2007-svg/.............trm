@@ -510,6 +510,26 @@ const mangaloreCategoryData = {
                 busRoutes: `<strong>Bus Numbers:</strong> 15, 17, 17A, 19, 33, 47B, 48A<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Kankanady<br>│<br>🔴 Bharath Mall Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🛍️ Bharath Mall</div>`,
                 bestChoice: 'Supermarket Shopping & Multiplex Theatre',
                 bestChoiceImg: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200'
+            },
+            { 
+                name: 'Inland Ornate Mall', 
+                image: 'assets/places/inland_ornate_mall.webp', 
+                description: 'A compact shopping destination in Kodialbail, Mangaluru, featuring retail stores, dining, and everyday services.',
+                openHours: '11:00 AM – 11:00 PM',
+                bestTime: 'Evening hours (5:00 PM onwards)',
+                busRoutes: `<strong>Bus Numbers:</strong> 1, 2, 4, 11, 13, 27<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ PVS Circle / Kodialbail<br>│<br>🔴 Navabharath Circle Bus Stop<br>│<br>🚶 Walk 2 min<br>│<br>🛍️ Inland Ornate Mall</div>`,
+                bestChoice: 'Quick Shopping & Casual Dining',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=200'
+            },
+            { 
+                name: 'PIO Mall', 
+                image: 'assets/places/pio_mall.webp', 
+                description: 'A commercial shopping destination in Mangaluru featuring retail outlets, restaurants, and convenient shopping options.',
+                openHours: '9:00 AM – 9:00 PM',
+                bestTime: 'Afternoon to evening (3:00 PM onwards)',
+                busRoutes: `<strong>Bus Numbers:</strong> 2, 7, 9, 11, 14, 15, 27<br><strong>📍 Board At:</strong> State Bank Bus Stand or KSRTC Bus Stand<br><div class="bus-route-flow-container">🟢 State Bank Bus Stand<br>│<br>⚪ Hampankatta<br>│<br>⚪ Bejai / KSRTC<br>│<br>🔴 Jail Road / Bejai Bus Stop<br>│<br>🚶 Walk 1 min<br>│<br>🛍️ PIO Mall</div>`,
+                bestChoice: 'Everyday Shopping & Quick Bites',
+                bestChoiceImg: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=200'
             }
         ]
     },
@@ -5141,6 +5161,8 @@ const cityCoordinates = {
     'forum fiza mall': { lat: 12.8622, lng: 74.8369 },
     'lotus mall (upcoming)': { lat: 12.8800, lng: 74.8600 },
     'bharath mall': { lat: 12.8814, lng: 74.8433 },
+    'inland ornate mall': { lat: 12.8756, lng: 74.8415 },
+    'pio mall': { lat: 12.8821, lng: 74.8450 },
     'jamalabad fort': { lat: 13.0270, lng: 75.3180 },
     'ermayi falls trek': { lat: 13.0800, lng: 75.3500 },
     'karinchieshwara trek': { lat: 12.9800, lng: 75.1200 },
@@ -5756,6 +5778,8 @@ const cityPlaceIds = {
     'forum fiza mall': 'ChIJBf1_13dApzsRgkSw_V8lJWs',
     'lotus mall (upcoming)': 'ChIJAf1_15dApzsRfkSw_V8lJWs',
     'bharath mall': 'ChIJ_e1_17dApzsRekSw_V8lJWs',
+    'inland ornate mall': 'ChIJ_e1_17dApzsRekSw_V8lJOr',
+    'pio mall': 'ChIJ_e1_17dApzsRekSw_V8lJPio',
     'jamalabad fort': 'ChIJ-e1_19dApzsRdkSw_V8lJWs',
     'ermayi falls trek': 'ChIJ9e1_1_dApzsRckSw_V8lJWs',
     'karinchieshwara trek': 'ChIJDf1_1zdApzsRikSw_V8lJWs',
