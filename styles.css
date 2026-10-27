@@ -6391,6 +6391,625 @@ main {
     }
 }
 
+/* ==========================================================================
+   MANGALURU NAVIGATION & LIVE SPECIAL SECTIONS (OFFERS & EVENTS)
+   ========================================================================== */
+
+/* Mangaluru Desktop Navbar */
+.mangaluru-nav-links {
+    display: none;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+@media (min-width: 993px) {
+    body.mangaluru-nav-active .default-nav-links {
+        display: none !important;
+    }
+
+    body.mangaluru-nav-active .mangaluru-nav-links {
+        display: flex !important;
+    }
+}
+
+body.mangaluru-nav-active .default-drawer-menu {
+    display: none !important;
+}
+
+body.mangaluru-nav-active .mangaluru-drawer-menu {
+    display: block !important;
+}
+
+/* Ensure mobile header never overflows or shows inline links */
+@media (max-width: 992px) {
+    body.mangaluru-nav-active .mangaluru-nav-links,
+    body.mangaluru-nav-active .default-nav-links,
+    .navbar .mangaluru-nav-links,
+    .navbar .default-nav-links,
+    .mangaluru-nav-links,
+    .default-nav-links {
+        display: none !important;
+    }
+}
+
+.nav-link.nav-live-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 7px 16px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-dark, #0f172a);
+    text-decoration: none;
+}
+
+.nav-link.nav-live-link:hover,
+.nav-link.nav-live-link.active {
+    background: rgba(131, 56, 236, 0.12);
+    border-color: rgba(131, 56, 236, 0.4);
+    color: var(--primary-color, #8338EC);
+    transform: translateY(-1px);
+}
+
+.live-nav-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.live-nav-dot.pulse-red {
+    background-color: #EF4444;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+    animation: livePulseRed 1.8s infinite;
+}
+
+.live-nav-dot.pulse-purple {
+    background-color: #8338EC;
+    box-shadow: 0 0 0 0 rgba(131, 56, 236, 0.8);
+    animation: livePulsePurple 1.8s infinite;
+}
+
+@keyframes livePulseRed {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+    }
+    70% {
+        transform: scale(1.25);
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+@keyframes livePulsePurple {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(131, 56, 236, 0.8);
+    }
+    70% {
+        transform: scale(1.25);
+        box-shadow: 0 0 0 8px rgba(131, 56, 236, 0);
+    }
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(131, 56, 236, 0);
+    }
+}
+
+/* Sections layout - Opaque container for 100% text readability over background photo */
+.dest-special-section {
+    max-width: 1400px;
+    margin: 2.5rem auto 5rem;
+    padding: 2.25rem 2.5rem 3rem;
+    background: #ffffff;
+    border-radius: 28px;
+    border: 1.5px solid #e2e8f0;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+    scroll-margin-top: 90px;
+    position: relative;
+    z-index: 10;
+}
+
+.dest-special-section .section-header-wrap {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.dest-special-section.live-offers-section .section-header-wrap {
+    border-left: 6px solid #ef4444;
+    background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+    border-color: #fed7aa;
+    border-left-color: #ef4444;
+}
+
+.dest-special-section.live-events-section .section-header-wrap {
+    border-left: 6px solid #8338ec;
+    background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+    border-color: #e9d5ff;
+    border-left-color: #8338ec;
+}
+
+.section-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    border-radius: 24px;
+    margin-bottom: 0.85rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.section-pill-badge.live-pill-red {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1.5px solid #f87171;
+}
+
+.section-pill-badge.live-pill-purple {
+    background: #f3e8ff;
+    color: #581c87;
+    border: 1.5px solid #c084fc;
+}
+
+.dest-special-section .section-title {
+    font-size: 2.35rem;
+    font-weight: 900;
+    color: #0f172a !important;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    text-shadow: none !important;
+}
+
+.dest-special-section .section-subtitle {
+    font-size: 1.15rem;
+    color: #1e293b !important;
+    line-height: 1.6;
+    font-weight: 600;
+    max-width: 800px;
+    margin: 0;
+}
+
+/* Live Cards Grid */
+.live-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .dest-special-section {
+        margin: 1.25rem auto 3.5rem;
+        padding: 1.25rem 1rem 1.75rem;
+        border-radius: 20px;
+    }
+    .dest-special-section .section-header-wrap {
+        padding: 1.25rem 1rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+    }
+    .dest-special-section .section-title {
+        font-size: 1.65rem;
+        line-height: 1.3;
+    }
+    .dest-special-section .section-subtitle {
+        font-size: 0.98rem;
+        line-height: 1.55;
+    }
+    .live-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.live-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    border: 1.5px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.live-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.12);
+}
+
+.live-card.live-offer-card:hover {
+    border-color: #f87171;
+}
+
+.live-card.live-event-card:hover {
+    border-color: #a78bfa;
+}
+
+.live-card-media {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+@media (max-width: 768px) {
+    .live-card-media {
+        height: 200px;
+    }
+}
+
+.live-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.live-card:hover .live-card-media img {
+    transform: scale(1.08);
+}
+
+.live-card-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+}
+
+.live-card-tag.offer-tag {
+    background: #dc2626;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.45);
+}
+
+.live-card-tag.event-tag {
+    background: #7c3aed;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.45);
+}
+
+.sample-card-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #fef08a;
+    color: #713f12;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 5px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #eab308;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.live-badge-status {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(15, 23, 42, 0.92);
+    color: #ffffff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(6px);
+    z-index: 2;
+    letter-spacing: 0.2px;
+}
+
+.live-badge-status.live-status-purple {
+    background: rgba(46, 16, 101, 0.92);
+}
+
+.live-card-body {
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .live-card-body {
+        padding: 1.25rem 1.1rem;
+    }
+}
+
+.live-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 0.85rem;
+}
+
+.live-card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 5px 12px;
+    border-radius: 10px;
+}
+
+.live-card-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+    margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .live-card-title {
+        font-size: 1.2rem;
+    }
+}
+
+.live-card-desc {
+    font-size: 1.02rem;
+    color: #1e293b;
+    line-height: 1.65;
+    font-weight: 500;
+    margin-bottom: 1.35rem;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .live-card-desc {
+        font-size: 0.96rem;
+        line-height: 1.6;
+    }
+}
+
+.live-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.2rem;
+    border-top: 1.5px solid #f1f5f9;
+    margin-top: auto;
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .live-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+}
+
+.live-coupon-code, .live-price-tag {
+    font-size: 0.94rem;
+    color: #0f172a;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.live-coupon-code strong {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1.5px dashed #ef4444;
+    font-family: monospace;
+    font-size: 1rem;
+    letter-spacing: 0.8px;
+    font-weight: 800;
+}
+
+.live-price-tag {
+    font-weight: 800;
+    font-size: 0.98rem;
+    color: #6d28d9;
+    background: #f3e8ff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1.5px solid #d8b4fe;
+}
+
+.live-action-btn {
+    padding: 11px 22px;
+    border-radius: 12px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+}
+
+@media (max-width: 768px) {
+    .live-action-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+.live-action-btn.offer-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}
+
+.live-action-btn.offer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
+}
+
+.live-action-btn.event-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+
+.live-action-btn.event-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+}
+
+/* Mangaluru Tab Switcher */
+.mangaluru-tab-switcher-wrap {
+    max-width: 1400px;
+    margin: 2rem auto 1rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    .mangaluru-tab-switcher-wrap {
+        padding: 0 1rem;
+        margin: 1.25rem auto 0.75rem;
+    }
+}
+
+.mangaluru-tab-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 5px;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+}
+
+@media (max-width: 768px) {
+    .mangaluru-tab-switcher {
+        display: flex;
+        width: 100%;
+        gap: 4px;
+        padding: 4px;
+        border-radius: 14px;
+    }
+}
+
+.mangaluru-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 12px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #334155;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    text-decoration: none;
+    min-height: 42px;
+}
+
+@media (max-width: 768px) {
+    .mangaluru-tab-btn {
+        flex: 1;
+        padding: 8px 4px;
+        font-size: 0.85rem;
+        min-height: 40px;
+        gap: 6px;
+    }
+}
+
+.mangaluru-tab-btn:hover {
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.mangaluru-tab-btn.active {
+    background: #ffffff;
+    color: var(--primary-color, #8338EC);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+}
+
+.mangaluru-tab-panel {
+    animation: tabFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tabFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1e293b;
+    cursor: pointer;
+    margin-bottom: 1.25rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tab-back-btn:hover {
+    background: #f8fafc;
+    color: var(--primary-color, #8338EC);
+    border-color: var(--primary-color, #8338EC);
+    box-shadow: 0 4px 12px rgba(131, 56, 236, 0.15);
+    transform: translateX(-2px);
+}
+
 
 
 

@@ -3670,6 +3670,7 @@ function renderFoodCategoryPage(cityId) {
 }
 
 function renderGlobalFavoritesPage() {
+    if (typeof setNavbarMode === 'function') setNavbarMode('default');
     const favFoodNames = getFavoriteFoods();
     
     const allMatchingFoods = [];
@@ -3843,6 +3844,7 @@ function initNavbarFavoriteListener() {
 }
 
 function renderCategoryPage(categoryId, cityId = currentCityId) {
+    if (typeof setNavbarMode === 'function') setNavbarMode('default');
     clearBackgroundIntervals();
     if (categoryId === 'food') {
         renderFoodCategoryPage(cityId);
@@ -4046,8 +4048,174 @@ function setAppContent(html, onMounted) {
     }
 }
 
+function setNavbarMode(mode) {
+    const isMangaluru = (mode === 'mangaluru');
+    if (isMangaluru) {
+        document.body.classList.add('mangaluru-nav-active');
+    } else {
+        document.body.classList.remove('mangaluru-nav-active');
+    }
+    const defaultNav = document.getElementById('default-nav-links');
+    const mangaluruNav = document.getElementById('mangaluru-nav-links');
+    const defaultDrawer = document.getElementById('default-drawer-menu');
+    const mangaluruDrawer = document.getElementById('mangaluru-drawer-menu');
+
+    if (defaultNav) defaultNav.style.display = isMangaluru ? 'none' : 'flex';
+    if (mangaluruNav) mangaluruNav.style.display = isMangaluru ? 'flex' : 'none';
+    if (defaultDrawer) defaultDrawer.style.display = isMangaluru ? 'none' : 'block';
+    if (mangaluruDrawer) mangaluruDrawer.style.display = isMangaluru ? 'block' : 'none';
+}
+window.setNavbarMode = setNavbarMode;
+
+function switchMangaluruTab(tab) {
+    window.currentMangaluruTab = tab;
+
+    const catPanel = document.getElementById('categories-section');
+    const offersPanel = document.getElementById('live-offers-section');
+    const eventsPanel = document.getElementById('live-events-section');
+
+    const navCat = document.getElementById('nav-categories');
+    const navOffers = document.getElementById('nav-live-offers');
+    const navEvents = document.getElementById('nav-live-events');
+
+    const menuCat = document.getElementById('menu-categories');
+    const menuOffers = document.getElementById('menu-live-offers');
+    const menuEvents = document.getElementById('menu-live-events');
+
+    const tabBtns = document.querySelectorAll('.mangaluru-tab-btn');
+    tabBtns.forEach(btn => {
+        if (btn.getAttribute('data-tab') === tab) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    [navCat, navOffers, navEvents, menuCat, menuOffers, menuEvents].forEach(link => {
+        link?.classList.remove('active');
+    });
+
+    if (tab === 'offers') {
+        if (catPanel) { catPanel.style.display = 'none'; catPanel.classList.remove('active-panel'); }
+        if (eventsPanel) { eventsPanel.style.display = 'none'; eventsPanel.classList.remove('active-panel'); }
+        if (offersPanel) {
+            offersPanel.style.display = 'block';
+            requestAnimationFrame(() => offersPanel.classList.add('active-panel'));
+        }
+        navOffers?.classList.add('active');
+        menuOffers?.classList.add('active');
+    } else if (tab === 'events') {
+        if (catPanel) { catPanel.style.display = 'none'; catPanel.classList.remove('active-panel'); }
+        if (offersPanel) { offersPanel.style.display = 'none'; offersPanel.classList.remove('active-panel'); }
+        if (eventsPanel) {
+            eventsPanel.style.display = 'block';
+            requestAnimationFrame(() => eventsPanel.classList.add('active-panel'));
+        }
+        navEvents?.classList.add('active');
+        menuEvents?.classList.add('active');
+    } else {
+        // Default: categories
+        if (offersPanel) { offersPanel.style.display = 'none'; offersPanel.classList.remove('active-panel'); }
+        if (eventsPanel) { eventsPanel.style.display = 'none'; eventsPanel.classList.remove('active-panel'); }
+        if (catPanel) {
+            catPanel.style.display = 'block';
+            requestAnimationFrame(() => catPanel.classList.add('active-panel'));
+        }
+        navCat?.classList.add('active');
+        menuCat?.classList.add('active');
+    }
+
+    // Scroll smoothly to top of content
+    const targetScroll = document.querySelector('.mangaluru-tab-switcher-wrap') || document.querySelector('.dest-header');
+    if (targetScroll) {
+        const headerOffset = 80;
+        const offsetPosition = targetScroll.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
+    }
+}
+window.switchMangaluruTab = switchMangaluruTab;
+
+function initLiveNavListeners() {
+    const navCat = document.getElementById('nav-categories');
+    const navOffers = document.getElementById('nav-live-offers');
+    const navEvents = document.getElementById('nav-live-events');
+
+    const menuCat = document.getElementById('menu-categories');
+    const menuOffers = document.getElementById('menu-live-offers');
+    const menuEvents = document.getElementById('menu-live-events');
+
+    if (navCat && !navCat._hasLiveListener) {
+        navCat._hasLiveListener = true;
+        navCat.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchMangaluruTab('categories');
+        });
+    }
+    if (navOffers && !navOffers._hasLiveListener) {
+        navOffers._hasLiveListener = true;
+        navOffers.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchMangaluruTab('offers');
+        });
+    }
+    if (navEvents && !navEvents._hasLiveListener) {
+        navEvents._hasLiveListener = true;
+        navEvents.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchMangaluruTab('events');
+        });
+    }
+
+    if (menuCat && !menuCat._hasLiveListener) {
+        menuCat._hasLiveListener = true;
+        menuCat.addEventListener('click', (e) => {
+            e.preventDefault();
+            const d = document.getElementById('menu-drawer');
+            if (d) d.classList.remove('open');
+            const ov = document.getElementById('drawer-overlay');
+            if (ov) ov.classList.remove('open');
+            switchMangaluruTab('categories');
+        });
+    }
+    if (menuOffers && !menuOffers._hasLiveListener) {
+        menuOffers._hasLiveListener = true;
+        menuOffers.addEventListener('click', (e) => {
+            e.preventDefault();
+            const d = document.getElementById('menu-drawer');
+            if (d) d.classList.remove('open');
+            const ov = document.getElementById('drawer-overlay');
+            if (ov) ov.classList.remove('open');
+            switchMangaluruTab('offers');
+        });
+    }
+    if (menuEvents && !menuEvents._hasLiveListener) {
+        menuEvents._hasLiveListener = true;
+        menuEvents.addEventListener('click', (e) => {
+            e.preventDefault();
+            const d = document.getElementById('menu-drawer');
+            if (d) d.classList.remove('open');
+            const ov = document.getElementById('drawer-overlay');
+            if (ov) ov.classList.remove('open');
+            switchMangaluruTab('events');
+        });
+    }
+
+    document.querySelectorAll('.mangaluru-tab-btn').forEach(btn => {
+        if (!btn._hasListener) {
+            btn._hasListener = true;
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tab = btn.getAttribute('data-tab');
+                switchMangaluruTab(tab);
+            });
+        }
+    });
+}
+window.initLiveNavListeners = initLiveNavListeners;
+
 function renderHome() {
     window.currentCityId = null;
+    setNavbarMode('default');
     if (window.WeekendAI && typeof window.WeekendAI.hide === 'function') {
         window.WeekendAI.hide();
     }
@@ -4161,6 +4329,13 @@ function renderDestination(id) {
     currentCityId = id;
     window.currentCityId = id;
 
+    if (id === 'mangaluru') {
+        setNavbarMode('mangaluru');
+        initLiveNavListeners();
+    } else {
+        setNavbarMode('default');
+    }
+
     // Show the AI widget button on the destination page (don't auto-open)
     if (window.WeekendAI && typeof window.WeekendAI.show === 'function') {
         window.WeekendAI.show();
@@ -4240,8 +4415,27 @@ function renderDestination(id) {
             </div>
             ` : ''}
 
+            ${dest.id === 'mangaluru' ? `
+                <div class="mangaluru-tab-switcher-wrap">
+                    <div class="mangaluru-tab-switcher">
+                        <button class="mangaluru-tab-btn active" data-tab="categories">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            <span>Categories</span>
+                        </button>
+                        <button class="mangaluru-tab-btn" data-tab="offers">
+                            <span class="live-nav-dot pulse-red"></span>
+                            <span>Live Offers</span>
+                        </button>
+                        <button class="mangaluru-tab-btn" data-tab="events">
+                            <span class="live-nav-dot pulse-purple"></span>
+                            <span>Live Events</span>
+                        </button>
+                    </div>
+                </div>
+            ` : ''}
+
             ${isPremiumCity ? `
-                <div class="categories-section">
+                <div class="categories-section mangaluru-tab-panel active-panel" id="categories-section">
                     <h2 class="section-title">${dest.name} Categories</h2>
                     <div class="category-grid">
                         ${cityCategories[dest.id].map(cat => `
@@ -4258,17 +4452,136 @@ function renderDestination(id) {
                     </div>
                 </div>
             ` : ''}
+
+            ${dest.id === 'mangaluru' ? `
+                <!-- Live Offers Section (Displayed on Live Offers click) -->
+                <section class="dest-special-section live-offers-section mangaluru-tab-panel" id="live-offers-section" style="display: none;">
+                    <button class="tab-back-btn" onclick="switchMangaluruTab('categories')">← Back to Categories</button>
+                    <div class="section-header-wrap">
+                        <div class="section-pill-badge live-pill-red">
+                            <span class="live-nav-dot pulse-red"></span>
+                            <span>Live Offers</span>
+                        </div>
+                        <h2 class="section-title">Live Offers in Mangaluru</h2>
+                        <p class="section-subtitle">Exclusive limited-time deals, dining specials, and seasonal discounts across Mangaluru.</p>
+                    </div>
+                    <div class="live-cards-grid live-offers-grid">
+                        <div class="live-card live-offer-card sample-card">
+                            <span class="sample-card-badge">Sample Card 📝</span>
+                            <div class="live-card-media">
+                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" alt="Sample Offer" loading="lazy">
+                                <span class="live-card-tag offer-tag">30% OFF</span>
+                                <span class="live-badge-status"><span class="live-nav-dot pulse-red"></span> Active Deal</span>
+                            </div>
+                            <div class="live-card-body">
+                                <div class="live-card-meta">
+                                    <span class="meta-tag">🍽️ Food &amp; Dining</span>
+                                    <span class="meta-expiry">⏳ Limited Period</span>
+                                </div>
+                                <h3 class="live-card-title">Sample Offer: Coastal Dining &amp; Seafood Special</h3>
+                                <p class="live-card-desc">Enjoy up to 30% off on authentic Mangalorean thalis and fresh seafood ghee roast at partner restaurants.</p>
+                                <div class="live-card-footer">
+                                    <span class="live-coupon-code">CODE: <strong>WEEKEND30</strong></span>
+                                    <button class="live-action-btn offer-btn" onclick="alert('Sample offer card. Real data will be linked here soon!')">Claim Offer →</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="live-card live-offer-card sample-card">
+                            <span class="sample-card-badge">Sample Card 📝</span>
+                            <div class="live-card-media">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800" alt="Sample Resort Offer" loading="lazy">
+                                <span class="live-card-tag offer-tag">FLAT ₹1,000 OFF</span>
+                                <span class="live-badge-status"><span class="live-nav-dot pulse-red"></span> Active Deal</span>
+                            </div>
+                            <div class="live-card-body">
+                                <div class="live-card-meta">
+                                    <span class="meta-tag">🏖️ Beach Stay &amp; Resorts</span>
+                                    <span class="meta-expiry">⏳ Weekend Only</span>
+                                </div>
+                                <h3 class="live-card-title">Sample Offer: Coastal Resort &amp; Water Sports Package</h3>
+                                <p class="live-card-desc">Special discount on beachfront resort staycations, jetski rides, and surf sessions along Mangaluru coast.</p>
+                                <div class="live-card-footer">
+                                    <span class="live-coupon-code">CODE: <strong>BEACHVIBES</strong></span>
+                                    <button class="live-action-btn offer-btn" onclick="alert('Sample offer card. Real data will be linked here soon!')">Claim Offer →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Live Events Section (Displayed on Live Events click) -->
+                <section class="dest-special-section live-events-section mangaluru-tab-panel" id="live-events-section" style="display: none;">
+                    <button class="tab-back-btn" onclick="switchMangaluruTab('categories')">← Back to Categories</button>
+                    <div class="section-header-wrap">
+                        <div class="section-pill-badge live-pill-purple">
+                            <span class="live-nav-dot pulse-purple"></span>
+                            <span>Live Events</span>
+                        </div>
+                        <h2 class="section-title">Live Events in Mangaluru</h2>
+                        <p class="section-subtitle">Happening now &amp; upcoming beach festivals, live music, and weekend cultural gatherings.</p>
+                    </div>
+                    <div class="live-cards-grid live-events-grid">
+                        <div class="live-card live-event-card sample-card">
+                            <span class="sample-card-badge">Sample Card 📝</span>
+                            <div class="live-card-media">
+                                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=800" alt="Sample Live Event" loading="lazy">
+                                <span class="live-card-tag event-tag">THIS WEEKEND</span>
+                                <span class="live-badge-status live-status-purple"><span class="live-nav-dot pulse-purple"></span> Live Happening</span>
+                            </div>
+                            <div class="live-card-body">
+                                <div class="live-card-meta">
+                                    <span class="meta-tag">📍 Panambur Beach</span>
+                                    <span class="meta-date">🗓️ Saturday • 5:00 PM</span>
+                                </div>
+                                <h3 class="live-card-title">Sample Event: Mangaluru Sunset Music &amp; Beach Fest</h3>
+                                <p class="live-card-desc">Live coastal band performances, kite shows, delicious street food stalls, and sunset acoustic sessions by the shore.</p>
+                                <div class="live-card-footer">
+                                    <span class="live-price-tag">Entry: Free Pass</span>
+                                    <button class="live-action-btn event-btn" onclick="alert('Sample event card. Real data will be linked here soon!')">Event Details →</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="live-card live-event-card sample-card">
+                            <span class="sample-card-badge">Sample Card 📝</span>
+                            <div class="live-card-media">
+                                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800" alt="Sample Night Event" loading="lazy">
+                                <span class="live-card-tag event-tag">UPCOMING</span>
+                                <span class="live-badge-status live-status-purple"><span class="live-nav-dot pulse-purple"></span> Open Entry</span>
+                            </div>
+                            <div class="live-card-body">
+                                <div class="live-card-meta">
+                                    <span class="meta-tag">📍 Kadri Park Amphitheatre</span>
+                                    <span class="meta-date">🗓️ Sunday • 6:30 PM</span>
+                                </div>
+                                <h3 class="live-card-title">Sample Event: Yakshagana &amp; Coastal Folk Night</h3>
+                                <p class="live-card-desc">An immersive evening celebrating traditional Tulunadu art forms, vibrant costumes, live percussions, and cultural heritage.</p>
+                                <div class="live-card-footer">
+                                    <span class="live-price-tag">Open for All</span>
+                                    <button class="live-action-btn event-btn" onclick="alert('Sample event card. Real data will be linked here soon!')">Event Details →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            ` : ''}
         </div>
     `;
 
     setAppContent(destHTML, () => {
         initBestFoodSliders();
+        if (dest.id === 'mangaluru') {
+            initLiveNavListeners();
+            switchMangaluruTab('categories');
+        }
 
         // Add back button listener
         const backHomeBtn = document.getElementById('back-home');
         if (backHomeBtn) {
             backHomeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                setNavbarMode('default');
                 renderHome();
             });
         }

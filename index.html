@@ -57,7 +57,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
     <!-- ── Own Stylesheets (versioned = long-cache safe) ── -->
-    <link rel="stylesheet" href="styles.css?v=35">
+    <link rel="stylesheet" href="styles.css?v=38">
     <link rel="stylesheet" href="ai-agent.css?v=20">
     <link rel="stylesheet" href="onboarding.css?v=8">
     <link rel="stylesheet" href="reviews.css?v=7">
@@ -105,13 +105,24 @@
             <a href="#" class="navbar-brand" onclick="renderHome()" title="Go to Home (Ctrl + K / ⌘K)" aria-keyshortcuts="Control+K Meta+K">
                 <span class="brand-text-main">Weekend</span><span class="brand-text-sub">Explorer</span>
             </a>
-            <div class="nav-links">
+            <div class="nav-links default-nav-links" id="default-nav-links">
                 <a href="#" class="nav-link" id="nav-about-us">About Us</a>
                 <a href="#" class="nav-link" id="nav-more-info">More Information</a>
                 <a href="#" class="nav-link" id="nav-reviews">Reviews</a>
                 <a href="#" class="nav-link" id="nav-support">Support</a>
                 <a href="#" class="nav-link" id="nav-terms-conditions">Terms &amp; Conditions</a>
                 <a href="#" class="nav-link" id="nav-updates">Updates</a>
+            </div>
+            <div class="nav-links mangaluru-nav-links" id="mangaluru-nav-links" style="display: none;">
+                <a href="#" class="nav-link active" id="nav-categories">Categories</a>
+                <a href="#live-offers-section" class="nav-link nav-live-link" id="nav-live-offers">
+                    <span class="live-nav-dot pulse-red"></span>
+                    <span>Live Offers</span>
+                </a>
+                <a href="#live-events-section" class="nav-link nav-live-link" id="nav-live-events">
+                    <span class="live-nav-dot pulse-purple"></span>
+                    <span>Live Events</span>
+                </a>
             </div>
             <div class="nav-actions">
                 <button class="mute-btn" id="welcome-mute-btn" aria-label="Mute welcome voice"
@@ -171,7 +182,7 @@
             </button>
         </div>
         <nav class="drawer-nav">
-            <ul class="drawer-menu-list">
+            <ul class="drawer-menu-list default-drawer-menu" id="default-drawer-menu">
                 <li class="drawer-menu-item" style="--item-index: 0;">
                     <a href="#" id="menu-about-us">
                         <span class="menu-item-icon">
@@ -295,6 +306,74 @@
                             </svg>
                         </span>
                         <span class="menu-item-text">Play Cartoon Adventure</span>
+                        <span class="menu-item-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="drawer-menu-list mangaluru-drawer-menu" id="mangaluru-drawer-menu" style="display: none;">
+                <li class="drawer-menu-item" style="--item-index: 0;">
+                    <a href="#" id="menu-categories">
+                        <span class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </span>
+                        <span class="menu-item-text">Categories</span>
+                        <span class="menu-item-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="drawer-menu-item" style="--item-index: 1;">
+                    <a href="#live-offers-section" id="menu-live-offers">
+                        <span class="menu-item-icon">
+                            <span class="live-nav-dot pulse-red" style="width:10px;height:10px;display:inline-block;"></span>
+                        </span>
+                        <span class="menu-item-text">Live Offers</span>
+                        <span class="menu-item-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="drawer-menu-item" style="--item-index: 1;">
+                    <a href="#live-events-section" id="menu-live-events">
+                        <span class="menu-item-icon">
+                            <span class="live-nav-dot pulse-purple" style="width:10px;height:10px;display:inline-block;"></span>
+                        </span>
+                        <span class="menu-item-text">Live Events</span>
+                        <span class="menu-item-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="drawer-menu-item" style="--item-index: 2;">
+                    <a href="#" id="menu-mangaluru-home" onclick="renderHome(); const d=document.getElementById('menu-drawer'); if(d) d.classList.remove('open'); const ov=document.getElementById('drawer-overlay'); if(ov) ov.classList.remove('open'); return false;">
+                        <span class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </span>
+                        <span class="menu-item-text">Back to Home</span>
                         <span class="menu-item-arrow">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
