@@ -2812,81 +2812,90 @@
           </a>
         </div>
 
-        <!-- ═══ JOURNEY TRACKING SYSTEM (AUTOMATIC GPS ARRIVAL DETECTION) ═══ -->
+                <!-- ═══ CREATIVE REAL-TIME JOURNEY TRACKER ═══ -->
         <div class="wai-tracker-section" id="wai-tracker-${city.replace(/\s+/g,'_')}" data-city="${city}">
           <div class="wai-tracker-header">
-            <span class="wai-tracker-icon">🧭</span>
-            <div>
-              <div class="wai-tracker-title">Automatic Journey Tracker</div>
-              <div class="wai-tracker-sub">Stops <b>click and check off automatically</b> when you reach each exact location!</div>
+            <div class="wai-tracker-title-row">
+              <span class="wai-tracker-icon">🧭</span>
+              <div>
+                <div class="wai-tracker-title">Live Journey Navigator</div>
+                <div class="wai-tracker-sub">Auto-detects your location & checks off stops when you arrive!</div>
+              </div>
             </div>
             <div class="wai-tracker-badge" id="wai-tracker-count">
-              <span class="wai-tracker-done-num">0</span>/<span>${stops.length}</span>
+              <span class="wai-tracker-done-num">0</span>/<span class="wai-tracker-total-num">${stops.length}</span>
             </div>
           </div>
 
-          <!-- Live GPS Detection Banner -->
+          <!-- Futuristic GPS Satellite Status Strip -->
           <div class="wai-gps-radar-bar">
             <div class="wai-gps-radar-left">
               <span class="wai-gps-pulse-dot"></span>
-              <span class="wai-gps-status-text" id="wai-gps-status-text">Live GPS Auto-Tracking Active</span>
+              <span class="wai-gps-status-text" id="wai-gps-status-text">🛰️ GPS Active • Tracking Your Location</span>
             </div>
-            <button type="button" class="wai-gps-sim-all-btn" onclick="window.WeekendAI && window.WeekendAI.simulateFullJourney(this.closest('.wai-tracker-section'))" title="Watch full trip auto-complete demo">
-              ⚡ Demo Auto-Trip
-            </button>
+            <div class="wai-gps-signal-bars">
+              <span></span><span></span><span></span><span></span>
+            </div>
           </div>
 
+          <!-- Sleek Progress HUD -->
           <div class="wai-tracker-progress-wrap">
             <div class="wai-tracker-progress-bar">
               <div class="wai-tracker-progress-fill" id="wai-tracker-fill" style="width:0%"></div>
             </div>
-            <span class="wai-tracker-progress-pct" id="wai-tracker-pct">0% Complete</span>
+            <div class="wai-tracker-progress-meta">
+              <span class="wai-tracker-progress-pct" id="wai-tracker-pct">0% Completed</span>
+              <span class="wai-tracker-next-dest" id="wai-tracker-next-dest">Next: Stop 1</span>
+            </div>
           </div>
 
-          <div class="wai-tracker-stops">
+          <!-- Connected Route Stream (Timeline Nodes) -->
+          <div class="wai-route-stream">
             ${stops.map((st, idx) => {
               const trackId = 'wai-tstop-' + idx;
+              const isFirst = idx === 0;
               return `
-              <div class="wai-tracker-stop" id="${trackId}" data-idx="${idx}" data-total="${stops.length}" data-lat="${st.lat}" data-lon="${st.lon}" data-title="${escapeHtml(st.title)}">
-                <div class="wai-tracker-stop-left">
-                  <div class="wai-tracker-checkbox" title="Auto-checks when you reach this place">
-                    <svg class="wai-check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <div class="wai-route-node ${isFirst ? 'wai-route-node--active' : ''}" id="${trackId}" data-idx="${idx}" data-total="${stops.length}" data-lat="${st.lat}" data-lon="${st.lon}" data-title="${escapeHtml(st.title)}" onclick="window.WeekendAI && window.WeekendAI.toggleJourneyStop(this)">
+                <!-- Connected Timeline Line & Waypoint Pin -->
+                <div class="wai-node-rail">
+                  <div class="wai-node-pin">
+                    <span class="wai-node-number">${idx + 1}</span>
+                    <svg class="wai-node-check-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="wai-node-beacon"></span>
                   </div>
-                  <div class="wai-tracker-stop-info">
-                    <div class="wai-tracker-stop-topline">
-                      <span class="wai-tracker-stop-num">${idx + 1}</span>
-                      <span class="wai-tracker-distance-badge" id="dist-${trackId}">📍 Auto-detecting...</span>
-                    </div>
-                    <span class="wai-tracker-stop-name">${st.icon} ${st.title}</span>
-                    <span class="wai-tracker-stop-time">${st.time}</span>
-                  </div>
+                  ${idx < stops.length - 1 ? '<div class="wai-node-track-line"></div>' : ''}
                 </div>
-                <div class="wai-tracker-stop-right">
-                  <div class="wai-tracker-btn-row">
-                    <button type="button" class="wai-tracker-auto-arrive-btn" onclick="event.stopPropagation(); window.WeekendAI && window.WeekendAI.simulateArrival(this.closest('.wai-tracker-stop'))" title="Simulate arriving at this exact spot to test auto-check">
-                      🎯 Arrive Here
-                    </button>
-                    <a href="${st.mapsUrl}" target="_blank" rel="noopener noreferrer" class="wai-tracker-nav-btn" onclick="event.stopPropagation()" title="Navigate to ${st.title} in Google Maps">
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                      Go
+
+                <!-- Stop Details Card -->
+                <div class="wai-node-card">
+                  <div class="wai-node-body">
+                    <div class="wai-node-top">
+                      <span class="wai-node-time">${st.time}</span>
+                      <span class="wai-tracker-distance-badge" id="dist-${trackId}">📍 Locating...</span>
+                    </div>
+                    <div class="wai-node-title">${st.icon} ${st.title}</div>
+                  </div>
+                  <div class="wai-node-actions">
+                    <a href="${st.mapsUrl}" target="_blank" rel="noopener noreferrer" class="wai-node-nav-link" onclick="event.stopPropagation()" title="Navigate to ${st.title} in Google Maps">
+                      <span>Navigate</span>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
                     </a>
                   </div>
-                  <span class="wai-tracker-status-label" id="status-${trackId}">Awaiting Arrival</span>
                 </div>
               </div>
               `;
             }).join('')}
           </div>
 
+          <!-- Journey Completed Celebration -->
           <div class="wai-tracker-celebration" id="wai-tracker-celebration" style="display:none">
-            <span>🎉</span>
+            <span class="wai-celeb-icon">🏆</span>
             <div>
-              <div style="font-weight:700;">Journey Completed! 🌟</div>
-              <div style="font-size:0.75rem;opacity:0.9;">You have reached all destinations in your itinerary!</div>
+              <div class="wai-celeb-title">Journey Completed! 🎉</div>
+              <div class="wai-celeb-desc">You've reached all destinations on your itinerary!</div>
             </div>
           </div>
         </div>
-
     `;
 
     // Concise, single-line practical note if weather/gogupa applies
@@ -3337,44 +3346,72 @@
       renderStep();
     },
     generateItinerary: generateMasterItinerary,
-    // Mark a stop as reached & completed automatically
-    autoCheckStop: function(stopEl, distanceMeters, isSimulated) {
-      if (!stopEl || stopEl.classList.contains('wai-tracker-stop--done')) return;
+    // Announce via Web Speech API: "You have reached [Place Name]!"
+    announceArrival: function(title) {
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const clean = (title || 'your destination')
+            .replace(/[^ws]/gi, ' ')
+            .replace(/s+/g, ' ')
+            .trim();
+          const utter = new SpeechSynthesisUtterance('You have reached ' + clean + '!');
+          utter.rate = 1.0;
+          utter.pitch = 1.08;
+          window.speechSynthesis.speak(utter);
+        }
+      } catch (e) {}
+    },
+
+    // Mark a stop as reached & completed automatically via GPS or tap
+    autoCheckStop: function(stopEl, distanceMeters, isManual) {
+      if (!stopEl || stopEl.classList.contains('wai-route-node--done')) return;
       const section = stopEl.closest('.wai-tracker-section');
       if (!section) return;
 
-      stopEl.classList.add('wai-tracker-stop--done');
-      stopEl.classList.add('wai-tracker-stop--auto-arrived');
-
-      // Update status label
-      const statusLabel = stopEl.querySelector('.wai-tracker-status-label');
-      if (statusLabel) {
-        statusLabel.textContent = isSimulated ? '🎯 Arrived (Auto)' : '📍 Arrived! Done ✓';
-        statusLabel.style.color = '#34d399';
-      }
+      stopEl.classList.remove('wai-route-node--active');
+      stopEl.classList.add('wai-route-node--done');
 
       // Update distance badge
       const distBadge = stopEl.querySelector('.wai-tracker-distance-badge');
       if (distBadge) {
-        distBadge.textContent = '🎯 At Location (0m)';
+        distBadge.textContent = '✓ Reached';
         distBadge.className = 'wai-tracker-distance-badge arrived';
       }
 
-      // Play arrival sound chime
+      // Voice audio announcement: "You have reached [Place]!"
+      const title = stopEl.getAttribute('data-title') || 'Location';
+      this.announceArrival(title);
+
+      // Play chime & vibration
       playArrivalChime();
       if (navigator.vibrate) {
-        try { navigator.vibrate([80, 40, 100]); } catch (e) {}
+        try { navigator.vibrate([100, 50, 150]); } catch (e) {}
       }
 
-      // Show animated arrival notification toast
-      const title = stopEl.getAttribute('data-title') || 'Location';
+      // Show sleek top banner toast
       this.showArrivalToast(title);
 
-      // Re-calculate total completed progress
+      // Advance next active node
+      const allNodes = Array.from(section.querySelectorAll('.wai-route-node'));
+      const nextUnfinished = allNodes.find(n => !n.classList.contains('wai-route-node--done'));
+      if (nextUnfinished) {
+        nextUnfinished.classList.add('wai-route-node--active');
+        const nextDestLabel = section.querySelector('#wai-tracker-next-dest');
+        if (nextDestLabel) {
+          const nextTitle = nextUnfinished.getAttribute('data-title') || 'Next Stop';
+          nextDestLabel.textContent = 'Next: ' + nextTitle.split('(')[0].trim();
+        }
+      } else {
+        const nextDestLabel = section.querySelector('#wai-tracker-next-dest');
+        if (nextDestLabel) nextDestLabel.textContent = 'All Completed! 🌟';
+      }
+
+      // Refresh progress metrics
       this.refreshTrackerProgress(section);
     },
 
-    // Show floating arrival toast in the chat window
+    // Show floating Dynamic Island arrival toast
     showArrivalToast: function(title) {
       let toast = document.getElementById('wai-arrival-toast');
       if (!toast) {
@@ -3383,16 +3420,16 @@
         toast.className = 'wai-arrival-toast';
         document.body.appendChild(toast);
       }
-      toast.innerHTML = '<span>🎯</span> <div><b>Arrived at location!</b><div style="font-size:0.75rem;opacity:0.9;">' + title + ' auto-checked!</div></div>';
+      toast.innerHTML = '<span class="wai-toast-icon">🎯</span> <div><div class="wai-toast-title">You have reached this place!</div><div class="wai-toast-name">' + title + '</div></div>';
       toast.classList.add('show');
-      setTimeout(() => { toast.classList.remove('show'); }, 3500);
+      setTimeout(() => { toast.classList.remove('show'); }, 4200);
     },
 
     // Refresh progress bar and completion count
     refreshTrackerProgress: function(section) {
       if (!section) return;
-      const allStops = section.querySelectorAll('.wai-tracker-stop');
-      const doneCount = section.querySelectorAll('.wai-tracker-stop--done').length;
+      const allStops = section.querySelectorAll('.wai-route-node');
+      const doneCount = section.querySelectorAll('.wai-route-node--done').length;
       const total = allStops.length;
 
       const countEl = section.querySelector('.wai-tracker-done-num');
@@ -3402,31 +3439,12 @@
       const pct = section.querySelector('#wai-tracker-pct');
       const percent = total > 0 ? Math.round((doneCount / total) * 100) : 0;
       if (fill) fill.style.width = percent + '%';
-      if (pct) pct.textContent = percent + '% Complete';
+      if (pct) pct.textContent = percent + '% Completed';
 
       const celebration = section.querySelector('#wai-tracker-celebration');
       if (celebration) {
         celebration.style.display = doneCount === total && total > 0 ? 'flex' : 'none';
       }
-    },
-
-    // Test feature: Instant arrival simulation for a specific stop
-    simulateArrival: function(stopEl) {
-      if (!stopEl) return;
-      this.autoCheckStop(stopEl, 0, true);
-    },
-
-    // Demo feature: Watch full trip auto-detect stop by stop
-    simulateFullJourney: function(section) {
-      if (!section) return;
-      const stops = Array.from(section.querySelectorAll('.wai-tracker-stop'));
-      let delay = 0;
-      stops.forEach((stopEl, idx) => {
-        setTimeout(() => {
-          this.autoCheckStop(stopEl, 0, true);
-        }, delay);
-        delay += 1400; // 1.4s gap between each stop arrival
-      });
     },
 
     // Initialize real-time GPS Geolocation Watcher
@@ -3437,11 +3455,11 @@
       const onPos = (pos) => {
         const userLat = pos.coords.latitude;
         const userLon = pos.coords.longitude;
-        if (statusText) statusText.textContent = 'GPS Active (±' + Math.round(pos.coords.accuracy || 10) + 'm)';
+        if (statusText) statusText.textContent = '🛰️ Live GPS Active (±' + Math.round(pos.coords.accuracy || 10) + 'm)';
 
-        const stops = section.querySelectorAll('.wai-tracker-stop');
+        const stops = section.querySelectorAll('.wai-route-node');
         stops.forEach((stopEl) => {
-          if (stopEl.classList.contains('wai-tracker-stop--done')) return;
+          if (stopEl.classList.contains('wai-route-node--done')) return;
           const sLat = parseFloat(stopEl.getAttribute('data-lat'));
           const sLon = parseFloat(stopEl.getAttribute('data-lon'));
           if (isNaN(sLat) || isNaN(sLon)) return;
@@ -3449,8 +3467,8 @@
           const dist = calculateGpsDistanceMeters(userLat, userLon, sLat, sLon);
           const badge = stopEl.querySelector('.wai-tracker-distance-badge');
 
-          if (dist <= 200) {
-            // ARRIVED! Automatic click by itself without user tapping!
+          if (dist <= 180) {
+            // ARRIVED! Auto-check tick & announce with voice!
             this.autoCheckStop(stopEl, dist, false);
           } else {
             if (badge) {
@@ -3463,26 +3481,35 @@
       };
 
       const onErr = (err) => {
-        if (statusText) statusText.textContent = 'GPS Ready (Use "Arrive Here" to test)';
+        if (statusText) statusText.textContent = '🛰️ GPS Standby • Tap any stop to check in';
       };
 
       try {
         navigator.geolocation.watchPosition(onPos, onErr, {
           enableHighAccuracy: true,
-          maximumAge: 5000,
-          timeout: 10000
+          maximumAge: 4000,
+          timeout: 12000
         });
       } catch (e) {}
     },
 
+    // Allow user to tap a node to check in manually as backup
     toggleJourneyStop: function(el) {
       if (!el) return;
       const section = el.closest('.wai-tracker-section');
       if (!section) return;
-      const isCompleted = el.classList.toggle('wai-tracker-stop--done');
-      const statusLabel = el.querySelector('.wai-tracker-status-label');
-      if (statusLabel) statusLabel.textContent = isCompleted ? 'Done ✓' : 'Awaiting Arrival';
-      this.refreshTrackerProgress(section);
+
+      if (el.classList.contains('wai-route-node--done')) {
+        el.classList.remove('wai-route-node--done');
+        const badge = el.querySelector('.wai-tracker-distance-badge');
+        if (badge) {
+          badge.textContent = '📍 Tracking...';
+          badge.className = 'wai-tracker-distance-badge';
+        }
+        this.refreshTrackerProgress(section);
+      } else {
+        this.autoCheckStop(el, 0, true);
+      }
     },
     _showZeroRupeeAgain: function () {
       showTypingIndicator(function () {

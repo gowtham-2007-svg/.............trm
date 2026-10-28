@@ -2081,301 +2081,91 @@
   margin-bottom: 8px;
 }
 
-
 /* ═══════════════════════════════════════════════════════
-   JOURNEY TRACKING SYSTEM STYLES
+   CREATIVE LIVE JOURNEY NAVIGATOR (METRO ROUTE HUD)
    ═══════════════════════════════════════════════════════ */
 
 .wai-tracker-section {
-  margin: 14px 0 10px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #0f0c29 0%, #1a1040 100%);
+  margin: 16px 0 12px;
+  border-radius: 18px;
+  background: linear-gradient(165deg, #0f0f23 0%, #150f30 50%, #0d0a1a 100%);
   border: 1.5px solid rgba(131, 56, 236, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(131, 56, 236, 0.15);
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(131, 56, 236, 0.15);
+  font-family: inherit;
 }
 
+/* Header */
 .wai-tracker-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 16px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wai-tracker-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .wai-tracker-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
+  font-size: 1.5rem;
+  background: rgba(131, 56, 236, 0.2);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(131, 56, 236, 0.35);
 }
 
 .wai-tracker-title {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #e2d9f3;
-  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .wai-tracker-sub {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.45);
-  margin-top: 1px;
+  color: rgba(226, 217, 243, 0.65);
+  margin-top: 2px;
 }
 
 .wai-tracker-badge {
-  margin-left: auto;
-  background: rgba(131, 56, 236, 0.25);
-  border: 1px solid rgba(131, 56, 236, 0.5);
+  background: linear-gradient(135deg, rgba(131, 56, 236, 0.3), rgba(58, 134, 239, 0.3));
+  border: 1.5px solid rgba(131, 56, 236, 0.6);
   border-radius: 20px;
-  padding: 3px 10px;
-  font-size: 0.78rem;
-  font-weight: 700;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: #c084fc;
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .wai-tracker-done-num {
-  color: #a78bfa;
-  font-size: 0.95rem;
-}
-
-/* Progress bar */
-.wai-tracker-progress-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px 10px;
-}
-
-.wai-tracker-progress-bar {
-  flex: 1;
-  height: 6px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.wai-tracker-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #8338EC, #a78bfa);
-  border-radius: 99px;
-  transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.wai-tracker-progress-pct {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.45);
-  white-space: nowrap;
-  min-width: 70px;
-  text-align: right;
-}
-
-/* Stop list */
-.wai-tracker-stops {
-  padding: 0 10px 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.wai-tracker-stop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.wai-tracker-stop:hover {
-  background: rgba(131, 56, 236, 0.12);
-  border-color: rgba(131, 56, 236, 0.35);
-}
-
-.wai-tracker-stop:active {
-  transform: scale(0.98);
-}
-
-/* DONE state */
-.wai-tracker-stop--done {
-  background: rgba(52, 211, 153, 0.1) !important;
-  border-color: rgba(52, 211, 153, 0.35) !important;
-}
-
-.wai-tracker-stop--done .wai-tracker-stop-name {
-  text-decoration: line-through;
-  color: rgba(255,255,255,0.4) !important;
-}
-
-.wai-tracker-stop--done .wai-tracker-checkbox {
-  background: #34d399;
-  border-color: #34d399;
-}
-
-.wai-tracker-stop--done .wai-check-icon {
-  opacity: 1;
-  stroke: #fff;
-}
-
-.wai-tracker-stop--done .wai-tracker-status-label {
-  color: #34d399 !important;
-  font-weight: 600;
-}
-
-/* Left side */
-.wai-tracker-stop-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 0;
-}
-
-.wai-tracker-checkbox {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  border: 2px solid rgba(131, 56, 236, 0.5);
-  background: rgba(131, 56, 236, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.wai-check-icon {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.wai-tracker-stop-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-
-.wai-tracker-stop-num {
-  font-size: 0.62rem;
-  color: rgba(131, 56, 236, 0.8);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-.wai-tracker-stop-name {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #e2d9f3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
-  transition: all 0.2s ease;
-}
-
-.wai-tracker-stop-time {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.35);
-}
-
-/* Right side */
-.wai-tracker-stop-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-
-.wai-tracker-nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(131, 56, 236, 0.2);
-  border: 1px solid rgba(131, 56, 236, 0.4);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #c084fc;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.wai-tracker-nav-btn:hover {
-  background: rgba(131, 56, 236, 0.4);
-  color: #fff;
-}
-
-.wai-tracker-status-label {
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.3);
-  text-align: right;
-  transition: color 0.2s ease;
-}
-
-/* Celebration banner */
-.wai-tracker-celebration {
-  margin: 4px 10px 12px;
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(52, 211, 153, 0.05));
-  border: 1px solid rgba(52, 211, 153, 0.4);
-  border-radius: 10px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.82rem;
-  font-weight: 600;
   color: #34d399;
-  animation: wai-tracker-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1rem;
 }
 
-@keyframes wai-tracker-bounce {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Mobile responsive */
-@media (max-width: 400px) {
-  .wai-tracker-stop-name {
-    max-width: 140px;
-  }
-  .wai-tracker-header {
-    padding: 12px 12px 8px;
-  }
-  .wai-tracker-stops {
-    padding: 0 6px 6px;
-  }
-}
-
-
-/* ═══════════════════════════════════════════════════════
-   GPS AUTOMATIC ARRIVAL TRACKER STYLES
-   ═══════════════════════════════════════════════════════ */
-
+/* Futuristic Satellite Status Strip */
 .wai-gps-radar-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
-  background: rgba(131, 56, 236, 0.15);
-  border-bottom: 1px solid rgba(131, 56, 236, 0.25);
-  font-size: 0.72rem;
+  padding: 8px 18px;
+  background: rgba(131, 56, 236, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .wai-gps-radar-left {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #c084fc;
+  font-size: 0.72rem;
+  color: #38bdf8;
   font-weight: 600;
 }
 
@@ -2394,106 +2184,352 @@
   100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-.wai-gps-sim-all-btn {
-  background: rgba(131, 56, 236, 0.3);
-  border: 1px solid rgba(131, 56, 236, 0.5);
-  color: #e2d9f3;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.68rem;
+.wai-gps-signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.wai-gps-signal-bars span {
+  width: 3px;
+  background: #34d399;
+  border-radius: 1px;
+}
+.wai-gps-signal-bars span:nth-child(1) { height: 3px; }
+.wai-gps-signal-bars span:nth-child(2) { height: 6px; }
+.wai-gps-signal-bars span:nth-child(3) { height: 9px; }
+.wai-gps-signal-bars span:nth-child(4) { height: 12px; }
+
+/* Progress HUD */
+.wai-tracker-progress-wrap {
+  padding: 12px 18px 10px;
+}
+
+.wai-tracker-progress-bar {
+  height: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.wai-tracker-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8338EC, #3A86EF, #34d399);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+}
+
+.wai-tracker-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 0.72rem;
+}
+
+.wai-tracker-progress-pct {
+  color: #34d399;
   font-weight: 700;
+}
+
+.wai-tracker-next-dest {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+/* Connected Route Timeline */
+.wai-route-stream {
+  padding: 8px 16px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wai-route-node {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  position: relative;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Waypoint Rail & Line */
+.wai-node-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.wai-node-pin {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1e163d;
+  border: 2px solid rgba(131, 56, 236, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.wai-node-number {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #e2d9f3;
   transition: all 0.2s ease;
 }
 
-.wai-gps-sim-all-btn:hover {
-  background: #8338EC;
-  color: #fff;
-  transform: translateY(-1px);
+.wai-node-check-svg {
+  display: none;
+  stroke: #ffffff;
 }
 
-.wai-tracker-stop-topline {
+.wai-node-track-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(180deg, rgba(131, 56, 236, 0.6) 0%, rgba(131, 56, 236, 0.2) 100%);
+  margin: 3px 0;
+  min-height: 26px;
+}
+
+/* Active Node: Pulsing Beacon */
+.wai-route-node--active .wai-node-pin {
+  border-color: #38bdf8;
+  background: #0d2745;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+}
+
+.wai-route-node--active .wai-node-number {
+  color: #38bdf8;
+}
+
+.wai-node-beacon {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #38bdf8;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wai-route-node--active .wai-node-beacon {
+  animation: wai-beacon-pulse 1.8s infinite;
+}
+
+@keyframes wai-beacon-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Completed Node: Emerald Green Checked */
+.wai-route-node--done .wai-node-pin {
+  background: #10b981 !important;
+  border-color: #34d399 !important;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.5) !important;
+}
+
+.wai-route-node--done .wai-node-number {
+  display: none;
+}
+
+.wai-route-node--done .wai-node-check-svg {
+  display: block;
+}
+
+.wai-route-node--done .wai-node-track-line {
+  background: #10b981;
+}
+
+.wai-route-node--done .wai-node-title {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Stop Card Body */
+.wai-node-card {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 2px;
+  justify-content: space-between;
+  padding: 8px 12px 10px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.wai-route-node:hover .wai-node-card {
+  background: rgba(131, 56, 236, 0.12);
+  border-color: rgba(131, 56, 236, 0.35);
+  transform: translateX(2px);
+}
+
+.wai-node-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.wai-node-time {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
 }
 
 .wai-tracker-distance-badge {
   font-size: 0.62rem;
-  background: rgba(56, 189, 248, 0.15);
+  font-weight: 700;
   color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
   border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 1px 6px;
   border-radius: 4px;
-  font-weight: 600;
 }
 
 .wai-tracker-distance-badge.arrived {
-  background: rgba(52, 211, 153, 0.2);
   color: #34d399;
+  background: rgba(52, 211, 153, 0.2);
   border-color: rgba(52, 211, 153, 0.4);
 }
 
-.wai-tracker-btn-row {
+.wai-node-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.3;
+  max-width: 220px;
+}
+
+.wai-node-actions {
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.wai-node-nav-link {
   display: flex;
   align-items: center;
-  gap: 5px;
-}
-
-.wai-tracker-auto-arrive-btn {
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(52, 211, 153, 0.15));
-  border: 1px solid rgba(52, 211, 153, 0.4);
-  color: #34d399;
-  font-size: 0.68rem;
+  gap: 4px;
+  background: rgba(131, 56, 236, 0.2);
+  border: 1px solid rgba(131, 56, 236, 0.4);
+  color: #c084fc;
+  padding: 5px 9px;
+  border-radius: 7px;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 6px;
-  cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s ease;
-  white-space: nowrap;
 }
 
-.wai-tracker-auto-arrive-btn:hover {
-  background: #34d399;
-  color: #0b0f19;
-  box-shadow: 0 2px 10px rgba(52, 211, 153, 0.4);
+.wai-node-nav-link:hover {
+  background: #8338EC;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(131, 56, 236, 0.4);
 }
 
-/* Auto-Arrived Pulse Animation */
-.wai-tracker-stop--auto-arrived {
-  animation: wai-arrived-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes wai-arrived-pop {
-  0% { transform: scale(0.96); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
-
-/* Floating Arrival Notification Toast */
+/* Floating Dynamic Island Arrival Banner */
 .wai-arrival-toast {
   position: fixed;
-  bottom: 90px;
+  top: 24px;
   left: 50%;
-  transform: translateX(-50%) translateY(30px);
-  background: #0f172a;
-  color: #fff;
+  transform: translateX(-50%) translateY(-40px);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(6, 78, 59, 0.95));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
   border: 1.5px solid #34d399;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(52, 211, 153, 0.3);
-  padding: 12px 18px;
-  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(52, 211, 153, 0.35);
+  padding: 12px 20px;
+  border-radius: 99px;
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 0.85rem;
-  z-index: 1000000;
+  z-index: 1000002;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
 }
 
 .wai-arrival-toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+.wai-toast-icon {
+  font-size: 1.3rem;
+  animation: wai-toast-wiggle 0.5s ease;
+}
+
+@keyframes wai-toast-wiggle {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.wai-toast-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.wai-toast-name {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Celebration banner */
+.wai-tracker-celebration {
+  margin: 6px 16px 16px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.18), rgba(16, 185, 129, 0.08));
+  border: 1.5px solid rgba(52, 211, 153, 0.5);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 6px 20px rgba(52, 211, 153, 0.2);
+  animation: wai-celeb-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes wai-celeb-pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.wai-celeb-icon {
+  font-size: 1.8rem;
+}
+
+.wai-celeb-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.wai-celeb-desc {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+
+@media (max-width: 440px) {
+  .wai-node-title {
+    max-width: 150px;
+  }
 }
