@@ -5,8 +5,7 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { createClient } = require('@supabase/supabase-js');
-let MongoClient = null;
-try { MongoClient = require('mongodb').MongoClient; } catch (e) {}
+const { MongoClient } = require('mongodb');
 const axios = require('axios');
 global.WebSocket = require('ws');
 
@@ -216,19 +215,21 @@ if (isSupabaseConfigured()) {
 } else {
     console.log('[SUPABASE] Supabase credentials not fully configured. Caching is disabled.');
 }
-// MongoDB Database Configuration (Dual-Database with Supabase)
+// =============================================================================
+// MongoDB Atlas Database Connection
+// =============================================================================
+const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://cluster0.mongodb.net/weekend_explore';
+const mongoClient = new MongoClient(mongoUri);
 let mongoDb = null;
-async function initMongoDB() {
-    if (!MongoClient) return null;
-    const uri = process.env.MONGODB_URI;
-    if (!uri || uri.includes('YOUR_PASSWORD') || uri.includes('YourRealPasswordHere')) {
+
+async function connectMongoDB() {
+    if (!process.env.MONGODB_URI || process.env.MONGODB_URI.includes('YOUR_PASSWORD') || process.env.MONGODB_URI.includes('YourRealPasswordHere')) {
         console.log('[MONGODB] MONGODB_URI not configured yet in .env');
         return null;
     }
     try {
-        const client = new MongoClient(uri);
-        await client.connect();
-        mongoDb = client.db('weekend_explore');
+        await mongoClient.connect();
+        mongoDb = mongoClient.db('weekend_explore');
         console.log('[MONGODB] Connected successfully to database: weekend_explore');
         return mongoDb;
     } catch (err) {
@@ -236,7 +237,7 @@ async function initMongoDB() {
         return null;
     }
 }
-initMongoDB();
+connectMongoDB();
 
 
 const PORT = process.env.PORT || 3000;
