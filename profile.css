@@ -1296,3 +1296,278 @@
 .we-user-avatar-btn:active {
   transform: scale(0.96);
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   INSTAGRAM-STYLE EDIT PROFILE PANEL
+   ═══════════════════════════════════════════════════════ */
+
+/* Submodal container - full-height scroll panel */
+.exp-submodal-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0f1019;
+  border-radius: 24px;
+  z-index: 10;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.exp-submodal-overlay.open {
+  display: flex;
+}
+
+/* ── Top Bar (Back / Title / Submit) ── */
+.exp-edit-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  background: #0f1019;
+  z-index: 5;
+}
+
+.exp-edit-back-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.exp-edit-back-btn:hover { background: rgba(255,255,255,0.08); }
+
+.exp-edit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.exp-edit-submit-btn {
+  background: linear-gradient(135deg, #3b82f6, #8338EC);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.exp-edit-submit-btn:hover { opacity: 0.9; transform: scale(1.03); }
+.exp-edit-submit-btn:active { transform: scale(0.97); }
+
+/* ── Photo Row ── */
+.exp-edit-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 20px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.exp-edit-avatar-preview {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+  padding: 2.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+.exp-edit-avatar-preview img,
+.exp-edit-avatar-preview .exp-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2.5px solid #0f1019;
+}
+
+.exp-edit-username-label {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.exp-edit-change-photo-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+.exp-edit-change-photo-btn:hover { opacity: 0.75; }
+
+/* ── Fields ── */
+.exp-edit-fields {
+  padding: 6px 0;
+}
+
+.exp-edit-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 52px;
+}
+
+.exp-edit-field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.exp-edit-field-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.9rem;
+  font-family: inherit;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.exp-edit-field-input::placeholder { color: rgba(255,255,255,0.3); }
+
+textarea.exp-edit-field-input {
+  padding: 10px 0;
+  resize: none;
+  line-height: 1.5;
+}
+
+select.exp-edit-field-input {
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.85);
+  padding: 10px 0;
+}
+
+/* ── Highlights Manager inside Edit ── */
+.exp-edit-highlights-section {
+  padding: 18px 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 6px;
+}
+
+.exp-edit-section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.exp-edit-highlights-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  min-height: 10px;
+}
+
+.exp-highlight-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(131,56,236,0.15);
+  border: 1px solid rgba(131,56,236,0.35);
+  border-radius: 20px;
+  padding: 5px 10px 5px 12px;
+  font-size: 0.78rem;
+  color: #e2d9f3;
+}
+
+.exp-highlight-chip-del {
+  background: none;
+  border: none;
+  color: #f472b6;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  transition: opacity 0.15s;
+}
+.exp-highlight-chip-del:hover { opacity: 0.7; }
+
+.exp-add-highlight-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.exp-edit-add-highlight-btn {
+  background: linear-gradient(135deg, #8338EC, #3b82f6);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.exp-edit-add-highlight-btn:hover { opacity: 0.85; }
+
+/* ── Add New Trip / + highlight circle ── */
+.exp-highlight-add {
+  background: rgba(255,255,255,0.06) !important;
+  border: 2px dashed rgba(255,255,255,0.25) !important;
+  color: rgba(255,255,255,0.5) !important;
+  font-size: 1.4rem;
+  box-shadow: none !important;
+}
+
+/* ── Filter banner on posts grid ── */
+#exp-filter-banner {
+  margin-bottom: 10px;
+}
+
+/* ── Fade-in keyframe for toast ── */
+@keyframes exp-fadein {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Bio char counter ── */
+#exp-bio-char-count {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  text-align: right;
+  padding-top: 2px;
+}

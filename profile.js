@@ -235,7 +235,7 @@
                 <span class="exp-highlight-label">${h.label}</span>
               </div>
             `).join('')}
-            <div class="exp-highlight-item" onclick="window.ExplorerProfile.addHighlightPrompt()">
+            <div class="exp-highlight-item" onclick="window.ExplorerProfile.addHighlightFromEditOpen()">
               <div class="exp-highlight-circle" style="border-style:dashed;">+</div>
               <span class="exp-highlight-label">New Trip</span>
             </div>
@@ -291,31 +291,81 @@
 
         </div>
 
-        <!-- Sub-Modal: Edit Profile -->
+        <!-- Sub-Modal: Edit Profile (Instagram style) -->
         <div class="exp-submodal-overlay" id="exp-submodal-edit">
-          <div class="exp-submodal-header">
-            <span class="exp-submodal-title">Edit Explorer Profile</span>
-            <button class="exp-profile-close-btn" onclick="window.ExplorerProfile.closeSubmodal('edit')">✕</button>
+          <!-- Instagram-style top bar -->
+          <div class="exp-edit-topbar">
+            <button class="exp-edit-back-btn" onclick="window.ExplorerProfile.closeSubmodal('edit')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <span class="exp-edit-title">Edit profile</span>
+            <button class="exp-edit-submit-btn" onclick="window.ExplorerProfile.saveProfileEdits()">Submit</button>
           </div>
-          <div class="exp-input-group">
-            <label class="exp-input-label">Full Name</label>
-            <input type="text" class="exp-input-text" id="exp-edit-name" value="${escapeHtml(state.name)}">
+
+          <!-- Photo section -->
+          <div class="exp-edit-photo-row" onclick="document.getElementById('exp-avatar-file-input').click()">
+            <div class="exp-edit-avatar-preview" id="exp-edit-avatar-preview">
+              ${state.avatar}
+            </div>
+            <div>
+              <div class="exp-edit-username-label">${escapeHtml(state.handle)}</div>
+              <button class="exp-edit-change-photo-btn" type="button" onclick="event.stopPropagation();document.getElementById('exp-avatar-file-input').click()">Change photo</button>
+            </div>
+            <input type="file" id="exp-avatar-file-input" accept="image/*" style="display:none" onchange="window.ExplorerProfile.handleAvatarUpload(event)">
           </div>
-          <div class="exp-input-group">
-            <label class="exp-input-label">Username (@handle)</label>
-            <input type="text" class="exp-input-text" id="exp-edit-handle" value="${escapeHtml(state.handle)}">
+
+          <!-- Fields -->
+          <div class="exp-edit-fields">
+            <div class="exp-edit-field-row">
+              <label class="exp-edit-field-label">Name</label>
+              <input type="text" class="exp-edit-field-input" id="exp-edit-name" value="${escapeHtml(state.name)}" placeholder="Full Name" maxlength="60">
+            </div>
+            <div class="exp-edit-field-row">
+              <label class="exp-edit-field-label">Username</label>
+              <div class="exp-edit-field-input" style="display:flex;align-items:center;gap:4px;padding:0 14px;">
+                <span style="color:rgba(255,255,255,0.4);font-size:0.9rem;">@</span>
+                <input type="text" id="exp-edit-handle" value="${escapeHtml(state.handle)}" placeholder="username" maxlength="30" style="background:none;border:none;outline:none;color:#fff;font-size:0.9rem;width:100%;font-family:inherit;">
+              </div>
+            </div>
+            <div class="exp-edit-field-row">
+              <label class="exp-edit-field-label">Website</label>
+              <input type="url" class="exp-edit-field-input" id="exp-edit-website" value="${escapeHtml(state.website || '')}" placeholder="Website" maxlength="100">
+            </div>
+            <div class="exp-edit-field-row" style="align-items:flex-start;padding-top:6px;">
+              <label class="exp-edit-field-label" style="padding-top:10px;">Bio</label>
+              <div style="flex:1;position:relative;">
+                <textarea class="exp-edit-field-input" id="exp-edit-bio" rows="4" placeholder="Bio" maxlength="150" style="resize:none;padding:10px 14px;height:auto;">${escapeHtml(state.bio)}</textarea>
+                <div id="exp-bio-char-count" style="position:absolute;bottom:-18px;right:4px;font-size:0.7rem;color:rgba(255,255,255,0.4);">${(state.bio||'').length}/150</div>
+              </div>
+            </div>
+            <div class="exp-edit-field-row">
+              <label class="exp-edit-field-label">Gender</label>
+              <select class="exp-edit-field-input" id="exp-edit-gender" style="color:#fff;">
+                <option value="" style="background:#1a1a2e;" ${!state.gender ? 'selected':''}>Prefer not to say</option>
+                <option value="female" style="background:#1a1a2e;" ${state.gender==='female' ? 'selected':''}>Female</option>
+                <option value="male" style="background:#1a1a2e;" ${state.gender==='male' ? 'selected':''}>Male</option>
+                <option value="other" style="background:#1a1a2e;" ${state.gender==='other' ? 'selected':''}>Non-binary / Other</option>
+              </select>
+            </div>
           </div>
-          <div class="exp-input-group">
-            <label class="exp-input-label">Bio Description</label>
-            <textarea class="exp-input-text" id="exp-edit-bio" rows="3">${escapeHtml(state.bio)}</textarea>
+
+          <!-- Story Highlights Manager section -->
+          <div class="exp-edit-highlights-section">
+            <div class="exp-edit-section-label">Story Highlights</div>
+            <div id="exp-edit-highlights-list" class="exp-edit-highlights-chips">
+              ${state.highlights.map((h,i) => `
+                <div class="exp-highlight-chip">
+                  <span>${h.icon} ${escapeHtml(h.label)}</span>
+                  <button class="exp-highlight-chip-del" onclick="window.ExplorerProfile.deleteHighlight(${i})" title="Remove">&times;</button>
+                </div>
+              `).join('')}
+            </div>
+            <div class="exp-add-highlight-row">
+              <input type="text" id="exp-new-highlight-icon" class="exp-edit-field-input" placeholder="Icon (emoji)" maxlength="4" style="width:56px;text-align:center;padding:8px;">
+              <input type="text" id="exp-new-highlight-label" class="exp-edit-field-input" placeholder="Highlight name (e.g. Goa Trip)" style="flex:1;padding:8px;">
+              <button class="exp-edit-add-highlight-btn" onclick="window.ExplorerProfile.addHighlightFromEdit()">+ Add</button>
+            </div>
           </div>
-          <div class="exp-input-group">
-            <label class="exp-input-label">Avatar Emoji or Image URL</label>
-            <input type="text" class="exp-input-text" id="exp-edit-avatar" value="${escapeHtml(state.avatar)}">
-          </div>
-          <button class="exp-btn-primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="window.ExplorerProfile.saveProfileEdits()">
-            Save Changes ✓
-          </button>
         </div>
 
         <!-- Sub-Modal: Create New Post -->
@@ -518,16 +568,51 @@
       const nameInp = document.getElementById('exp-edit-name');
       const handleInp = document.getElementById('exp-edit-handle');
       const bioInp = document.getElementById('exp-edit-bio');
-      const avatarInp = document.getElementById('exp-edit-avatar');
+      const websiteInp = document.getElementById('exp-edit-website');
+      const genderInp = document.getElementById('exp-edit-gender');
 
-      if (nameInp) state.name = nameInp.value.trim() || state.name;
-      if (handleInp) state.handle = handleInp.value.trim().replace(/^@/, '') || state.handle;
-      if (bioInp) state.bio = bioInp.value.trim() || state.bio;
-      if (avatarInp) state.avatar = avatarInp.value.trim() || state.avatar;
+      if (nameInp && nameInp.value.trim()) state.name = nameInp.value.trim();
+      if (handleInp) {
+        const raw = handleInp.value.trim().replace(/^@/, '');
+        if (raw) state.handle = raw;
+      }
+      if (bioInp) state.bio = bioInp.value || state.bio;
+      if (websiteInp) state.website = websiteInp.value.trim();
+      if (genderInp) state.gender = genderInp.value;
 
       saveProfileState(state);
       this.syncUI();
       this.closeSubmodal('edit');
+
+      // Show Instagram-style brief toast
+      const toast = document.createElement('div');
+      toast.textContent = '✓ Profile updated';
+      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1d1d2e;border:1px solid rgba(131,56,236,0.4);color:#fff;padding:10px 22px;border-radius:20px;font-size:0.85rem;z-index:99999999;animation:exp-fadein 0.3s ease;';
+      document.body.appendChild(toast);
+      setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 2500);
+    },
+
+    handleAvatarUpload: function (e) {
+      const file = e.target && e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const dataUrl = ev.target.result;
+        state.avatar = `<img src="${dataUrl}" class="exp-avatar-img" alt="${state.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+        saveProfileState(state);
+        // Update preview inside edit modal
+        const preview = document.getElementById('exp-edit-avatar-preview');
+        if (preview) preview.innerHTML = state.avatar;
+        // Update main profile avatar
+        this.syncUI();
+        // Also update navbar avatar
+        const navAvatar = document.getElementById('we-unified-user-avatar');
+        if (navAvatar) {
+          const inner = navAvatar.querySelector('div');
+          if (inner) inner.innerHTML = `<img src="${dataUrl}" style="width:100%;height:100%;object-fit:cover;" alt="${state.name}">`;
+        }
+      };
+      reader.readAsDataURL(file);
     },
 
     publishPost: function () {
@@ -763,31 +848,129 @@
     },
 
     promptAvatarChange: function () {
-      const newAv = prompt('Enter an emoji or image URL for your profile avatar:', state.avatar.length < 5 ? state.avatar : '🎒');
-      if (newAv) {
-        if (newAv.startsWith('http')) {
-          state.avatar = `<img src="${newAv}" class="exp-avatar-img">`;
-        } else {
-          state.avatar = newAv.trim();
-        }
-        saveProfileState(state);
-        this.syncUI();
-      }
+      // Trigger file input from avatar ring click
+      document.getElementById('exp-avatar-file-input') && document.getElementById('exp-avatar-file-input').click()
+        || this.openEditModal();
     },
 
     filterHighlights: function (label) {
-      alert('Viewing "' + label + '" story highlights & check-ins on your profile!');
+      // Switch to posts tab and filter
+      this.switchTab('posts');
+      const postsContainer = document.getElementById('exp-posts-grid-container');
+      if (!postsContainer) return;
+      // Show all posts tagged with this highlight label
+      const filtered = state.posts.filter(p =>
+        p.location && p.location.toLowerCase().includes(label.toLowerCase())
+      );
+      if (filtered.length > 0) {
+        postsContainer.innerHTML = renderPostsGrid(filtered);
+        // Show filter banner
+        let banner = document.getElementById('exp-filter-banner');
+        if (!banner) {
+          banner = document.createElement('div');
+          banner.id = 'exp-filter-banner';
+          banner.style.cssText = 'background:rgba(131,56,236,0.18);border:1px solid rgba(131,56,236,0.3);border-radius:10px;padding:8px 14px;margin-bottom:10px;font-size:0.78rem;color:#c4b5fd;display:flex;align-items:center;justify-content:space-between;';
+          postsContainer.parentNode.insertBefore(banner, postsContainer);
+        }
+        banner.innerHTML = `<span>📌 Showing: ${escapeHtml(label)}</span><button onclick="window.ExplorerProfile.clearFilter()" style="background:none;border:none;color:#f472b6;cursor:pointer;font-size:0.78rem;">✕ Clear</button>`;
+      } else {
+        // Show all and scroll to posts tab
+        postsContainer.innerHTML = renderPostsGrid(state.posts);
+      }
+    },
+
+    clearFilter: function () {
+      const postsContainer = document.getElementById('exp-posts-grid-container');
+      if (postsContainer) postsContainer.innerHTML = renderPostsGrid(state.posts);
+      const banner = document.getElementById('exp-filter-banner');
+      if (banner && banner.parentNode) banner.parentNode.removeChild(banner);
+    },
+
+    addHighlightFromEdit: function () {
+      const iconInp = document.getElementById('exp-new-highlight-icon');
+      const labelInp = document.getElementById('exp-new-highlight-label');
+      const icon = (iconInp && iconInp.value.trim()) || '📍';
+      const label = labelInp && labelInp.value.trim();
+      if (!label) { labelInp && labelInp.focus(); return; }
+      state.highlights.push({ icon, label });
+      saveProfileState(state);
+      // Refresh chips in edit modal
+      const chipList = document.getElementById('exp-edit-highlights-list');
+      if (chipList) {
+        chipList.innerHTML = state.highlights.map((h, i) => `
+          <div class="exp-highlight-chip">
+            <span>${h.icon} ${escapeHtml(h.label)}</span>
+            <button class="exp-highlight-chip-del" onclick="window.ExplorerProfile.deleteHighlight(${i})" title="Remove">&times;</button>
+          </div>
+        `).join('');
+      }
+      // Refresh main profile highlights row
+      const highlightsScroll = document.querySelector('.exp-highlights-scroll');
+      if (highlightsScroll) {
+        highlightsScroll.innerHTML = state.highlights.map(h => `
+          <div class="exp-highlight-item" onclick="window.ExplorerProfile.filterHighlights('${h.label}')">
+            <div class="exp-highlight-circle">${h.icon}</div>
+            <div class="exp-highlight-label">${escapeHtml(h.label)}</div>
+          </div>
+        `).join('') + `
+          <div class="exp-highlight-item" onclick="window.ExplorerProfile.addHighlightFromEditOpen()">
+            <div class="exp-highlight-circle exp-highlight-add">+</div>
+            <div class="exp-highlight-label">New Trip</div>
+          </div>`;
+      }
+      if (iconInp) iconInp.value = '';
+      if (labelInp) labelInp.value = '';
+    },
+
+    addHighlightFromEditOpen: function () {
+      this.openEditModal();
+      setTimeout(() => {
+        const s = document.querySelector('.exp-edit-highlights-section');
+        if (s) s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const inp = document.getElementById('exp-new-highlight-label');
+        if (inp) inp.focus();
+      }, 200);
+    },
+
+    deleteHighlight: function (idx) {
+      state.highlights.splice(idx, 1);
+      saveProfileState(state);
+      const chipList = document.getElementById('exp-edit-highlights-list');
+      if (chipList) {
+        chipList.innerHTML = state.highlights.map((h, i) => `
+          <div class="exp-highlight-chip">
+            <span>${h.icon} ${escapeHtml(h.label)}</span>
+            <button class="exp-highlight-chip-del" onclick="window.ExplorerProfile.deleteHighlight(${i})" title="Remove">&times;</button>
+          </div>
+        `).join('');
+      }
+      const highlightsScroll = document.querySelector('.exp-highlights-scroll');
+      if (highlightsScroll) {
+        highlightsScroll.innerHTML = state.highlights.map(h => `
+          <div class="exp-highlight-item" onclick="window.ExplorerProfile.filterHighlights('${h.label}')">
+            <div class="exp-highlight-circle">${h.icon}</div>
+            <div class="exp-highlight-label">${escapeHtml(h.label)}</div>
+          </div>
+        `).join('') + `
+          <div class="exp-highlight-item" onclick="window.ExplorerProfile.addHighlightFromEditOpen()">
+            <div class="exp-highlight-circle exp-highlight-add">+</div>
+            <div class="exp-highlight-label">New Trip</div>
+          </div>`;
+      }
     },
 
     addHighlightPrompt: function () {
-      const label = prompt('Name for new Trip Highlight (e.g. Goa Trip, Hassan Circuit):');
-      if (label) {
-        state.highlights.push({ icon: '📍', label: label.trim() });
-        saveProfileState(state);
-        this.open();
-      }
+      this.addHighlightFromEditOpen();
     }
   };
+
+  // Live bio char counter
+  document.addEventListener('input', function (e) {
+    if (e.target && e.target.id === 'exp-edit-bio') {
+      var counter = document.getElementById('exp-bio-char-count');
+      if (counter) counter.textContent = e.target.value.length + '/150';
+    }
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', createProfileModalDOM);
