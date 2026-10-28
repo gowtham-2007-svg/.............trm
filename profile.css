@@ -1162,3 +1162,106 @@
   accent-color: #8338EC;
   cursor: pointer;
 }
+
+
+/* ═════════════════════════════════════════════════════════════
+   EXPLORER PROFILE 4-POINT GUIDE & HEADER CONTROLS
+   ═════════════════════════════════════════════════════════════ */
+.exp-explorer-bar-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp-guide-trigger-btn {
+  background: rgba(131, 56, 236, 0.15);
+  border: 1px solid rgba(131, 56, 236, 0.35);
+  color: #c084fc;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exp-guide-trigger-btn:hover {
+  background: rgba(131, 56, 236, 0.3);
+  color: #fff;
+}
+
+.exp-guide-btn-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.exp-guide-btn-icon:hover {
+  background: rgba(131, 56, 236, 0.3);
+  color: #fff;
+}
+
+.exp-guide-scroll-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.exp-guide-item {
+  display: flex;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.exp-guide-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8338EC, #38bdf8);
+  color: #fff;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.exp-guide-heading {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.exp-guide-text {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.exp-guide-tips-box {
+  background: rgba(131, 56, 236, 0.12);
+  border: 1px dashed rgba(131, 56, 236, 0.4);
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+}

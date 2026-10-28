@@ -381,10 +381,10 @@
             return `
                             <div class="review-card">
                                 <div class="review-card-header">
-                                    <div class="review-avatar">${initial}</div>
-                                    <div class="review-author-meta">
+                                    <div class="review-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.openForUser('${escapeHtml(rev.name)}'); event.stopPropagation();" title="View ${escapeHtml(rev.name)}'s Explorer Profile" style="cursor:pointer;">${initial}</div>
+                                    <div class="review-author-meta" onclick="window.ExplorerProfile && window.ExplorerProfile.openForUser('${escapeHtml(rev.name)}'); event.stopPropagation();" title="View ${escapeHtml(rev.name)}'s Explorer Profile" style="cursor:pointer;">
                                         <div class="review-author-name">
-                                            <span>${escapeHtml(rev.name)}</span>
+                                            <span style="text-decoration:underline dotted rgba(131,56,236,0.6);text-underline-offset:3px;">${escapeHtml(rev.name)}</span>
                                             <span class="review-verified-badge" title="Verified Traveler">
                                                 <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                                             </span>
