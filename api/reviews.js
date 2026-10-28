@@ -15,7 +15,128 @@ try {
     console.warn('[REVIEWS API] Optional Supabase client not loaded:', e.message);
 }
 
-const DEFAULT_REVIEWS = [];
+const DEFAULT_REVIEWS = [
+    {
+        "id": "rev_1793073059348_jaxfyi",
+        "name": "Sangam",
+        "location": "Karnataka, India",
+        "rating": 5,
+        "tag": "Budget Traveler",
+        "text": "Weekend Explore is an amazing platform for discovering beautiful destinations and planning memorable weekend getaways! 🌍✨ I really appreciate its user-friendly interface, smart destination recommendations, and helpful travel information that make trip planning simple, quick, and enjoyable. The platform is especially useful for discovering hidden gems, exploring new places, and making the most of every weekend. It’s a fantastic initiative that inspires people to travel more, explore beyond familiar places, and create unforgettable experiences. Keep up the great work and continue making travel easier and more exciting for everyone! Highly recommended to all travel lovers. 🚀❤️",
+        "date": "2026-10-27",
+        "createdAt": "2026-10-27T03:50:59.348+00:00"
+    },
+    {
+        "id": "rev_1793029958406_2h91q8",
+        "name": "Ravi",
+        "location": "Karnataka, India",
+        "rating": 5,
+        "tag": "Budget Traveler",
+        "text": "Best time saving website and also suggest good places that's it",
+        "date": "2026-10-26",
+        "createdAt": "2026-10-26T15:52:38.405+00:00"
+    },
+    {
+        "id": "rev_1792664465997_f66ua9",
+        "name": "Divya Shettar",
+        "location": "Karnataka, India",
+        "rating": 5,
+        "tag": "Weekend Getaway",
+        "text": "Weekend Explore is an excellent platform for discovering unique destinations and planning memorable weekend getaways. Its user-friendly interface makes exploring new places effortless, offering a convenient and enjoyable experience for travelers seeking inspiration for their next adventure. Highly recommended for anyone looking to make their weekends more exciting and meaningful.\"",
+        "date": "2026-10-22",
+        "createdAt": "2026-10-22T10:21:05.997+00:00"
+    },
+    {
+        "id": "rev_1792664088273_jv3r4u",
+        "name": "Deekshith k R",
+        "location": "Karnataka, India",
+        "rating": 5,
+        "tag": "Weekend Getaway",
+        "text": "Weekend Explore is an excellent platform for discovering unique destinations and planning memorable weekend getaways. Its user-friendly interface makes exploring new places effortless, offering a convenient and enjoyable experience for travelers seeking inspiration for their next adventure. Highly recommended for anyone looking to make their weekends more exciting and meaningful.",
+        "date": "2026-10-22",
+        "createdAt": "2026-10-22T10:14:48.273+00:00"
+    },
+    {
+        "id": "rev_1792643253370_k9nms7",
+        "name": "Weekendexplore explore",
+        "location": "Karnataka, India",
+        "rating": 5,
+        "tag": "Weekend Getaway",
+        "text": "Weekend Explore is an amazing platform for planning weekend trips! The website makes it easy to discover beautiful destinations",
+        "date": "2026-10-22",
+        "createdAt": "2026-10-22T04:27:33.37+00:00"
+    },
+    {
+        "id": "rev_1791350015181_f3zyoh",
+        "name": "Darshan K",
+        "location": "Mysuru",
+        "rating": 5,
+        "tag": "Weekend Getaway",
+        "text": "This travel guide website is truly amazing and super helpful for weekend trips.",
+        "date": "2026-10-07",
+        "createdAt": "2026-10-07T05:13:35.182+00:00"
+    },
+    {
+        "id": "rev_1791349285050_4hmtc8",
+        "name": "Gowtham N",
+        "location": "Karnataka, India",
+        "rating": 4,
+        "tag": "Weekend Getaway",
+        "text": "Weekend Explore is a very helpful website for planning weekend trips. I really like the simple interface, destination suggestions, travel information, and useful itinerary features. It makes trip planning easier and more convenient.",
+        "date": "2026-10-07",
+        "createdAt": "2026-10-07T05:01:25.05+00:00"
+    },
+    {
+        "id": "rev_1791349050468_61rjn0",
+        "name": "Ananya Rao",
+        "location": "Mangaluru",
+        "rating": 5,
+        "tag": "Nature & Beaches",
+        "text": "The beach recommendations and curated weekend spots are fantastic!",
+        "date": "2026-10-07",
+        "createdAt": "2026-10-07T04:57:30.468+00:00"
+    },
+    {
+        "id": "rev_init_4",
+        "name": "Rohan D'Souza",
+        "location": "Udupi, Karnataka",
+        "rating": 5,
+        "tag": "Weekend Roadtrips",
+        "text": "Super smooth website! Very responsive on mobile and gives accurate recommendations without useless clutter. Highly recommended for anyone exploring South India.",
+        "date": "2026-04-05",
+        "createdAt": "2026-04-05T11:20:00+00:00"
+    },
+    {
+        "id": "rev_init_3",
+        "name": "Pooja Shankar",
+        "location": "Mysuru, Karnataka",
+        "rating": 5,
+        "tag": "Heritage & Culture",
+        "text": "Planning our family weekend in Mysuru was so seamless. The detailed category breakdown with temples, gardens, and heritage walks is the best I've seen on any travel site.",
+        "date": "2026-04-03",
+        "createdAt": "2026-04-03T18:45:00+00:00"
+    },
+    {
+        "id": "rev_init_2",
+        "name": "Aditya Hegde",
+        "location": "Mangaluru, Karnataka",
+        "rating": 5,
+        "tag": "Coastal Getaways",
+        "text": "The Mangaluru beach recommendations and local seafood canteen suggestions were 100% spot-on. The AI agent even helped customize an itinerary within our ₹1,500 budget.",
+        "date": "2026-04-01",
+        "createdAt": "2026-04-01T09:15:00+00:00"
+    },
+    {
+        "id": "rev_init_1",
+        "name": "Kavya Ramesh",
+        "location": "Bangalore, Karnataka",
+        "rating": 5,
+        "tag": "Solo Explorer",
+        "text": "Weekend Explore made discovering hidden places around Bangalore so effortless! The bus route tips and verified timings saved me so much time. Absolutely love the clean interface!",
+        "date": "2026-03-28",
+        "createdAt": "2026-03-28T14:32:00+00:00"
+    }
+];
 
 // Load reviews with Supabase priority and local fallback
 async function fetchAllReviews() {

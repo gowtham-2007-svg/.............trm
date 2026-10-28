@@ -5,6 +5,8 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { createClient } = require('@supabase/supabase-js');
+let MongoClient = null;
+try { MongoClient = require('mongodb').MongoClient; } catch (e) {}
 const axios = require('axios');
 global.WebSocket = require('ws');
 
@@ -214,6 +216,28 @@ if (isSupabaseConfigured()) {
 } else {
     console.log('[SUPABASE] Supabase credentials not fully configured. Caching is disabled.');
 }
+// MongoDB Database Configuration (Dual-Database with Supabase)
+let mongoDb = null;
+async function initMongoDB() {
+    if (!MongoClient) return null;
+    const uri = process.env.MONGODB_URI;
+    if (!uri || uri.includes('YOUR_PASSWORD') || uri.includes('YourRealPasswordHere')) {
+        console.log('[MONGODB] MONGODB_URI not configured yet in .env');
+        return null;
+    }
+    try {
+        const client = new MongoClient(uri);
+        await client.connect();
+        mongoDb = client.db('weekend_explore');
+        console.log('[MONGODB] Connected successfully to database: weekend_explore');
+        return mongoDb;
+    } catch (err) {
+        console.warn('[MONGODB] Connection error:', err.message);
+        return null;
+    }
+}
+initMongoDB();
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -1109,6 +1133,24 @@ const requestListener = async (req, res) => {
 
             saveLocalDB();
 
+            // Dual-write analytics to MongoDB if available
+            if (mongoDb) {
+                try {
+                    mongoDb.collection('analytics_sessions').updateOne(
+                        { session_id: session.session_id },
+                        { $set: session },
+                        { upsert: true }
+                    ).catch(e => console.warn('[MONGODB SESSIONS ERROR]', e.message));
+                    mongoDb.collection('analytics_page_views').insertOne({
+                        session_id: sessionId,
+                        path: viewPath,
+                        title: title || '',
+                        referrer: referrer || '',
+                        viewed_at: new Date().toISOString()
+                    }).catch(e => console.warn('[MONGODB PAGEVIEW ERROR]', e.message));
+                } catch (mErr) {}
+            }
+
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: true }));
         } catch (err) {
@@ -1338,6 +1380,64 @@ const requestListener = async (req, res) => {
             console.error('[Admin Users Endpoint Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Failed to fetch users' }));
+        }
+        return;
+    }
+
+    // --- AI Agent History & Saved Itineraries Endpoints ---
+    if (pathname === '/api/ai/history' && req.method === 'POST') {
+        setCorsHeaders(res);
+        try {
+            const body = await getRequestBody(req);
+            const historyEntry = {
+                session_id: body.session_id || null,
+                user_id: body.user_id || null,
+                user_email: body.user_email || null,
+                user_name: body.user_name || null,
+                destination: body.destination || 'Mangaluru',
+                budget: Number(body.budget) || 0,
+                people: Number(body.people) || 1,
+                vibe: body.vibe || body.moodKey || 'chill',
+                food_preference: body.food_preference || body.foodKey || 'all',
+                transport: body.transport || body.transportKey || 'bus',
+                weather: body.weatherKey || 'clear',
+                selected_movie: body.selectedMovie || null,
+                generated_at: new Date().toISOString()
+            };
+
+            // 1. Save to MongoDB in collection 'ai_agent_history'
+            if (mongoDb) {
+                try {
+                    await mongoDb.collection('ai_agent_history').insertOne(historyEntry);
+                    console.log(`[MONGODB AI HISTORY] Saved AI itinerary request for ${historyEntry.destination} (${historyEntry.user_email || 'Anonymous'})`);
+                } catch (mErr) {
+                    console.warn('[MONGODB AI HISTORY ERROR]', mErr.message);
+                }
+            }
+
+            res.writeHead(201, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, historyEntry }));
+        } catch (err) {
+            console.error('[AI History Error]', err.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: err.message }));
+        }
+        return;
+    }
+
+    if (pathname === '/api/ai/history' && req.method === 'GET') {
+        setCorsHeaders(res);
+        try {
+            let history = [];
+            if (mongoDb) {
+                history = await mongoDb.collection('ai_agent_history').find({}).sort({ generated_at: -1 }).limit(100).toArray();
+            }
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, history }));
+        } catch (err) {
+            console.error('[AI History Fetch Error]', err.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: err.message }));
         }
         return;
     }

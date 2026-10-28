@@ -2121,6 +2121,32 @@
     const foodKey = s.foodKey || 'veg';
     const transportKey = s.transportKey || 'bus';
 
+    // Log AI Itinerary Generation to MongoDB
+    try {
+      const historyPayload = {
+        session_id: (sessionStorage.getItem('we_session_id') || ''),
+        destination: city,
+        budget: budget,
+        people: people,
+        vibe: moodKey,
+        food_preference: foodKey,
+        transport: transportKey,
+        weatherKey: s.weatherKey || 'clear',
+        selectedMovie: selectedMovie ? (selectedMovie.title || selectedMovie.name || selectedMovie) : null
+      };
+      if (window.Clerk && window.Clerk.user) {
+        historyPayload.user_id = window.Clerk.user.id;
+        historyPayload.user_email = window.Clerk.user.primaryEmailAddress ? window.Clerk.user.primaryEmailAddress.emailAddress : '';
+        historyPayload.user_name = window.Clerk.user.fullName || '';
+      }
+      fetch('/api/ai/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(historyPayload),
+        keepalive: true
+      }).catch(() => {});
+    } catch (e) {}
+
     // 1. Transport Calculation & Label
     let transportCost = 0;
     let transLabel = s.transport || 'Local Transit';
