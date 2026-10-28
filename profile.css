@@ -1265,3 +1265,34 @@
   color: #e2e8f0;
   line-height: 1.5;
 }
+
+
+/* Ensure Clerk default account flyout/popover menu is completely suppressed */
+.cl-userButtonPopoverCard,
+.cl-userButtonPopoverRoot,
+.cl-userButtonPopoverActions,
+.cl-popover,
+.cl-popoverCard {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* Story Ring Avatar in Navbar */
+.we-user-avatar-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.we-user-avatar-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.45);
+}
+
+.we-user-avatar-btn:active {
+  transform: scale(0.96);
+}

@@ -14,6 +14,19 @@
 (function () {
   'use strict';
 
+  // Global capture click listener: Intercepts all profile avatar clicks before Clerk or other handlers
+  document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('#nav-user-profile-anchor, #user-button, #we-unified-user-avatar, .we-user-avatar-btn, .cl-userButtonTrigger, .cl-userButtonBox, [data-clerk-user-button], [data-localization-key*="userButton"], #menu-explorer-profile');
+    if (trigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      if (window.ExplorerProfile && typeof window.ExplorerProfile.open === 'function') {
+        window.ExplorerProfile.open();
+      }
+    }
+  }, true);
+
   const STORAGE_KEY = 'we_explorer_profile_exact_v1';
 
   const DEFAULT_POSTS = [

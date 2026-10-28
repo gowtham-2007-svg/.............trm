@@ -1791,17 +1791,14 @@ const requestListener = async (req, res) => {
                 'Content-Security-Policy': "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.js https://*.clerk.accounts.dev https://js.stripe.com https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; connect-src 'self' https: wss:; font-src 'self' data: https:; frame-src 'self' https:;"
             };
 
-            if (ext === '.html') {
-                headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
-            } else if (req.url && req.url.includes('?v=')) {
-                // Versioned asset query: immutable cache for instant 0ms loads across refreshes
-                headers['Cache-Control'] = 'public, max-age=31536000, immutable';
-            } else if (ext === '.js' || ext === '.css') {
-                // Non-versioned static code: short cache with stale-while-revalidate for fast rendering
-                headers['Cache-Control'] = 'public, max-age=1800, stale-while-revalidate=86400';
+            if (ext === '.html' || ext === '.js' || ext === '.css') {
+                headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                headers['Pragma'] = 'no-cache';
+                headers['Expires'] = '0';
             } else {
-                headers['Cache-Control'] = 'public, max-age=31536000, immutable';
+                headers['Cache-Control'] = 'public, max-age=86400';
             }
+
 
             const acceptEncoding = req.headers['accept-encoding'] || '';
             const isCompressible = /javascript|json|html|css|xml|svg|text/.test(contentType);

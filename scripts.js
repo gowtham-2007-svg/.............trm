@@ -9634,8 +9634,11 @@ function initPlaceImageSliders() {
                 userButtonDiv.style.display = 'flex';
                 const initial = (stored.name || 'D').charAt(0).toUpperCase();
                 userButtonDiv.innerHTML = `
-                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${stored.name || 'Account'} - Open Explorer Profile" style="width:36px;height:36px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 2px 10px rgba(2,132,199,0.5);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;">
-                        ${initial}
+                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${stored.name || 'Account'} - Open Explorer Profile" style="position:relative;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);padding:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;box-shadow:0 2px 10px rgba(220,39,67,0.35);transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);">
+                        <div style="width:100%;height:100%;border-radius:50%;background:#1e1e2f;border:2px solid #0f172a;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.95rem;overflow:hidden;">
+                            ${stored.imageUrl ? `<img src="${stored.imageUrl}" style="width:100%;height:100%;object-fit:cover;" alt="${stored.name}">` : initial}
+                        </div>
+                        <span style="position:absolute;bottom:-2px;right:-2px;width:15px;height:15px;border-radius:50%;background:#8338EC;color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;border:1.5px solid #0f172a;">★</span>
                     </div>
                 `;
                 userButtonDiv.onclick = (e) => {
@@ -9743,8 +9746,11 @@ function initPlaceImageSliders() {
                 const initial = (name.charAt(0) || 'D').toUpperCase();
                 const avatarImg = user.imageUrl;
                 userButtonDiv.innerHTML = `
-                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${name} - Open Explorer Profile" style="width:36px;height:36px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 2px 10px rgba(2,132,199,0.5);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;overflow:hidden;">
-                        ${avatarImg ? `<img src="${avatarImg}" style="width:100%;height:100%;object-fit:cover;" alt="${name}">` : initial}
+                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${name} - Open Explorer Profile" style="position:relative;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);padding:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;box-shadow:0 2px 10px rgba(220,39,67,0.35);transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);">
+                        <div style="width:100%;height:100%;border-radius:50%;background:#1e1e2f;border:2px solid #0f172a;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.95rem;overflow:hidden;">
+                            ${avatarImg ? `<img src="${avatarImg}" style="width:100%;height:100%;object-fit:cover;" alt="${name}">` : initial}
+                        </div>
+                        <span style="position:absolute;bottom:-2px;right:-2px;width:15px;height:15px;border-radius:50%;background:#8338EC;color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;border:1.5px solid #0f172a;">★</span>
                     </div>
                 `;
                 userButtonDiv.onclick = (e) => {
