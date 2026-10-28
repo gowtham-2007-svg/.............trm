@@ -2355,3 +2355,145 @@
     padding: 0 6px 6px;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   GPS AUTOMATIC ARRIVAL TRACKER STYLES
+   ═══════════════════════════════════════════════════════ */
+
+.wai-gps-radar-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(131, 56, 236, 0.15);
+  border-bottom: 1px solid rgba(131, 56, 236, 0.25);
+  font-size: 0.72rem;
+}
+
+.wai-gps-radar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #c084fc;
+  font-weight: 600;
+}
+
+.wai-gps-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  animation: wai-gps-pulse 1.8s infinite;
+}
+
+@keyframes wai-gps-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.wai-gps-sim-all-btn {
+  background: rgba(131, 56, 236, 0.3);
+  border: 1px solid rgba(131, 56, 236, 0.5);
+  color: #e2d9f3;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wai-gps-sim-all-btn:hover {
+  background: #8338EC;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.wai-tracker-stop-topline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.wai-tracker-distance-badge {
+  font-size: 0.62rem;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.wai-tracker-distance-badge.arrived {
+  background: rgba(52, 211, 153, 0.2);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.wai-tracker-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.wai-tracker-auto-arrive-btn {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(52, 211, 153, 0.15));
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.wai-tracker-auto-arrive-btn:hover {
+  background: #34d399;
+  color: #0b0f19;
+  box-shadow: 0 2px 10px rgba(52, 211, 153, 0.4);
+}
+
+/* Auto-Arrived Pulse Animation */
+.wai-tracker-stop--auto-arrived {
+  animation: wai-arrived-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes wai-arrived-pop {
+  0% { transform: scale(0.96); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Floating Arrival Notification Toast */
+.wai-arrival-toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: #0f172a;
+  color: #fff;
+  border: 1.5px solid #34d399;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(52, 211, 153, 0.3);
+  padding: 12px 18px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  z-index: 1000000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wai-arrival-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
