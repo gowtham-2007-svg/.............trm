@@ -2080,3 +2080,278 @@
   border-radius: 8px;
   margin-bottom: 8px;
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   JOURNEY TRACKING SYSTEM STYLES
+   ═══════════════════════════════════════════════════════ */
+
+.wai-tracker-section {
+  margin: 14px 0 10px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1040 100%);
+  border: 1.5px solid rgba(131, 56, 236, 0.4);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(131, 56, 236, 0.15);
+}
+
+.wai-tracker-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.wai-tracker-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.wai-tracker-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #e2d9f3;
+  letter-spacing: 0.01em;
+}
+
+.wai-tracker-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 1px;
+}
+
+.wai-tracker-badge {
+  margin-left: auto;
+  background: rgba(131, 56, 236, 0.25);
+  border: 1px solid rgba(131, 56, 236, 0.5);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #c084fc;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.wai-tracker-done-num {
+  color: #a78bfa;
+  font-size: 0.95rem;
+}
+
+/* Progress bar */
+.wai-tracker-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 10px;
+}
+
+.wai-tracker-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.wai-tracker-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8338EC, #a78bfa);
+  border-radius: 99px;
+  transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wai-tracker-progress-pct {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* Stop list */
+.wai-tracker-stops {
+  padding: 0 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wai-tracker-stop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wai-tracker-stop:hover {
+  background: rgba(131, 56, 236, 0.12);
+  border-color: rgba(131, 56, 236, 0.35);
+}
+
+.wai-tracker-stop:active {
+  transform: scale(0.98);
+}
+
+/* DONE state */
+.wai-tracker-stop--done {
+  background: rgba(52, 211, 153, 0.1) !important;
+  border-color: rgba(52, 211, 153, 0.35) !important;
+}
+
+.wai-tracker-stop--done .wai-tracker-stop-name {
+  text-decoration: line-through;
+  color: rgba(255,255,255,0.4) !important;
+}
+
+.wai-tracker-stop--done .wai-tracker-checkbox {
+  background: #34d399;
+  border-color: #34d399;
+}
+
+.wai-tracker-stop--done .wai-check-icon {
+  opacity: 1;
+  stroke: #fff;
+}
+
+.wai-tracker-stop--done .wai-tracker-status-label {
+  color: #34d399 !important;
+  font-weight: 600;
+}
+
+/* Left side */
+.wai-tracker-stop-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.wai-tracker-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(131, 56, 236, 0.5);
+  background: rgba(131, 56, 236, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.wai-check-icon {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.wai-tracker-stop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.wai-tracker-stop-num {
+  font-size: 0.62rem;
+  color: rgba(131, 56, 236, 0.8);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.wai-tracker-stop-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2d9f3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  transition: all 0.2s ease;
+}
+
+.wai-tracker-stop-time {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.35);
+}
+
+/* Right side */
+.wai-tracker-stop-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.wai-tracker-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(131, 56, 236, 0.2);
+  border: 1px solid rgba(131, 56, 236, 0.4);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #c084fc;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.wai-tracker-nav-btn:hover {
+  background: rgba(131, 56, 236, 0.4);
+  color: #fff;
+}
+
+.wai-tracker-status-label {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+  transition: color 0.2s ease;
+}
+
+/* Celebration banner */
+.wai-tracker-celebration {
+  margin: 4px 10px 12px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(52, 211, 153, 0.05));
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #34d399;
+  animation: wai-tracker-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes wai-tracker-bounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Mobile responsive */
+@media (max-width: 400px) {
+  .wai-tracker-stop-name {
+    max-width: 140px;
+  }
+  .wai-tracker-header {
+    padding: 12px 12px 8px;
+  }
+  .wai-tracker-stops {
+    padding: 0 6px 6px;
+  }
+}

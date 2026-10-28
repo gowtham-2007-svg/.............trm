@@ -2675,6 +2675,60 @@
             <span>Open Complete Trip Route in Google Maps</span>
           </a>
         </div>
+
+        <!-- ═══ JOURNEY TRACKING SYSTEM ═══ -->
+        <div class="wai-tracker-section" id="wai-tracker-${city.replace(/\s+/g,'_')}_${Date.now()}">
+          <div class="wai-tracker-header">
+            <span class="wai-tracker-icon">🧭</span>
+            <div>
+              <div class="wai-tracker-title">Journey Tracker</div>
+              <div class="wai-tracker-sub">Tap each stop as you complete it — track your day live!</div>
+            </div>
+            <div class="wai-tracker-badge" id="wai-tracker-count">
+              <span class="wai-tracker-done-num">0</span>/<span>${stops.length}</span>
+            </div>
+          </div>
+
+          <div class="wai-tracker-progress-wrap">
+            <div class="wai-tracker-progress-bar">
+              <div class="wai-tracker-progress-fill" id="wai-tracker-fill" style="width:0%"></div>
+            </div>
+            <span class="wai-tracker-progress-pct" id="wai-tracker-pct">0% Complete</span>
+          </div>
+
+          <div class="wai-tracker-stops">
+            ${stops.map((st, idx) => {
+              const trackId = 'wai-tstop-' + idx + '-' + Date.now();
+              return `
+              <div class="wai-tracker-stop" id="${trackId}" data-idx="${idx}" data-total="${stops.length}" onclick="window.WeekendAI && window.WeekendAI.toggleJourneyStop(this)">
+                <div class="wai-tracker-stop-left">
+                  <div class="wai-tracker-checkbox">
+                    <svg class="wai-check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="wai-tracker-stop-info">
+                    <span class="wai-tracker-stop-num">${idx + 1}</span>
+                    <span class="wai-tracker-stop-name">${st.icon} ${st.title}</span>
+                    <span class="wai-tracker-stop-time">${st.time}</span>
+                  </div>
+                </div>
+                <div class="wai-tracker-stop-right">
+                  <a href="${st.mapsUrl}" target="_blank" rel="noopener noreferrer" class="wai-tracker-nav-btn" onclick="event.stopPropagation()" title="Navigate to ${st.title}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Go
+                  </a>
+                  <span class="wai-tracker-status-label">Tap to mark</span>
+                </div>
+              </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="wai-tracker-celebration" id="wai-tracker-celebration" style="display:none">
+            <span>🎉</span>
+            <span>Amazing! You've completed your entire journey!</span>
+          </div>
+        </div>
+
     `;
 
     // Concise, single-line practical note if weather/gogupa applies
@@ -3117,6 +3171,30 @@
       renderStep();
     },
     generateItinerary: generateMasterItinerary,
+    toggleJourneyStop: function(el) {
+      if (!el) return;
+      const section = el.closest('.wai-tracker-section');
+      if (!section) return;
+      const isCompleted = el.classList.toggle('wai-tracker-stop--done');
+      const statusLabel = el.querySelector('.wai-tracker-status-label');
+      if (statusLabel) statusLabel.textContent = isCompleted ? 'Done ✓' : 'Tap to mark';
+      // Count completed
+      const allStops = section.querySelectorAll('.wai-tracker-stop');
+      const doneCount = section.querySelectorAll('.wai-tracker-stop--done').length;
+      const total = allStops.length;
+      // Update counter badge
+      const countEl = section.querySelector('.wai-tracker-done-num');
+      if (countEl) countEl.textContent = doneCount;
+      // Update progress bar
+      const fill = section.querySelector('#wai-tracker-fill');
+      const pct = section.querySelector('#wai-tracker-pct');
+      const percent = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+      if (fill) fill.style.width = percent + '%';
+      if (pct) pct.textContent = percent + '% Complete';
+      // Show celebration when all done
+      const celebration = section.querySelector('#wai-tracker-celebration');
+      if (celebration) celebration.style.display = doneCount === total && total > 0 ? 'flex' : 'none';
+    },
     _showZeroRupeeAgain: function () {
       showTypingIndicator(function () {
         addAIMessage('<div style="font-size:0.84rem;color:#334155;line-height:1.5;">Sure, pick another situation and I will help you with a practical plan.</div>');
