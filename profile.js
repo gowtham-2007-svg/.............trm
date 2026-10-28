@@ -115,7 +115,6 @@
       bio: '🎒 Weekend Wanderer | 🌊 Coastal & Heritage Trail Explorer | 📍 Karnataka, India\nTrack my live check-ins & completed journeys!',
       avatar: avatar,
       isPrivate: false,
-      wallpaper: 'assets/places/panambur_beach.jpg',
       posts: DEFAULT_POSTS,
       reachedPlaces: DEFAULT_REACHED_PLACES,
       highlights: [
@@ -149,16 +148,7 @@
     overlay.className = 'exp-profile-overlay';
 
     overlay.innerHTML = `
-      <div class="exp-profile-card" id="exp-profile-card-box">
-        <!-- Scenic Place Cover Banner -->
-        <div class="exp-profile-cover-banner" id="exp-profile-cover-banner" onclick="window.ExplorerProfile.promptChangeWallpaper()" title="Tap to change beautiful place background">
-          <img src="${state.wallpaper || 'assets/places/panambur_beach.jpg'}" id="exp-cover-img" alt="Scenic Background">
-          <div class="exp-cover-overlay"></div>
-          <button class="exp-change-wallpaper-pill" onclick="window.ExplorerProfile.promptChangeWallpaper(); event.stopPropagation();" title="Change beautiful place wallpaper">
-            <span>📷 Change Place</span>
-          </button>
-        </div>
-
+      <div class="exp-profile-card">
         <!-- Top App Bar (Exact Image 1) -->
         <div class="exp-profile-topbar">
           <div class="exp-profile-handle-wrap">
@@ -436,7 +426,6 @@
         }
       }
       this.syncUI();
-      this.applyWallpaper();
       const overlay = document.getElementById('exp-profile-overlay');
       if (overlay) overlay.classList.add('open');
     },
