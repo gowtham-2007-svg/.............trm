@@ -658,3 +658,50 @@
     font-size: 1rem;
   }
 }
+
+
+.exp-bio-email {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 1px;
+}
+
+.exp-account-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.exp-account-action-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 7px 10px;
+  border-radius: 9px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.exp-account-action-btn:hover {
+  background: rgba(131, 56, 236, 0.18);
+  border-color: rgba(131, 56, 236, 0.4);
+  color: #ffffff;
+}
+
+.exp-account-action-btn.signout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+.we-user-avatar-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.7) !important;
+}

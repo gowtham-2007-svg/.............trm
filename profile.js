@@ -75,12 +75,14 @@
 
     // Pull from Clerk if user is logged in
     let name = 'Explorer';
+    let email = '';
     let handle = 'weekend_wanderer';
     let avatar = '🎒';
 
     if (window.Clerk && window.Clerk.user) {
       name = window.Clerk.user.fullName || window.Clerk.user.firstName || 'Explorer';
       handle = (window.Clerk.user.username || name.toLowerCase().replace(/\s+/g, '_')) + '_explorer';
+      email = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress) || '';
     }
 
     return {
@@ -88,6 +90,7 @@
       handle: handle,
       bio: '🎒 Weekend Wanderer | 🌊 Coastal & Heritage Trail Explorer | 📍 Karnataka, India\nTrack my live check-ins & completed journeys!',
       avatar: avatar,
+      email: email,
       isPrivate: false, // Default is Public profile
       posts: DEFAULT_POSTS,
       reachedPlaces: DEFAULT_REACHED_PLACES,
@@ -166,6 +169,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
               </span>
             </div>
+            <div class="exp-bio-email" id="exp-render-email">${escapeHtml(state.email || '')}</div>
             <div class="exp-bio-category">Travel & Exploration Guide</div>
             <div class="exp-bio-text" id="exp-render-bio">${escapeHtml(state.bio).replace(/\n/g, '<br>')}</div>
           </div>
@@ -173,13 +177,25 @@
           <!-- Action Buttons Bar -->
           <div class="exp-actions-bar">
             <button class="exp-btn-secondary" onclick="window.ExplorerProfile.openEditModal()">
-              <span>✏️ Edit Profile</span>
+              <span>✏️ Edit</span>
             </button>
             <button class="exp-btn-secondary" onclick="window.ExplorerProfile.togglePrivacy()">
-              <span id="exp-btn-privacy-label">${state.isPrivate ? '🔓 Make Public' : '🔒 Make Private'}</span>
+              <span id="exp-btn-privacy-label">${state.isPrivate ? '🔓 Public' : '🔒 Private'}</span>
             </button>
             <button class="exp-btn-primary" onclick="window.ExplorerProfile.openNewPostModal()">
               <span>📸 + Post</span>
+            </button>
+          </div>
+
+          <!-- Account Settings & Sign Out Controls (Merged from D) -->
+          <div class="exp-account-row">
+            <button type="button" class="exp-account-action-btn" onclick="window.Clerk && window.Clerk.openUserProfile(); window.ExplorerProfile.close();" title="Manage your Clerk Account">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span>Manage Account</span>
+            </button>
+            <button type="button" class="exp-account-action-btn signout" onclick="window.WeekendAuth && window.WeekendAuth.signOut(); window.ExplorerProfile.close();" title="Sign out of your account">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Sign Out</span>
             </button>
           </div>
 
@@ -365,6 +381,9 @@
       // Sync Clerk user if logged in
       if (window.Clerk && window.Clerk.user) {
         state.name = window.Clerk.user.fullName || window.Clerk.user.firstName || state.name;
+        state.email = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress) || state.email;
+        const initial = (state.name.charAt(0) || 'D').toUpperCase();
+        if (!window.Clerk.user.imageUrl) { state.avatar = initial; }
         if (window.Clerk.user.imageUrl) {
           state.avatar = `<img src="${window.Clerk.user.imageUrl}" class="exp-avatar-img" alt="Avatar">`;
         }
