@@ -241,19 +241,44 @@
             </div>
           </div>
 
-          <!-- Tabs (POSTS | PLACES REACHED (3) | PRIVATE) -->
-          <div class="exp-tabs-nav">
-            <button class="exp-tab-btn active" id="tab-btn-posts" onclick="window.ExplorerProfile.switchTab('posts')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-              <span>POSTS</span>
+          <!-- 5-icon Instagram-style Tab Bar -->
+          <div class="exp-tabs-nav exp-tabs-nav-icons">
+            <!-- 1: Grid Posts -->
+            <button class="exp-tab-btn active" id="tab-btn-posts" onclick="window.ExplorerProfile.switchTab('posts')" title="Posts">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+              </svg>
             </button>
-            <button class="exp-tab-btn" id="tab-btn-reached" onclick="window.ExplorerProfile.switchTab('reached')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span>PLACES REACHED (<span id="exp-reached-tab-count">${state.reachedPlaces.length}</span>)</span>
+            <!-- 2: Reels -->
+            <button class="exp-tab-btn" id="tab-btn-reels" onclick="window.ExplorerProfile.switchTab('reels')" title="Reels & Videos">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polygon points="10,8 17,12 10,16" fill="currentColor" stroke="none"></polygon>
+              </svg>
             </button>
-            <button class="exp-tab-btn" id="tab-btn-private" onclick="window.ExplorerProfile.switchTab('private')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <span>PRIVATE</span>
+            <!-- 3: Saved -->
+            <button class="exp-tab-btn" id="tab-btn-saved" onclick="window.ExplorerProfile.switchTab('saved')" title="Saved Places">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <!-- 4: Places Reached (GPS / sync) -->
+            <button class="exp-tab-btn" id="tab-btn-reached" onclick="window.ExplorerProfile.switchTab('reached')" title="Places Reached">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 .49-4.5"></path>
+              </svg>
+            </button>
+            <!-- 5: Private / Tagged -->
+            <button class="exp-tab-btn" id="tab-btn-private" onclick="window.ExplorerProfile.switchTab('private')" title="Private">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                <circle cx="12" cy="10" r="3"></circle>
+                <path d="M7 21h10"></path>
+              </svg>
             </button>
           </div>
 
@@ -272,6 +297,30 @@
             </div>
             <div class="exp-places-reached-list" id="exp-reached-list-container">
               ${renderReachedList(state.reachedPlaces)}
+            </div>
+          </div>
+
+          <!-- TAB 2b: REELS & VIDEOS -->
+          <div class="exp-tab-panel" id="panel-reels">
+            <div class="exp-reels-empty">
+              <div class="exp-reels-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <polygon points="10,8 17,12 10,16" fill="currentColor" stroke="none" opacity="0.5"></polygon>
+                </svg>
+              </div>
+              <h4>Share Reels</h4>
+              <p>Reels you share will appear on your profile. Short travel videos, check-in clips, and destination reels go here.</p>
+              <button class="exp-btn-primary" style="margin-top:10px;" onclick="window.ExplorerProfile.openNewPostModal()">
+                📹 Create Reel
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 2c: SAVED -->
+          <div class="exp-tab-panel" id="panel-saved">
+            <div class="exp-saved-grid" id="exp-saved-grid-container">
+              ${renderSavedGrid(state.saved || [])}
             </div>
           </div>
 
@@ -475,6 +524,26 @@
     `).join('');
   }
 
+  function renderSavedGrid(saved) {
+    if (!saved || saved.length === 0) {
+      return `<div class="exp-saved-empty">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🔖</div>
+        <h4 style="color:#fff;margin:0 0 6px;font-size:0.95rem;">Save posts & places</h4>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.78rem;margin:0;">Tap the bookmark icon on any post to save it here privately.</p>
+      </div>`;
+    }
+    return saved.map(p => `
+      <div class="exp-post-tile" onclick="window.ExplorerProfile.openPostLightbox('${p.id}')">
+        <img src="${p.img}" alt="${escapeHtml(p.location)}" class="exp-post-img" loading="lazy" onerror="this.src='assets/places/panambur_beach.jpg'">
+        <div class="exp-post-overlay">
+          <span>🔖</span>
+          <span style="margin-left:8px;">📍 ${escapeHtml((p.location||'').split(',')[0])}</span>
+        </div>
+        <div class="exp-post-location-tag">📍 ${escapeHtml((p.location||'').split(',')[0])}</div>
+      </div>
+    `).join('');
+  }
+
   // Exposed Global ExplorerProfile
   window.ExplorerProfile = {
     open: function () {
@@ -491,6 +560,27 @@
       this.syncUI();
       const overlay = document.getElementById('exp-profile-overlay');
       if (overlay) overlay.classList.add('open');
+    },
+
+    savePost: function (postId) {
+      const post = state.posts.find(p => p.id === postId);
+      if (!post) return;
+      if (!state.saved) state.saved = [];
+      const alreadySaved = state.saved.some(p => p.id === postId);
+      if (alreadySaved) {
+        state.saved = state.saved.filter(p => p.id !== postId);
+      } else {
+        state.saved.unshift(post);
+      }
+      saveProfileState(state);
+      const savedGrid = document.getElementById('exp-saved-grid-container');
+      if (savedGrid) savedGrid.innerHTML = renderSavedGrid(state.saved);
+      // Update bookmark icon in lightbox
+      const bookmarkBtn = document.getElementById('exp-bookmark-btn-' + postId);
+      if (bookmarkBtn) {
+        bookmarkBtn.innerHTML = alreadySaved ? '🔖' : '🏷️';
+        bookmarkBtn.title = alreadySaved ? 'Saved' : 'Save';
+      }
     },
 
     close: function () {

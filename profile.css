@@ -1571,3 +1571,142 @@ select.exp-edit-field-input {
   text-align: right;
   padding-top: 2px;
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   5-ICON INSTAGRAM TAB BAR
+   ═══════════════════════════════════════════════════════ */
+
+/* Override old text tabs — pure icon bar */
+.exp-tabs-nav.exp-tabs-nav-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0;
+  gap: 0;
+  background: rgba(255,255,255,0.015);
+}
+
+.exp-tabs-nav-icons .exp-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  border-radius: 0;
+  gap: 0;
+  position: relative;
+}
+
+.exp-tabs-nav-icons .exp-tab-btn:hover {
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.04);
+}
+
+.exp-tabs-nav-icons .exp-tab-btn.active {
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+.exp-tabs-nav-icons .exp-tab-btn svg {
+  display: block;
+}
+
+/* Hide any text labels inside icon tabs */
+.exp-tabs-nav-icons .exp-tab-btn span {
+  display: none;
+}
+
+/* ── Reels Empty State ── */
+.exp-reels-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  min-height: 180px;
+}
+
+.exp-reels-icon {
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 14px;
+}
+
+.exp-reels-empty h4 {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.exp-reels-empty p {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 240px;
+}
+
+/* ── Saved Grid ── */
+.exp-saved-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 2px;
+}
+
+.exp-saved-empty {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  min-height: 180px;
+}
+
+.exp-saved-empty h4 {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.exp-saved-empty p {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Bookmark button in lightbox ── */
+.exp-lightbox-btn-icon {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  padding: 4px;
+  border-radius: 8px;
+  transition: transform 0.15s ease, background 0.15s;
+  line-height: 1;
+  color: inherit;
+}
+
+.exp-lightbox-btn-icon:hover {
+  transform: scale(1.15);
+  background: rgba(255,255,255,0.06);
+}
+
+.exp-lightbox-btn-icon:active {
+  transform: scale(0.92);
+}
