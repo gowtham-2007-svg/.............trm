@@ -294,6 +294,62 @@ function getRequestBody(req) {
     });
 }
 
+// ============================================
+// SECURITY: In-Memory Rate Limiter
+// ============================================
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
+const MAX_BODY_BYTES = 64 * 1024; // 64 KB max body size
+
+function checkRateLimit(ip, endpoint, maxRequests) {
+    const key = ip + ':' + endpoint;
+    const now = Date.now();
+    const entry = rateLimitStore.get(key) || { count: 0, start: now };
+    if (now - entry.start > RATE_LIMIT_WINDOW_MS) {
+        entry.count = 1;
+        entry.start = now;
+    } else {
+        entry.count++;
+    }
+    rateLimitStore.set(key, entry);
+    // Cleanup old entries every 500 requests
+    if (rateLimitStore.size > 500) {
+        for (const [k, v] of rateLimitStore.entries()) {
+            if (now - v.start > RATE_LIMIT_WINDOW_MS) rateLimitStore.delete(k);
+        }
+    }
+    return entry.count <= maxRequests;
+}
+
+function getClientIp(req) {
+    return (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+           req.headers['x-real-ip'] || req.socket.remoteAddress || 'unknown';
+}
+
+function getRequestBodySafe(req) {
+    return new Promise((resolve, reject) => {
+        let body = '';
+        let size = 0;
+        req.on('data', chunk => {
+            size += chunk.length;
+            if (size > MAX_BODY_BYTES) {
+                req.destroy();
+                reject(new Error('Request body too large'));
+                return;
+            }
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            try {
+                resolve(body ? JSON.parse(body) : {});
+            } catch (err) {
+                reject(err);
+            }
+        });
+        req.on('error', err => { reject(err); });
+    });
+}
+
 // Create clean, robust HTTP server
 const requestListener = async (req, res) => {
     // 1. Set CORS header for all OPTIONS requests (preflight)
@@ -753,8 +809,9 @@ const requestListener = async (req, res) => {
             const email = userRes.data.email_addresses && userRes.data.email_addresses[0] ? userRes.data.email_addresses[0].email_address : '';
             const role = userRes.data.public_metadata ? userRes.data.public_metadata.role : '';
 
-            // Force yadhur689@gmail.com to be an admin always
-            const adminEmails = ['yadhur689@gmail.com'];
+            // SECURITY NOTE: Move this to ADMIN_EMAILS env var for production.
+            // Hardcoded admin email is a security risk if the repo is public.
+            const adminEmails = (process.env.ADMIN_EMAILS_HARDCODED || 'yadhur689@gmail.com').split(',').map(e => e.trim().toLowerCase());
             if (process.env.ADMIN_EMAILS) {
                 adminEmails.push(...process.env.ADMIN_EMAILS.split(',').map(e => e.trim().toLowerCase()));
             }
@@ -1087,8 +1144,15 @@ const requestListener = async (req, res) => {
 
     // Route: Page View Tracking
     if (pathname === '/api/analytics/track' && req.method === 'POST') {
+        // SECURITY FIX: Rate limit analytics tracking (60 per minute per IP)
+        const clientIpAnalytics = getClientIp(req);
+        if (!checkRateLimit(clientIpAnalytics, 'analytics_track', 60)) {
+            res.writeHead(429, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Rate limit exceeded' }));
+            return;
+        }
         try {
-            const body = await getRequestBody(req);
+            const body = await getRequestBodySafe(req);
             const { sessionId, path: viewPath, title, referrer, deviceType, browser, os, userId, userEmail, userName } = body;
 
             if (!sessionId || !viewPath) {
@@ -1157,7 +1221,7 @@ const requestListener = async (req, res) => {
         } catch (err) {
             console.error('[Analytics Track Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: err.stack }));
+            res.end(JSON.stringify({ error: 'Internal server error. Please try again.' }));
         }
         return;
     }
@@ -1211,7 +1275,7 @@ const requestListener = async (req, res) => {
         } catch (err) {
             console.error('[Analytics Heartbeat Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: err.stack }));
+            res.end(JSON.stringify({ error: 'Internal server error. Please try again.' }));
         }
         return;
     }
@@ -1241,7 +1305,7 @@ const requestListener = async (req, res) => {
         } catch (err) {
             console.error('[Analytics Identify Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: err.stack }));
+            res.end(JSON.stringify({ error: 'Internal server error. Please try again.' }));
         }
         return;
     }
@@ -1301,7 +1365,7 @@ const requestListener = async (req, res) => {
         } catch (err) {
             console.error('[Admin Analytics Endpoint Error]', err.message);
             res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: err.stack }));
+            res.end(JSON.stringify({ error: 'Internal server error. Please try again.' }));
         }
         return;
     }
@@ -1446,8 +1510,15 @@ const requestListener = async (req, res) => {
     // 3.5. Automated Welcome Email Endpoint
     if (pathname === '/api/auth/send-welcome-email' && req.method === 'POST') {
         setCorsHeaders(res);
+        // SECURITY FIX: Rate limit email endpoint (3 per minute per IP)
+        const clientIpEmail = getClientIp(req);
+        if (!checkRateLimit(clientIpEmail, 'welcome_email', 3)) {
+            res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '60' });
+            res.end(JSON.stringify({ success: false, error: 'Too many email requests. Please wait before trying again.' }));
+            return;
+        }
         try {
-            const body = await getRequestBody(req);
+            const body = await getRequestBodySafe(req);
             const email = body.email ? body.email.trim().toLowerCase() : '';
             const name = body.name ? body.name.trim() : 'Explorer';
 
@@ -1512,6 +1583,13 @@ const requestListener = async (req, res) => {
         }
 
         if (req.method === 'DELETE') {
+            // SECURITY FIX: Require admin authentication for DELETE
+            const isAdminDelete = await verifyAdmin(req);
+            if (!isAdminDelete) {
+                res.writeHead(403, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Access Denied: Admin authorization required to delete reviews.' }));
+                return;
+            }
             if (supabase) {
                 try {
                     await supabase.from('website_reviews').delete().neq('id', '');
@@ -1526,8 +1604,15 @@ const requestListener = async (req, res) => {
         }
 
         if (req.method === 'POST') {
+            // SECURITY FIX: Rate limit review submissions (10 per minute per IP)
+            const clientIpReview = getClientIp(req);
+            if (!checkRateLimit(clientIpReview, 'reviews_post', 10)) {
+                res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '60' });
+                res.end(JSON.stringify({ success: false, error: 'Too many requests. Please wait a moment before submitting again.' }));
+                return;
+            }
             try {
-                const body = await getRequestBody(req);
+                const body = await getRequestBodySafe(req);
                 const name = (body.name || '').trim();
                 const rating = Math.max(1, Math.min(5, Math.round(Number(body.rating) || 5)));
                 const text = (body.text || '').trim();
@@ -1698,7 +1783,12 @@ const requestListener = async (req, res) => {
                 'ETag': etag,
                 'Vary': 'Accept-Encoding',
                 'X-Content-Type-Options': 'nosniff',
-                'X-Frame-Options': 'SAMEORIGIN'
+                'X-Frame-Options': 'SAMEORIGIN',
+                // SECURITY FIX: Add defence-in-depth security headers
+                'Referrer-Policy': 'strict-origin-when-cross-origin',
+                'Permissions-Policy': 'camera=(), microphone=(), geolocation=(self)',
+                'X-XSS-Protection': '1; mode=block',
+                'Content-Security-Policy': "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.js https://*.clerk.accounts.dev https://js.stripe.com https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; connect-src 'self' https: wss:; font-src 'self' data: https:; frame-src 'self' https:;"
             };
 
             if (ext === '.html') {

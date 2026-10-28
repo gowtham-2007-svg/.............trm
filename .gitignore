@@ -7,3 +7,5 @@ node_modules/
 .vscode/
 node-bin/
 backend/analytics_db.json
+
+backend/reviews_db.json

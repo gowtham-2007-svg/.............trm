@@ -1,0 +1,217 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run every Monday at 07:00 UTC
+    - cron: '0 7 * * 1'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  # ─────────────────────────────────────────────
+  # JOB 1: Dependency Vulnerability Scan
+  # ─────────────────────────────────────────────
+  dependency-audit:
+    name: Dependency Vulnerability Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit backend dependencies
+        working-directory: backend
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          npm audit --audit-level=high
+        continue-on-error: false
+
+      - name: Audit root dependencies (if any)
+        run: |
+          if [ -f package.json ]; then
+            npm install --package-lock-only --ignore-scripts
+            npm audit --audit-level=high
+          fi
+        continue-on-error: true
+
+  # ─────────────────────────────────────────────
+  # JOB 2: Secret Scanning
+  # ─────────────────────────────────────────────
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan for hardcoded secrets (pattern-based)
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          # Check for real API key patterns (not placeholders)
+          if grep -rn --include="*.js" --include="*.html" --include="*.json" \
+            -E "(sk_live_|re_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z\-_]{35}|ghp_[A-Za-z0-9]{36})" \
+            --exclude-dir=node_modules --exclude-dir=.git .; then
+            echo "::error::Potential hardcoded secret detected!"
+            exit 1
+          fi
+          echo "No hardcoded secrets found."
+
+      - name: Check .env files are not committed
+        run: |
+          if git ls-files | grep -E "^\.env$|^backend/\.env$"; then
+            echo "::error::.env file is tracked by git!"
+            exit 1
+          fi
+          echo ".env files are not tracked — OK"
+
+  # ─────────────────────────────────────────────
+  # JOB 3: Static Security Analysis (SAST)
+  # ─────────────────────────────────────────────
+  sast:
+    name: Static Security Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run custom security checks
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+
+          const server = fs.readFileSync('backend/server.js', 'utf8');
+          let failed = false;
+
+          // Check: DELETE /api/reviews requires admin auth
+          const deleteIdx = server.indexOf("req.method === 'DELETE'");
+          const deleteCtx = server.substring(deleteIdx - 300, deleteIdx + 400);
+          if (!deleteCtx.includes('verifyAdmin') && !deleteCtx.includes('isAdminDelete')) {
+            console.error('FAIL: DELETE /api/reviews missing admin auth');
+            failed = true;
+          } else {
+            console.log('PASS: DELETE /api/reviews has admin auth');
+          }
+
+          // Check: Rate limiting present
+          if (!server.includes('checkRateLimit')) {
+            console.error('FAIL: No rate limiting found in server.js');
+            failed = true;
+          } else {
+            console.log('PASS: Rate limiting present');
+          }
+
+          // Check: Path traversal protection
+          if (!server.includes('safePath.startsWith(rootPath)')) {
+            console.error('FAIL: No path traversal protection');
+            failed = true;
+          } else {
+            console.log('PASS: Path traversal protection present');
+          }
+
+          // Check: CSP header present
+          if (!server.includes('Content-Security-Policy')) {
+            console.error('FAIL: No Content-Security-Policy header');
+            failed = true;
+          } else {
+            console.log('PASS: Content-Security-Policy header present');
+          }
+
+          // Check: Body size limit
+          if (!server.includes('MAX_BODY_BYTES')) {
+            console.error('FAIL: No body size limit');
+            failed = true;
+          } else {
+            console.log('PASS: Body size limit present');
+          }
+
+          // Check: No stack traces sent to client
+          if (server.includes('err.stack') && server.match(/res\.end.*err\.stack/)) {
+            console.error('FAIL: Stack traces may be sent to clients');
+            failed = true;
+          } else {
+            console.log('PASS: No stack traces exposed to clients');
+          }
+
+          if (failed) process.exit(1);
+          console.log('\nAll security checks passed!');
+          EOF
+
+      - name: Check security headers exist
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+          const server = fs.readFileSync('backend/server.js', 'utf8');
+          const required = ['X-Content-Type-Options', 'X-Frame-Options', 'Referrer-Policy', 'Permissions-Policy'];
+          let ok = true;
+          required.forEach(h => {
+            if (server.includes(h)) {
+              console.log('PASS: Header present:', h);
+            } else {
+              console.error('FAIL: Missing header:', h);
+              ok = false;
+            }
+          });
+          if (!ok) process.exit(1);
+          EOF
+
+  # ─────────────────────────────────────────────
+  # JOB 4: Build Validation
+  # ─────────────────────────────────────────────
+  build-validate:
+    name: Build & Syntax Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm install --ignore-scripts
+
+      - name: Validate server.js syntax
+        working-directory: backend
+        run: node --check server.js && echo "server.js syntax OK"
+
+      - name: Validate API files
+        run: |
+          node --check api/index.js && echo "api/index.js OK"
+          node --check api/reviews.js && echo "api/reviews.js OK"
+          node --check api/movies.js && echo "api/movies.js OK"
+
+      - name: Validate frontend JS files
+        run: |
+          node --check scripts.js && echo "scripts.js OK" || echo "scripts.js has issues (may contain browser-only code)"
+          node --check ai-agent.js && echo "ai-agent.js OK" || echo "ai-agent.js has issues (may contain browser-only code)"
+
+      - name: Check gitignore excludes sensitive files
+        run: |
+          python3 - <<'EOF'
+          import subprocess, sys
+          result = subprocess.run(['git', 'ls-files', 'backend/.env', '.env'], capture_output=True, text=True)
+          if result.stdout.strip():
+              print("FAIL: .env files are tracked!")
+              sys.exit(1)
+          print("PASS: .env files not tracked")
+          EOF
