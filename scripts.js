@@ -9526,7 +9526,7 @@ function initPlaceImageSliders() {
     const AUTH_PROMPT_SHOWN_KEY = 'we_auth_prompt_shown';
 
     const authNavBtn = document.getElementById('nav-auth-btn');
-    const userButtonDiv = document.getElementById('user-button');
+    const userButtonDiv = (document.getElementById('nav-user-profile-anchor') || document.getElementById('user-button'));
 
     // Helper: Read validated session from localStorage
     function getStoredSession() {
@@ -9634,10 +9634,15 @@ function initPlaceImageSliders() {
                 userButtonDiv.style.display = 'flex';
                 const initial = (stored.name || 'D').charAt(0).toUpperCase();
                 userButtonDiv.innerHTML = `
-                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open()" title="${stored.name || 'Account'} - View Profile (Posts & Places Reached)" style="width:34px;height:34px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.4);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;">
+                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${stored.name || 'Account'} - Open Explorer Profile" style="width:36px;height:36px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 2px 10px rgba(2,132,199,0.5);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;">
                         ${initial}
                     </div>
                 `;
+                userButtonDiv.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.ExplorerProfile) window.ExplorerProfile.open();
+                };
             }
             if (mandatoryOverlay) mandatoryOverlay.style.display = 'none';
         }
@@ -9734,14 +9739,19 @@ function initPlaceImageSliders() {
             if (userButtonDiv) {
                 userButtonDiv.style.display = 'flex';
                 const user = window.Clerk.user;
-                const name = user.fullName || user.firstName || 'Explorer';
+                const name = user.fullName || user.firstName || 'Divya Shettar';
                 const initial = (name.charAt(0) || 'D').toUpperCase();
                 const avatarImg = user.imageUrl;
                 userButtonDiv.innerHTML = `
-                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open()" title="${name} - View Profile (Posts & Places Reached)" style="width:34px;height:34px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.4);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;overflow:hidden;">
+                    <div class="we-user-avatar-btn" id="we-unified-user-avatar" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" title="${name} - Open Explorer Profile" style="width:36px;height:36px;border-radius:50%;background:#0284c7;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 2px 10px rgba(2,132,199,0.5);user-select:none;border:2px solid #38bdf8;transition:transform 0.2s ease;overflow:hidden;">
                         ${avatarImg ? `<img src="${avatarImg}" style="width:100%;height:100%;object-fit:cover;" alt="${name}">` : initial}
                     </div>
                 `;
+                userButtonDiv.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.ExplorerProfile) window.ExplorerProfile.open();
+                };
             }
 
             // Dispatch global event for other components (Reviews, AI Agent, Analytics)

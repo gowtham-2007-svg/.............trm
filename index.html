@@ -61,7 +61,7 @@
     <link rel="stylesheet" href="ai-agent.css?v=23">
     <link rel="stylesheet" href="onboarding.css?v=8">
     <link rel="stylesheet" href="reviews.css?v=7">
-    <link rel="stylesheet" href="profile.css?v=4">
+    <link rel="stylesheet" href="profile.css?v=500">
 
     <!-- ── Inline Critical Script: onboarding gate (must run before paint) ── -->
     <script>
@@ -152,7 +152,7 @@
                     </svg>
                     <span class="auth-btn-text">Sign In</span>
                 </button>
-                <div id="user-button" style="display:none;align-items:center;margin-left:8px;"></div>
+                <div id="nav-user-profile-anchor" class="nav-user-profile-anchor" onclick="window.ExplorerProfile && window.ExplorerProfile.open(); event.stopPropagation();" style="display:none;align-items:center;margin-left:8px;cursor:pointer;"></div>
                 <button class="hamburger-menu-btn" id="hamburger-menu-btn" aria-label="Toggle Navigation Menu">
                     <span class="hamburger-bar bar-1"></span>
                     <span class="hamburger-bar bar-2"></span>
@@ -421,9 +421,9 @@
 
     <!-- Core app scripts - execute in dependency order -->
     <script defer src="reviews.js?v=11"></script>
-    <script defer src="scripts.js?v=324"></script>
+    <script defer src="scripts.js?v=500"></script>
     <script defer src="shortcut.js?v=2"></script>
-    <script defer src="profile.js?v=4"></script>
+    <script defer src="profile.js?v=500"></script>
     <script defer src="ai-agent.js?v=26"></script>
     <script defer src="onboarding.js?v=12"></script>
 
