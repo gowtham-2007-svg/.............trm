@@ -1,26 +1,25 @@
 /**
- * Instagram-Style Explorer Profile System
- * Complete All-in-One Profile & Account Manager
- * Features:
- *  - Instagram Profile with Posts, Places Reached & Account Settings
+ * Instagram-Style ExplorerProfile System
+ * All-in-One Explorer Profile:
+ *  - Public Posts of Places Visited
+ *  - Private Posts of Places Visited
+ *  - Places Visited / Reached with Photos & GPS Verification
  *  - Full Instagram Post Lightbox (photo view, likes, comments, caption, location)
- *  - Places Visited List with Photos, GPS Verified Badges, and Maps
- *  - Photo File Upload & Presets for New Posts
- *  - In-Place Account Management (No separate external Gmail window)
- *  - Public / Private privacy mode
+ *  - New Post creation with Public / Private privacy toggle & photo upload
+ *  - In-Place Account Management (Manage Account, Edit Profile, Sign Out)
  */
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'we_explorer_profile_v2';
+  const STORAGE_KEY = 'we_explorer_profile_v3';
 
-  // Default pre-loaded check-in posts
+  // Default pre-loaded check-in posts for places visited
   const DEFAULT_POSTS = [
     {
       id: 'post_1',
       img: 'assets/places/panambur_beach.jpg',
       location: 'Panambur Beach, Mangaluru',
-      caption: 'Golden hour waves and cool Arabian sea breeze! 🌅🌊 #CoastalVibes #WeekendExplore',
+      caption: 'Golden hour waves and cool Arabian sea breeze! 🌅🌊 Visited the coast for weekend sunset. #CoastalVibes #WeekendExplore',
       likes: 42,
       isLiked: false,
       date: 'Yesterday • 5:45 PM',
@@ -28,36 +27,61 @@
         { user: 'kavya_travels', text: 'Stunning sunset view! 🌅' },
         { user: 'rahul_m', text: 'Did you try the jet ski ride?' }
       ],
-      isPublic: true
+      isPrivate: false // Public post
     },
     {
       id: 'post_2',
       img: 'assets/destinations/mangaluru_hd.jpg',
       location: 'Woodlands Restaurant, Mangaluru',
-      caption: 'Crispy ghee roast dosa with authentic filter coffee. Pure bliss! ☕✨ #MangaloreFoodie',
+      caption: 'Crispy ghee roast dosa with authentic filter coffee. Pure bliss after traveling! ☕✨ #MangaloreFoodie',
       likes: 28,
       isLiked: false,
       date: '2 days ago • 9:15 AM',
       comments: [
         { user: 'foodie_karnataka', text: 'Best ghee roast in South Canara! 🔥' }
       ],
-      isPublic: true
+      isPrivate: false // Public post
     },
     {
       id: 'post_3',
       img: 'assets/places/someshwara_temple.jpg',
       location: 'Someshwara Beach & Temple',
-      caption: 'The majestic Rudra Shila rocks meeting the sunset ocean. Stunning heritage! 🏛️🌊 #KarnatakaTourism',
+      caption: 'The majestic Rudra Shila rocks meeting the sunset ocean. Stunning heritage site visited! 🏛️🌊 #KarnatakaTourism',
       likes: 56,
       isLiked: false,
       date: 'Last weekend • 6:30 PM',
       comments: [
         { user: 'ananya_s', text: 'Such peaceful vibes here at evening!' }
       ],
-      isPublic: true
+      isPrivate: false // Public post
+    },
+    {
+      id: 'post_priv_1',
+      img: 'assets/destinations/bangalore_hd.jpg',
+      location: 'Bangalore Palace & Gardens',
+      caption: '🔒 [Private Check-in] Early morning heritage photography walk before the crowd arrived. Personal journal note.',
+      likes: 5,
+      isLiked: true,
+      date: '3 days ago • 7:00 AM',
+      comments: [
+        { user: 'weekend_wanderer', text: 'Saved private coordinates for next road trip.' }
+      ],
+      isPrivate: true // Private post
+    },
+    {
+      id: 'post_priv_2',
+      img: 'assets/destinations/mysuru_hd.jpg',
+      location: 'Mysore Palace Grand Illumination',
+      caption: '🔒 [Private Check-in] Spectacular 100,000 bulbs lighting up on Sunday evening with family. Memorable trip!',
+      likes: 12,
+      isLiked: true,
+      date: 'Last week • 7:15 PM',
+      comments: [],
+      isPrivate: true // Private post
     }
   ];
 
+  // Default visited places (Places Reached)
   const DEFAULT_REACHED_PLACES = [
     {
       id: 'reach_1',
@@ -79,12 +103,30 @@
     },
     {
       id: 'reach_3',
-      title: 'Shettihalli Rosary Church',
-      city: 'Hassan',
+      title: 'Someshwara Beach & Temple',
+      city: 'Mangaluru',
       img: 'assets/places/someshwara_temple.jpg',
       icon: '🏛️',
-      date: 'Verified GPS Check-in • 26 Oct 2026',
-      maps: 'https://www.google.com/maps/search/?api=1&query=Shettihalli+Rosary+Church+Hassan'
+      date: 'Verified GPS Check-in • 27 Oct 2026',
+      maps: 'https://www.google.com/maps/search/?api=1&query=Someshwara+Temple+Mangaluru'
+    },
+    {
+      id: 'reach_4',
+      title: 'Bangalore Palace Grounds',
+      city: 'Bangalore',
+      img: 'assets/destinations/bangalore_hd.jpg',
+      icon: '🏰',
+      date: 'Verified GPS Check-in • 25 Oct 2026',
+      maps: 'https://www.google.com/maps/search/?api=1&query=Bangalore+Palace'
+    },
+    {
+      id: 'reach_5',
+      title: 'Mysore Palace',
+      city: 'Mysuru',
+      img: 'assets/destinations/mysuru_hd.jpg',
+      icon: '✨',
+      date: 'Verified GPS Check-in • 22 Oct 2026',
+      maps: 'https://www.google.com/maps/search/?api=1&query=Mysore+Palace'
     }
   ];
 
@@ -96,15 +138,15 @@
     } catch (e) {}
 
     // Pull from Clerk if user is logged in
-    let name = 'Explorer';
-    let email = '';
+    let name = 'Divya Shettar';
+    let email = 'divyashettar236@gmail.com';
     let handle = 'weekend_wanderer';
-    let avatar = '🎒';
+    let avatar = 'D';
 
     if (window.Clerk && window.Clerk.user) {
-      name = window.Clerk.user.fullName || window.Clerk.user.firstName || 'Explorer';
+      name = window.Clerk.user.fullName || window.Clerk.user.firstName || name;
       handle = (window.Clerk.user.username || name.toLowerCase().replace(/\s+/g, '_')) + '_explorer';
-      email = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress) || '';
+      email = (window.Clerk.user.primaryEmailAddress && window.Clerk.user.primaryEmailAddress.emailAddress) || email;
       if (window.Clerk.user.imageUrl) {
         avatar = `<img src="${window.Clerk.user.imageUrl}" class="exp-avatar-img" alt="${name}">`;
       } else {
@@ -115,10 +157,10 @@
     return {
       name: name,
       handle: handle,
-      bio: '🎒 Weekend Wanderer | 🌊 Coastal & Heritage Trail Explorer | 📍 Karnataka, India\nTrack my live check-ins & completed journeys!',
+      bio: '🎒 Weekend Wanderer | 🌊 Coastal & Heritage Trail Explorer | 📍 Karnataka, India\nTracking visited destinations, live check-ins & completed journeys!',
       avatar: avatar,
       email: email,
-      isPrivate: false,
+      isPrivate: false, // Default is Public explorer
       posts: DEFAULT_POSTS,
       reachedPlaces: DEFAULT_REACHED_PLACES,
       highlights: [
@@ -143,7 +185,7 @@
     return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
   }
 
-  // Create & mount the Modal DOM
+  // Create & mount the ExplorerProfile Modal DOM
   function createProfileModalDOM() {
     if (document.getElementById('exp-profile-overlay')) return;
 
@@ -151,11 +193,15 @@
     overlay.id = 'exp-profile-overlay';
     overlay.className = 'exp-profile-overlay';
 
+    const publicPosts = state.posts.filter(p => !p.isPrivate);
+    const privatePosts = state.posts.filter(p => p.isPrivate);
+
     overlay.innerHTML = `
       <div class="exp-profile-card">
         <!-- Top App Bar -->
         <div class="exp-profile-topbar">
           <div class="exp-profile-handle-wrap">
+            <span class="exp-brand-pill">ExplorerProfile</span>
             <span class="exp-profile-handle" id="exp-render-handle">@${escapeHtml(state.handle)}</span>
             <button class="exp-profile-privacy-badge ${state.isPrivate ? 'private' : 'public'}" id="exp-privacy-btn" onclick="window.ExplorerProfile.togglePrivacy()" title="Tap to switch between Public and Private">
               <span>${state.isPrivate ? '🔒 Private' : '🌐 Public'}</span>
@@ -178,17 +224,17 @@
             </div>
 
             <div class="exp-stats-row">
-              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('posts')">
-                <span class="exp-stat-num" id="exp-count-posts">${state.posts.length}</span>
-                <span class="exp-stat-label">Posts</span>
+              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('posts')" title="View Public Posts of Visited Places">
+                <span class="exp-stat-num" id="exp-count-posts">${publicPosts.length}</span>
+                <span class="exp-stat-label">Public Posts</span>
               </div>
-              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('reached')">
+              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('private')" title="View Private Posts">
+                <span class="exp-stat-num" id="exp-count-private">${privatePosts.length}</span>
+                <span class="exp-stat-label">Private</span>
+              </div>
+              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('reached')" title="View All Visited Places">
                 <span class="exp-stat-num" id="exp-count-reached">${state.reachedPlaces.length}</span>
-                <span class="exp-stat-label">Places Reached</span>
-              </div>
-              <div class="exp-stat-item" onclick="window.ExplorerProfile.switchTab('account')">
-                <span class="exp-stat-num" id="exp-count-level">Lv. 3</span>
-                <span class="exp-stat-label">Explorer</span>
+                <span class="exp-stat-label">Visited</span>
               </div>
             </div>
           </div>
@@ -200,9 +246,10 @@
               <span class="exp-verified-badge" title="Verified Explorer">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
               </span>
+              <span class="exp-level-chip">Lv. 3 Explorer</span>
             </div>
-            <div class="exp-bio-email" id="exp-render-email">${escapeHtml(state.email || '')}</div>
-            <div class="exp-bio-category">Travel & Exploration Guide</div>
+            <div class="exp-bio-email" id="exp-render-email">${escapeHtml(state.email || 'divyashettar236@gmail.com')}</div>
+            <div class="exp-bio-category">Karnataka Travel & Heritage Explorer</div>
             <div class="exp-bio-text" id="exp-render-bio">${escapeHtml(state.bio).replace(/\n/g, '<br>')}</div>
           </div>
 
@@ -233,15 +280,19 @@
             </div>
           </div>
 
-          <!-- Tabs (POSTS | PLACES REACHED | ACCOUNT) -->
+          <!-- Tabs (PUBLIC POSTS | PRIVATE POSTS | PLACES VISITED | ACCOUNT) -->
           <div class="exp-tabs-nav">
             <button class="exp-tab-btn active" id="tab-btn-posts" onclick="window.ExplorerProfile.switchTab('posts')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-              <span>POSTS</span>
+              <span>POSTS (<span id="exp-tab-count-posts">${publicPosts.length}</span>)</span>
+            </button>
+            <button class="exp-tab-btn" id="tab-btn-private" onclick="window.ExplorerProfile.switchTab('private')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>PRIVATE (<span id="exp-tab-count-private">${privatePosts.length}</span>)</span>
             </button>
             <button class="exp-tab-btn" id="tab-btn-reached" onclick="window.ExplorerProfile.switchTab('reached')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span>PLACES REACHED (<span id="exp-reached-tab-count">${state.reachedPlaces.length}</span>)</span>
+              <span>VISITED (<span id="exp-tab-count-reached">${state.reachedPlaces.length}</span>)</span>
             </button>
             <button class="exp-tab-btn" id="tab-btn-account" onclick="window.ExplorerProfile.switchTab('account')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
@@ -249,25 +300,33 @@
             </button>
           </div>
 
-          <!-- TAB 1: POSTS -->
+          <!-- TAB 1: PUBLIC POSTS (Visited spots shared publicly) -->
           <div class="exp-tab-panel active" id="panel-posts">
-            ${state.isPrivate ? `
-              <div class="exp-private-banner">
-                <div class="exp-private-banner-icon">🔒</div>
-                <h4>This Profile is Private</h4>
-                <p>Only you can see your shared posts and check-ins. Tap any post to view its full photo and comments.</p>
-              </div>
-            ` : ''}
+            <div class="exp-tab-lead-badge">
+              <span>🌐 Public Photo Check-ins of Visited Places</span>
+            </div>
             <div class="exp-posts-grid" id="exp-posts-grid-container">
-              ${renderPostsGrid(state.posts)}
+              ${renderPostsGrid(publicPosts, false)}
             </div>
           </div>
 
-          <!-- TAB 2: PLACES REACHED -->
+          <!-- TAB 2: PRIVATE POSTS (Private places & personal check-ins) -->
+          <div class="exp-tab-panel" id="panel-private">
+            <div class="exp-private-banner">
+              <div class="exp-private-banner-icon">🔒</div>
+              <h4>Private Visited Places & Photos</h4>
+              <p>These check-ins and photos are strictly private. Only you can view them when signed into this account.</p>
+            </div>
+            <div class="exp-posts-grid" id="exp-private-grid-container">
+              ${renderPostsGrid(privatePosts, true)}
+            </div>
+          </div>
+
+          <!-- TAB 3: ALL PLACES VISITED / REACHED -->
           <div class="exp-tab-panel" id="panel-reached">
             <div class="exp-reached-header-bar">
               <div style="font-size:0.75rem;color:#38bdf8;font-weight:600;display:flex;align-items:center;gap:6px;">
-                <span>🛰️</span> <span>Verified places reached via real-time GPS check-ins:</span>
+                <span>🛰️</span> <span>Verified places visited via real-time GPS check-ins & logs:</span>
               </div>
               <button class="exp-btn-secondary" style="padding:4px 10px;font-size:0.72rem;" onclick="window.ExplorerProfile.promptAddPlace()">
                 + Check-in Spot
@@ -278,39 +337,43 @@
             </div>
           </div>
 
-          <!-- TAB 3: ACCOUNT & SETTINGS (Merged In-Place) -->
+          <!-- TAB 4: ACCOUNT & SETTINGS -->
           <div class="exp-tab-panel" id="panel-account">
             <div class="exp-account-settings-card">
-              <div class="exp-settings-section-title">👤 Account Information</div>
+              <div class="exp-settings-section-title">👤 Account & Explorer Profile Details</div>
               <div class="exp-settings-item">
                 <span class="exp-settings-label">Full Name:</span>
                 <span class="exp-settings-val" id="exp-acc-val-name">${escapeHtml(state.name)}</span>
               </div>
               <div class="exp-settings-item">
-                <span class="exp-settings-label">Username:</span>
+                <span class="exp-settings-label">Username (@handle):</span>
                 <span class="exp-settings-val">@${escapeHtml(state.handle)}</span>
               </div>
               <div class="exp-settings-item">
-                <span class="exp-settings-label">Email Address:</span>
+                <span class="exp-settings-label">Primary Account Email:</span>
                 <span class="exp-settings-val" style="color:#38bdf8;">${escapeHtml(state.email || 'divyashettar236@gmail.com')}</span>
               </div>
               <div class="exp-settings-item">
-                <span class="exp-settings-label">Security & Auth:</span>
-                <span class="exp-settings-val" style="color:#34d399;">🛡️ Google / Clerk Connected</span>
+                <span class="exp-settings-label">Security & Provider:</span>
+                <span class="exp-settings-val" style="color:#34d399;">🛡️ Google / Clerk Verified</span>
+              </div>
+              <div class="exp-settings-item">
+                <span class="exp-settings-label">Travel Explorer Status:</span>
+                <span class="exp-settings-val" style="color:#fbbf24;">⭐ Level 3 Certified Explorer</span>
               </div>
 
-              <div class="exp-settings-section-title" style="margin-top:16px;">🔒 Privacy & Visibility</div>
+              <div class="exp-settings-section-title" style="margin-top:16px;">🔒 Privacy & Visibility Setting</div>
               <div class="exp-settings-item" style="cursor:pointer;" onclick="window.ExplorerProfile.togglePrivacy()">
                 <div>
-                  <div style="font-weight:600;color:#fff;font-size:0.82rem;">Account Privacy</div>
-                  <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);">${state.isPrivate ? 'Only approved travelers can see your posts' : 'Anyone can view your photos & places reached'}</div>
+                  <div style="font-weight:600;color:#fff;font-size:0.82rem;">Global Account Privacy</div>
+                  <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);">${state.isPrivate ? 'Profile is Private (Only you see your posts)' : 'Profile is Public (Anyone can discover your journeys)'}</div>
                 </div>
                 <div class="exp-toggle-switch ${state.isPrivate ? 'active' : ''}"></div>
               </div>
 
               <div class="exp-settings-actions-group">
                 <button type="button" class="exp-btn-secondary" style="width:100%;justify-content:center;margin-bottom:8px;" onclick="window.ExplorerProfile.openEditModal()">
-                  ✏️ Edit Profile Details
+                  ✏️ Edit Profile Bio & Handle
                 </button>
                 <button type="button" class="exp-btn-danger" style="width:100%;justify-content:center;" onclick="window.WeekendAuth && window.WeekendAuth.signOut(); window.ExplorerProfile.close();">
                   🚪 Sign Out of Account
@@ -350,10 +413,25 @@
         <!-- Sub-Modal: Create New Post -->
         <div class="exp-submodal-overlay" id="exp-submodal-post">
           <div class="exp-submodal-header">
-            <span class="exp-submodal-title">Share New Check-in Post</span>
+            <span class="exp-submodal-title">Share Visited Place Post</span>
             <button class="exp-profile-close-btn" onclick="window.ExplorerProfile.closeSubmodal('post')">✕</button>
           </div>
           
+          <!-- Post Privacy Selector (Public vs Private) -->
+          <div class="exp-input-group">
+            <label class="exp-input-label">Post Privacy Mode</label>
+            <div class="exp-post-privacy-picker">
+              <label class="exp-privacy-opt">
+                <input type="radio" name="exp-post-privacy" id="exp-post-privacy-public" value="public" checked>
+                <span>🌐 Public Post (Share with travelers)</span>
+              </label>
+              <label class="exp-privacy-opt">
+                <input type="radio" name="exp-post-privacy" id="exp-post-privacy-private" value="private">
+                <span>🔒 Private Post (Saved in Private tab only)</span>
+              </label>
+            </div>
+          </div>
+
           <div class="exp-input-group">
             <label class="exp-input-label">Upload Photo from Device</label>
             <input type="file" id="exp-newpost-file" accept="image/*" class="exp-input-file" onchange="window.ExplorerProfile.handleImageUpload(event)">
@@ -364,28 +442,28 @@
           </div>
 
           <div class="exp-input-group">
-            <label class="exp-input-label">Or Choose Preset Destination</label>
+            <label class="exp-input-label">Or Choose Preset Karnataka Spot</label>
             <select class="exp-input-text" id="exp-newpost-preset" onchange="window.ExplorerProfile.handlePresetChange(event)">
               <option value="">-- Choose Preset Photo --</option>
-              <option value="assets/places/panambur_beach.jpg" selected>Panambur Beach (Sunset)</option>
+              <option value="assets/places/panambur_beach.jpg" selected>Panambur Beach, Mangaluru</option>
               <option value="assets/places/someshwara_temple.jpg">Someshwara Rocks & Temple</option>
-              <option value="assets/destinations/mangaluru_hd.jpg">Mangaluru Heritage Center</option>
-              <option value="assets/destinations/bangalore_hd.jpg">Bangalore Skyline</option>
+              <option value="assets/destinations/mangaluru_hd.jpg">Woodlands Restaurant, Mangaluru</option>
+              <option value="assets/destinations/bangalore_hd.jpg">Bangalore Palace & City</option>
               <option value="assets/destinations/mysuru_hd.jpg">Mysore Palace Lights</option>
             </select>
           </div>
 
           <div class="exp-input-group">
-            <label class="exp-input-label">Location Tag (e.g. Panambur Beach, Mangaluru)</label>
+            <label class="exp-input-label">Place Visited (e.g. Panambur Beach, Mangaluru)</label>
             <input type="text" class="exp-input-text" id="exp-newpost-location" placeholder="e.g. Someshwara Beach, Mangaluru">
           </div>
           <div class="exp-input-group">
-            <label class="exp-input-label">Caption & Highlights</label>
-            <textarea class="exp-input-text" id="exp-newpost-caption" rows="3" placeholder="Describe the atmosphere, sunset, food..."></textarea>
+            <label class="exp-input-label">Caption & Travel Experience</label>
+            <textarea class="exp-input-text" id="exp-newpost-caption" rows="3" placeholder="Describe the place, sunset, vibe, food..."></textarea>
           </div>
 
           <button class="exp-btn-primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="window.ExplorerProfile.publishPost()">
-            Share Post 🚀
+            Share Visited Place 🚀
           </button>
         </div>
 
@@ -418,9 +496,12 @@
     }
   }
 
-  function renderPostsGrid(posts) {
+  function renderPostsGrid(posts, isPrivateTab) {
     if (!posts || posts.length === 0) {
-      return '<div style="grid-column:span 3;text-align:center;padding:30px;color:rgba(255,255,255,0.4);font-size:0.8rem;">No posts yet. Tap "+ Post" to share your first check-in!</div>';
+      if (isPrivateTab) {
+        return '<div style="grid-column:span 3;text-align:center;padding:30px;color:rgba(255,255,255,0.4);font-size:0.8rem;">No private posts yet. When sharing a post with "+ Post", select "Private" to save it here!</div>';
+      }
+      return '<div style="grid-column:span 3;text-align:center;padding:30px;color:rgba(255,255,255,0.4);font-size:0.8rem;">No public posts yet. Tap "+ Post" to share your first visited spot!</div>';
     }
     return posts.map(p => `
       <div class="exp-post-tile" onclick="window.ExplorerProfile.openPostLightbox('${p.id}')">
@@ -429,6 +510,7 @@
           <span>❤️ ${p.likes || 1}</span>
           <span style="margin-left:8px;">💬 ${(p.comments && p.comments.length) || 0}</span>
         </div>
+        ${p.isPrivate ? '<div class="exp-post-priv-indicator" title="Private Post">🔒 Private</div>' : ''}
         <div class="exp-post-location-tag">📍 ${escapeHtml(p.location.split(',')[0])}</div>
       </div>
     `).join('');
@@ -436,7 +518,7 @@
 
   function renderReachedList(places) {
     if (!places || places.length === 0) {
-      return '<div style="text-align:center;padding:30px;color:rgba(255,255,255,0.4);font-size:0.8rem;">No places reached yet. As you complete stops in the AI Journey Tracker, they will appear here automatically!</div>';
+      return '<div style="text-align:center;padding:30px;color:rgba(255,255,255,0.4);font-size:0.8rem;">No places visited yet. As you arrive at stops in the AI Journey Tracker, they will appear here automatically!</div>';
     }
     return places.map(p => `
       <div class="exp-reached-item">
@@ -450,7 +532,7 @@
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
-          <span class="exp-reached-tag">✓ Reached</span>
+          <span class="exp-reached-tag">✓ Visited</span>
           ${p.maps ? `<a href="${p.maps}" target="_blank" rel="noopener noreferrer" class="exp-reached-map-btn" title="Open in Google Maps">Maps ↗</a>` : ''}
         </div>
       </div>
@@ -569,12 +651,14 @@
       const locInp = document.getElementById('exp-newpost-location');
       const capInp = document.getElementById('exp-newpost-caption');
       const presetInp = document.getElementById('exp-newpost-preset');
+      const privRadio = document.getElementById('exp-post-privacy-private');
 
+      const isPrivatePost = privRadio && privRadio.checked;
       const loc = (locInp && locInp.value.trim()) || 'Karnataka Spot';
-      const cap = (capInp && capInp.value.trim()) || 'Exploring amazing sights in Karnataka!';
+      const cap = (capInp && capInp.value.trim()) || (isPrivatePost ? '🔒 Private check-in note' : 'Exploring amazing visited sights in Karnataka!');
       const finalImg = uploadedImageDataUrl || (presetInp && presetInp.value) || 'assets/places/panambur_beach.jpg';
 
-      state.posts.unshift({
+      const newPost = {
         id: 'post_' + Date.now(),
         img: finalImg,
         location: loc,
@@ -583,14 +667,26 @@
         isLiked: true,
         date: 'Just now • Verified Check-in',
         comments: [],
-        isPublic: !state.isPrivate
+        isPrivate: isPrivatePost
+      };
+
+      state.posts.unshift(newPost);
+
+      // Automatically add to Visited Places list as well
+      const locName = loc.split(',')[0].trim();
+      const locCity = (loc.split(',')[1] || 'Karnataka').trim();
+      this.addReachedPlace({
+        title: locName,
+        city: locCity,
+        img: finalImg,
+        maps: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc)
       });
 
       saveProfileState(state);
       this.syncUI();
       this.closeSubmodal('post');
-      this.switchTab('posts');
-      this.openPostLightbox(state.posts[0].id);
+      this.switchTab(isPrivatePost ? 'private' : 'posts');
+      this.openPostLightbox(newPost.id);
     },
 
     // 📸 Full Instagram Post Lightbox
@@ -616,6 +712,7 @@
                 <div class="exp-lightbox-name">
                   ${escapeHtml(state.name)}
                   <span class="exp-verified-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  ${post.isPrivate ? '<span class="exp-post-priv-indicator" style="position:static;display:inline-block;margin-left:6px;font-size:0.65rem;">🔒 Private</span>' : ''}
                 </div>
                 <div class="exp-lightbox-location">📍 ${escapeHtml(post.location)}</div>
               </div>
@@ -760,6 +857,9 @@
     },
 
     syncUI: function () {
+      const publicPosts = state.posts.filter(p => !p.isPrivate);
+      const privatePosts = state.posts.filter(p => p.isPrivate);
+
       const handleEl = document.getElementById('exp-render-handle');
       if (handleEl) handleEl.textContent = '@' + state.handle;
 
@@ -785,16 +885,28 @@
       if (bioEl) bioEl.innerHTML = escapeHtml(state.bio).replace(/\n/g, '<br>');
 
       const countPosts = document.getElementById('exp-count-posts');
-      if (countPosts) countPosts.textContent = state.posts.length;
+      if (countPosts) countPosts.textContent = publicPosts.length;
+
+      const countPrivate = document.getElementById('exp-count-private');
+      if (countPrivate) countPrivate.textContent = privatePosts.length;
 
       const countReached = document.getElementById('exp-count-reached');
       if (countReached) countReached.textContent = state.reachedPlaces.length;
 
-      const tabCount = document.getElementById('exp-reached-tab-count');
-      if (tabCount) tabCount.textContent = state.reachedPlaces.length;
+      const tabCountPosts = document.getElementById('exp-tab-count-posts');
+      if (tabCountPosts) tabCountPosts.textContent = publicPosts.length;
+
+      const tabCountPrivate = document.getElementById('exp-tab-count-private');
+      if (tabCountPrivate) tabCountPrivate.textContent = privatePosts.length;
+
+      const tabCountReached = document.getElementById('exp-tab-count-reached');
+      if (tabCountReached) tabCountReached.textContent = state.reachedPlaces.length;
 
       const postsContainer = document.getElementById('exp-posts-grid-container');
-      if (postsContainer) postsContainer.innerHTML = renderPostsGrid(state.posts);
+      if (postsContainer) postsContainer.innerHTML = renderPostsGrid(publicPosts, false);
+
+      const privContainer = document.getElementById('exp-private-grid-container');
+      if (privContainer) privContainer.innerHTML = renderPostsGrid(privatePosts, true);
 
       const reachedContainer = document.getElementById('exp-reached-list-container');
       if (reachedContainer) reachedContainer.innerHTML = renderReachedList(state.reachedPlaces);
