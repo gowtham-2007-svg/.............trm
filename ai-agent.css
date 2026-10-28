@@ -2533,3 +2533,25 @@
     max-width: 150px;
   }
 }
+
+
+.wai-view-profile-btn {
+  background: linear-gradient(135deg, rgba(131, 56, 236, 0.35), rgba(58, 134, 239, 0.35));
+  border: 1px solid rgba(131, 56, 236, 0.6);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+}
+.wai-view-profile-btn:hover {
+  background: linear-gradient(135deg, #8338EC, #3A86EF);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(131, 56, 236, 0.4);
+}

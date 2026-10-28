@@ -2822,6 +2822,9 @@
                 <div class="wai-tracker-sub">Auto-detects your location & checks off stops when you arrive!</div>
               </div>
             </div>
+            <button type="button" class="wai-view-profile-btn" onclick="window.ExplorerProfile && window.ExplorerProfile.open()" title="View your places reached & photos in your Instagram Profile">
+              <span>👤 My Profile</span>
+            </button>
             <div class="wai-tracker-badge" id="wai-tracker-count">
               <span class="wai-tracker-done-num">0</span>/<span class="wai-tracker-total-num">${stops.length}</span>
             </div>
@@ -3391,6 +3394,17 @@
 
       // Show sleek top banner toast
       this.showArrivalToast(title);
+      // Sync with Instagram Explorer Profile Places Reached
+      if (window.ExplorerProfile && window.ExplorerProfile.addReachedPlace) {
+        const city = section ? (section.getAttribute('data-city') || 'Mangaluru') : 'Mangaluru';
+        const navLink = stopEl.querySelector('.wai-node-nav-link');
+        window.ExplorerProfile.addReachedPlace({
+          title: title,
+          city: city,
+          maps: navLink ? navLink.href : ''
+        });
+      }
+
 
       // Advance next active node
       const allNodes = Array.from(section.querySelectorAll('.wai-route-node'));
